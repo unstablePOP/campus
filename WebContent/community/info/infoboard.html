@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CampUs-정보공유게시판</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        *{box-sizing: border-box;}
+        #wrap{
+            width: 1250px;
+            margin: 0px auto;
+        }
+        #header-wrap {
+            width: 100%;
+            height: 100px;
+            margin: 0 auto;
+        }
+        #contents-wrap {
+            width: 100%;
+            margin: 0 auto;
+        }
+        #contents{
+            width: 75%;
+            margin-left: 17%;
+            position:relative;
+        }
+        #cushion{
+            width:100%;
+            height:250px;
+        }
+        #cushion>img{
+            width:100%;
+            height:100%;
+            border-radius:50px;
+            float:left;
+        }
+        #mylist{
+            height:100%;
+            padding-right:30px;
+            position:fixed;
+            border: 5px solid rgb(0, 0, 40);
+            border-bottom-right-radius:50px;
+            border-top-right-radius:50px;
+            background-color:rgb(0, 0, 20);
+        }
+        #listground{
+            padding-top:10%;
+            margin-left:10%;
+            height:100%;
+            color:white;
+        }
+        #listground>div{
+            font-size: 25px;
+        }
+        #listground>ul{
+            width:120%;
+            font-size:17px;
+        }
+        #listground>ul>li:hover{
+            background-color:skyblue;
+            font-weight: 1000;
+            color:rgb(0, 0, 40);
+        }
+        #listground>ul>li{
+            list-style:none;
+            height:50px;
+            padding-top:12px;
+        }
+        a{
+            text-decoration: none;
+        }
+        #msg>ul>li:first-of-type{
+            padding-top:15%;
+        }
+        #msg>ul>li{
+            margin-left:-20px;
+            list-style:none;
+            font-size: 14px;
+            display: none;
+            padding-top:none;
+        }
+        #where{
+            width:80%;
+            height:100px;
+            margin-top:-130px;
+            padding-top:30px;
+            font-size: 30px;
+            color:white;
+            font-weight:700;
+            float:left;
+        }
+        #arrange {
+            width: 100%;
+            height:30px;
+            padding-left:60%;
+            margin-top:-30px;
+            float:left;
+        }
+        .btn1{
+            width:20px;
+            height:20px;
+            padding:0px;
+            float:left;
+        }
+        #select{
+            float:left;
+            margin-left:5px;
+            margin-top:4px;
+        }
+        .btn2{
+            margin-top:-1px;
+            margin-left:3px;
+            height:23px;
+            padding-left:5px;
+            padding-right:5px;
+            padding-top:none;
+            float:left;
+            font-size:13px;
+        }
+        #mypost{
+            margin-left:5px;
+        }
+        #titlelist{
+            width:15px;
+            height:16px;
+            margin-left:0px;
+        }
+        #piclist{
+            width:16px;
+            height:16px;
+            margin:0px auto;
+        }
+        #board{
+            width:100%;
+            margin:0px auto;
+        }
+        table{
+            width:100%;
+            border-top:1px solid black;
+            border-bottom:1px solid black;
+            border-spacing: 0px;
+            font-size: 14px;
+        }
+        #table1 th{
+            height:35px;
+            color:rgb(0, 0, 40);
+        }
+        #table1 td{
+            height:28px;
+            border-top:1px solid black;
+        }
+        #table1 .title{
+            width:60%;border-left:1px solid black;
+            border-right:1px solid black;
+        }
+        #table1 a{
+            text-decoration:none;
+            color:black;
+        }
+        #table1 .title:hover>a{
+            text-decoration:underline;
+        }
+        #table1 .comment{width:60px;}
+        #table1 .like{width:60px;}
+        #table2{
+            width:100%;
+            height:100%;
+            margin-top:30px;
+        }
+        #table2>li{
+            border:1px black solid;
+            list-style:none;
+            width:20%;
+            float:left;
+            padding:5px;
+            margin-left:30px;
+            margin-top:15px;
+            padding-bottom:0px;
+        }
+        #table2 img{
+            width:100%;
+        }
+        dl{
+            text-align: left;
+            font-size:15px;
+            margin-top:0px;
+        }
+        dt{
+            color:black;
+        }
+        dd{
+            margin-left:0px;
+            font-size:13px;
+        }
+        #search{
+            width:100%;
+            margin-top:30px;
+            padding-left:30%;
+        }
+        #footer {
+            width: 100%;
+            height: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+    
+<body>
+    
+    <div id="wrap">
+        
+        <div id="header-wrap">
+            <!--%@ include file="/common/gnb.html" %-->
+        </div>
+        
+        <div id="contents-wrap">
+        <div id="mylist">
+            <div id="listground">
+                <div>커뮤니티</div>
+            <ul>
+                <li><a>공지사항</a></li>
+                <li><a>자유게시판</a></li>
+                <li><a>정보공유게시판</a></li>
+                <li><a>중고장터</a></li>
+                <li id="msg"><a href="" target="_blank">쪽지함</a></li>
+            </ul>
+            </div>
+        </div>
+        <div id="contents">
+            
+            <div id="cushion">
+                <img src="../image/board/camper-1845590_1920.jpg"/>
+            </div>
+            
+            <div id="where">&nbsp&nbsp&nbsp&nbsp 정보공유게시판</div>
+            
+            <form id="arrange" action="/board/boardSearch.do" method="get">
+                <button type="button" id="list1" class="btn1"><img id="titlelist" src="../image/titlelist.jpg" alt="목록 정렬"/></button><button type="button" id="list2" class="btn1"><img id="piclist" src="../image/piclist.jpg" alt="썸네일 정렬"/></button>
+                <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
+            </form>
+            
+            <div id="board">
+<!--<%if(arrange==0){%>-->
+<table id="table1" style="text-align: center;">
+	<tr>
+		<th>번호</th>
+        <th>작성자</th>
+		<th>제목</th>
+        <th>댓글</th>
+		<th>추천</th>
+		<th>작성일</th>
+	</tr>
+    <!--<%
+	   for(Board board : list){
+    %>-->
+    <tr>	
+        <td class="no"><!--<%=freeboard.getBoardNo()%>-->g</td>
+        <td class="writer"><!--<%=freeboard.getPostWriterName()%>-->g</td>
+		<td class="title"><!--<%=freeboard.getBoardTitle()%>--><a href="">아무튼 제목</a></td>
+        <td class="comment"><!--<%=freeboard.getCommentCount()%>-->baby</td>
+        <td class="like"><!--<%=freeboard.getHeartCount()%>-->baby</td>
+		<td class="date"><!--<%=freeboard.getRegDate()%>-->baby</td>
+	</tr>
+<!--<%}%>-->
+</table>
+<!--<%}else{%>-->
+<ul id="table2" style="text-align: center;">
+    <li>
+        <a href=""><img src="../image/merch/griddle.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/thermo.png"/></a>
+        <dl>
+            <dt><span class="del">[판매완료]</span>&nbsp<a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/latan.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/sleepingbag.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/griddle.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/thermo.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/latan.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <li>
+        <a href=""><img src="../image/merch/sleepingbag.png"/></a>
+        <dl>
+            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
+            <dd><div>작성자</div></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+        </dl>
+    </li>
+    <!--<tr>
+		<th>썸네일</th>
+        <th>마감여부</th>
+        <th>제목</th>
+		<th>댓글</th>
+        <th>작성자</th>
+		<th>작성일</th>
+		<th>가격</th>
+	</tr>-->
+</ul>
+<!--<%} %>-->
+            </div>
+    <div id="search">
+        <select id="select" name="type">
+            <option value="subject">제목</option>
+            <option value="writer">작성자</option>
+            <option value="all">제목+작성자</option>
+        </select>
+        <!--<%
+            String keyword = request.getParameter("keyword");
+        %>-->
+        <!--<%if(keyword!=null){ %>-->
+            <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
+        <!--<%}else{%>-->
+            <input type="text" name="keyword"> <input type="submit" value="검색">
+        <!--<%} %>-->
+    </div>
+        </div>
+        </div>   
+        
+        <div id="footer">
+            
+        </div>
+        
+    </div>
+    
+<script>
+        var arrange=0;
+    $(function(){
+        $("#list1").click(function(){
+            arrange=0;
+        });
+        $("#list2").click(function(){
+            arrange=1;
+        });
+    });
+    $(".del_yn").each(function() {
+        if($(this).text()=="판매완료"){
+            $(this).siblings().css("color","gray");
+        }
+    });
+    $(".del").each(function() {
+        if($(this).text()=="[판매완료]"){
+            $(this).parent().parent().children('a').css("color","gray");
+        }
+    });
+    $('#list1').click(function(){
+        $(this).css("background-color","gray");
+    });
+    $('#list2').click(function(){
+        $(this).css("background-color","gray");
+    });
+</script>
+</body>
+</html>
