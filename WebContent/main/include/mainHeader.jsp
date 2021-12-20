@@ -248,7 +248,7 @@
 							<li><a href="">중고장터</a></li>
 							<li><a href="">통합 채팅</a></li>
 						</ul></li>
-					<li><a href="/reservation/views/resservationMain.jsp">Reservation</a>
+					<li><a href="/reservation/views/reservationMain.jsp">Reservation</a>
 						<ul class="subBar" id="secondSub">
 							<li><a href="">캠핑 예약</a></li>
 							<li><a href="">날씨 정보</a></li>
