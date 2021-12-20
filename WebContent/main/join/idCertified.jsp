@@ -167,7 +167,7 @@
 <body>
     <div id="wrap">
         <div id="header-wrap">
-			<%@include file="/common/include/gnb.html" %>
+			<%@include file="/common/include/gnb.jsp" %>
         </div>
         <div id="bodyWrap">
             <br>

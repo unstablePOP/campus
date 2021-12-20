@@ -9,4 +9,6 @@ public interface MemberService {
 
 	Business loginBusiness(String businessId, String businessPwd);
 
+	boolean idCheck(String userId);
+
 }

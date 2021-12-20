@@ -29,4 +29,13 @@ public class MemberServiceImpl implements MemberService{
 		return b;
 	}
 
+	@Override
+	public boolean idCheck(String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = mDAO.idCheck(userId,conn);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }
