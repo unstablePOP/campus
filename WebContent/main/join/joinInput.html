@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        *{
+			box-sizing:border-box;
+		}
+		#wrap {
+            width: 1250px;
+            height: 1450px;
+            box-sizing: border-box;
+            margin: 0px auto;
+        }
+		#header-wrap {
+            width: 100%;
+            height: 100px;
+        }
+        #bodyWrap{
+            width: 100%;
+            height: 1150px;
+        }
+        #header-1 {
+            width: 1250px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        #logoWrap {
+            width: 15%;
+            height: 100%;
+            float: left;
+        }
+
+        #logo {
+            margin: 0 auto;
+        }
+
+        #GNB {
+            width: 70%;
+            height: 100%;
+            float: left;
+        }
+
+        #GNB>ul {
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        #GNB>ul>li {
+            list-style: none;
+            display: block;
+            float: left;
+            color: black;
+            line-height: 100px;
+            width: 25%;
+            font-size: 24px;
+            font-weight: bolder;
+        }
+        #GNB>ul>li:hover>a{
+            color: skyblue;
+        }
+        #GNB>ul>li>a{
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: black;
+        }
+        .subBar{
+            padding: 0px;
+            margin: 0px;
+            width: 500px;
+            text-align: center;
+         
+            
+        }
+        #firstSub{
+            margin: 0 50px;
+        }
+        #secondSub{
+            margin: 0 30px;
+        }
+        #thirdSub{
+            margin: 0 50px;
+        }
+        #fourthSub{
+            margin: 0 50px;
+        }
+        .subBar>li{
+            list-style: none;
+            width: 20%;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            float: left;
+            display: none;
+        }
+        .subBar>li>a{
+            color: black;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            border-radius: 50px;
+            display: block;
+        }
+        .subBar>li>a:hover{
+            background-color:skyblue;
+            
+        }
+
+        #loginWrap {
+            width: 15%;
+            height: 100%;
+            float: right;
+        }
+        #loginWrap>a{
+            display: block;
+            width: 70%;
+            height: 100%;
+            font-size: 20px;
+            text-align: end;
+            color: black;
+            text-decoration: none;
+            margin-left: 60px;
+        }
+        
+        
+        #joinStep{
+            width: 100%;
+            height: 80px;
+        }
+        #joinStep>ul{
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        #joinStep li{
+            border: 1px solid rgba(220,220,220,0.5);
+            list-style: none;
+            display: inline-block;
+            font-size: 20px;
+            height: 100%;
+            width: 300px;
+            background-color: rgba(220,220,220,0.2);
+            line-height: 78px;
+            border-radius: 10px;
+        }
+        #joinStep li:last-child{
+            background-color: skyblue;
+        }
+        .nextInfo{
+            font-size: 35px;
+        }
+        
+        
+        #inputWrap{
+            
+            width: 78%;
+            height: 810px;
+            margin: 0 auto;
+        }
+        #inputAlertWrap{
+            widows: 100%;
+            height: 100px;
+            text-align: center;
+            line-height: 50px;
+            background-color: rgba(220,220,220,0.2);
+        }
+        #nextStepBtn{
+            width: 100%;
+            height: 100%;
+            background-color: skyblue;
+            border-radius: 10px;
+            border: 1px solid rgba(220,220,220,0.5);
+            font-size: 18px;
+            font-weight: bolder;
+            cursor: pointer;
+        }
+        #nextStepBtnWrap{
+            width: 200px;
+            height: 60px;
+            margin: 0 auto;
+        }
+        dl{
+            width: 100%;
+            height: 70px;
+            margin: 0px;
+            padding: 0px;
+        }
+        dt{
+            border: 1px solid;
+            width: 30%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            float: left;
+            line-height: 70px;
+            padding: 0px 20px;
+            background-color: rgba(220,220,220,0.2);
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            border-color: rgba(220,220,220,1);
+        }
+        .firstDt{
+            border-top-color: black;
+        }
+        .lastDt{
+            border-bottom: 1px solid black;
+        }
+        dd{
+            border-top: 1px solid;
+            width: 70%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            float: left;
+            border-left: none;
+            border-right: none;
+            border-color: rgba(220,220,220,1);
+        }
+        .inputTextWrap{
+            border: 1px solid rgba(220,220,220,1);
+            float: left;
+            width: 70%;
+            height: 30px;
+            margin: 10px;
+            margin-bottom: 5px;
+        }
+        .inputText{
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+        .inputBtnWrap{
+            border: 1px solid black;
+            float: left;
+            width: 100px;
+            height: 30px;
+            margin: 10px;
+            margin-bottom: 5px;
+        }
+        .inputBtn{
+            width: 100%;
+            height: 100%;
+            border: none;
+            cursor: pointer;
+        }
+        .stars{
+            color: blue;
+        }
+        .inputDescription{
+            clear: both;
+            margin-left: 10px;
+            color: dodgerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="header-wrap">
+            <div id="header-1">
+                <div id="logoWrap">
+                    <a href=""><img src="/WebContent/common/image/logo/logo2.png" id="logo" alt=""></a>
+                </div>
+                <div id="GNB">
+                    <ul>
+                        <li><a href="">Board</a>
+                            <ul class="subBar" id="firstSub">
+                                <li><a href="">공지사항</a></li>
+                                <li><a href="">자유 게시판</a></li>
+                                <li><a href="">정보공유</a></li>
+                                <li><a href="">중고장터</a></li>
+                                <li><a href="">통합 채팅</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="">Reservation</a>
+                            <ul class="subBar" id="secondSub">
+                                <li><a href="">캠핑 예약</a></li>
+                                <li><a href="">날씨 정보</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="">MyPage</a>
+                            <ul class="subBar" id="thirdSub">
+                                <li><a href="">내 정보 보기</a></li>
+                                <li><a href="">다이어리</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="">Service</a>
+                            <ul class="subBar" id="fourthSub">
+                                <li>
+                                    <a href="">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="">신고센터</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div id="loginWrap">
+                    <a href="/WebContent/main/login/M_Login.jsp">login<img src="/WebContent/common/image/logo/2lock.jpg" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div id="bodyWrap">
+           <br>
+           <br>
+            <h1 align="center">회원가입</h1>
+            <div id="joinStep">
+                <ul>
+                    <li>1. 약관동의</li>
+                    <span class="nextInfo">></span>
+                    <li>2. 가입인증</li>
+                    <span class="nextInfo">></span>
+                    <li>3. 회원정보 입력</li>
+                </ul>
+            </div>
+            <br>
+            <div id="inputWrap">
+                <div id="inputAlertWrap">
+                    <span>
+                        - 캠퍼스 홈페이지는 회원의 개인정보보호문제를 신중하게 취급합니다.
+                    </span>
+                    <br>
+                    <span>
+                        - 아이디/비밀번호 분실 등 본인 여부 확인이 필요할 경우를 위해 가급적 신분증에 기재된 이름, 생년월일을 입력해 주세요.
+                    </span>
+                </div>
+                <div id="idInforInputWrap">
+                    <h3>아이디 정보</h3>
+                    <dl>
+                        <dt class="firstDt"><span class="stars">*</span> 아이디</dt>
+                        <dd class="firstDt">
+                            <div class="inputTextWrap"><input type="text" class="inputText" placeholder="사용하실 아이디를 입력하신 후 중복확인을 눌러주세요."></div>
+                            <div class="inputBtnWrap"><button class="inputBtn">중복 확인</button></div>
+                            <div class="inputDescription">영문, 숫자만 가능합니다. (5~15자)</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="stars">*</span> 비밀번호</dt>
+                        <dd>
+                            <div class="inputTextWrap"><input type="password" class="inputText" placeholder="(8~15글자)영어 대소문자 + 숫자 + 특수문자로 구성되어야 합니다."></div>
+                            <div class="inputDescription">특수문자는 `~`, `!`, `@`, `#`, `$`, `^`, `*`, `(`, `)`, `=`, `_`, `.`, `|` 만 사용가능합니다.</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="lastDt"><span class="stars">*</span> 비밀번호 확인</dt>
+                        <dd class="lastDt">
+                            <div class="inputTextWrap"><input type="password" class="inputText" placeholder="비밀번호를 재입력해주세요."></div>
+                            <div class="inputDescription"></div>
+                        </dd>
+                    </dl>
+                </div>
+                <br>
+                <div id="userInforInputWrap">
+                    <h3>개인 정보</h3>
+                    <dl>
+                        <dt class="firstDt"><span class="stars">*</span> 이름</dt>
+                        <dd class="firstDt">
+                            <div class="inputTextWrap"><input type="text" class="inputText" placeholder="사용하실 아이디를 입력하신 후 중복확인을 눌러주세요."></div>
+                            <div class="inputBtnWrap"><button class="inputBtn">중복 확인</button></div>
+                            <div class="inputDescription">주민등록상의 이름을 입력해주시기 바랍니다.</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="stars">*</span> 생년월일</dt>
+                        <dd>
+                            <div class="inputTextWrap"><input type="date" class="inputText"></div>
+                            <div class="inputDescription">주민등록상의 생년월일을 입력해주시기 바랍니다.</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="stars">*</span> 연락처</dt>
+                        <dd>
+                            <div class="inputTextWrap"><input type="text" class="inputText"></div>
+                            <div class="inputDescription">현재 연락 가능한 번호를 입력해주세요.</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="stars">*</span> 거주지 시/도</dt>
+                        <dd>
+                            <div class="inputTextWrap"><input type="text" class="inputText"></div>
+                            <div class="inputDescription">현재 거주지를 입력해주세요.</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="lastDt"><span class="stars">*</span> 이메일</dt>
+                        <dd class="lastDt">
+                            <div class="inputTextWrap"><input type="email" class="inputText" disabled=true></div>
+                            <div class="inputDescription"></div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <br>
+            <div id="nextStepBtnWrap">
+                <button id="nextStepBtn" value="다음 단계">가입 하기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
