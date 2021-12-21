@@ -112,35 +112,32 @@
         }
         
         #fixed-bar{
-            width: 55px;
+             width: 55px;
             height: 290px;
-            background-color: grey;
-            position: fixed; 
-            top:100px; 
-            right:0px;
-            /*
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;*/
+            position: fixed;
+            top: 250px;
+            right: 0px;
             border-radius: 10px;
             padding: 25px 2.5px 25px 2.5px;
             opacity: 0.5;
+            border: 5px solid #D5D5D5;
         }
         #fixed-bar>a{
-            width: 50px;
+            width: 40px;
             height: 50px;
-            color: white;
-            float:left;
+            color: gray;
+            float: left;
             margin: 0 auto;
             text-align: center;
         }
         #fixed-bar>a:hover{
-            color: #4C4C4C;
+            color: #D5D5D5;
         }
          #fixed-bar-move{
             width: 55px;
             height: 20px;
             position: fixed; 
-            top:390px; 
+            top:540px; 
             right:0px;
             opacity: 0.5;
             padding-top: 2px;
@@ -148,16 +145,16 @@
         #fixed-bar-move>a{
             width: 25px;
             height: 25px;
-            background-color: grey;
+            background-color: #D5D5D5;
             color: white;
-            float:left;
+            float: left;
             text-align: center;
             border-radius: 5px;
             margin: 1px;
             padding-top: 5px;
         }
         #fixed-bar-move>a:hover{
-            color: #4C4C4C;
+            color: gray;
         }
 
     </style>

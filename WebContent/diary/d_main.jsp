@@ -12,8 +12,8 @@
         * {
             box-sizing: border-box;
         }
-        #header-wrap{
-        }
+
+        #header-wrap {}
 
         #wrap {
             width: 100%;
@@ -25,25 +25,34 @@
             opacity: 0.8;
             position: fixed;
             z-index: -1;
-            
+            filter: blur(2px);
 
         }
 
         #body {
             width: 100%;
-            height: 10000px;
             margin-top: 50px;
         }
 
-        #pol_area {
+        #pol-title {
+            width: 85%;
+            height: 80px;
+            font-size: 25px;
+            color: white;
+            margin: 0 auto 10px;
+            padding-left: 20px;
+            padding-top: 20px;
+            line-height: 70px;
+        }
+
+        #pol-area {
             width: 85%;
             height: 100%;
             margin: 0 auto;
             text-align: center;
         }
 
-        #polaroid-wrap {
-        }
+        #polaroid-wrap {}
 
         .polaroid {
             width: 250px;
@@ -118,8 +127,8 @@
             left: -80px;
             top: 0px;
             z-index: 10;
-            color: #5D5D5D;
-            text-shadow: 0px 1px 2px grey;
+            color: white;
+            /*text-shadow: 0px 1px 2px grey;*/
         }
 
         #pol-add-area {
@@ -142,10 +151,11 @@
 
 
         #modal {
+            /*
             position: absolute;
             top: 0;
             left: 0;
-
+            */
             width: 100%;
             height: 100%;
 
@@ -166,7 +176,6 @@
 
             text-align: center;
 
-            border-radius: 10px;
 
             transform: translateX(-50%) translateY(-50%);
         }
@@ -183,34 +192,66 @@
         }
 
         #add-img {
-            width: 90%;
-            height: 70%;
-            margin: 22.5px auto ;
+            width: 337.5px;
+            height: 367.5px;
+            margin: 22.5px auto;
             border-radius: 5px;
-            background-color: floralwhite;
+            background-color: #F6F6F6;
+            text-align: center;
+            line-height: 337.5px;
+            overflow: hidden;
+            border: 1px solid #F6F6F6;
+        }
+
+        label {
+            cursor: pointer;
+            font-size: 15px;
+            color: gray;
+        }
+
+        #chooseFile {
+            visibility: hidden;
         }
 
         #add-title {
-            width: 90%;
-            height: 17%;
+            width: 337.5px;
+            height: 89.25px;
             margin: 22.5px auto;
             text-align: center;
-            background-color: floralwhite;
+            background-color: #F6F6F6;
+            padding-top: 10px;
         }
+
+        #addTitle {
+            border: none;
+            background-color: #F6F6F6;
+
+            width: 300px;
+            height: 50px;
+        }
+
+        #addTitle:focus {
+            outline: none;
+            font-size: 15px;
+        }
+
 
         #add-date {
             width: 375px;
             height: 30px;
             margin: 0 auto;
         }
+
         #add-date>input {
             float: left;
         }
-		#modal-btn{
+
+        #modal-btn {
             width: 100px;
             height: 50px;
             margin: 0 auto;
-		}
+        }
+
         #add-pol {
             float: left;
             cursor: pointer;
@@ -235,7 +276,10 @@
         <%@ include file="include/d_gnb.html" %>
     </div>
     <div id="body">
-        <div id="pol_area">
+
+        <div id="pol-title">USER'S DIARY : )</div>
+
+        <div id="pol-area">
             <div id="polaroid-wrap">
                 <div class="polaroid">
                     <a href="" class="delete"><i class="xi-close-circle-o"></i></a>
@@ -288,57 +332,109 @@
                 </div>
                 <div id="modal">
                     <div id="modal-area">
-                        <div id="modal-pol">
-                            <div id="add-img"></div>
-                            <div id="add-title"></div>
+                        <form method="post" enctype="multipart/form-data" id="addForm">
+                            <div id="modal-pol">
+                                <div id="add-img">
 
-                        </div>
-                        <div id="add-date">
-                            <input type="date">
-                        </div>
-                        <div id="modal-btn">
-                            <div id="add-pol">
-                                <i class="xi-plus-square-o xi-3x"></i>
+                                    <label for="chooseFile">클릭하여 이미지를 추가해주세요 :-)</label>
+                                    <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+                                    <div id="fileName"></div>
+                                </div>
+                                <div id="add-title">
+                                    <label for="addTitle">클릭하여 제목을 추가해주세요 :-)</label>
+                                    <input type="text" id="addTitle" name="addTitle">
+
+                                </div>
+
                             </div>
-                            <div id="modal-close">
-                                <i class="xi-close-square-o xi-3x"></i>
+                            <div id="add-date">
+                                <input type="date">
                             </div>
+                            <div id="modal-btn">
+                                <div id="add-pol">
+                                    <i class="xi-plus-square-o xi-3x" onclick="$('#addForm').submit();"></i>
+                                </div>
+                        </form>
+                        <div id="modal-close">
+                            <i class="xi-close-square-o xi-3x"></i>
                         </div>
                     </div>
                 </div>
-                <script>
-                    //modal
-                    $(function() {
-                        $('#add').click(function() {
-                            $('#modal').fadeIn();
-                            //$('body').css('overflow', 'hidden');
-                        });
-                        $('#modal-close').click(function() {
-                            $('#modal').fadeOut();
-                            //$('body').css('overflow', 'auto');
-                        });
+            </div>
 
+            <script>
+                // modal
+                $(function() {
+                    $('#add').click(function() {
+                        $('body').css('overflow', 'hidden'); // 스크롤 제어
+                        
+                        var div = $('#modal');
+                        div.css("position", "absolute");
+                        // 모달창 열리는 위치 현재 화면의 위치로 지정
+                        div.css("top", Math.max(0, (($(window).height() - div.outerHeight()) / 2) + $(window).scrollTop()) + "px");
+                        div.css("left", Math.max(0, (($(window).width() - div.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+                        // 모달창 띄우기
+                        $('#modal').fadeIn();
+                    });
+                    $('#modal-close').click(function() {
+                        // 모달창 닫기
+                        $('#modal').fadeOut();
+                        // 스크롤 제어 해제
+                        $('body').css('overflow', 'auto');
                     });
 
-                </script>
+                });
 
-            </div>
+            </script>
+
         </div>
-        <script>
-            // 삭제 버튼 나타내기
-            $('.polaroid').hover(function() {
-                $(this).children('.delete').css('display', 'block');
-                //$(this).children('.img-area').css('margin','-1px 17.5px 14px 12.5px'); 
-                $(this).children('.img-area').css('margin', '-1px 17.5px 14px 12.5px');
-            }, function() {
-                $(this).children('.delete').css('display', 'none');
-                $(this).children('.img-area').css('margin', '15px auto');
-            });
-            $('.delete').click(function(){
-            	window.confirm('삭제된 폴라로이드는 되돌릴 수 없습니다. 삭제하시겠습니까? ');
-            });
+    </div>
+    <script>
+        // 삭제 버튼 나타내기
+        $('.polaroid').hover(function() {
+            $(this).children('.delete').css('display', 'block');
+            //$(this).children('.img-area').css('margin','-1px 17.5px 14px 12.5px'); 
+            $(this).children('.img-area').css('margin', '-1px 17.5px 14px 12.5px');
+        }, function() {
+            $(this).children('.delete').css('display', 'none');
+            $(this).children('.img-area').css('margin', '15px auto');
+        });
+        $('.delete').click(function() {
+            window.confirm('삭제된 폴라로이드는 되돌릴 수 없습니다. 삭제하시겠습니까? ');
+        });
 
-        </script>
+    </script>
+
+    <script>
+        function loadFile(input) {
+            // 선택된 파일 가져오기
+            var file = input.files[0];
+
+            // 미리 만들어 놓은 div에 text(파일이름) 추가
+            var name = document.getElementById('fileName');
+            name.textContent = file.name;
+            //console.log(file.name);
+
+            // 새로운 이미지 div 추가
+            var newImage = document.createElement("img");
+            newImage.setAttribute("class", 'img');
+
+            // 이미지 source 가져오기
+            newImage.src = URL.createObjectURL(file);
+
+            newImage.style.width = "100%";
+            newImage.style.height = "100%";
+            newImage.style.objectFit = "cover";
+
+
+            var container = document.getElementById('add-img');
+            container.innerHTML = "";
+            container.appendChild(newImage);
+        };
+
+    </script>
+
+   
 
     </div>
 
