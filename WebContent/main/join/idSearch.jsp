@@ -39,8 +39,8 @@
             background-color: rgba(220, 220, 220, 0.2);
         }
 
-        /* mainlogin Wrap */
-        #mainLoginWrap {
+        /* certifiedWrap */
+        #certifiedWrap {
             border: 1px solid grey;
             width: 70%;
             height: 300px;
@@ -50,6 +50,16 @@
             border-bottom-right-radius: 10px;
             background-color: rgba(220, 220, 220, 0.5);
             margin: 0 auto;
+        }
+        #certifiedInputWrap{
+        	border: 1px solid grey;
+            width: 70%;
+            height: 300px;
+            border-radius:10px;
+            margin: 0 auto;
+            padding: 40px 0px;
+            display:none;
+        	text-align:center;
         }
 
         #loginSelectWrap_user {
@@ -184,7 +194,7 @@
                 </span>
             </div>
             <br><br>
-            <div id="mainLoginWrap">
+            <div id="certifiedWrap">
 <%--select Wrap --%>
                 <div id="loginSelectWrap_user">
                     <ul id="userSelUl">
@@ -198,21 +208,25 @@
                 </div>
 <%--ID찾기 form --%>
                 <div id="userLoginFormWrap">
-                    <form action="/main/join/idCertified.jsp">
-                        <input type="text" class="inputId" placeholder="E-mail 주소를 입력해주세요."><br><br>
-                        <input type="submit" class="inputSm" value="인증 번호 발송">
-                    </form>
+                        <input type="text" class="inputId" placeholder="E-mail 주소를 입력해주세요." name="userEmail" id="userEmail"><br><br>
+                        <input type="button" class="inputSm" id="userInput" value="인증 번호 발송">
                 </div>
                 <div id="businessLoginFormWrap">
-                    <form action="/main/join/idCertified.jsp">
-                        <input type="text" class="inputId" placeholder="사업자 E-mail 주소를 입력해주세요."><br><br>
-                        <input type="submit" class="inputSm" value="인증 번호 발송">
-                    </form>
+                        <input type="text" class="inputId" placeholder="사업자 E-mail 주소를 입력해주세요." name="businessEmail" id="businessEmail"><br><br>
+                        <input type="button" class="inputSm" id="businessInput" value="인증 번호 발송">
                 </div>
             </div>
+<%-- 인증번호 입력 form --%>
+			<div id="certifiedInputWrap">
+				<input type="text" class="inputId" placeholder="인증번호를 입력해주세요." id="certifiedInput"><br><br>
+                <div id="timeWrap"></div>
+                <br>
+                <input type="button" class="inputSm" value="인증 번호 입력" onclick="certifiedCheck()">
+			</div>
         </div>
     </div>
     <script>
+    var certifiedNum="";
         $("input[type=text]").keydown(function() {
             if (event.keyCode === 13) {
                 event.preventDefault();
@@ -229,7 +243,90 @@
             $("#userLoginFormWrap").css("display", "block");
             $("#businessSelUl").css("display", "none");
             $("#businessLoginFormWrap").css("display", "none");
-        })
+        });
+        $('#userInput').click(function(){
+        	var userEmail = $('#userEmail').val();
+        	if(userEmail==""){
+        		alert("email주소를 입력해주세요.")
+        		return;
+        	}
+        	$.ajax({
+        		url:"/main/idSearch.do",
+        		data:{
+        			"userEmail":userEmail,
+        		},
+        		type:"get",
+        		dataType:"json",
+        		success:function(result){
+        			if(result==false){
+        				alert("없는 email주소입니다. \n email을 다시 입력해주세요.")
+        				return;
+        			}
+        			$('#certifiedWrap').css('display','none');
+        			$('#certifiedInputWrap').css('display','block');
+        			certifiedNum = result;
+        			time();
+        		},
+        		error:function(){
+        			
+        		}
+        	});
+        });
+        $('#businessInput').click(function(){
+        	var businessEmail = $('#businessEmail').val();
+        	if(businessEmail==""){
+        		alert("email주소를 입력해주세요.")
+        		return;
+        	}
+        	$.ajax({
+        		url:"/main/idSearch.do",
+        		data:{
+        			"businessEmail":businessEmail,
+        		},
+        		type:"get",
+        		dataType:"json",
+        		success:function(result){
+        			if(result==false){
+        				alert("없는 email주소입니다. \n email을 다시 입력해주세요.")
+        				return;
+        			}
+        			$('#certifiedWrap').css('display','none');
+        			$('#certifiedInputWrap').css('display','block');
+        			certifiedNum = result;
+        			time();
+        		},
+        		error:function(){
+        			
+        		}
+        	});
+        });
+        function time(){
+    		var time = 300;
+    		var min ="";
+    		var sec ="";
+    		var x = setInterval(function(){
+    			time -=1;
+    			min=parseInt(time/60);
+    			sec=time%60;
+    			$('#timeWrap').html(min+' : '+sec);
+    			
+    			if(time<0){
+    				clearInterval(x);
+    				alert("응답시간이 초과되었습니다.\n메인화면으로 이동합니다.");
+    				location.replace('/')
+    			}
+    		}, 1000);
+    	}
+        function certifiedCheck(){
+    		var inputNum = $('#certifiedInput').val();
+    		var userEmail = $('#userEmail').val();
+    		var businessEmail = $('#businessEmail').val();
+    		if(certifiedNum==inputNum&&certifiedNum!=""){
+    			location.replace('/main/idResult.do?userEmail='+userEmail+'&businessEmail='+businessEmail)
+    		}else{
+    			alert('error');
+    		}
+    	}
     </script>
 </body>
 </html>

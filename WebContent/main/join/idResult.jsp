@@ -57,10 +57,19 @@
             <br>
             <br>
             <div id="inputAlertWrap">
+            <c:choose>
+            <c:when test="${userId!=null }">
                 <span>
-                    - 회원님께서 가입하신 아이디는 [<span> </span>]입니다.
+                    - 회원님께서 가입하신 아이디는 <span>${userId } </span>입니다.
                 </span>
-                <br>
+            </c:when>
+            <c:otherwise>
+            	<span>
+                    - 회원님께서 가입하신 아이디는 <span>${businessId } </span>입니다.
+                </span>
+            </c:otherwise>
+            </c:choose>
+            <br>
             </div>
             <br><br>
         </div>

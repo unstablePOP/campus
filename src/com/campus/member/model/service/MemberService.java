@@ -15,4 +15,14 @@ public interface MemberService {
 
 	int memberJoin(Member m);
 
+	boolean emailCheckB(String email);
+
+	boolean idCheckBusiness(String businessId);
+
+	int businessJoin(Business b);
+
+	String businessIdSearchResult(String businessEmail);
+
+	String userIdSearchResult(String userEmail);
+
 }

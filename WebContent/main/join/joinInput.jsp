@@ -394,12 +394,12 @@
 <%-- 전체 항목 검사 --%>
     	function joinCheck(){
     		var id = $("#idDescription").css('color')=="rgb(30, 144, 255)";
-    		var pwd = $("#idDescription").css('color')=="rgb(30, 144, 255)";
-    		var pwdRe = $("#idDescription").css('color')=="rgb(30, 144, 255)";
-    		var name = $("#idDescription").css('color')=="rgb(30, 144, 255)";
-    		var birth = $("#idDescription").css('color')=="rgb(30, 144, 255)";
-    		var phone = $("#idDescription").css('color')=="rgb(30, 144, 255)";
-    		var addr = $("#idDescription").css('color')=="rgb(30, 144, 255)";
+    		var pwd = $("#pwdDescription").css('color')=="rgb(30, 144, 255)";
+    		var pwdRe = $("#pwdReDescription").css('color')=="rgb(30, 144, 255)";
+    		var name = $("#nameDescription").css('color')=="rgb(30, 144, 255)";
+    		var birth = $("#birthDescription").css('color')=="rgb(30, 144, 255)";
+    		var phone = $("#phoneDescription").css('color')=="rgb(30, 144, 255)";
+    		var addr = $("#addrDescription").css('color')=="rgb(30, 144, 255)";
     		if(id&&pwd&&pwdRe&&name&&birth&&phone&&addr){
     			$('#joinDo').submit();
     		}else{

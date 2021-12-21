@@ -146,4 +146,114 @@ public class MemberDAO {
 		return result;
 	}
 
+	public boolean emailCheckB(String email, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "select * from business where business_email=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			if(rset.next()) result = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public boolean idCheckBusiness(String businessId, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "select * from business where business_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, businessId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) result = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int businessJoin(Connection conn, Business b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO BUSINESS VALUES(BUSINESS_SEQ.nextval,?,?,?,?,?,?,?,SYSDATE,'N','BS')";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getBusinessId());
+			pstmt.setString(2, b.getBusinessPwd());
+			pstmt.setString(3, b.getBusinessName());
+			pstmt.setString(4, b.getBusinessPhone());
+			pstmt.setString(5, b.getBusinessAddress());
+			pstmt.setString(6, b.getBusinessEmail());
+			pstmt.setString(7, b.getBusinessUrl());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public String businessIdSearchResult(String businessEmail, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String businessId = null;
+		String query = "select * from business where business_email=? and business_withdrawal='N'";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, businessEmail);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				businessId = rset.getString("business_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return businessId;
+	}
+
+	public String memberIdSearchResult(String userEmail, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String userId = null;
+		String query = "select * from member where user_email=? and user_withdrawal='N'";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userEmail);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				userId = rset.getString("user_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return userId;
+	}
+
 }

@@ -180,6 +180,7 @@
     					$('#certifiedWrap').css('display','none');
     					$('#certifiedInputWrap').css('display','block');
     					certifiedNum = result;
+    					console.log(certifiedNum);
     					time();
     				}
     			},
