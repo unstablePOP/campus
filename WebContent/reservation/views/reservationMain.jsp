@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--Jquery 라이브러리 & JqueryUI라이브러리-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <!--부트스트랩 CSS파일 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<!--아이콘CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CampUS reservation</title>
@@ -21,7 +24,7 @@ div {
 }
 #wrapper {
 	width: 1250px;
-	height: 1400px;
+	height: 2000px;
 	margin: 0px auto;
 }
 #header {
@@ -31,7 +34,7 @@ div {
 }
 #body {
 	width: 1250px;
-	height: 1200px;
+	height: 1800px;
 	margin: 0px auto;
 }
 #footer {
@@ -47,31 +50,31 @@ div {
 }
 #contentArea {
 	width: 1250px;
-	height: 900px;
+	height: 1500px;
 }
 #leftArea {
 	width: 900px;
-	height: 900px;
+	height: 1500px;
 	float: left;
 }
 #rightArea {
 	width: 350px;
-	height: 900px;
+	height: 1500px;
 	float: left;
 }
 #weatherArea {
 	width: 350px;
-	height: 450px;
+	height: 800px;
 	float: left;
 	background-color:rgba(220,220,220,0.5);
 }
 #mapArea {
 	width: 350px;
-	height: 450px;
+	height: 700px;
 	float: left;
 }
 #serachPanel {
-	width: 720px;
+	width: 760px;
 	height: 100px;
 	color: white;
 	background-color: rgba(220,220,220,0.2);
@@ -93,7 +96,7 @@ div {
 	height: 40px;
 	font-size: 25px;
 }
-#searchlogo{
+.searchlogo{
 	width:40px;
 	height:40px;
 	margin-bottom: 10px;
@@ -102,9 +105,14 @@ div {
 	width:20px;
 	height:20px;	
 }
+.resultArea{
+	width:100%;
+	height:1500px;	
+}
 
 </style>
 </head>
+<!--캠핑장 검색 일정 달력 -->
 <script type="text/javascript">
 	 $(function() {
 		  $( "#from" ).datepicker({
@@ -137,7 +145,7 @@ div {
 <body>
 	<div id="wrapper">
 		<div id="header">
-		<%@ include file="/common/include/gnb.html" %>
+		<%@ include file="/common/include/gnb.jsp" %>
 		</div>
 		<div id="body">
 			<div class="searchArea">
@@ -145,16 +153,14 @@ div {
 					<div class="search">
 					     <label for="form">어디로 가나요?</label><br>
 					     <select name="where" class="form" style="width:150px; height:40px; font-size:20px;">
-							<option value="seoul">서울</option>
-							<option value="gyeonggi">경기도</option>
-							<option value="gangwon">강원도</option>
-							<option value="chungcheongbuk">충청북도</option>
-							<option value="chungcheongnam">충청남도</option>							
-							<option value="jeollabuk">전라북도</option>							
-							<option value="jeollanam">전라남도</option>
-							<option value="gyeongsangbuk">경상북도</option>
-							<option value="gyeongsangnam">경상남도</option>
-							<option value="jeju">제주도</option>
+							<option value="total">전체</option>
+							<option value="gp">가평</option>
+							<option value="gi">경기/인천</option>
+							<option value="gw">강원</option>
+							<option value="cc">충청</option>							
+							<option value="gs">경상</option>							
+							<option value="jl">전라</option>
+							<option value="jj">제주</option>
 						</select>
 					</div>
 					<div class="search">
@@ -168,7 +174,7 @@ div {
 					</div>
 					<br>
 					<div id="searchBTN">
-					     <button type="submit" class="btn btn-outline-light" style="width:100px;, height:30px; font-size:20px; ">검색</button>
+					     <button type="submit" class="btn btn-outline-light" style="width:120px;, height:30px; font-size:20px;"><i class="xi-search"></i> 검색</button>
 					</div>
 				</form>
 					
@@ -176,9 +182,9 @@ div {
 			
 			<div id="contentArea">
 				<div id="leftArea">
-					<div id="resultArea">
+					<div class="resultArea">
 					<br>
-						<h2><img id="searchlogo" src='../../reservation/image/main/select2.png'> 캠핑장 정보</h2>
+						<h2><img class="searchlogo" src='../../reservation/image/main/select2.png'> 캠핑장 정보</h2>
 						
 						<table class="table table-striped" style="border:1px solid black; width: 880px; height:100%; ">
 							
@@ -192,7 +198,7 @@ div {
 								
 								<img
 									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
-									
+
 								
 								</td>
 								<td style="border:1px solid black;">태그</td>
@@ -223,8 +229,9 @@ div {
 					</div>
 				</div>
 				<div id="rightArea">
+				<br>
+					<h2><img class="searchlogo" src='../../reservation/image/main/select5.png'> 날씨정보</h2>
 					<div id="weatherArea" style="border:1px solid black;">
-					<h2>날씨영역
 						<button id="nameBtn">버튼</button>
 						<script>
 							$(function(){
@@ -253,7 +260,11 @@ div {
 					</h2>
 					</div>
 					<div id="mapArea">
+
+						<br>
+						<div>
 						<%@ include file="/reservation/views/map.jsp" %>
+						</div>
 					</div>
 		<div id="footer"></div>
 	</div>

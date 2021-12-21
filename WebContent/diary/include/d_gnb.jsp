@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
         * {
             box-sizing: border-box;
         }
@@ -141,7 +140,6 @@
         }
     </style>
 </head>
-
 <body>
 	
             <div id="header-1">
@@ -184,7 +182,15 @@
                     </ul>
                 </div>
                 <div id="loginWrap">
-                    <a href="">login</a>
+                
+                	<c:choose>
+                		<c:when test="${member!=null }">
+                			<a href="/userPage/u_main.jsp" class="userIcon">${member.userName } 님 </a>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<a href="/main/login/M_Login.jsp">login</a>
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
             </div>
     <script>
@@ -192,4 +198,5 @@
             $(this).children().children().slideToggle(300);
         })
     </script>
-</body></html>
+</body>
+</html>
