@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -12,8 +13,6 @@
         * {
             box-sizing: border-box;
         }
-
-        #header-wrap {}
 
         #wrap {
             width: 100%;
@@ -52,7 +51,6 @@
             text-align: center;
         }
 
-        #polaroid-wrap {}
 
         .polaroid {
             width: 250px;
@@ -270,10 +268,21 @@
 </head>
 
 <body>
+	
+	<c:choose>
+			<c:when test="${member==null }">
+				<script>
+					location.replace('/main/login/M_Login.jsp');
+				</script>
+			</c:when>
+			
+			<c:otherwise>
+
+
     <div id="wrap">
     </div>
     <div id="header-wrap">
-        <%@ include file="include/d_gnb.html" %>
+        <%@ include file="include/d_gnb.jsp" %>
     </div>
     <div id="body">
 
@@ -438,6 +447,11 @@
 
     </div>
 
+	</c:otherwise>
+			
+			
+	</c:choose>
+		
 
 
 </body>

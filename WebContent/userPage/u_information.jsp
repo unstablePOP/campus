@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -247,8 +248,19 @@
     <div id="wrap">
         <a name="top"></a>
         <div id="header-wrap">
-            <%@ include file="include/u_gnb.html" %>
+            <%@ include file="include/u_gnb.jsp" %>
         </div>
+
+
+		<c:choose>
+			<c:when test="${member==null }">
+				<script>
+					location.replace('/main/login/M_Login.jsp');
+				</script>
+			</c:when>
+			
+			<c:otherwise>
+
 
         <div id="body">
             <div id="infor-area">
@@ -385,7 +397,11 @@
         <a name="bottom"></a>
     </div>
 
-
+	</c:otherwise>
+			
+			
+	</c:choose>
+		
 </body>
 
 </html>
