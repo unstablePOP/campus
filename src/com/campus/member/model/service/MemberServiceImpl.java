@@ -38,4 +38,12 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public boolean emailCheck(String email) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = mDAO.emailCheck(email,conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

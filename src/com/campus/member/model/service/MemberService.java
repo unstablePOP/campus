@@ -11,4 +11,6 @@ public interface MemberService {
 
 	boolean idCheck(String userId);
 
+	boolean emailCheck(String email);
+
 }

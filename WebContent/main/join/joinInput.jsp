@@ -267,7 +267,7 @@
                     <dl>
                         <dt class="lastDt"><span class="stars">*</span> 이메일</dt>
                         <dd class="lastDt">
-                            <div class="inputTextWrap"><input type="email" class="inputText" disabled=true></div>
+                            <div class="inputTextWrap"><input type="email" class="inputText" disabled=true value=${param.email }></div>
                             <div class="inputDescription"></div>
                         </dd>
                     </dl>
@@ -317,8 +317,9 @@
     			url:"/main/idCheck.do",
     			data:{"userId":userId},
     			type:"get",
+    			dataType:"json",
     			success:function(result){
-    				if(result=="true"){
+    				if(result==true){
     					$('#idDescription').html("중복된 ID입니다. 다른 ID를 입력해주세요.");
     					$('#idDescription').css('color','red');
     				}else{
