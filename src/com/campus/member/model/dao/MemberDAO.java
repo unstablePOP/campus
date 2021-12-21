@@ -122,4 +122,28 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int memberJoin(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO MEMBER VALUES(M_SEQ.nextval,?,?,?,?,?,?,?,?,SYSDATE,'N')";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setDate(4, m.getUserBirth());
+			pstmt.setString(5, m.getUserPhone());
+			pstmt.setString(6, m.getUserAddress());
+			pstmt.setString(7, m.getUserEmail());
+			pstmt.setString(8, String.valueOf(m.getUserGender()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

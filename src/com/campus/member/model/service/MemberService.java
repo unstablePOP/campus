@@ -13,4 +13,6 @@ public interface MemberService {
 
 	boolean emailCheck(String email);
 
+	int memberJoin(Member m);
+
 }

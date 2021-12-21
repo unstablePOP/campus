@@ -13,7 +13,7 @@
 		}
 		#wrap {
             width: 1250px;
-            height: 1450px;
+            height: 1550px;
             box-sizing: border-box;
             margin: 0px auto;
         }
@@ -23,7 +23,7 @@
         }
         #bodyWrap{
             width: 100%;
-            height: 1150px;
+            height: 1250px;
         }
         
         /* 단계 CSS */
@@ -86,7 +86,7 @@
         #nextStepBtnWrap{
             width: 200px;
             height: 60px;
-            margin: 0 auto;
+            margin: 50px auto;
         }
         
         /* 정보기입 목록(1개) 전체 wrap CSS */
@@ -130,6 +130,9 @@
             border-left: none;
             border-right: none;
             border-color: rgba(220,220,220,1);
+        }
+        #genderWrap{
+        	padding:22px 10px;
         }
         .inputTextWrap{
             border: 1px solid rgba(220,220,220,1);
@@ -206,13 +209,14 @@
                     </span>
                 </div>
 <%-- 아이디 input 부분 --%>
+			<form action="/main/join.do" method="post" id="joinDo">
                 <div id="idInforInputWrap">
                     <h3>아이디 정보</h3>
                     <dl>
                         <dt class="firstDt"><span class="stars">*</span> 아이디</dt>
                         <dd class="firstDt">
                             <div class="inputTextWrap"><input type="text" name="userId" class="inputText" placeholder="사용하실 아이디를 입력하신 후 중복확인을 눌러주세요."></div>
-                            <div class="inputBtnWrap"><button class="inputBtn" id="idCheck">중복 확인</button></div>
+                            <div class="inputBtnWrap"><button type="button" class="inputBtn" id="idCheck">중복 확인</button></div>
                             <div class="inputDescription" id="idDescription">영문, 숫자만 가능합니다. (5~15자)</div>
                         </dd>
                     </dl>
@@ -238,7 +242,7 @@
                     <dl>
                         <dt class="firstDt"><span class="stars">*</span> 이름</dt>
                         <dd class="firstDt">
-                            <div class="inputTextWrap"><input type="text" name="userName" class="inputText" placeholder="사용하실 아이디를 입력하신 후 중복확인을 눌러주세요."></div>
+                            <div class="inputTextWrap"><input type="text" name="userName" class="inputText" placeholder="이름을 입력해주세요."></div>
                             <div class="inputDescription" id="nameDescription">주민등록상의 이름을 입력해주시기 바랍니다.</div>
                         </dd>
                     </dl>
@@ -247,6 +251,13 @@
                         <dd>
                             <div class="inputTextWrap"><input type="date" name="userBirth" class="inputText"></div>
                             <div class="inputDescription" id="birthDescription">주민등록상의 생년월일을 입력해주시기 바랍니다.</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="stars">*</span> 성별</dt>
+                        <dd id="genderWrap">         
+                            <input type="radio" name="gender" value="M" checked=true>남
+                            <input type="radio" name="gender" value="F">여
                         </dd>
                     </dl>
                     <dl>
@@ -267,12 +278,15 @@
                     <dl>
                         <dt class="lastDt"><span class="stars">*</span> 이메일</dt>
                         <dd class="lastDt">
-                            <div class="inputTextWrap"><input type="email" class="inputText" disabled=true value=${param.email }></div>
+                            <div class="inputTextWrap"><input type="email" class="inputText" disabled=ture value="${param.email }"></div>
+	                        <input type="hidden" value="${param.email }" name="email">
                             <div class="inputDescription"></div>
                         </dd>
                     </dl>
                 </div>
             </div>
+           </form>
+            <br>
             <br>
 <%-- 가입하기 button 부분 --%>
             <div id="nextStepBtnWrap">
@@ -387,7 +401,7 @@
     		var phone = $("#idDescription").css('color')=="rgb(30, 144, 255)";
     		var addr = $("#idDescription").css('color')=="rgb(30, 144, 255)";
     		if(id&&pwd&&pwdRe&&name&&birth&&phone&&addr){
-    			alert("성공");
+    			$('#joinDo').submit();
     		}else{
     			alert("실패");
     		}

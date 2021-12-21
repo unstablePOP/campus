@@ -46,4 +46,14 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int memberJoin(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = mDAO.memberJoin(conn,m);
+		if(result>0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		
+		return result;
+	}
+
 }

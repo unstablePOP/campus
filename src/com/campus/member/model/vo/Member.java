@@ -17,6 +17,19 @@ public class Member {
 	private char userWithdrawal;
 	
 	
+	
+	public Member(String userId, String userPwd, String userName, Date userBirth, String userPhone, String userAddress,
+			String userEmail, char userGender) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userPhone = userPhone;
+		this.userAddress = userAddress;
+		this.userEmail = userEmail;
+		this.userGender = userGender;
+	}
 	public Member(int userNo, String userId, String userPwd, String userName, Date userBirth, String userPhone,
 			String userAddress, String userEmail, char userGender, Date userJoined, char userWithdrawal) {
 		super();
