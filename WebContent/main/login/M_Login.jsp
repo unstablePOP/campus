@@ -229,6 +229,12 @@
 			location.replace("/");
 		</script>
 	</c:if>
+	<c:if test="${business!=null }">
+		<script>
+			alert("비정상적인 접근입니다. 로그아웃후 이용해주세요.");
+			location.replace("/");
+		</script>
+	</c:if>
 
 	<div id="AllWrap">
 		<div id="logoWrap">
@@ -275,8 +281,8 @@
 		<%-- Sub 부분 --%>
 		<div id=loginSubWrap>
 			<ul id=loginSub>
-				<li><a href="/main/join/passwordSearch.jsp">비밀번호 찾기</a></li>
-				<li><a href="/main/join/idSearch.jsp">아이디 찾기</a></li>
+				<li><a href="/main/id,pwd/passwordSearch.jsp">비밀번호 찾기</a></li>
+				<li><a href="/main/id,pwd/idSearch.jsp">아이디 찾기</a></li>
 				<li><a href="/main/join/joinTerms.jsp">회원가입</a></li>
 			</ul>
 		</div>

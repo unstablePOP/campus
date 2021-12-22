@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -27,8 +28,8 @@
             width: 100%;
             height: 650px;
         }
-
-
+        
+        
         /* 알림 Wrap CSS */
         #inputAlertWrap {
             widows: 100%;
@@ -38,8 +39,8 @@
             background-color: rgba(220, 220, 220, 0.2);
         }
 
-        /* login Wrap */
-        #mainLoginWrap {
+        /* certifiedWrap */
+        #certifiedWrap {
             border: 1px solid grey;
             width: 70%;
             height: 300px;
@@ -49,6 +50,16 @@
             border-bottom-right-radius: 10px;
             background-color: rgba(220, 220, 220, 0.5);
             margin: 0 auto;
+        }
+        #certifiedInputWrap{
+        	border: 1px solid grey;
+            width: 70%;
+            height: 300px;
+            border-radius:10px;
+            margin: 0 auto;
+            padding: 40px 0px;
+            display:none;
+        	text-align:center;
         }
 
         #loginSelectWrap_user {
@@ -164,7 +175,6 @@
     </style>
 </head>
 <body>
-<body>
     <div id="wrap">
         <div id="header-wrap">
 			<%@include file="/common/include/gnb.jsp" %>
@@ -173,17 +183,19 @@
             <br>
             <br>
             <h1 align="center">아이디 찾기</h1>
+<%--알림 부분 --%>
             <div id="inputAlertWrap">
                 <span>
-                    - 해당하는 회원 분류를 선택해주세요.
+                    - 해당하는 <span style="color: dodgerblue">회원 분류</span>를 선택해주세요.
                 </span>
                 <br>
                 <span>
-                    - E-mail 주소로 발송된 인증번호를 입력해주세요.
+                    - 회원가입시 입력하셨던 <span style="color: dodgerblue">E-mail</span> 주소를 입력해주세요.
                 </span>
             </div>
             <br><br>
-            <div id="mainLoginWrap">
+            <div id="certifiedWrap">
+<%--select Wrap --%>
                 <div id="loginSelectWrap_user">
                     <ul id="userSelUl">
                         <li><img src="../image/login/2key-resize.png" alt="" align="top"> 일반 사용자</li>
@@ -194,27 +206,27 @@
                         <li><img src="../image/login/2team-resize.png" alt="" align="top"> 사업자</li>
                     </ul>
                 </div>
+<%--ID찾기 form --%>
                 <div id="userLoginFormWrap">
-                    <form action="/main/join/idResult.jsp">
-                        <input type="text" class="inputId" placeholder="인증번호를 입력해주세요."><br>
-                        <br>
-                        <div class="timeWrap"></div>
-                        <br>
-                        <input type="submit" class="inputSm" value="인증 번호 입력">
-                    </form>
+                        <input type="text" class="inputId" placeholder="E-mail 주소를 입력해주세요." name="userEmail" id="userEmail"><br><br>
+                        <input type="button" class="inputSm" id="userInput" value="인증 번호 발송">
                 </div>
                 <div id="businessLoginFormWrap">
-                    <form action="/main/join/idResult.jsp">
-                        <input type="text" class="inputId" placeholder="인증번호를 입력해주세요."><br><br>
-                        <div class="timeWrap"></div>
-                        <br>
-                        <input type="submit" class="inputSm" value="인증 번호 입력">
-                    </form>
+                        <input type="text" class="inputId" placeholder="사업자 E-mail 주소를 입력해주세요." name="businessEmail" id="businessEmail"><br><br>
+                        <input type="button" class="inputSm" id="businessInput" value="인증 번호 발송">
                 </div>
             </div>
+<%-- 인증번호 입력 form --%>
+			<div id="certifiedInputWrap">
+				<input type="text" class="inputId" placeholder="인증번호를 입력해주세요." id="certifiedInput"><br><br>
+                <div id="timeWrap"></div>
+                <br>
+                <input type="button" class="inputSm" value="인증 번호 입력" onclick="certifiedCheck()">
+			</div>
         </div>
     </div>
     <script>
+    var certifiedNum="";
         $("input[type=text]").keydown(function() {
             if (event.keyCode === 13) {
                 event.preventDefault();
@@ -232,23 +244,89 @@
             $("#businessSelUl").css("display", "none");
             $("#businessLoginFormWrap").css("display", "none");
         });
-        $(function(){
-            var time = 300;
-            var min = "";
-            var sec = "";
-            var x = setInterval(function(){
-                time -=1;
-                min = parseInt(time/60);
-                sec = time%60;
-                
-                $('.timeWrap').html(min+' : '+sec);
-                
-                if(time<0){
-                    clearInterval(x);
-                    $('.timeWrap').html('시간초과');
-                }
-            }, 1000);
+        $('#userInput').click(function(){
+        	var userEmail = $('#userEmail').val();
+        	if(userEmail==""){
+        		alert("email주소를 입력해주세요.")
+        		return;
+        	}
+        	$.ajax({
+        		url:"/main/idSearch.do",
+        		data:{
+        			"userEmail":userEmail,
+        		},
+        		type:"get",
+        		dataType:"json",
+        		success:function(result){
+        			if(result==false){
+        				alert("없는 email주소입니다. \n email을 다시 입력해주세요.")
+        				return;
+        			}
+        			$('#certifiedWrap').css('display','none');
+        			$('#certifiedInputWrap').css('display','block');
+        			certifiedNum = result;
+        			time();
+        		},
+        		error:function(){
+        			
+        		}
+        	});
         });
+        $('#businessInput').click(function(){
+        	var businessEmail = $('#businessEmail').val();
+        	if(businessEmail==""){
+        		alert("email주소를 입력해주세요.")
+        		return;
+        	}
+        	$.ajax({
+        		url:"/main/idSearch.do",
+        		data:{
+        			"businessEmail":businessEmail,
+        		},
+        		type:"get",
+        		dataType:"json",
+        		success:function(result){
+        			if(result==false){
+        				alert("없는 email주소입니다. \n email을 다시 입력해주세요.")
+        				return;
+        			}
+        			$('#certifiedWrap').css('display','none');
+        			$('#certifiedInputWrap').css('display','block');
+        			certifiedNum = result;
+        			time();
+        		},
+        		error:function(){
+        			
+        		}
+        	});
+        });
+        function time(){
+    		var time = 300;
+    		var min ="";
+    		var sec ="";
+    		var x = setInterval(function(){
+    			time -=1;
+    			min=parseInt(time/60);
+    			sec=time%60;
+    			$('#timeWrap').html(min+' : '+sec);
+    			
+    			if(time<0){
+    				clearInterval(x);
+    				alert("응답시간이 초과되었습니다.\n메인화면으로 이동합니다.");
+    				location.replace('/')
+    			}
+    		}, 1000);
+    	}
+        function certifiedCheck(){
+    		var inputNum = $('#certifiedInput').val();
+    		var userEmail = $('#userEmail').val();
+    		var businessEmail = $('#businessEmail').val();
+    		if(certifiedNum==inputNum&&certifiedNum!=""){
+    			location.replace('/main/idResult.do?userEmail='+userEmail+'&businessEmail='+businessEmail)
+    		}else{
+    			alert('인증번호가 올바르지 않습니다. \n 다시 확인해주세요.');
+    		}
+    	}
     </script>
 </body>
 </html>

@@ -15,6 +15,19 @@ public class Business {
 	private char businessWithDrawal;
 	private String rating;
 	
+	
+	
+	public Business(String businessId, String businessPwd, String businessName, String businessPhone,
+			String businessAddress, String businessEmail, String businessUrl) {
+		super();
+		this.businessId = businessId;
+		this.businessPwd = businessPwd;
+		this.businessName = businessName;
+		this.businessPhone = businessPhone;
+		this.businessAddress = businessAddress;
+		this.businessEmail = businessEmail;
+		this.businessUrl = businessUrl;
+	}
 	public Business(int businessNo, String businessId, String businessPwd, String businessName, String businessPhone,
 			String businessAddress, String businessEmail, String businessUrl, Date businessJoined,
 			char businessWithDrawal, String rating) {

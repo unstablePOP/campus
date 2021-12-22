@@ -3,13 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!--Jquery 라이브러리 & JqueryUI라이브러리-->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<!--jQuery UI CSS -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<!--부트스트랩 CSS파일 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-
+<!--아이콘CSS -->
+<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CampUS reservation</title>
@@ -68,6 +72,7 @@
 		height: 50px;
 		margin: 0px auto;
         float: left;
+        margin-top: 1px;
     }
 	#campingAreaList{
 		width: 950px;
@@ -94,8 +99,8 @@
 		height: 45px;
 		margin: 0px auto;
         float: left;
-        text-align: center;
-     	background-color: #1AAB8A;
+        text-align: left;
+     	background-color: white;
     }
     #serachPanel{
     	width: 300px;
@@ -104,7 +109,7 @@
         float: left;
         text-align : center;
     }
-	#reservationClick{
+	#reSearch{
 	background:#1AAB8A;
 	color:#fff;
 	border:1px solid white;
@@ -117,11 +122,11 @@
 	transition:800ms ease all;
 	outline:none;
 	}
-	#reservationClick:hover{
+	#reSearch:hover{
 	  background:#fff;
 	  color:#1AAB8A;
 	}
-	#reservationClick:before,#reservationClick:after{
+	#reSearch:before,#reSearch:after{
 	  content:'';
 	  position:absolute;
 	  top:0;
@@ -131,13 +136,13 @@
 	  background: #1AAB8A;
 	  transition:400ms ease all;
 	}
-	#reservationClick:after{
+	#reSearch:after{
 	  right:inherit;
 	  top:inherit;
 	  left:0;
 	  bottom:0;
 	}
-	#reservationClick:hover:before,#reservationClick:hover:after{
+	#reSearch:hover:before,#reSearch:hover:after{
 	  width:100%;
 	  transition:800ms ease all;
 	}
@@ -158,6 +163,73 @@
     .prevnextIcon{
 	width:20px;
 	height:20px;	
+}
+
+.modal{ 
+  position:absolute; width:100%; height:100%; background: rgba(255,255,255,0.6); top:0; left:0; display:none;
+}
+
+.modal_content{
+  width:500px; height:7000px;
+  background:#fff; border-radius:10px;
+  position:relative; top:20%; left:50%;
+  margin-top:-100px; margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box; padding:74px 0;
+  line-height:23px; cursor:pointer;
+  
+}
+
+.mUpside{
+	width : 500px;
+	height : 650px;
+	background-color: #f3f1ff;
+	
+}
+.mImageArea{
+	width : 500px;
+	height : 250px;
+	float: left;
+	
+}
+.mimage{
+	width : 500px;
+	height : 200px;
+	float: left;
+	padding-top: 20px;
+	
+}
+.mAreaInfo{
+	width : 500px;
+	height : 400px;
+	float: left;
+	background-color: #f3f1ff;	
+}
+.mTitle{
+	width : 500px;
+	height : 50px;
+	float: left;
+	
+}
+.summary{
+	width : 500px;
+	height : 350px;
+	
+	background-color: white;
+
+}
+
+.mDownside{
+	width : 500px;
+	height : 50px;
+}
+.confirm{
+	width : 350px;
+	height : 50px;
+}
+.reservCancle{
+	width : 150px;
+	height : 50px;
 }
 
 </style>
@@ -202,7 +274,7 @@
 
 	<div id="wrapper">
         <div id="header">
-		<%@ include file="/common/include/gnb.html" %></div>
+		<%@ include file="/common/include/gnb.jsp" %></div>
 		<div id="body">
 		    <div id="upSideArea" style = "background: url('../../reservation/image/main/2maintop.jpg') no-repeat 50%">;
 		    
@@ -222,8 +294,7 @@
 							<tr style="border:1px solid gary;">
 								<td rowspan="5" style="border:1px solid gray; width: 300px;">
 									<button class="btn btn-success btn-sm" >
-									<img id ="likeBtnImg" src="../../reservation/image/main/likeIcon.png">
-									찜!!
+									<i class="xi-heart-o"></i>
 									</button>								
 					
 									<img
@@ -231,7 +302,7 @@
 									
 								</td>
 								<td style="border:1px solid gray;">
-								<h5><span class="badge rounded-pill bg-warning text-dark">캠핑</span></h5>
+								<button class="reservBtn">예약하기</button>
 				
 								</td>
 							</tr>
@@ -267,7 +338,7 @@
 
                     <div id="reservationSelect">
                    	<form id="serachPanel" mehtod="get">
-                    	<button type="submit" id="reservationClick">일정 재 검색</button>
+                    	<button type="submit" id="reSearch"><i class="xi-search"></i> 일정 재 검색</button>
 						<br><br>
 						<div class="search">
 						     <label for="form">일정이 언제에요?</label><br>
@@ -293,9 +364,49 @@
 		</div>
 		<div id="footer"></div>
 	</div>
-
-
-
-
 </body>
+
+<div class="modal">
+  <div class="modal_content">
+  		<div class="mUpside">
+			<div class="mImageArea">
+				<div class="mimage">
+					<img src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
+				</div>
+			</div>
+			<div class="mAreaInfo">
+				<div class="mTitle">
+					<h2>00캠핑장</h2>
+				</div>
+				<div class="summary">
+				
+				</div>
+			</div>
+		</div>
+		<div class="mDownside">
+			<div>
+				<button type="submit" class="confirm">결제하기</button><button class="reservCancle">취소</button>
+			</div>
+		</div>
+  </div>
+</div>
+
+
+<script>
+$(function(){ 
+
+  $(".reservBtn").click(function(){
+    $(".modal").fadeIn();
+  });
+  
+  $(".reservCancle").click(function(){
+    $(".modal").fadeOut();
+  });
+  
+});
+</script>
+
+
+
+
 </html>
