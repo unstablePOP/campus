@@ -101,4 +101,44 @@ public class MemberServiceImpl implements MemberService{
 		return userId;
 	}
 
+	@Override
+	public boolean passwordSearch(String userId, String userEmail) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = mDAO.passwordSearch(userId,userEmail,conn);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	@Override
+	public boolean passwordSearchB(String businessId, String businessEmail) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = mDAO.passwordSearchB(businessId,businessEmail,conn);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	@Override
+	public int tmpPassword(String userId, String tmpPwd) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = mDAO.tmpPassowrd(userId,tmpPwd,conn);
+		if(result>0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	@Override
+	public int tmpPasswordB(String businessId, String tmpPwd) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = mDAO.tmpPassowrdB(businessId,tmpPwd,conn);
+		if(result>0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }

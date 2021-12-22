@@ -136,6 +136,10 @@
 	color: black;
 	text-decoration: none;
 }
+#loginWrap3>a {
+	color: black;
+	text-decoration: none;
+}
 
 .userIcon:hover>.xi-user-o {
 	color: gray;

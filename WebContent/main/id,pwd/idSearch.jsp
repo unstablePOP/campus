@@ -324,7 +324,7 @@
     		if(certifiedNum==inputNum&&certifiedNum!=""){
     			location.replace('/main/idResult.do?userEmail='+userEmail+'&businessEmail='+businessEmail)
     		}else{
-    			alert('error');
+    			alert('인증번호가 올바르지 않습니다. \n 다시 확인해주세요.');
     		}
     	}
     </script>

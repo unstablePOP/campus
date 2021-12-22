@@ -38,14 +38,18 @@ public class M_idResult extends HttpServlet {
 		
 		MemberService mService = new MemberServiceImpl();
 		
-		RequestDispatcher view = request.getRequestDispatcher("/main/join/idResult.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/main/id,pwd/idResult.jsp");
+		
+		//userEmail이 비어있다면 = 사업자인 경우
 		if(userEmail.equals("")) {
 			String businessId = mService.businessIdSearchResult(businessEmail);
 			request.setAttribute("businessId", businessId);
+		//userEmail이 비어있지 안다면 = 유저인 경우
 		}else {
 			String userId = mService.userIdSearchResult(userEmail);
 			request.setAttribute("userId", userId);
 		}
+		
 		view.forward(request, response);
 	}
 

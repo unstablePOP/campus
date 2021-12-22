@@ -25,4 +25,12 @@ public interface MemberService {
 
 	String userIdSearchResult(String userEmail);
 
+	boolean passwordSearch(String userId, String userEmail);
+
+	boolean passwordSearchB(String businessId, String businessEmail);
+
+	int tmpPassword(String userId, String tmpPwd);
+
+	int tmpPasswordB(String businessId, String tmpPwd);
+
 }

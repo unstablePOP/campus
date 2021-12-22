@@ -256,4 +256,86 @@ public class MemberDAO {
 		return userId;
 	}
 
+	public boolean passwordSearch(String userId, String userEmail, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "select * from member where user_id=? and user_email=? and user_withdrawal='N'";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userEmail);
+			rset = pstmt.executeQuery();
+			if(rset.next()) result=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public boolean passwordSearchB(String businessId, String businessEmail, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "select * from business where business_id=? and business_email=? and business_withdrawal='N'";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, businessId);
+			pstmt.setString(2, businessEmail);
+			rset = pstmt.executeQuery();
+			if(rset.next()) result=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int tmpPassowrd(String userId, String tmpPwd, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE MEMBER SET USER_PWD=? WHERE USER_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, tmpPwd);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int tmpPassowrdB(String businessId, String tmpPwd, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE BUSINESS SET BUSINESS_PWD=? WHERE BUSINESS_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, tmpPwd);
+			pstmt.setString(2, businessId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
