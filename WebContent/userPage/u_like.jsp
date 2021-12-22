@@ -250,7 +250,7 @@
                 <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
                 <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
                 <a href=""><i class="xi-note-o xi-2x"></i></a>
-                <a href="u_information.jsp"><i class="xi-user-o xi-2x"></i></a>
+                <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
             </div>
             <div id="fixed-bar-move">
                 <a href="#top"><i class="xi-angle-up"></i></a>

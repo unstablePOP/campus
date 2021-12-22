@@ -121,7 +121,7 @@
         #btn>input:hover{
             background-color: #A6A6A6;
             color: white;
-            
+            cursor: pointer;
         }
 
     </style>
