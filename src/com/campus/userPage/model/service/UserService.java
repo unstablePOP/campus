@@ -26,4 +26,14 @@ public interface UserService {
 	 */
 	int updateOneMember(Member m);
 
+	/**
+	 * 작성자 : yeonhee
+	 * @param userNo
+	 * @return int
+	 * 작성일 : 2021. 12. 22.
+	 * 
+	 * Descriptrion : userNo 받아서 회원 탈퇴 처리
+	 */
+	int deleteOneMember(int userNo);
+
 }

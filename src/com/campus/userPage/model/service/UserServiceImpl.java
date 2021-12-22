@@ -33,4 +33,19 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
+	@Override
+	public int deleteOneMember(int userNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = uDAO.deleteOneMember(userNo,conn);
+		
+
+		if(result>0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }
