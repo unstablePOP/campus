@@ -35,51 +35,9 @@
             border-radius:50px;
             float:left;
         }
-        #mylist{
-            height:100%;
-            padding-right:30px;
-            position:fixed;
-            border: 5px solid rgb(0, 0, 40);
-            border-bottom-right-radius:50px;
-            border-top-right-radius:50px;
-            background-color:rgb(0, 0, 20);
-        }
-        #listground{
-            padding-top:10%;
-            margin-left:10%;
-            height:100%;
-            color:white;
-        }
-        #listground>div{
-            font-size: 25px;
-        }
-        #listground>ul{
-            width:120%;
-            font-size:17px;
-        }
-        #listground>ul>li:hover{
-            background-color:skyblue;
-            font-weight: 1000;
-            color:rgb(0, 0, 40);
-        }
-        #listground>ul>li{
-            list-style:none;
-            height:50px;
-            padding-top:12px;
-        }
         a{
             text-decoration: none;
             color:white;
-        }
-        #msg>ul>li:first-of-type{
-            padding-top:15%;
-        }
-        #msg>ul>li{
-            margin-left:-20px;
-            list-style:none;
-            font-size: 14px;
-            display: none;
-            padding-top:none;
         }
         #where{
             width:80%;
@@ -160,18 +118,7 @@
         </div>
         
         <div id="contents-wrap">
-        <div id="mylist">
-            <div id="listground">
-                <div>커뮤니티</div>
-            <ul>
-                <li><a href="http://127.0.0.1:54893/community/notice/noticeboard.html">공지사항</a></li>
-                <li><a href="http://127.0.0.1:54893/community/free/freeboard.html">자유게시판</a></li>
-                <li><a href="http://127.0.0.1:54893/community/info/infoboard.html">정보공유게시판</a></li>
-                <li><a href="http://127.0.0.1:54893/community/market/marketboard.html">중고장터</a></li>
-                <li id="msg"><a href="http://127.0.0.1:54893/community/msg/msgboard.html" target="_blank">쪽지함</a></li>
-            </ul>
-            </div>
-        </div>
+        <%@ include file="../include/sideNavi.jsp" %>
         <div id="contents">
             
             <div id="cushion">

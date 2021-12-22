@@ -11,29 +11,29 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<style>
 		<link rel="stylesheet" href="../include/board.css">
-		#arrange{
+		#arrange {
             padding-left:80%;
         }
-        th{
-            height:35px;
-            color:rgb(0, 0, 40);
-        }
-        td{
-            height:28px;
-            border-top:1px solid black;
-        }
-        .title{
-            width:60%;border-left:1px solid black;
-            border-right:1px solid black;
-        }
-        table a{
-            text-decoration:none;
-            color:black;
-        }
-        .title:hover>a{
-            text-decoration:underline;
-        }
-        .like{width:60px;}
+		th{
+		    height:35px;
+		    color:rgb(0, 0, 40);
+		}
+		td{
+    		height:28px;
+    		border-top:1px solid black;
+		}
+		.title{
+    		width:60%;border-left:1px solid black;
+    		border-right:1px solid black;
+		}
+		table a{
+    	text-decoration:none;
+    	color:black;
+		}
+		.title:hover>a{
+    		text-decoration:underline;
+		}
+		.like{width:60px;}
     </style>
 </head>
     
@@ -44,17 +44,20 @@
         <div id="header-wrap">
             <%@ include file="../../common/include/gnb.jsp" %>
         </div>
-        <div id="contents-wrap">
         
-        <%@ include file="include/sideNavi.jsp" %>
+        <div id="contents-wrap">
+        <%@ include file="../include/sideNavi.jsp" %>
+        
         <div id="contents">
-            <%@ include file="include/upimg.jsp" %>
+            <%@ include file="../include/upimg.jsp" %>
+            
             <div id="where">&nbsp&nbsp&nbsp&nbsp 공지사항</div>
+            
             <form id="arrange" action="/board/boardSearch.do" method="get">
                <button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
             </form>
-            <div id="board">
             
+            <div id="board">
 <table style="text-align: center;">
 	<tr>
 		<th>번호</th>
