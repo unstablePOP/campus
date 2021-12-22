@@ -15,6 +15,16 @@ public class Member {
 	private char userGender;
 	private Date userJoined;
 	private char userWithdrawal;
+
+	
+	// 회원 정보 수정용
+	public Member(String userId, String userPwd, String userPhone, String userAddress) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userPhone = userPhone;
+		this.userAddress = userAddress;
+	}
 	
 	
 	
