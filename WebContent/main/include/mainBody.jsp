@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 <style>
 #bodyWrap {
-	border: 1px solid black;
 	width: 100%;
-	height: 2000px;
+	height: 1800px;
 }
 
 #bodyLogoWrap {
@@ -24,15 +23,13 @@
 	width: 100%;
 	height: 563px;
 }
-
+/* 컨텐츠 영역 1 */
 #ContentsAreaWrap {
 	width: 100%;
 	height: 400px;
-	border: 1px solid black;
 }
 
 #noticeWrap {
-	border: 1px solid black;
 	float: left;
 	width: 45%;
 	height: 100%;
@@ -43,7 +40,6 @@
 }
 
 #freeWrap {
-	border: 1px solid black;
 	float: left;
 	width: 45%;
 	height: 100%;
@@ -51,7 +47,7 @@
 }
 
 #freeBoard{
-	background-color: pink;
+	background-color: #fdf7f7;
 }
 
 .listBoard {
@@ -74,6 +70,44 @@
 .list:last-child{
 	border-bottom:1px solid black;
 }
+/* 컨텐츠 영역2 */
+#ContentsAreaWrap2{
+	width: 100%;
+	height: 470px;
+}
+/* 컨텐츠 영역3 */
+#ContentsAreaWrap3{
+	width:100%;
+	height:400px;
+}
+#infoBoard{
+	width:100%;
+	height:310px;
+}
+.list2{
+	float:left;
+	width:25%;
+	height:100%;
+	list-style:none;
+	margin: 0px 38px;
+}
+.infoImgWrap{
+	width:100%;
+	height:80%;
+	border:1px solid black;
+
+}
+.infoSubWrap{
+	width:100%;
+	height:20%;
+	border:1px solid black;
+}
+/* 컨텐츠 영역 4 */
+#ContentsAreaWrap4{
+	width:100%;
+	height:400px;
+}
+
 </style>
 </head>
 <body>
@@ -109,9 +143,75 @@
 			</div>
 		</div>
 <%-- 컨텐츠 영역 2 --%>
-		<div>
-		
+		<div id="ContentsAreaWrap2">
+			<img alt="" src="/main/image/mainlogo/Marry.png">
+		</div>
+<%-- 컨텐츠 영역 3 --%>
+		<div id="ContentsAreaWrap3">
+			<div id="infoWrap">
+				<h3 style="color:dodgerblue; border-bottom:1px solid black; width:1128px;">정보 게시판</h3>
+				<ul class="listBoard" id="infoBoard">
+					<li class="list2">
+					<div class="infoImgWrap">
+					</div>
+					<div class="infoSubWrap">
+					</div>
+					</li>
+					<li class="list2">
+					<div class="infoImgWrap">
+					</div>
+					<div class="infoSubWrap">
+					</div>
+					</li>
+					<li class="list2">
+					<div class="infoImgWrap">
+					</div>
+					<div class="infoSubWrap">
+					</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+<%-- 컨텐츠 영역 4 --%>
+		<div id="ContentsAreaWrap4">
+			<div id="maketWrap">
+				<h3 style="color:dodgerblue; border-bottom:1px solid black; width:1128px;">중고 장터</h3>
+				<ul class="listBoard" id="infoBoard">
+					<li class="list2">
+					<div class="infoImgWrap">
+					</div>
+					<div class="infoSubWrap">
+					</div>
+					</li>
+					<li class="list2">
+					<div class="infoImgWrap">
+					</div>
+					<div class="infoSubWrap">
+					</div>
+					</li>
+					<li class="list2">
+					<div class="infoImgWrap">
+					</div>
+					<div class="infoSubWrap">
+					</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$.ajax({
+				url:"/main/dataPull.do",
+				dataType:"json",
+				success:function(){
+					
+				},
+				error:function(){
+					
+				}
+			});
+		});
+	</script>
 </body>
 </html>
