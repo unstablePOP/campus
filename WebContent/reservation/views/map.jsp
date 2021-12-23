@@ -3,7 +3,7 @@
 
     
  <form>   
-<input type="text" id="keyword" placeholder="키워드를 입력하세요 " style='width:250px; height:40px;' /><button id ="btn" style='width:100px; height:40px;' class="btn btn-outline-secondary" ;>검색</button>
+<input type="text" id="keyword" placeholder="키워드를 입력하세요 " style='width:250px; height:40px;' /><button id ="btn" style='width:100px; height:40px;' class="btn btn-outline-secondary">검색</button>
 </form>
 
 <div id="map" style="width:350px;height:640px;"></div>
