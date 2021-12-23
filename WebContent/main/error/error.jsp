@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-	alert('비정상적인 접근 혹은 \n로그인이 필요한 서비스입니다.');
-	location.replace("/main/login/M_Login.jsp")
+	alert('비정상적인 접근 혹은 \n회원 로그인이 필요한 서비스입니다.');
+	location.replace("/")
 </script>
 </body>
 </html>

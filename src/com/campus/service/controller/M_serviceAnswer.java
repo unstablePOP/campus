@@ -1,6 +1,7 @@
 package com.campus.service.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.campus.service.model.service.ServiceService;
 import com.campus.service.model.service.ServiceServiceImpl;
-import com.campus.service.model.vo.Answer;
-import com.campus.service.model.vo.Service;
 
 /**
- * Servlet implementation class M_serviceSelectContent
+ * Servlet implementation class M_serviceAnswer
  */
-@WebServlet("/main/serviceSelectContent.do")
-public class M_serviceSelectContent extends HttpServlet {
+@WebServlet("/main/serviceAnswer.do")
+public class M_serviceAnswer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public M_serviceSelectContent() {
+    public M_serviceAnswer() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +32,21 @@ public class M_serviceSelectContent extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int serviceNo = Integer.parseInt(request.getParameter("serviceNo"));
+		request.setCharacterEncoding("utf-8");
+		String answerContent = request.getParameter("answer");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int serviceNo = Integer.parseInt(request.getParameter("serviceNo"));
 		
 		ServiceService sService = new ServiceServiceImpl();
-		Service s = sService.serviceSelectContent(serviceNo);
-		Answer a = sService.qnaAnswerContent(serviceNo);
+		int result = sService.qnaAnswer(answerContent,serviceNo);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/main/service/M_serviceContent.jsp");
-		request.setAttribute("s", s);
-		if(a!=null) {
-			request.setAttribute("a", a);
+		PrintWriter out = response.getWriter();
+		if(result>0) {
+			out.print(true);
+		}else {
+			out.print(false);
 		}
-		request.setAttribute("currentPage", currentPage);
-		view.forward(request, response);
-		
+	
 	}
 
 	/**

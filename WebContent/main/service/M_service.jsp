@@ -31,73 +31,6 @@
             height: 1000px;
         }
 
-        #serviceLogoWrap {
-            width: 100%;
-            height: 519px;
-            margin-bottom: 30px;
-        }
-
-        #serviceLogoWrap>img {
-            width: 100%;
-            height: 519px;
-            position: absolute;
-            left: 0;
-            z-index: -1;
-        }
-
-        #myService {
-            width: 130px;
-            height: 60px;
-            border: 1px solid black;
-            position: relative;
-            left: 1080px;
-            top: 30px;
-            background-color: rgba(0, 0, 0, 0.6);
-            text-align: center;
-            line-height: 60px;
-            border-radius: 10px;
-        }
-
-        #myService>a {
-            text-decoration: none;
-            color: white;
-        }
-
-        #helpSearchWrap {
-            width: 100%;
-            height: 150px;
-            position: relative;
-            margin: 150px auto;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 50px 280px;
-        }
-
-        #helpSearchWrap>span {
-            position: relative;
-            font-weight: bolder;
-            color: white;
-            top: 5px;
-        }
-
-        #helpSeachBar {
-            display: inline-block;
-            width: 500px;
-            height: 45px;
-            border-radius: 10px;
-            position: relative;
-            font-size: 16px;
-        }
-
-        #helpSearchWrap>img {
-            position: relative;
-            width: 30px;
-            height: 30px;
-            top: 10px;
-            right: 50px;
-            cursor: pointer;
-        }
-
         #ContentWrap {
             width: 100%;
             height: 450px;
@@ -161,15 +94,7 @@
             <%@include file="/common/include/gnb.jsp"%>
         </div>
         <div id="bodyWrap">
-            <div id="serviceLogoWrap">
-                <img src="/main/image/mainlogo/creux-du-van-2839124_1920.jpg" alt="">
-                <div id="myService"><a href="/main/serviceList.do">내 문의 내역 ></a></div>
-                <div id="helpSearchWrap">
-                    <span>도움말 검색</span>
-                    <input type="text" id="helpSeachBar" placeholder="검색어를 입력하세요.">
-                    <img src="/main/image/search/searchLeaf.png" alt="">
-                </div>
-            </div>
+            <%@include file="/main/include/serviceBodyLogo.jsp" %>
             <div id="ContentWrap">
                 <div id="helpTitleWrap">
                     <ol>

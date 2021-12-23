@@ -50,10 +50,14 @@ public class M_serviceList extends HttpServlet {
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
-		ServiceService sService = new ServiceServiceImpl();
-		HashMap<String, Object> map = sService.serviceList(userId,currentPage);
-		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(userId.equals("admin")) {
+			ServiceService sService = new ServiceServiceImpl();
+			map = sService.serviceList(currentPage);
+		}else {
+			ServiceService sService = new ServiceServiceImpl();
+			map = sService.serviceList(userId,currentPage);
+		}
 		RequestDispatcher view = request.getRequestDispatcher("/main/service/M_serviceHistory.jsp");
 		request.setAttribute("map", map);
 		request.setAttribute("currentPage", currentPage);

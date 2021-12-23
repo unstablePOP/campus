@@ -31,73 +31,6 @@
             height: 1000px;
         }
 
-        #serviceLogoWrap {
-            width: 100%;
-            height: 519px;
-            margin-bottom: 30px;
-        }
-
-        #serviceLogoWrap>img {
-            width: 100%;
-            height: 519px;
-            position: absolute;
-            left: 0;
-            z-index: -1;
-        }
-
-        #myService {
-            width: 130px;
-            height: 60px;
-            border: 1px solid black;
-            position: relative;
-            left: 1080px;
-            top: 30px;
-            background-color: rgba(0, 0, 0, 0.6);
-            text-align: center;
-            line-height: 60px;
-            border-radius: 10px;
-        }
-
-        #myService>a {
-            text-decoration: none;
-            color: white;
-        }
-
-        #helpSearchWrap {
-            width: 100%;
-            height: 150px;
-            position: relative;
-            margin: 150px auto;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 50px 280px;
-        }
-
-        #helpSearchWrap>span {
-            position: relative;
-            font-weight: bolder;
-            color: white;
-            top: 5px;
-        }
-
-        #helpSeachBar {
-            display: inline-block;
-            width: 500px;
-            height: 45px;
-            border-radius: 10px;
-            position: relative;
-            font-size: 16px;
-        }
-
-        #helpSearchWrap>img {
-            position: relative;
-            width: 30px;
-            height: 30px;
-            top: 10px;
-            right: 50px;
-            cursor: pointer;
-        }
-
         #ContentWrap {
             width: 100%;
             height: 450px;
@@ -220,6 +153,23 @@
             font-size:16px;
             border: 2px solid rgba(220, 220, 220, 1);
         }
+        #serviceAnswer{
+        	width: 960px;
+            height: 160px;
+            resize: none;
+            border-radius: 7px;
+            font-size:16px;
+            border: 2px solid rgba(220, 220, 220, 1);
+        }
+        #serviceAnswerUser{
+        	width: 960px;
+            height: 160px;
+            resize: none;
+            border-radius: 7px;
+            font-size:16px;
+            border: 2px solid rgba(220, 220, 220, 1);
+        }
+        
         #check{
             width: 100%;
             height: 150px;
@@ -274,6 +224,21 @@
             font-size: 18px;
             cursor: pointer;
         }
+        #answerWrap{
+        	width:100%;
+        	height: 200px;
+        }
+        #answerBtn{
+            width: 100px;
+            height: 100%;
+            border: none;
+            background-color: #ff5000;
+            color: white;
+            border-radius: 10px;
+            font-weight: bolder;
+            font-size: 18px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -289,15 +254,7 @@
 			<%@include file="/common/include/gnb.jsp"%>
         </div>
         <div id="bodyWrap">
-            <div id="serviceLogoWrap">
-                <img src="/main/image/mainlogo/creux-du-van-2839124_1920.jpg" alt="">
-                <div id="myService"><a href="">내 문의 내역 ></a></div>
-                <div id="helpSearchWrap">
-                    <span>도움말 검색</span>
-                    <input type="text" id="helpSeachBar" placeholder="검색어를 입력하세요.">
-                    <img src="/main/image/search/searchLeaf.png" alt="">
-                </div>
-            </div>
+            <%@include file="/main/include/serviceBodyLogo.jsp" %>
             <div id="ContentWrap">
                 <h3>문의 내역</h3>
                 <%-- 문의 폼 시작 --%>
@@ -342,13 +299,60 @@
                         </div>
                     </div>
                     <br>
+                    <div id="answerWrap">
+                    	<div class="infor-group">
+                        	답변내용
+                        </div>
+                        <div class="input-group">
+	                        <c:if test="${member.userId=='admin' }">
+	                            <textarea name="serviceAnswer" id="serviceAnswer" cols="30" rows="10"><c:if test="${a!=null }">${a.answerContent }</c:if></textarea>
+	                        </c:if>
+	                        <c:if test="${member.userId!='admin' }">
+	                            <textarea name="serviceAnswer" id="serviceAnswerUser" cols="30" rows="10" disabled=true><c:if test="${a!=null }">${a.answerContent }</c:if></textarea>
+	                        </c:if>
+                        </div>
+                    </div>
                     <br>
                     <div id="checkBtnWrap">
+                    	<c:if test="${member.userId=='admin' }">
+                    	<input type="button" value="답변" id="answerBtn">
+                    	</c:if>
+                    	<c:if test="${member.userId!='admin' }">
                         <input type="button" value="수정" id="modifyBtn" onclick="location.href='/main/serviceQnaSearch.do?serviceNo=${s.serviceNo }&currentPage=${currentPage }'">
+                        </c:if>
                         <input type="button" value="문의목록" id="serviceListBtn" onclick="location.href='/main/serviceList.do?currentPage=${currentPage}'">
                     </div>
             </div>
         </div>
     </div>
+    <script>
+    	$('#answerBtn').click(function(){
+    		var answer = $('#serviceAnswer').val();
+    		var currentPage = ${currentPage};
+    		var serviceNo = ${s.serviceNo};
+    		
+    		$.ajax({
+    			url:"/main/serviceAnswer.do",
+    			data:{
+    				"answer":answer,
+    				"currentPage":currentPage,
+    				"serviceNo":serviceNo
+    			},
+    			type:"post",
+    			dataType:"json",
+    			success:function(result){
+    				if(result==true){
+    					alert('답변이 등록되었습니다.');
+    					location.replace("/main/serviceSelectContent.do?serviceNo="+serviceNo+"&currentPage="+currentPage)
+    				}else{
+    					alert("오류가 발생하였습니다. \n지속적인 오류 발생시 개발사로 연락바랍니다.")
+    				}
+    			},
+    			error:function(){
+    				alert('bb')
+    			}
+    		});
+    	});
+    </script>
 </body>
 </html>

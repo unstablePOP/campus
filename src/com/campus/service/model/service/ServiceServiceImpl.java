@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.campus.common.JDBCTemplate;
 import com.campus.service.dao.ServiceDAO;
+import com.campus.service.model.vo.Answer;
 import com.campus.service.model.vo.Service;
 
 public class ServiceServiceImpl implements ServiceService{
@@ -57,6 +58,45 @@ public class ServiceServiceImpl implements ServiceService{
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}
+
+	@Override
+	public HashMap<String, Object> serviceList(int currentPage) {
+		Connection conn = JDBCTemplate.getConnection();
+		int recordCountPerPage = 5;
+		ArrayList<Service> list = sDAO.serviceList(conn,currentPage,recordCountPerPage);
+		int naviCountPerPage = 5;
+		String pageNavi = sDAO.getServicePageNavi(conn,naviCountPerPage,currentPage,recordCountPerPage);
+		JDBCTemplate.close(conn);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("pageNavi", pageNavi);
+		
+		return map;
+	}
+
+	@Override
+	public int qnaAnswer(String answerContent, int serviceNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = sDAO.qnaAnswer(answerContent,serviceNo,conn);
+		if(result>0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	@Override
+	public Answer qnaAnswerContent(int serviceNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Answer a = sDAO.qnaAnswerContent(serviceNo,conn);
+		int result = sDAO.serviceAnserYN(serviceNo,conn);
+		if(result>0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.close(conn);
+		JDBCTemplate.close(conn);
+		
+		return a;
 	}
 
 }
