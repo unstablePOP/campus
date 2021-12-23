@@ -64,7 +64,7 @@ div {
 }
 #weatherArea {
 	width: 350px;
-	height: 800px;
+	height: 780px;
 	float: left;
 	background-color:rgba(220,220,220,0.5);
 }
@@ -109,6 +109,40 @@ div {
 	width:100%;
 	height:1500px;	
 }
+
+.cicon{
+	width:100%;
+	height:100%;	
+}
+
+.btn btn-outline-secondary{
+	width:55px;
+	height:50px;
+	text-align: center;	
+}
+.btnArea{
+	width:350px;
+	height:60px;
+	text-align: center;	
+}
+.climateResult{
+	width:350px;
+	height:700px;
+	background-color: #3e4a56;
+	color: white;
+}
+.morebtn{
+	width:350px;
+	height:40px;
+	background-color: #d4dadc;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+
+	
+}
+
+
+
 
 </style>
 </head>
@@ -188,14 +222,15 @@ div {
 						
 						<table class="table table-striped" style="border:1px solid black; width: 880px; height:100%; ">
 							
-						<%for(int i=0; i<5; i++){%>
+						<%for(int i=0; i<8; i++){%>
 							<tr style="border:1px solid black;">
 													
 								<td rowspan="3" style="border:1px solid black; width: 300px; height: 200px;">
 								
 								
 								<a href ="./campingArea.jsp">상세페이지</a>
-								
+								<a href ="./weatherArea.jsp">날씨</a>
+								<a href ="./table.jsp">테이블</a>
 								<img
 									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
 
@@ -225,40 +260,72 @@ div {
 					    </span>                        
 					    <a href="" class="next">
 					    <img src="../../reservation/image/main/nextIcon.png" class="prevnextIcon"" alt="다음"></a>
-			</div>
+				</div>
+
 					</div>
 				</div>
 				<div id="rightArea">
 				<br>
-					<h2><img class="searchlogo" src='../../reservation/image/main/select5.png'> 날씨정보</h2>
-					<div id="weatherArea" style="border:1px solid black;">
-						<button id="nameBtn">버튼</button>
+					<h2><img class="searchlogo" src='../../reservation/image/main/select5.png'> 날씨정보</h2></a>
+					<div id="weatherArea">
+						<div class="btn-group" role="group" aria-label="Basic outlined example">
+							<button type="button" class="btn btn-outline-secondary">인천</button>
+							<button type="button" class="btn btn-outline-secondary">춘천</button>
+							<button type="button" class="btn btn-outline-secondary">대구</button>
+							<button type="button" class="btn btn-outline-secondary">경주</button>
+							<button type="button" class="btn btn-outline-secondary">전주</button>
+							<button type="button" class="btn btn-outline-secondary">제주</button>
+						</div>
+						
+						<div class="climateResult">
+						
+
+						
+					
 						<script>
-							$(function(){
-		
-								//서블릿을 호출하여 String 값을 전달 함
-								$.ajax({
-									url : "http://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=37a03c805de2c4b05a7b17fc4e292a7c",
-									type : "get",					
-									success : function(data){
-											/* console.log(resp);
-										console.log("현재온도 : "+(resp.main.temp- 273.15));
-										console.log("현재습도 : "+resp.main.humity);
-										console.log("날씨 : "+ resp.weather[0].main);
-										console.log("날씨 이미지 : "+resp.weather[0].icon);
-										console.log("도시이름 : "+resp.name);
-*/
-										
-										
-									},
-									error : function(){
-										console.log("서버 전송 실패");
-									},
-								});
-							});
-						</script>
-					</h2>
+						$.getJSON
+						('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=37a03c805de2c4b05a7b17fc4e292a7c&units=metric', function(data){
+							var $minTemp = data.list[6].main.temp_min;
+							var $maxTemp = data.list[6].main.temp_max;
+							var $cDate = data.list[6].dt_txt;
+							var $wIcon = data.list[6].weather[0].icon;
+							
+							$('.cDate').append($cDate);
+							$('.clowtemp').append($minTemp+" ℃");
+							$('.chightemp').append($maxTemp+" ℃");
+							$('.cicon').append('<img src="../../reservation/image/weatherIcon/'+ $wIcon +'.png" />')
+						});
+						</script>	
+									
+						<h2>Seoul</h2>
+						
+						<table class="weatherTable" style="width: 350px; height: 80px;">
+					
+							<tr>					
+								<td rowspan="3" style="width: 80px; height: 80px; padding-left:15px;">
+									<div class ="cicon"></div>						
+								</td>
+								<td>
+									<div class="cDate" style="font-size:13pt">일자 : </div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="chightemp" style="font-size:13pt">최고온도 : </div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="clowtemp" style="font-size:13pt">최저온도 : </div>
+								</td>
+							</tr>
+						</table>	
+							<hr>	
+						</div>
+						<button class="morebtn"> <a style="text-decoration-line: none;" href="https://www.weather.go.kr/w/index.do" ;>더보기</a></button>
+						
 					</div>
+
 					<div id="mapArea">
 
 						<br>
