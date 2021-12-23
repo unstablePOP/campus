@@ -24,13 +24,13 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
  * Servlet implementation class FrameUpload
  */
 @WebServlet("/diary/frameUpload.do")
-public class FrameUpload extends HttpServlet {
+public class FrameUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrameUpload() {
+    public FrameUploadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
