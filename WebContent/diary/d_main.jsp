@@ -339,29 +339,30 @@
                     </div>
 
                 </div>
+                
                 <div id="modal">
                     <div id="modal-area">
-                        <form method="post" enctype="multipart/form-data" id="addForm">
+                        <form action="/diary/frameUpload.do" method="post" enctype="multipart/form-data" id="addForm">
                             <div id="modal-pol">
                                 <div id="add-img">
 
-                                    <label for="chooseFile">클릭하여 이미지를 추가해주세요 :-)</label>
-                                    <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-                                    <div id="fileName"></div>
+                                    <label for="chooseFile" class="add-content">클릭하여 이미지를 추가해주세요 :-)</label>
+                                    <input type="file" class="add-content" id="chooseFile" name="file" accept="image/*" onchange="loadFile(this)">
+                                    
                                 </div>
                                 <div id="add-title">
                                     <label for="addTitle">클릭하여 제목을 추가해주세요 :-)</label>
-                                    <input type="text" id="addTitle" name="addTitle">
+                                    <input type="text" id="addTitle" name="title">
 
                                 </div>
 
                             </div>
                             <div id="add-date">
-                                <input type="date">
+                                <input type="date" name="date">
                             </div>
                             <div id="modal-btn">
                                 <div id="add-pol">
-                                    <i class="xi-plus-square-o xi-3x" onclick="$('#addForm').submit();"></i>
+                                    <i class="xi-plus-square-o xi-3x"  id="submitBtn"></i>
                                 </div>
                         </form>
                         <div id="modal-close">
@@ -370,6 +371,28 @@
                     </div>
                 </div>
             </div>
+            
+            <script>
+            
+            	// 서브밋 버튼 클릭 했을 때 사진 사이즈 검증하고 모달창 닫기
+            	$('#submitBtn').click(function(){
+                   	//console.log(document.getElementById('chooseFile').files[0]);
+                   	
+            		var file = document.getElementById('chooseFile');
+            		var fileSize = file.files[0].size;
+            		//console.log(fileSize);
+            		if(fileSize>(50*1024*1024))
+            		{
+            			alert('업로드 가능한 최대 사이즈는 50MB 입니다.');
+            		}
+            		else
+            		{
+            			$('#addForm').submit();
+            			//console.log('submit');
+            		}
+            	});
+            
+            </script>
 
             <script>
                 // modal
@@ -415,14 +438,14 @@
     </script>
 
     <script>
+    
+    	// 폴라로이드에 사진 추가하고 미리보기
         function loadFile(input) {
+        	
+        	
             // 선택된 파일 가져오기
             var file = input.files[0];
-
-            // 미리 만들어 놓은 div에 text(파일이름) 추가
-            var name = document.getElementById('fileName');
-            name.textContent = file.name;
-            //console.log(file.name);
+            
 
             // 새로운 이미지 div 추가
             var newImage = document.createElement("img");
@@ -437,7 +460,7 @@
 
 
             var container = document.getElementById('add-img');
-            container.innerHTML = "";
+            $('.add-content').css('display','none');
             container.appendChild(newImage);
         };
 
