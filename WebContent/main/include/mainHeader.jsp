@@ -195,13 +195,13 @@
 	background-image: url(/main/image/mainlogo/stars.png);
 	border-radius: 70px;
 	margin: -65px 0px;
+	padding:50px 0px;
 }
 
 #mainReservationSearch {
 	width: 100%;
 	height: 60px;
 	text-align: center;
-	padding: 6px 0px;
 }
 
 #areaSearch {
@@ -218,19 +218,6 @@
 	height: 40px;
 	position: absolute;
 	margin: 5px -50px;
-}
-
-#mainReservationIcon {
-	width: 100%;
-	height: 90px;
-	text-align: center;
-}
-
-#mainReservationIcon>a {
-	text-decoration: none;
-	color: white;
-	font-size: 30px;
-	padding: 30px;
 }
 </style>
 </head>
@@ -301,17 +288,6 @@
 						id="areaSearch" name="areaSearch"> <input type="image"
 						src="/main/image/search/searchLeaf.png" id="searchLeaf">
 				</form>
-			</div>
-			<div id="mainReservationIcon">
-				<a href=""><img
-					src="/main/image/searchIcon/2camp-removebg-preview.png" alt=""
-					align="middle">Camping</a> <a href=""><img
-					src="/main/image/searchIcon/2glamp-removebg-preview.png" alt=""
-					align="middle">Glamping</a> <a href=""><img
-					src="/main/image/searchIcon/2caravan-removebg-preview.png" alt=""
-					align="middle">Caravan</a> <a href=""><img
-					src="/main/image/searchIcon/2psension-removebg-preview.png" alt=""
-					align="middle">Pension</a>
 			</div>
 		</div>
 	</div>
