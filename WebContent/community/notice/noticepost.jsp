@@ -34,19 +34,18 @@
             <div id="post-wrap">
                 <div id="post">
                     <br>
-                    <div id="title" style="text-align:center">
-                        디스 이즈 제목
-                    </div>
-                    <div id="postinfo">
-                        작성자: 김뫄뫄 &nbsp 추천수:
-                    </div>
+                    <div id="title" style="text-align:center">디스 이즈 제목</div>
+                    <div id="postinfo">작성자: 김뫄뫄 &nbsp 추천수:</div>
                     <div id="postcontent-wrap">
                         <div id="postaction">
-                            <button>추천<img src="../image/post/like.png"/></button><button>비추천<img src="../image/post/hate.png"/></button><button>즐겨찾기<img src="../image/post/unsave.png"/></button>
-                            <a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a>
-<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">페이스북</a>    
-<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();">카카오톡</a>   
-                            <button>공유<img src="../image/post/share.png"/></button>
+                            <button><i class="xi-thumbs-up xi-x"></i></button>
+                            <button><i class="xi-thumbs-down xi-x"></i></button>
+                            <button><i class="xi-bookmark-o xi-x"></i></button>
+                            <a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();"></a>
+                            <a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();"></a>
+							<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();"></a>
+							<a id="btnMail" class="link-icon email" href="javascript:shareKakao();"><i class="xi-mail-o xi-x"></i></a>
+                            <button><i class="xi-share-alt-o xi-x"></i></button>
                         </div>
                         <div id="postcontent">
                             헤이 모두들 안녕 내가 누군지 아늬?<br>

@@ -1,31 +1,20 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>CampUs-쪽지함</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<title>CampUs-쪽지함</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<style>
         *{box-sizing: border-box;}
         #wrap{
             width: 300px;
             width: 300px;
             margin: 0px auto;
-        }
-        #contents{
-            width: 80%;
-            margin-left: 17%;
-            position:relative;
-        }
-        #cushion{
-            width:100%;
-            height:250px;
-        }
-        #cushion>img{
-            width:100%;
-            height:100%;
-            border-radius:50px;
-            float:left;
         }
         #where{
             margin:0px auto;
@@ -65,10 +54,6 @@
             text-decoration:none;
             color:black;
         }
-        .title{
-            width:60%;border-left:1px solid black;
-            border-right:1px solid black;
-        }
         .writer:hover>a{
             text-decoration:underline;
         }
@@ -79,10 +64,8 @@
         }
     </style>
 </head>
-    
 <body>
-    
-    <div id="wrap">
+	<div id="wrap">
             <div id="where">&nbsp&nbsp&nbsp&nbsp 쪽지함</div>
             <div id="search">
             <!--<%
@@ -101,9 +84,7 @@
 		<th>번호</th>
         <th>작성자</th>
 	</tr>
-    <!--<%
-	   for(Board board : list){
-    %>-->
+    <!--<%for(FreeBoard board : list){%>-->
     <tr>	
         <td class="no"><!--<%=freeboard.getBoardNo()%>-->1</td>
         <td class="writer"><!--<%=freeboard.getPostWriterName()%>--><a href="">이롸롸</a></td>
@@ -124,6 +105,5 @@
 </table>
             </div>
     </div>
-
 </body>
 </html>

@@ -58,14 +58,14 @@
        	        <li><a href="\community\info\infoboard.jsp">정보공유게시판</a></li>
            	    <li><a href="\community\market\marketboard.jsp">중고장터</a></li>
            	    <li><a href="\">통합채팅</a></li>
-               	<li id="msg">쪽지함</li>
+               	<li id="msg">쪽지함<i class="xi-note-o xi-x"></i></li>
            	</ul>
     	</div>
 	</div>
 	
 	<script>
-		document.getElementById('msg').onclick=function winOpen(){
-			var newWin = window.open("msgboard.html","width=400px, height=280px");
+		document.getElementById('msg').onclick=function popup(){
+			var newWin = window.open("/msg/msgboard.jsp","_blank","width=700px, height=400px");
 		}
 	</script>
 </body>

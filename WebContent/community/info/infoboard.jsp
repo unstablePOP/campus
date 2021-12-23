@@ -1,24 +1,24 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>CampUs-중고장터</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<title>CampUs-정보공유게시판</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<style>
     	<link rel="stylesheet" href="../include/board.css">
-		<link rel="stylesheet" href="../include/table.css">
+    	<link rel="stylesheet" href="../include/table.css">
         #arrange {
             padding-left:60%;
         }
-        #table1 .del_yn{border-left:1px solid black;}
-        #table1 .title{border-left:none;}
     </style>
 </head>
-    
 <body>
-    
-    <div id="wrap">
+	<div id="wrap">
         
         <div id="header-wrap">
             <%@ include file="../../common/include/gnb.jsp" %>
@@ -30,10 +30,10 @@
             
             <%@ include file="../include/upimg.jsp" %>
             
-            <div id="where">&nbsp&nbsp&nbsp&nbsp 중고장터</div>
+            <div id="where">&nbsp&nbsp&nbsp&nbsp 정보공유게시판</div>
             
             <form id="arrange" action="/board/boardSearch.do" method="get">
-                <button type="button" id="list1" class="btn1"><img id="titlelist" src="../image/titlelist.jpg" alt="목록 정렬"/></button><button type="button" id="list2" class="btn1"><img id="piclist" src="../image/piclist.jpg" alt="썸네일 정렬"/></button>
+                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot"></i></button><button type="button" id="list2" class="btn1"><i id="titlelist" class="xi-apps"></i></button>
                 <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
             </form>
             
@@ -43,31 +43,18 @@
 	<tr>
 		<th>번호</th>
         <th>작성자</th>
-        <th>마감</th>
 		<th>제목</th>
         <th>댓글</th>
-		<th>가격</th>
+		<th>추천</th>
 		<th>작성일</th>
 	</tr>
-    <!--<%
-	   for(Board board : list){
-    %>-->
+    <!--<%for(FreeBoard board : list){%>-->
     <tr>	
-        <td class="no"><!--<%=marketboard.getBoardNo()%>-->g</td>
+        <td class="no"><!--<%=freeboard.getBoardNo()%>-->g</td>
         <td class="writer"><!--<%=freeboard.getPostWriterName()%>-->g</td>
-        <td class="del_yn"><!--<%=freeboard.getPostWriterName()%>-->판매완료</td>
-		<td class="title"><!--<%=freeboard.getBoardTitle()%>-->gg</td>
+		<td class="title"><!--<%=freeboard.getBoardTitle()%>--><a href="">아무튼 제목</a></td>
         <td class="comment"><!--<%=freeboard.getCommentCount()%>-->baby</td>
-        <td class="price"><!--<%=freeboard.getHeartCount()%>-->baby</td>
-		<td class="date"><!--<%=freeboard.getRegDate()%>-->baby</td>
-	</tr>
-    <tr>	
-        <td class="no"><!--<%=marketboard.getBoardNo()%>-->g</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>-->g</td>
-        <td class="del_yn"><!--<%=freeboard.getPostWriterName()%>--></td>
-		<td class="title"><!--<%=freeboard.getBoardTitle()%>--><a>냉장고, 컴퓨터, 테레비- 팝니다.</a></td>
-        <td class="comment"><!--<%=freeboard.getCommentCount()%>-->baby</td>
-        <td class="price"><!--<%=freeboard.getHeartCount()%>-->baby</td>
+        <td class="like"><!--<%=freeboard.getHeartCount()%>-->baby</td>
 		<td class="date"><!--<%=freeboard.getRegDate()%>-->baby</td>
 	</tr>
 <!--<%}%>-->
@@ -79,7 +66,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -87,7 +74,7 @@
         <dl>
             <dt><span class="del">[판매완료]</span>&nbsp<a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -95,7 +82,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -103,7 +90,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -111,7 +98,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -119,7 +106,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -127,7 +114,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <li>
@@ -135,7 +122,7 @@
         <dl>
             <dt><a href="">제목</a><a href="">[댓글]</a></dt>
             <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회수</span></dd>
+            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
         </dl>
     </li>
     <!--<tr>
@@ -173,9 +160,6 @@
         </div>
         
     </div>
-    <div id="popup" style="position:absolute; visibility:hidden;">
-        <h4>팝업<a href="C:/oracle/semi/CampUs/WebContent/community/msg/msgboard.html" class="close" onClick="javascript:popupOpen()">ㅇㅇㅇㅇ</a></h4>
-    </div>
     
 <script>
         var arrange=0;
@@ -197,30 +181,12 @@
             $(this).parent().parent().children('a').css("color","gray");
         }
     });
-    $('#msg').click(function(){
-        $(this).children('ul').children('li').slideToggle(300);
-    });
     $('#list1').click(function(){
         $(this).css("background-color","gray");
     });
     $('#list2').click(function(){
         $(this).css("background-color","gray");
     });
-    function popupOpen{
-        if(document.all.popup.style.visibility=="hidden"){
-            document.all.popup.style.visibility="visible";
-            return false;
-        }
-        else{
-            document.all.popup.style.visibility="hidden";
-            return false;
-        }
-        var $layer=$('#popup');
-        var left=($(window).scrollLeft()+($(window).width()-$layerPopupObj.width())/2);
-        var top=($(window).scrollTop()+($(window).height()-$layerPopupObj.width())/2);
-        $layerPopupObj.css({'left':left,'top':top,'position':'absolute'});
-        $('body').css('position','relative').append($layerPopupObj);
-    }
 </script>
 </body>
 </html>

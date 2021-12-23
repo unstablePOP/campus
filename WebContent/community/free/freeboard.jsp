@@ -1,6 +1,14 @@
+<%@page import="com.campus.board.free.model.vo.FreeBoard"%>
+<%@page import="com.campus.board.free.model.vo.FreePage"%>
+<%@page import="com.campus.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	FreePage freepage=(FreePage)request.getAttribute("pageData");
+	ArrayList<FreeBoard> list = freepage.getPageList();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,9 +25,7 @@
         }
     </style>
 </head>
-    
 <body>
-    
     <div id="wrap">
         
         <div id="header-wrap">
@@ -27,20 +33,20 @@
         </div>
         
         <div id="contents-wrap">
-        <%@ include file="../include/sideNavi.jsp" %>
-        <div id="contents">
-            
-            <%@ include file="../include/upimg.jsp" %>
-            
-            <div id="where">&nbsp&nbsp&nbsp&nbsp 자유게시판</div>
-            
-            <form id="arrange" action="/board/boardSearch.do" method="get">
-                <button type="button" id="list1" class="btn1"><img id="titlelist" src="../image/titlelist.jpg" alt="목록 정렬"/></button><button type="button" id="list2" class="btn1"><img id="piclist" src="../image/piclist.jpg" alt="썸네일 정렬"/></button>
-                <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
-            </form>
-            
-            <div id="board">
-<!--<%if(arrange==0){%>-->
+        	<%@ include file="../include/sideNavi.jsp" %>
+	        <div id="contents">
+	            
+	            <%@ include file="../include/upimg.jsp" %>
+	            
+	            <div id="where">&nbsp&nbsp&nbsp&nbsp 자유게시판</div>
+	            
+	            <form id="arrange" action="/board/boardSearch.do" method="get">
+	                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot xi-x"></i></button><button type="button" id="list2" class="btn1"><i id="titlelist" class="xi-apps xi-x"></i></button>
+	                <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
+	            </form>
+	            
+	            <div id="board">
+	            
 <table id="table1" style="text-align: center;">
 	<tr>
 		<th>번호</th>
@@ -50,147 +56,58 @@
 		<th>추천</th>
 		<th>작성일</th>
 	</tr>
-    <!--<%
-	   for(Board board : list){
-    %>-->
+    <%for(FreeBoard freeboard : list){%>
     <tr>	
-        <td class="no"><!--<%=freeboard.getBoardNo()%>-->g</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>-->g</td>
-		<td class="title"><!--<%=freeboard.getBoardTitle()%>--><a href="">아무튼 제목</a></td>
-        <td class="comment"><!--<%=freeboard.getCommentCount()%>-->baby</td>
-        <td class="like"><!--<%=freeboard.getHeartCount()%>-->baby</td>
-		<td class="date"><!--<%=freeboard.getRegDate()%>-->baby</td>
+        <td class="no"><%=freeboard.getFree_no()%></td>
+        <td class="writer"><%=freeboard.getUser_id()%></td>
+		<td class="title"><a href="/community//board/free/selectOne.do?free_no=<%=freeboard.getFree_no()%>"><%=freeboard.getFree_title()%>[댓글]</a></td>
+        <td class="hit"><%=freeboard.getFree_hit()%></td>
+        <td class="like"><%=freeboard.getFree_like()%></td>
+		<td class="date"><%=freeboard.getFree_date()%></td>
 	</tr>
-<!--<%}%>-->
+	<%}%>
 </table>
-<!--<%}else{%>-->
+
 <ul id="table2" style="text-align: center;">
+	<%for(FreeBoard freeboard : list){%>
     <li>
-        <a href=""><img src="../image/merch/griddle.png"/></a>
+        <a href="/community//board/free/selectOne.do?free_no=<%=freeboard.getFree_no()%>"><img src="../image/merch/griddle.png"/></a>
         <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
+            <dt><a href="/community//board/free/selectOne.do?free_no=<%=freeboard.getFree_no()%>"><%=freeboard.getFree_title()%></a><a href="">[댓글]</a></dt>
+            <dd><div><%=freeboard.getUser_id()%></div></dd>
+            <dd><span><%=freeboard.getFree_date()%></span>&nbsp&nbsp&nbsp<span><%=freeboard.getFree_hit()%></span>&nbsp&nbsp&nbsp<span><%=freeboard.getFree_like()%></span></dd>
         </dl>
     </li>
-    <li>
-        <a href=""><img src="../image/merch/thermo.png"/></a>
-        <dl>
-            <dt><span class="del">[판매완료]</span>&nbsp<a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <li>
-        <a href=""><img src="../image/merch/latan.png"/></a>
-        <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <li>
-        <a href=""><img src="../image/merch/sleepingbag.png"/></a>
-        <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <li>
-        <a href=""><img src="../image/merch/griddle.png"/></a>
-        <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <li>
-        <a href=""><img src="../image/merch/thermo.png"/></a>
-        <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <li>
-        <a href=""><img src="../image/merch/latan.png"/></a>
-        <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <li>
-        <a href=""><img src="../image/merch/sleepingbag.png"/></a>
-        <dl>
-            <dt><a href="">제목</a><a href="">[댓글]</a></dt>
-            <dd><div>작성자</div></dd>
-            <dd><span>날짜</span>&nbsp&nbsp&nbsp<span>조회</span>&nbsp&nbsp&nbsp<span>추천</span></dd>
-        </dl>
-    </li>
-    <!--<tr>
-		<th>썸네일</th>
-        <th>마감여부</th>
-        <th>제목</th>
-		<th>댓글</th>
-        <th>작성자</th>
-		<th>작성일</th>
-		<th>가격</th>
-	</tr>-->
+    <%}%>
 </ul>
-<!--<%} %>-->
-            </div>
-    <div id="search">
-        <select id="select" name="type">
-            <option value="subject">제목</option>
-            <option value="writer">작성자</option>
-            <option value="all">제목+작성자</option>
-        </select>
-        <!--<%
-            String keyword = request.getParameter("keyword");
-        %>-->
-        <!--<%if(keyword!=null){ %>-->
-            <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
-        <!--<%}else{%>-->
-            <input type="text" name="keyword"> <input type="submit" value="검색">
-        <!--<%} %>-->
-    </div>
-        </div>
-        </div>   
-        
-        <div id="footer">
-            
-        </div>
-        
-    </div>
+            	</div>
+			    <div id="search">
+			        <select id="select" name="type">
+			            <option value="subject">제목</option>
+			            <option value="writer">작성자</option>
+			            <option value="all">제목+작성자</option>
+			        </select>
+			        <%String keyword = request.getParameter("keyword");%>
+			        <%if(keyword!=null){ %>
+			            <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
+			        <%}else{%>
+			            <input type="text" name="keyword"> <input type="submit" value="검색">
+			        <%} %>
+			    </div>
+			    <form action="/views/board/boardWrite.jsp" method="post">
+					<%Member m = (Member) session.getAttribute("member");%>
+					<%if (m != null) {%>
+						<input type="submit" value="글쓰기">
+					<%}%>
+				</form>
+				<%=freepage.getPageNavi()%>
+			</div>
+		</div>   
+		<div id="footer">
+		</div>
+			        
+	</div>
     
-<script>
-        var arrange=0;
-    $(function(){
-        $("#list1").click(function(){
-            arrange=0;
-        });
-        $("#list2").click(function(){
-            arrange=1;
-        });
-    });
-    $(".del_yn").each(function() {
-        if($(this).text()=="판매완료"){
-            $(this).siblings().css("color","gray");
-        }
-    });
-    $(".del").each(function() {
-        if($(this).text()=="[판매완료]"){
-            $(this).parent().parent().children('a').css("color","gray");
-        }
-    });
-    $('#list1').click(function(){
-        $(this).css("background-color","gray");
-    });
-    $('#list2').click(function(){
-        $(this).css("background-color","gray");
-    });
-</script>
+<script src="/community/include/click.js"></script>
 </body>
 </html>

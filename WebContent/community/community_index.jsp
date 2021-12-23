@@ -63,9 +63,7 @@
 		<th>추천</th>
 		<th>작성일</th>
 	</tr>
-	<!--<%
-	   for(Board board : list){
-    %>-->
+	<!--<%for(FreeBoard board : list){%>-->
     <tr>	
         <td class="no"><!--<%=freeboard.getBoardNo()%>-->g</td>
         <td class="writer"><!--<%=freeboard.getPostWriterName()%>-->g</td>
