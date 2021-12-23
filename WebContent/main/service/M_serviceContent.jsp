@@ -349,7 +349,7 @@
     				}
     			},
     			error:function(){
-    				alert('bb')
+    				alert('error')
     			}
     		});
     	});

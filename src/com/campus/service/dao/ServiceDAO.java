@@ -91,9 +91,9 @@ public class ServiceDAO {
 		}
 		for(int i = startNavi; i<=endNavi; i++) {
 			if(i==currentPage) {
-				sb.append("<a href='/main/serviceList.do?currentPage="+i+"'><B style='font-siez:1.2em'>"+i+"</B></a> ");
+				sb.append("<a class='navi' id='focusNavi' href='/main/serviceList.do?currentPage="+i+"'><B style='font-siez:1.4em; color:#ff5000;'>"+i+"</B></a> ");
 			}else {
-				sb.append("<a href='/main/serviceList.do?currentPage="+i+"'>"+i+"</a> ");
+				sb.append("<a class='navi' href='/main/serviceList.do?currentPage="+i+"'>"+i+"</a> ");
 			}
 		}
 		if(endNavi!=pageTotalCount) {
@@ -234,9 +234,9 @@ public class ServiceDAO {
 		}
 		for(int i = startNavi; i<=endNavi; i++) {
 			if(i==currentPage) {
-				sb.append("<a href='/main/serviceList.do?currentPage="+i+"'><B style='font-siez:1.2em'>"+i+"</B></a> ");
+				sb.append("<a class='navi' id='focusNavi' href='/main/serviceList.do?currentPage="+i+"'><B style='font-siez:1.4em; color:#ff5000;'>"+i+"</B></a> ");
 			}else {
-				sb.append("<a href='/main/serviceList.do?currentPage="+i+"'>"+i+"</a> ");
+				sb.append("<a class='navi' href='/main/serviceList.do?currentPage="+i+"'>"+i+"</a> ");
 			}
 		}
 		if(endNavi!=pageTotalCount) {

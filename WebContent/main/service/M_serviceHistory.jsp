@@ -69,8 +69,15 @@
 		.tbodyTr{
 			height:60px;
 		}
+		.tbodyTr:hover{
+			background-color: rgba(220,220,220,0.3);
+		}
 		.contentTd{
 			border-bottom:1px solid rgba(220,220,220,0.7);
+		}
+		.contentTd>a{
+			text-decoration: none;
+			color:black;
 		}
 		#tfootTr{
 			height:60px;
@@ -89,6 +96,20 @@
 			height:40px;
 			line-height: 40px;
 			color:#999
+		}
+		.navi{
+			text-decoration: none;
+			color:black;
+			border:1px solid black;
+			display:inline-block;
+			width:25px;
+			margin:0px -1px;;
+		}
+		#focusNavi{
+			border-color:#ff5000;
+		}
+		.navi:hover{
+			background-color: rgba(220,220,220,0.5);
 		}
     </style>
 </head>
