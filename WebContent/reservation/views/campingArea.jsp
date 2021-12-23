@@ -110,7 +110,7 @@
         text-align : center;
     }
 	#reSearch{
-	background:#1AAB8A;
+	background:#3e4a56;
 	color:#fff;
 	border:1px solid white;
 	position:relative;
@@ -124,7 +124,7 @@
 	}
 	#reSearch:hover{
 	  background:#fff;
-	  color:#1AAB8A;
+	  color:#3e4a56;
 	}
 	#reSearch:before,#reSearch:after{
 	  content:'';
@@ -133,7 +133,7 @@
 	  right:0;
 	  height:2px;
 	  width:0;
-	  background: #1AAB8A;
+	  background: #3e4a56;
 	  transition:400ms ease all;
 	}
 	#reSearch:after{
@@ -170,20 +170,19 @@
 }
 
 .modal_content{
-  width:500px; height:7000px;
+  width:500px; height:900px;
   background:#fff; border-radius:10px;
   position:relative; top:20%; left:50%;
   margin-top:-100px; margin-left:-200px;
   text-align:center;
   box-sizing:border-box; padding:74px 0;
   line-height:23px; cursor:pointer;
-  
 }
 
 .mUpside{
 	width : 500px;
 	height : 650px;
-	background-color: #f3f1ff;
+	background-color: #3e4a56;
 	
 }
 .mImageArea{
@@ -194,16 +193,16 @@
 }
 .mimage{
 	width : 500px;
-	height : 200px;
+	height : 250px;
 	float: left;
 	padding-top: 20px;
 	
 }
 .mAreaInfo{
 	width : 500px;
-	height : 400px;
+	height : 500px;
 	float: left;
-	background-color: #f3f1ff;	
+	background-color:#3e4a56;
 }
 .mTitle{
 	width : 500px;
@@ -213,10 +212,9 @@
 }
 .summary{
 	width : 500px;
-	height : 350px;
-	
+	height : 450px;
 	background-color: white;
-
+	text-align: left;
 }
 
 .mDownside{
@@ -268,8 +266,6 @@
    
    
    
-   
-   
 <body>
 
 	<div id="wrapper">
@@ -292,19 +288,15 @@
 							
 							<%for(int i=0; i<1; i++) {%>
 							<tr style="border:1px solid gary;">
-								<td rowspan="5" style="border:1px solid gray; width: 300px;">
-									<button class="btn btn-success btn-sm" >
-									<i class="xi-heart-o"></i>
-									</button>								
+								<td rowspan="5" style="border:1px solid gray; width: 300px;">						
 					
 									<img
 									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
 									
 								</td>
 								<td style="border:1px solid gray;">
-								<button class="reservBtn">예약하기</button>
-				
-								</td>
+								<input class="reservBtn" type="button" value="예약하기">
+								<button class='likebtn' style='border:0; outline: 0;'><i class="xi-heart-o xi-2x"></i></button>
 							</tr>
 							<tr style="border:1px solid gray;">
 								<td style="border:1px solid black;">캠핑사이트명 : 글램핑 강전망</td>
@@ -379,7 +371,20 @@
 					<h2>00캠핑장</h2>
 				</div>
 				<div class="summary">
-				
+					<form style="font-size : 16pt; left:50px;">
+					
+						숙소이름 : <br><br>
+						체크인 : <br><br>
+						체크아웃 : <br><br>
+						결제금액 : <br><br>
+						예약안내 : <br><br><br>
+						
+						<input type="checkbox" style="zoom:1.5;"/> 숙소이용규칙 및 취소/환불규정 동의 (필수)<br>
+						<input type="checkbox" style="zoom:1.5;"/> 개인정보 수집 및 이용 동의 (필수)<br>
+						<input type="checkbox" style="zoom:1.5;"/> 개인정보 제 3자 제공 동의 (필수)<br>
+						<input type="checkbox" style="zoom:1.5;"/> 만 14세 이상 확인 (필수)<br>
+						
+					</form>
 				</div>
 			</div>
 		</div>
@@ -406,7 +411,22 @@ $(function(){
 });
 </script>
 
+<!-- 좋아요 함수 -->
+<script>
+	$('#like_btn').click(function(){
+	
+		var text = $(this).text();
+		if(text==<i class="xi-heart-o xi-2x">)
+		{
+			$(this).text('<i class="xi-heart xi-2x">');
+		}else if (text=='<i class="xi-heart xi-2x">')
+		{
+			$(this).text('<i class="xi-heart-o xi-2x">');
+		}
+	});
+	
 
+</script>
 
 
 </html>
