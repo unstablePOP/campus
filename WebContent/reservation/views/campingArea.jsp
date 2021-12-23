@@ -296,7 +296,7 @@
 								</td>
 								<td style="border:1px solid gray;">
 								<input class="reservBtn" type="button" value="예약하기">
-								<button class='likebtn' style='border:0; outline: 0;'><i class="xi-heart-o xi-2x"></i></button>
+								<button class='likebtn' style='border:0; outline: 0; color:black;'><i class="xi-heart xi-2x"></i></button>
 							</tr>
 							<tr style="border:1px solid gray;">
 								<td style="border:1px solid black;">캠핑사이트명 : 글램핑 강전망</td>
