@@ -10,169 +10,84 @@
 
 </head>
 <body>
-
-<script type="text/javascript">
-
-function show_layer(div_name){
-
- 
-
- document.all.div_01.style.display="none";
-
- document.all.div_02.style.display="none";
-
- document.all.div_03.style.display="none";
-
- document.all.div_04.style.display="none"; // 메뉴 숫자에 따라 늘려주세요
-
- 
-
- switch(div_name)
-
- {
-
-  case '1':
-
-  document.all.div_01.style.display="";
-
-  break;
-
-  case '2':
-
-  document.all.div_02.style.display="";
-
-  break;
-
-  case '3':
-
-  document.all.div_03.style.display="";
-
-  break;
-
-  case '4':
-
-  document.all.div_04.style.display="";
-
-  break;
-
- }
-
-}
-
-</script>
-
-	<div id="weatherArea">
-		<DIV id=div_01>
-
-			<table width="350px" cellspacing="0" cellpadding="0" border="0"
-				align="center" style="margin-top: 30px;">
-
-				<tr>
-
-					<td>인천</td>
-
-					<td><a href="javascript:show_layer('2');">춘천</a></td>
-
-					<td><a href="javascript:show_layer('3');">대구</a></td>
-
-					<td><a href="javascript:show_layer('4');">경주</a></td>
-
-				</tr>
-
-				<tr>
-					<td colspan=4 align=center style='padding-top: 20px;'>내용1</td>
-				</tr>
-
-			</table>
-
-		</DIV>
-		<DIV id=div_02 style="DISPLAY: none">
-
-			<table width="707px" cellspacing="0" cellpadding="0" border="0"
-				align="center" style="margin-top: 30px;">
-
-				<tr>
-
-					<td><a href="javascript:show_layer('1');">메뉴 또는 탭 1</a></td>
-
-					<td>메뉴 또는 탭2</td>
-
-					<td><a href="javascript:show_layer('3');">메뉴 또는 탭3</a></td>
-
-					<td><a href="javascript:show_layer('4');">메뉴 또는 탭4</a></td>
-
-				</tr>
-
-				<tr>
-					<td colspan=4 align=center style='padding-top: 20px;'> 내용2</td>
-				</tr>
-
-			</table>
-
-		</DIV>
-
-
-
-
-		<DIV id=div_03 style="DISPLAY: none">
-
-
-
-			<table width="707px" cellspacing="0" cellpadding="0" border="0"
-				align="center" style="margin-top: 30px;">
-
-				<tr>
-
-					<td><a href="javascript:show_layer('1');">메뉴 또는 탭1</a></td>
-
-					<td><a href="javascript:show_layer('2');">메뉴 또는 탭2</a></td>
-
-					<td>메뉴 또는 탭3</td>
-
-					<td><a href="javascript:show_layer('4');">메뉴 또는 탭4</a></td>
-
-				</tr>
-
-				<tr>
-					<td colspan=4 align=center style='padding-top: 20px;'>내용3</td>
-				</tr>
-
-			</table>
-
-		</DIV>
-
-		<DIV id=div_04 style="DISPLAY: none">
-
-
-
-			<table width="707px" cellspacing="0" cellpadding="0" border="0"
-				align="center" style="margin-top: 30px;">
-
-				<tr>
-
-					<td><a href="javascript:show_layer('1');">메뉴 또는 탭1</a></td>
-
-					<td><a href="javascript:show_layer('2');">메뉴 또는 탭2</a></td>
-
-					<td><a href="javascript:show_layer('3');">메뉴 또는 탭3</a></td>
-
-					<td>메뉴 또는 탭4</td>
-
-				</tr>
-
-				<tr>
-					<td colspan=4 align=center style='padding-top: 20px;'>내용4</td>
-				</tr>
-
-			</table>
-
-		</DIV>
-
-	</div>
-
-
-
-
+				<!-- 날씨정보 START -->
+					<h2><img class="searchlogo" src='../../reservation/image/main/select5.png'> 날씨정보</h2></a>
+					<div id="weatherArea">
+						<div class="btn-group" role="group" aria-label="Basic outlined example">
+							<button type="button" class="btn btn-outline-secondary" onclick="weather('서울');">서울</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="weather('인천');">인천</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="weather('춘천');">춘천</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="weather('경주');">경주</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="weather('전주');">전주</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="weather('제주');">제주</button>
+						</div>
+						
+<script>
+	function weather(region){
+		
+		if(!region){
+			region = "1835848";
+		}
+		alert(region);
+		var param = {
+						"id" : "1835848",
+						"appid" : "37a03c805de2c4b05a7b17fc4e292a7c",
+						"units" : "metric"
+					};
+				
+		$.ajax({
+			type : "GET", 
+			url : "http://api.openweathermap.org/data/2.5/forecast",
+			data: param,
+			success : function(data){
+				$("#weatherTable").html("");
+				for(var i=8; i<= 24; i++) {
+					if(i%8 == 0) {
+						var $minTemp = data.list[i].main.temp_min;
+						var $maxTemp = data.list[i].main.temp_max;
+						var $cDate = data.list[i].dt_txt;
+						var $wIcon = data.list[i].weather[0].icon;
+		
+						var strHtml ='<tr>'
+								+'		<td rowspan="3" style="width: 80px; height: 80px; padding-left:15px;">'
+								+'			<div class=cicon" id="cicon"><img src="../../reservation/image/weatherIcon/'+ $wIcon +'.png" /></div>'
+								+'		</td>'
+								+'		<td>'
+								+'			<div class="cDate" style="font-size:13pt">일자 : '+ $cDate +'</div>'
+								+'		</td>'
+								+'	</tr>'
+								+'	<tr>'
+								+'		<td>'
+								+'			<div class="chightemp" style="font-size:13pt">최고온도 : '+ $maxTemp +'</div>'
+								+'		</td>'
+								+'	</tr>'
+								+'	<tr style="border-bottom: 1px solid white;">'
+								+'		<td>'
+								+'			<div class="clowtemp" style="font-size:13pt">최저온도 : '+ $minTemp +'</div>'
+								+'		</td>'
+								+'	</tr>';
+							
+								$("#region").html(region);
+								$("#weatherTable").append(strHtml);
+							
+						}
+				} 
+			}, 
+			error : function(e){
+				alert("ERR 발생::"+e);
+				
+			}
+		});
+	}
+</script>	
+						<div class="climateResult">									
+							<span style="font-size: 32px;" id="region"></span>
+							<table class="weatherTable" id="weatherTable" style="width: 350px; height: 80px;"></table>
+						</div>
+
+						<button class="morebtn"> <a style="text-decoration-line: none;" href="https://www.weather.go.kr/w/index.do" ;>더보기</a></button>
+					</div>
+					<!-- 날씨정보 END -->
 
 
 

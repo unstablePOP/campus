@@ -149,6 +149,8 @@ div {
 <!--캠핑장 검색 일정 달력 -->
 <script type="text/javascript">
 	 $(function() {
+		 weather('Seoul');
+		 
 		  $( "#from" ).datepicker({
 		         changeMonth: true, 
 		         changeYear: true,
@@ -229,8 +231,6 @@ div {
 								
 								
 								<a href ="./campingArea.jsp">상세페이지</a>
-								<a href ="./weatherArea.jsp">날씨</a>
-								<a href ="./table.jsp">테이블</a>
 								<img
 									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
 
@@ -266,66 +266,80 @@ div {
 				</div>
 				<div id="rightArea">
 				<br>
+				
+				<!-- 날씨정보 START -->
 					<h2><img class="searchlogo" src='../../reservation/image/main/select5.png'> 날씨정보</h2></a>
 					<div id="weatherArea">
 						<div class="btn-group" role="group" aria-label="Basic outlined example">
-							<button type="button" class="btn btn-outline-secondary">인천</button>
-							<button type="button" class="btn btn-outline-secondary">춘천</button>
-							<button type="button" class="btn btn-outline-secondary">대구</button>
-							<button type="button" class="btn btn-outline-secondary">경주</button>
-							<button type="button" class="btn btn-outline-secondary">전주</button>
-							<button type="button" class="btn btn-outline-secondary">제주</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Seoul');">서울</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Gapyeong');">가평</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Busan');">부산</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Jeju');">제주</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Daegu');">대구</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Jeonju');">전주</button>
 						</div>
 						
-						<div class="climateResult">
-						
-
-						
-					
 						<script>
-						$.getJSON
-						('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=37a03c805de2c4b05a7b17fc4e292a7c&units=metric', function(data){
-							var $minTemp = data.list[6].main.temp_min;
-							var $maxTemp = data.list[6].main.temp_max;
-							var $cDate = data.list[6].dt_txt;
-							var $wIcon = data.list[6].weather[0].icon;
-							
-							$('.cDate').append($cDate);
-							$('.clowtemp').append($minTemp+" ℃");
-							$('.chightemp').append($maxTemp+" ℃");
-							$('.cicon').append('<img src="../../reservation/image/weatherIcon/'+ $wIcon +'.png" />')
-						});
+							function weather(region){
+								var param = {
+												"q" : region,
+												"appid" : "37a03c805de2c4b05a7b17fc4e292a7c",
+												"units" : "metric"
+											};
+										
+								$.ajax({
+									type : "GET", 
+									url : "http://api.openweathermap.org/data/2.5/forecast",
+									data: param,
+									success : function(data){
+										$("#weatherTable").html("");
+										for(var i=4; i<= 56; i++) {
+											if(i%6 == 0) {
+												var $minTemp = data.list[i].main.temp_min;
+												var $maxTemp = data.list[i].main.temp_max;
+												var $cDate = data.list[i].dt_txt.substring(0,13)+"시";
+												var $wIcon = data.list[i].weather[0].icon;
+								
+												var strHtml ='<tr>'
+														+'		<td rowspan="3" style="width: 80px; height: 80px; padding-left:15px;">'
+														+'			<div class=cicon" id="cicon"><img src="../../reservation/image/weatherIcon/'+ $wIcon +'.png" /></div>'
+														+'		</td>'
+														+'		<td>'
+														+'			<div class="cDate" style="font-size:13pt; color:yellow; padding-left:26px; ">일자 : '+ $cDate +'</div>'
+														+'		</td>'
+														+'	</tr>'
+														+'	<tr>'
+														+'		<td>'
+														+'			<div class="chightemp" style="font-size:13pt; padding-left:26px;">최고온도 : '+ $maxTemp + ' ℃'+'</div>'
+														+'		</td>'
+														+'	</tr>'
+														+'	<tr style="border-bottom: 1px solid white;">'
+														+'		<td>'
+														+'			<div class="clowtemp" style="font-size:13pt; padding-left:26px;">최저온도 : '+ $minTemp + ' ℃'+'</div>'
+														+'		</td>'
+														+'	</tr>';
+													
+														$("#region").html(region);
+														$("#weatherTable").append(strHtml);
+												}
+										} 
+									}, 
+									error : function(e){
+										alert("지속적인 문제발생시 고객센터에 문의바랍니다.");
+										
+									}
+								});
+							}
 						</script>	
-									
-						<h2>Seoul</h2>
-						
-						<table class="weatherTable" style="width: 350px; height: 80px;">
-					
-							<tr>					
-								<td rowspan="3" style="width: 80px; height: 80px; padding-left:15px;">
-									<div class ="cicon"></div>						
-								</td>
-								<td>
-									<div class="cDate" style="font-size:13pt">일자 : </div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="chightemp" style="font-size:13pt">최고온도 : </div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="clowtemp" style="font-size:13pt">최저온도 : </div>
-								</td>
-							</tr>
-						</table>	
-							<hr>	
+						<div class="climateResult">									
+							<span style="font-size: 32px;" id="region"></span>
+							<table class="weatherTable" id="weatherTable" style="width: 350px; height: 80px;"></table>
 						</div>
-						<button class="morebtn"> <a style="text-decoration-line: none;" href="https://www.weather.go.kr/w/index.do" ;>더보기</a></button>
-						
-					</div>
 
+						<button class="morebtn"> <a style="text-decoration-line: none;" href="https://www.weather.go.kr/w/index.do" ;>더보기</a></button>
+					</div>
+					<!-- 날씨정보 END -->
+					
 					<div id="mapArea">
 
 						<br>

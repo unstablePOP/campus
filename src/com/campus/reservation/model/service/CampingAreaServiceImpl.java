@@ -5,19 +5,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.campus.common.JDBCTemplate;
-import com.campus.reservation.model.dao.campingAreaDAO;
+import com.campus.reservation.model.dao.CampingAreaDAO;
 import com.campus.reservation.model.vo.CampingArea;
 
 public class CampingAreaServiceImpl implements CampingAreaService{
-
+	private CampingAreaDAO campingAreaDAO = new CampingAreaDAO();
+	
 	@Override
 	public HashMap<String, Object> selectAllList(int currentPage) {
 
 		Connection conn = JDBCTemplate.getConnection();
+		
 		int recordCountPerPage = 5;
 		ArrayList<CampingArea> list = campingAreaDAO.selectAllList(conn, currentPage, recordCountPerPage);
 
 		int naviCountPerPage = 5;
+		
 		String pageNavi = campingAreaDAO.getPageNavi(conn, naviCountPerPage, recordCountPerPage, currentPage);
 		
 		JDBCTemplate.close(conn);
