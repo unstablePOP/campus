@@ -8,7 +8,7 @@
 <style>
 #bodyWrap {
 	width: 100%;
-	height: 1800px;
+	height: 1900px;
 }
 
 #bodyLogoWrap {
@@ -23,10 +23,11 @@
 	width: 100%;
 	height: 563px;
 }
-.list>a{
-	color:black;
+
+.list>a {
+	color: black;
 	text-decoration: none;
-	font-size:16px;
+	font-size: 16px;
 }
 /* 컨텐츠 영역 1 */
 #ContentsAreaWrap {
@@ -40,7 +41,7 @@
 	height: 100%;
 }
 
-#noticeBoard{
+#noticeBoard {
 	
 }
 
@@ -51,7 +52,7 @@
 	margin-left: 10px;
 }
 
-#freeBoard{
+#freeBoard {
 	background-color: #fdf7f7;
 }
 
@@ -64,83 +65,92 @@
 	list-style: none;
 	height: 40px;
 	font-size: 18px;
-	line-height:40px;
+	line-height: 40px;
 	border-bottom: 1px solid rgba(220, 220, 220, 1);
-	padding:0px 20px;
+	padding: 0px 20px;
 }
 
 .list:first-child {
-	border-top:1px solid black;	
+	border-top: 1px solid black;
 }
-.list:last-child{
-	border-bottom:1px solid black;
+
+.list:last-child {
+	border-bottom: 1px solid black;
 }
 /* 컨텐츠 영역2 */
-#ContentsAreaWrap2{
+#ContentsAreaWrap2 {
 	width: 100%;
 	height: 470px;
 }
 /* 컨텐츠 영역3 */
-#ContentsAreaWrap3{
-	width:100%;
-	height:400px;
+#ContentsAreaWrap3 {
+	width: 100%;
+	height: 400px;
 }
-#infoBoard{
-	width:100%;
-	height:310px;
+
+#infoBoard {
+	width: 100%;
+	height: 310px;
 }
-.list2{
-	float:left;
-	width:25%;
-	height:100%;
-	list-style:none;
+
+.list2 {
+	float: left;
+	width: 25%;
+	height: 100%;
+	list-style: none;
 	margin: 0px 38px;
 }
-.infoImgWrap{
-	width:100%;
-	height:80%;
-	border:1px solid black;
 
+.infoImgWrap {
+	width: 100%;
+	height: 80%;
+	border: 1px solid black;
 }
-.infoSubWrap{
-	width:100%;
-	height:20%;
-	border:1px solid black;
+
+.infoSubWrap {
+	width: 100%;
+	height: 20%;
+	border: 1px solid black;
 }
 /* 컨텐츠 영역 4 */
-#ContentsAreaWrap4{
-	width:100%;
-	height:400px;
+#ContentsAreaWrap4 {
+	width: 100%;
+	height: 400px;
 }
 /* fixed bar 영역 */
-#fixedBarWrap{
-	position: fixed;
-	top:400px;
-	width:1250px;
-	height:200px;
-	z-index:-1;
+#fixedBar {
+	position: relative;
+	left: 1150px;
+	top:-1700px;
+	border: 1px solid black;
+	width: 55px;
+	height: 200px;
+	display: none;
+	border-radius: 10px;
+	padding-top: 6px;
 }
-#fixedBar{
-	position:relative;
-	left:1150px;
-	border:1px solid rgba(220,220,220,0.7);
-	width:50px;
-	height:100%;
-	display:none;
-	border-radius:10px;
-	padding-top:6px;
+
+.fixedbarContentWrap {
+	margin-left: 3px;
+	widhth: 100%;
+	height: 24%;
+	padding: 1px;
+	border-bottom: 1px solid black;
 }
-.fixedbarContentWrap{
-	widhth:100%;
-	height:24%;
-	border:1px solid black;
+
+.fixedbarContentWrap img {
+	cursor: pointer;
+}
+
+.fixedbarContentWrap:last-child {
+	border: none;
 }
 </style>
 </head>
 <body>
 	<div id="bodyWrap">
 		<div id="bodyLogoWrap"></div>
-<%-- 컨텐츠 영역1 (공지, 자유) --%>
+		<%-- 컨텐츠 영역1 (공지, 자유) --%>
 		<div id="ContentsAreaWrap">
 			<div id="noticeWrap">
 				<h3>소식 게시판</h3>
@@ -156,7 +166,7 @@
 				</ul>
 			</div>
 			<div id="freeWrap">
-				<h3 style="color:dodgerblue;">자유 게시판</h3>
+				<h3 style="color: dodgerblue;">자유 게시판</h3>
 				<ul class="listBoard" id="freeBoard">
 					<li class="list free" id="free1">1</li>
 					<li class="list free" id="free2">2</li>
@@ -169,116 +179,120 @@
 				</ul>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 2 --%>
+		<%-- 컨텐츠 영역 2 --%>
 		<div id="ContentsAreaWrap2">
 			<img alt="" src="/main/image/mainlogo/Marry.png">
 		</div>
-<%-- 컨텐츠 영역 3 --%>
+		<%-- 컨텐츠 영역 3 --%>
 		<div id="ContentsAreaWrap3">
 			<div id="infoWrap">
-				<h3 style="color:dodgerblue; border-bottom:1px solid black; width:1128px;">정보 게시판</h3>
+				<h3
+					style="color: dodgerblue; border-bottom: 1px solid black; width: 1128px;">정보
+					게시판</h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
-					<div class="infoImgWrap">
-					</div>
-					<div class="infoSubWrap">
-					</div>
+						<div class="infoImgWrap"></div>
+						<div class="infoSubWrap"></div>
 					</li>
 					<li class="list2">
-					<div class="infoImgWrap">
-					</div>
-					<div class="infoSubWrap">
-					</div>
+						<div class="infoImgWrap"></div>
+						<div class="infoSubWrap"></div>
 					</li>
 					<li class="list2">
-					<div class="infoImgWrap">
-					</div>
-					<div class="infoSubWrap">
-					</div>
+						<div class="infoImgWrap"></div>
+						<div class="infoSubWrap"></div>
 					</li>
 				</ul>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 4 --%>
+		<%-- 컨텐츠 영역 4 --%>
 		<div id="ContentsAreaWrap4">
 			<div id="maketWrap">
-				<h3 style="color:dodgerblue; border-bottom:1px solid black; width:1128px;">중고 장터</h3>
+				<h3
+					style="color: dodgerblue; border-bottom: 1px solid black; width: 1128px;">중고
+					장터</h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
-					<div class="infoImgWrap">
-					</div>
-					<div class="infoSubWrap">
-					</div>
+						<div class="infoImgWrap"></div>
+						<div class="infoSubWrap"></div>
 					</li>
 					<li class="list2">
-					<div class="infoImgWrap">
-					</div>
-					<div class="infoSubWrap">
-					</div>
+						<div class="infoImgWrap"></div>
+						<div class="infoSubWrap"></div>
 					</li>
 					<li class="list2">
-					<div class="infoImgWrap">
-					</div>
-					<div class="infoSubWrap">
-					</div>
+						<div class="infoImgWrap"></div>
+						<div class="infoSubWrap"></div>
 					</li>
 				</ul>
 			</div>
 		</div>
-<%-- fixedBar 영역 --%>
-		<div id="fixedBarWrap">
+		<%-- fixedBar 영역 --%>
 			<div id="fixedBar">
 				<div class="fixedbarContentWrap">
+					<a href=""><img alt="" src="/main/image/logo/2user.jpg" id="fixedUserIcon"></a>
 				</div>
 				<div class="fixedbarContentWrap">
+					<a href=""><img alt="" src="/main/image/logo/calendar.jpg" id="fixedResevationIcon"></a>
 				</div>
 				<div class="fixedbarContentWrap">
+					<a href=""><img alt="" src="/main/image/logo/2postbox.jpg" id="fixedMessageIcon"></a>
 				</div>
 				<div class="fixedbarContentWrap">
+					<img alt="" src="/main/image/logo/2top.jpg" id="fixedTopIcon">
 				</div>
 			</div>
-		</div>
 	</div>
 	<script>
-	// 자유게시판 목록 불러오기
-		$(function(){
+		// 자유게시판 목록 불러오기
+		$(function() {
 			$.ajax({
-				url:"/main/freeDataPull.do",
-				dataType:"json",
-				success:function(freeList){
-					$.each(freeList,function(index,f){
-						$('.free').eq(index).html("<a href='/community/free/freeboard.jsp?currentPage=1&freeNo='"+f.freeNo+">"
-								+f.FreeTitle+"<span style='color:#f94b4b;'> ["+f.commentCount+"]</span></a>");
+				url : "/main/freeDataPull.do",
+				dataType : "json",
+				success : function(freeList) {
+					$.each(freeList, function(index, f) {
+						$('.free').eq(index).html(
+								"<a href='/community/free/freeboard.jsp?currentPage=1&freeNo='"
+										+ f.freeNo + ">" + f.FreeTitle
+										+ "<span style='color:#f94b4b;'> ["
+										+ f.commentCount + "]</span></a>");
 					})
 				},
-				error:function(){
-					
+				error : function() {
+
 				}
 			});
 		});
-	// 공지게시판 불러오기
-		$(function(){
+		// 공지게시판 불러오기
+		$(function() {
 			$.ajax({
-				url:"/main/noticeDataPull.do",
-				dataType:"json",
-				success:function(noticeList){
-					$.each(noticeList,function(index,n){
-						$('.notice').eq(index).html("<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo='"+n.noticeNo+">"
-								+n.noticeTitle+"</a>");
+				url : "/main/noticeDataPull.do",
+				dataType : "json",
+				success : function(noticeList) {
+					$.each(noticeList, function(index, n) {
+						$('.notice').eq(index).html(
+								"<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo='"
+										+ n.noticeNo + ">" + n.noticeTitle
+										+ "</a>");
 					})
 				},
-				error:function(){
-					
+				error : function() {
+
 				}
 			});
 		});
-		$(window).scroll(function(){
-			if($(this).scrollTop()>380){
-				$('#fixedBar').css("display","block");
-			}else{
-				$('#fixedBar').css("display","none");
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 380) {
+				$('#fixedBar').css("display", "block");
+				$('#fixedBar').css("top",-2080+$(this).scrollTop()+"px");
+			} else {
+				$('#fixedBar').css("display", "none");
 			}
-		})
+		});
+		$('#fixedTopIcon').click(function(){
+			$('html').animate({scrollTop:0}, 400);
+			return false;
+		});
 	</script>
 </body>
 </html>
