@@ -1,3 +1,9 @@
+<%@page import="com.campus.reservation.model.vo.CampingArea" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,12 +18,8 @@
 <!--부트스트랩 CSS파일 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-<!--아이콘CSS -->
-<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CampUS reservation</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <style>
 	div{
@@ -229,6 +231,15 @@
 	width : 150px;
 	height : 50px;
 }
+.reservBtn{
+	width : 500px;
+	height : 50px;
+	background-color: #3e4a56;
+	color: white;
+	font-weight: bold;
+	font-size: 16pt;
+}
+
 
 </style>
   <script type="text/javascript">
@@ -268,6 +279,8 @@
    
 <body>
 
+
+
 	<div id="wrapper">
         <div id="header">
 		<%@ include file="/common/include/gnb.jsp" %></div>
@@ -295,14 +308,14 @@
 									
 								</td>
 								<td style="border:1px solid gray;">
-								<input class="reservBtn" type="button" value="예약하기">
+								<input class="reservBtn" type="button" value="예약하기"/>
 								<button class='likebtn' style='border:0; outline: 0; color:black;'><i class="xi-heart xi-2x"></i></button>
 							</tr>
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid black;">캠핑사이트명 : 글램핑 강전망</td>
+								<td style="border:1px solid black;"></td>
 							</tr>
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;">위치번호 : 침대/온돌형 &캠핑시설 &홍천강 전망(17개동)_3동</td>
+								<td style="border:1px solid gray;"></td>
 							</tr>													
 							<tr style="border:1px solid gray;">
 								<td style="border:1px solid gray;">기준인원 : 2인 (최대인원: 4인)</td>
@@ -413,18 +426,13 @@ $(function(){
 
 <!-- 좋아요 함수 -->
 <script>
-	$('#like_btn').click(function(){
+$(function(){
+	$(".likebtn").click(function(){
+		
+	alert("");
 	
-		var text = $(this).text();
-		if(text==<i class="xi-heart-o xi-2x">)
-		{
-			$(this).text('<i class="xi-heart xi-2x">');
-		}else if (text=='<i class="xi-heart xi-2x">')
-		{
-			$(this).text('<i class="xi-heart-o xi-2x">');
-		}
 	});
-	
+});
 
 </script>
 

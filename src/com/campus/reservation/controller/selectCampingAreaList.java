@@ -36,7 +36,7 @@ public class selectCampingAreaList extends HttpServlet {
 		int currentPage;
 		if(request.getParameter("currentPage")==null)
 		{
-			currentPage=2;
+			currentPage=1;
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
@@ -47,7 +47,10 @@ public class selectCampingAreaList extends HttpServlet {
 	
 	
 	RequestDispatcher view = request.getRequestDispatcher("/reservation/views/campingArea.jsp");
-
+	
+	request.setAttribute("pageDataMap", pageDataMap);
+	request.setAttribute("currentPage", pageDataMap);
+	view.forward(request, response);
 	
 	}
 

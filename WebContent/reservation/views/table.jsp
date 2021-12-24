@@ -59,7 +59,29 @@ img{
 				</div>
 				<div class="campaddr">경기도 가평군 00로</div>
 				</div>
-			</li>
+			</li><br>
+						<li class="camparea">
+				<div class="campbackimg">
+					<img src="../../reservation/image/main/2maintop.jpg"/>
+				
+				<div class="campinfo">
+					00캠핑장 & 글램핑장<br>
+					캠핑태그
+				</div>
+				<div class="campaddr">경기도 가평군 00로</div>
+				</div>
+			</li><br>
+						<li class="camparea">
+				<div class="campbackimg">
+					<img src="../../reservation/image/main/2maintop.jpg"/>
+				
+				<div class="campinfo">
+					00캠핑장 & 글램핑장<br>
+					캠핑태그
+				</div>
+				<div class="campaddr">경기도 가평군 00로</div>
+				</div>
+			</li><br>
 		</ul>
 		
 		
