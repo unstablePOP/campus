@@ -83,7 +83,7 @@ public class FrameUploadServlet extends HttpServlet {
 		// 사진 이름
 		String imageName = multi.getFilesystemName("file");
 		// 사진 경로
-		String imagePath = uploadImagePath+"\\"+imageName;
+		String imagePath = "/diary/uploadFrameImage/"+imageName;
 		// 프레임 타이틀
 		String frameTitle = multi.getParameter("title");
 		
@@ -98,6 +98,8 @@ public class FrameUploadServlet extends HttpServlet {
 		System.out.println(imagePath.length());
 		System.out.println(frameTitle.length());
 		*/
+		System.out.println(imagePath);
+
 		Frame fr = new Frame();
 		fr.setUserId(userId);
 		fr.setImageName(imageName);

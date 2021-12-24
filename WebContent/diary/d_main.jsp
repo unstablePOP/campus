@@ -1,3 +1,5 @@
+<%@page import="com.campus.diary.model.vo.Frame"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -72,11 +74,11 @@
         }
 
         .img-area {
-            border: 1px solid skyblue;
             width: 90%;
             height: 70%;
             margin: 15px auto;
             overflow: hidden;
+            border: 1px solid #EAEAEA;
         }
 
         .img-area>img {
@@ -86,39 +88,24 @@
         }
 
         .title-area {
-            border: 1px solid skyblue;
             width: 90%;
             height: 17%;
             margin: 15px auto;
             text-align: center;
-            font-family: "gaegu";
             font-size: 25px
         }
 
         .title {
-            width: 60%;
+            width: 100%;
             height: 100%;
             float: left;
-            border: 1px solid pink;
-            font-size: 20px;
+            font-size: 15px;
             text-align: center;
             margin: auto;
             line-height: 50px;
         }
 
-        .mood {
-            width: 20%;
-            height: 100%;
-            float: left;
-            border: 1px solid pink;
-        }
-
-        .weather {
-            width: 20%;
-            height: 100%;
-            float: left;
-            border: 1px solid pink;
-        }
+       
 
         .date {
             position: relative;
@@ -290,8 +277,44 @@
 
         <div id="pol-area">
             <div id="polaroid-wrap">
+            
+            
+            <%
+				ArrayList<Frame> list = (ArrayList<Frame>)request.getAttribute("list");
+			%>
+			
+            
+            <%if(!list.isEmpty()){%>
+            
+            	<%for(Frame fr : list) {%>
+            	<div class="polaroid">
+                    <a href="/diary/frameDeletedo?frameNo=<%=fr.getFrameNo() %>&imagePath=<%=fr.getImagePath() %>" class="delete" ><i class="xi-close-circle-o"></i></a>
+                    <div class="img-area">
+						<img src="<%=fr.getImagePath() %>">
+                    </div>
+                    <div class="title-area">
+                    	<div class="title">
+                    		<%if(fr.getFrameTitle()==null) {%>
+                    			
+                    		<%}else{ %>
+                    			<%=fr.getFrameTitle() %>
+                    		<%} %>
+						</div>
+                    </div>
+                    <div class="date">
+                    	<%=fr.getFrameDate() %>
+                    </div>
+                </div>
+                <%} %>
+            
+            <%} %>
+             
+            	
+            
+            
+            <%-- 
                 <div class="polaroid">
-                    <a href="" class="delete"><i class="xi-close-circle-o"></i></a>
+                    <a href="" class="delete" ><i class="xi-close-circle-o"></i></a>
                     <div class="img-area">
                         <img src="image/test/nature-2588685.jpg" alt="">
                     </div>
@@ -306,33 +329,11 @@
                         2021-12-12
                     </div>
                 </div>
-                <div class="polaroid">
-                    <a href="" class="delete"><i class="xi-close-circle-o"></i></a>
-                    <div class="img-area">
-
-                    </div>
-                    <div class="title-area">
-
-                    </div>
-                </div>
-                <div class="polaroid">
-                    <a href="" class="delete"><i class="xi-close-circle-o"></i></a>
-                    <div class="img-area">
-
-                    </div>
-                    <div class="title-area">
-
-                    </div>
-                </div>
-                <div class="polaroid">
-                    <a href="" class="delete"><i class="xi-close-circle-o"></i></a>
-                    <div class="img-area">
-
-                    </div>
-                    <div class="title-area">
-
-                    </div>
-                </div>
+             --%>   
+                
+                
+                
+                
                 <div id="pol-add-area">
                     <div id="pol-add">
                         <i class="xi-plus-circle xi-4x" id="add"></i>
@@ -358,7 +359,7 @@
 
                             </div>
                             <div id="add-date">
-                                <input type="date" name="date">
+                                <input type="date" name="date" id="date">
                             </div>
                             <div id="modal-btn">
                                 <div id="add-pol">
@@ -384,6 +385,11 @@
             		if(fileSize>(50*1024*1024))
             		{
             			alert('업로드 가능한 최대 사이즈는 50MB 입니다.');
+            		}
+            		else if($('#date').val()=='')
+            		{
+            			alert('날짜를 입력해주세요');
+            			
             		}
             		else
             		{
@@ -432,7 +438,12 @@
             $(this).children('.img-area').css('margin', '15px auto');
         });
         $('.delete').click(function() {
-            window.confirm('삭제된 폴라로이드는 되돌릴 수 없습니다. 삭제하시겠습니까? ');
+            if(window.confirm('삭제된 폴라로이드는 되돌릴 수 없습니다. 삭제하시겠습니까? ')){
+            	return true;
+            }else
+            {
+            	return false;
+            }
         });
 
     </script>
