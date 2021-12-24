@@ -18,7 +18,7 @@
 		<%}else{%>
 			alert('업로드 실패!! -지속저인 문제 발생 시 관리자에게 문의해주세요 -');
 		<%}%>
-		location.replace('/diary/d_main.jsp');
+		location.replace('/diary/frameView.do');
 	</script>
 	
 </body>
