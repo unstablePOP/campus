@@ -1,6 +1,7 @@
 package com.campus.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,18 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.campus.main.model.service.MainService;
 import com.campus.main.model.service.MainServiceImpl;
 import com.campus.main.model.vo.Free;
+import com.campus.main.model.vo.Notice;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class M_dataPull
+ * Servlet implementation class M_noticeDataPull
  */
-@WebServlet("/main/dataPull.do")
-public class M_dataPull extends HttpServlet {
+@WebServlet("/main/noticeDataPull.do")
+public class M_noticeDataPull extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public M_dataPull() {
+    public M_noticeDataPull() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +35,12 @@ public class M_dataPull extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		MainService mService = new MainServiceImpl();
-		ArrayList<Free> f = mService.freeData(); 
+		ArrayList<Notice> noticeList = mService.noticeData();
 		
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		new Gson().toJson(noticeList,out);
 	}
 
 	/**

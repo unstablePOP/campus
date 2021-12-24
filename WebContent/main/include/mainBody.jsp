@@ -23,6 +23,11 @@
 	width: 100%;
 	height: 563px;
 }
+.list>a{
+	color:black;
+	text-decoration: none;
+	font-size:16px;
+}
 /* 컨텐츠 영역 1 */
 #ContentsAreaWrap {
 	width: 100%;
@@ -107,7 +112,29 @@
 	width:100%;
 	height:400px;
 }
-
+/* fixed bar 영역 */
+#fixedBarWrap{
+	position: fixed;
+	top:400px;
+	width:1250px;
+	height:200px;
+	z-index:-1;
+}
+#fixedBar{
+	position:relative;
+	left:1150px;
+	border:1px solid rgba(220,220,220,0.7);
+	width:50px;
+	height:100%;
+	display:none;
+	border-radius:10px;
+	padding-top:6px;
+}
+.fixedbarContentWrap{
+	widhth:100%;
+	height:24%;
+	border:1px solid black;
+}
 </style>
 </head>
 <body>
@@ -118,27 +145,27 @@
 			<div id="noticeWrap">
 				<h3>소식 게시판</h3>
 				<ul class="listBoard" id="noticeBoard">
-					<li class="list">1</li>
-					<li class="list">2</li>
-					<li class="list">3</li>
-					<li class="list">4</li>
-					<li class="list">5</li>
-					<li class="list">6</li>
-					<li class="list">7</li>
-					<li class="list">8</li>
+					<li class="list notice">1</li>
+					<li class="list notice">2</li>
+					<li class="list notice">3</li>
+					<li class="list notice">4</li>
+					<li class="list notice">5</li>
+					<li class="list notice">6</li>
+					<li class="list notice">7</li>
+					<li class="list notice">8</li>
 				</ul>
 			</div>
 			<div id="freeWrap">
 				<h3 style="color:dodgerblue;">자유 게시판</h3>
 				<ul class="listBoard" id="freeBoard">
-					<li class="list">1</li>
-					<li class="list">2</li>
-					<li class="list">3</li>
-					<li class="list">4</li>
-					<li class="list">5</li>
-					<li class="list">6</li>
-					<li class="list">7</li>
-					<li class="list">8</li>
+					<li class="list free" id="free1">1</li>
+					<li class="list free" id="free2">2</li>
+					<li class="list free" id="free3">3</li>
+					<li class="list free" id="free4">4</li>
+					<li class="list free" id="free5">5</li>
+					<li class="list free" id="free6">6</li>
+					<li class="list free" id="free7">7</li>
+					<li class="list free" id="free8">8</li>
 				</ul>
 			</div>
 		</div>
@@ -198,20 +225,60 @@
 				</ul>
 			</div>
 		</div>
+<%-- fixedBar 영역 --%>
+		<div id="fixedBarWrap">
+			<div id="fixedBar">
+				<div class="fixedbarContentWrap">
+				</div>
+				<div class="fixedbarContentWrap">
+				</div>
+				<div class="fixedbarContentWrap">
+				</div>
+				<div class="fixedbarContentWrap">
+				</div>
+			</div>
+		</div>
 	</div>
 	<script>
+	// 자유게시판 목록 불러오기
 		$(function(){
 			$.ajax({
-				url:"/main/dataPull.do",
+				url:"/main/freeDataPull.do",
 				dataType:"json",
-				success:function(){
-					
+				success:function(freeList){
+					$.each(freeList,function(index,f){
+						$('.free').eq(index).html("<a href='/community/free/freeboard.jsp?currentPage=1&freeNo='"+f.freeNo+">"
+								+f.FreeTitle+"<span style='color:#f94b4b;'> ["+f.commentCount+"]</span></a>");
+					})
 				},
 				error:function(){
 					
 				}
 			});
 		});
+	// 공지게시판 불러오기
+		$(function(){
+			$.ajax({
+				url:"/main/noticeDataPull.do",
+				dataType:"json",
+				success:function(noticeList){
+					$.each(noticeList,function(index,n){
+						$('.notice').eq(index).html("<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo='"+n.noticeNo+">"
+								+n.noticeTitle+"</a>");
+					})
+				},
+				error:function(){
+					
+				}
+			});
+		});
+		$(window).scroll(function(){
+			if($(this).scrollTop()>380){
+				$('#fixedBar').css("display","block");
+			}else{
+				$('#fixedBar').css("display","none");
+			}
+		})
 	</script>
 </body>
 </html>
