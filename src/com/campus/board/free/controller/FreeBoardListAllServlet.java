@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.campus.board.free.model.service.FreeBoardService;
 import com.campus.board.free.model.service.FreeBoardServiceImpl;
-import com.campus.board.free.model.vo.FreeBoard;
+import com.campus.board.free.model.vo.FreePage;
 
 /**
- * Servlet implementation class FreeBoardSelectOneServlt
+ * Servlet implementation class FreeBoardListAllServlet
  */
-@WebServlet(name = "FreeBoardSelectOneServlet", urlPatterns = { "/board/free/selectOne.do" })
-public class FreeBoardSelectOneServlet extends HttpServlet {
+@WebServlet("/board/free/listAll.do")
+public class FreeBoardListAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FreeBoardSelectOneServlet() {
+    public FreeBoardListAllServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,19 @@ public class FreeBoardSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-		System.out.println(freeNo);
-		
-		FreeBoardService freebService = new FreeBoardServiceImpl();
-		FreeBoard freeBoard = freebService.freeboardSelectOne(freeNo);
-		
-		if (freeBoard != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/community/free/freepost.jsp");
-			request.setAttribute("freeBoard", freeBoard);
-			view.forward(request, response);
-
+		int currentPage;
+		if (request.getParameter("currentPage") == null) {
+			currentPage = 1;
 		} else {
-			response.sendRedirect("/community/error/boardError.jsp");
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+
+		FreeBoardService freebService = new FreeBoardServiceImpl();
+		FreePage page = freebService.freeboardListAll(currentPage);
+		
+		RequestDispatcher view = request.getRequestDispatcher("/community/free/freeboard.jsp");
+		request.setAttribute("freepage", page);
+		view.forward(request,response);
 	}
 
 	/**

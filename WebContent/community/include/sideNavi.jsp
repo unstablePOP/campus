@@ -54,7 +54,7 @@
 	        <div>커뮤니티</div>
             <ul>
                 <li><a href="\community\notice\noticeboard.jsp">공지사항</a></li>
-   	            <li><a href="\community\free\freeboard.jsp">자유게시판</a></li>
+   	            <li><a href="/board/free/listAll.do">자유게시판</a></li>
        	        <li><a href="\community\info\infoboard.jsp">정보공유게시판</a></li>
            	    <li><a href="\community\market\marketboard.jsp">중고장터</a></li>
            	    <li><a href="\">통합채팅</a></li>

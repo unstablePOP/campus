@@ -3,85 +3,84 @@ package com.campus.board.free.model.vo;
 import java.sql.Date;
 
 public class FreeBoard {
-	private int free_no;
-	private String free_title;
-	private Date free_date;
-	private String user_id;
-	private String free_content;
-	private String free_hit;
-	private int free_like;
-	private int free_hate;
-	private char free_withdrawal;
+	private int freeNo;
+	private String freeTitle;
+	private Date freeDate;
+	private String userId;
+	private String freeContent;
+	private int freeHit;
+	private int freeLike;
+	private int freeHate;
+	private char freeWithdrawal;
 	
 	public FreeBoard() {
 		super();
 	}
-	public FreeBoard(int free_no, String free_title, Date free_date, String user_id, String free_content,
-			String free_hit, int free_like, int free_hate, char free_withdrawal) {
+	public FreeBoard(int freeNo, String freeTitle, Date freeDate, String userId, String freeContent, int freeHit,
+			int freeLike, int freeHate) {
 		super();
-		this.free_no = free_no;
-		this.free_title = free_title;
-		this.free_date = free_date;
-		this.user_id = user_id;
-		this.free_content = free_content;
-		this.free_hit = free_hit;
-		this.free_like = free_like;
-		this.free_hate = free_hate;
-		this.free_withdrawal = free_withdrawal;
+		this.freeNo = freeNo;
+		this.freeTitle = freeTitle;
+		this.freeDate = freeDate;
+		this.userId = userId;
+		this.freeContent = freeContent;
+		this.freeHit = freeHit;
+		this.freeLike = freeLike;
+		this.freeHate = freeHate;
 	}
 
-	public int getFree_no() {
-		return free_no;
+	public int getFreeNo() {
+		return freeNo;
 	}
-	public void setFree_no(int free_no) {
-		this.free_no = free_no;
+	public void setFreeNo(int freeNo) {
+		this.freeNo = freeNo;
 	}
-	public String getFree_title() {
-		return free_title;
+	public String getFreeTitle() {
+		return freeTitle;
 	}
-	public void setFree_title(String free_title) {
-		this.free_title = free_title;
+	public void setFreeTitle(String freeTitle) {
+		this.freeTitle = freeTitle;
 	}
-	public Date getFree_date() {
-		return free_date;
+	public Date getFreeDate() {
+		return freeDate;
 	}
-	public void setFree_date(Date free_date) {
-		this.free_date = free_date;
+	public void setFreeDate(Date freeDate) {
+		this.freeDate = freeDate;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getFree_content() {
-		return free_content;
+	public String getFreeContent() {
+		return freeContent;
 	}
-	public void setFree_content(String free_content) {
-		this.free_content = free_content;
+	public void setFreeContent(String freeContent) {
+		this.freeContent = freeContent;
 	}
-	public String getFree_hit() {
-		return free_hit;
+	public int getFreeHit() {
+		return freeHit;
 	}
-	public void setFree_hit(String free_hit) {
-		this.free_hit = free_hit;
+	public void setFreeHit(int freeHit) {
+		this.freeHit = freeHit;
 	}
-	public int getFree_like() {
-		return free_like;
+	public int getFreeLike() {
+		return freeLike;
 	}
-	public void setFree_like(int free_like) {
-		this.free_like = free_like;
+	public void setFreeLike(int freeLike) {
+		this.freeLike = freeLike;
 	}
-	public int getFree_hate() {
-		return free_hate;
+	public int getFreeHate() {
+		return freeHate;
 	}
-	public void setFree_hate(int free_hate) {
-		this.free_hate = free_hate;
+	public void setFreeHate(int freeHate) {
+		this.freeHate = freeHate;
 	}
-	public char getFree_withdrawal() {
-		return free_withdrawal;
+	public char getFreeWithdrawal() {
+		return freeWithdrawal;
 	}
-	public void setFree_withdrawal(char free_withdrawal) {
-		this.free_withdrawal = free_withdrawal;
+	public void setFreeWithdrawal(char freeWithdrawal) {
+		this.freeWithdrawal = freeWithdrawal;
 	}
 }

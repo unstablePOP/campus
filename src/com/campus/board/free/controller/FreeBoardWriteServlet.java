@@ -12,18 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.campus.board.free.model.service.FreeBoardService;
 import com.campus.board.free.model.service.FreeBoardServiceImpl;
 import com.campus.board.free.model.vo.FreeBoard;
+import com.campus.member.model.vo.Member;
 
 /**
- * Servlet implementation class FreeBoardSelectOneServlt
+ * Servlet implementation class FreeBoardWriteServlet
  */
-@WebServlet(name = "FreeBoardSelectOneServlet", urlPatterns = { "/board/free/selectOne.do" })
-public class FreeBoardSelectOneServlet extends HttpServlet {
+@WebServlet("/board/free/write.do")
+public class FreeBoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FreeBoardSelectOneServlet() {
+    public FreeBoardWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +33,31 @@ public class FreeBoardSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-		System.out.println(freeNo);
+		request.setCharacterEncoding("UTF-8");
+		
+		String freeTitle = request.getParameter("freeTitle");
+		String freeContent = request.getParameter("freeContent");
+		
+		String userId = ((Member)request.getSession().getAttribute("member")).getUserId();
+		
+		FreeBoard freeBoard = new FreeBoard();
+		freeBoard.setFreeTitle(freeTitle);
+		freeBoard.setFreeContent(freeContent);
+		freeBoard.setUserId(userId);
 		
 		FreeBoardService freebService = new FreeBoardServiceImpl();
-		FreeBoard freeBoard = freebService.freeboardSelectOne(freeNo);
+		int result=freebService.insert(freeBoard);
 		
-		if (freeBoard != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/community/free/freepost.jsp");
-			request.setAttribute("freeBoard", freeBoard);
-			view.forward(request, response);
-
-		} else {
-			response.sendRedirect("/community/error/boardError.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/community/free/write.jsp");
+		
+		if(result>0)
+		{
+			request.setAttribute("writeResult", true);
+		}else
+		{
+			request.setAttribute("writeResult", false);
 		}
+		view.forward(request, response);
 	}
 
 	/**

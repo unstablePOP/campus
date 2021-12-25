@@ -1,4 +1,4 @@
-package com.campus.board.free.controller;
+package com.campus.board.info.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campus.board.free.model.service.FreeBoardService;
-import com.campus.board.free.model.service.FreeBoardServiceImpl;
-import com.campus.board.free.model.vo.FreeBoard;
+import com.campus.board.info.model.service.InfoBoardService;
+import com.campus.board.info.model.service.InfoBoardServiceImpl;
+import com.campus.member.model.vo.Member;
 
 /**
- * Servlet implementation class FreeBoardSelectOneServlt
+ * Servlet implementation class InfoBoardDeleteServlet
  */
-@WebServlet(name = "FreeBoardSelectOneServlet", urlPatterns = { "/board/free/selectOne.do" })
-public class FreeBoardSelectOneServlet extends HttpServlet {
+@WebServlet("/board/info/delete.do")
+public class InfoBoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FreeBoardSelectOneServlet() {
+    public InfoBoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,20 @@ public class FreeBoardSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-		System.out.println(freeNo);
+		int infoNo = Integer.parseInt(request.getParameter("infoNo"));
+		String userId = ((Member)request.getSession().getAttribute("member")).getUserId();
 		
-		FreeBoardService freebService = new FreeBoardServiceImpl();
-		FreeBoard freeBoard = freebService.freeboardSelectOne(freeNo);
+		InfoBoardService infobService = new InfoBoardServiceImpl();
+		int result = infobService.delete(infoNo,userId);
 		
-		if (freeBoard != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/community/free/freepost.jsp");
-			request.setAttribute("freeBoard", freeBoard);
-			view.forward(request, response);
-
-		} else {
-			response.sendRedirect("/community/error/boardError.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/community/info/delete.jsp");
+		
+		if(result>0) {
+			request.setAttribute("deleteResult", true);
+		}else {
+			request.setAttribute("deleteResult", false);
 		}
+		view.forward(request, response);
 	}
 
 	/**

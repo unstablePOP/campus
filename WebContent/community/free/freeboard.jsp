@@ -6,8 +6,9 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	FreePage freepage=(FreePage)request.getAttribute("pageData");
+	FreePage freepage=(FreePage)request.getAttribute("freepage");
 	ArrayList<FreeBoard> list = freepage.getPageList();
+	Member m = (Member) session.getAttribute("member");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,18 +30,18 @@
     <div id="wrap">
         
         <div id="header-wrap">
-            <%@ include file="../../common/include/gnb.jsp" %>
+            <%@ include file="/common/include/gnb.jsp" %>
         </div>
         
         <div id="contents-wrap">
-        	<%@ include file="../include/sideNavi.jsp" %>
+        	<%@ include file="/community/include/sideNavi.jsp" %>
 	        <div id="contents">
 	            
-	            <%@ include file="../include/upimg.jsp" %>
+	            <%@ include file="/community/include/upimg.jsp" %>
 	            
 	            <div id="where">&nbsp&nbsp&nbsp&nbsp 자유게시판</div>
 	            
-	            <form id="arrange" action="/board/boardSearch.do" method="get">
+	            <form id="arrange">
 	                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot xi-x"></i></button><button type="button" id="list2" class="btn1"><i id="titlelist" class="xi-apps xi-x"></i></button>
 	                <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
 	            </form>
@@ -58,12 +59,12 @@
 	</tr>
     <%for(FreeBoard freeboard : list){%>
     <tr>	
-        <td class="no"><%=freeboard.getFree_no()%></td>
-        <td class="writer"><%=freeboard.getUser_id()%></td>
-		<td class="title"><a href="/community//board/free/selectOne.do?free_no=<%=freeboard.getFree_no()%>"><%=freeboard.getFree_title()%>[댓글]</a></td>
-        <td class="hit"><%=freeboard.getFree_hit()%></td>
-        <td class="like"><%=freeboard.getFree_like()%></td>
-		<td class="date"><%=freeboard.getFree_date()%></td>
+        <td class="no"><%=freeboard.getFreeNo()%></td>
+        <td class="writer"><%=freeboard.getUserId()%></td>
+		<td class="title"><a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%>[댓글]</a></td>
+        <td class="hit"><%=freeboard.getFreeHit()%></td>
+        <td class="like"><%=freeboard.getFreeLike()%></td>
+		<td class="date"><%=freeboard.getFreeDate()%></td>
 	</tr>
 	<%}%>
 </table>
@@ -71,20 +72,22 @@
 <ul id="table2" style="text-align: center;">
 	<%for(FreeBoard freeboard : list){%>
     <li>
-        <a href="/community//board/free/selectOne.do?free_no=<%=freeboard.getFree_no()%>"><img src="../image/merch/griddle.png"/></a>
+        <a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><img src="../image/merch/griddle.png"/></a>
         <dl>
-            <dt><a href="/community//board/free/selectOne.do?free_no=<%=freeboard.getFree_no()%>"><%=freeboard.getFree_title()%></a><a href="">[댓글]</a></dt>
-            <dd><div><%=freeboard.getUser_id()%></div></dd>
-            <dd><span><%=freeboard.getFree_date()%></span>&nbsp&nbsp&nbsp<span><%=freeboard.getFree_hit()%></span>&nbsp&nbsp&nbsp<span><%=freeboard.getFree_like()%></span></dd>
+            <dt><a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%></a>[댓글]</dt>
+            <dd><div><%=freeboard.getUserId()%></div></dd>
+            <dd><span><%=freeboard.getFreeDate()%></span>&nbsp&nbsp&nbsp<span><%=freeboard.getFreeHit()%></span>&nbsp&nbsp&nbsp<span><%=freeboard.getFreeLike()%></span></dd>
         </dl>
     </li>
     <%}%>
 </ul>
             	</div>
+				<%=freepage.getPageNavi()%>
 			    <div id="search">
+			    	<form action="/board/free/search.do" method="get">
 			        <select id="select" name="type">
-			            <option value="subject">제목</option>
-			            <option value="writer">작성자</option>
+			            <option value="freeTitle">제목</option>
+			            <option value="userId">작성자</option>
 			            <option value="all">제목+작성자</option>
 			        </select>
 			        <%String keyword = request.getParameter("keyword");%>
@@ -93,14 +96,13 @@
 			        <%}else{%>
 			            <input type="text" name="keyword"> <input type="submit" value="검색">
 			        <%} %>
+			        </form>
 			    </div>
-			    <form action="/views/board/boardWrite.jsp" method="post">
-					<%Member m = (Member) session.getAttribute("member");%>
+			    <form action="/community/free/writeForm.jsp" method="post">
 					<%if (m != null) {%>
 						<input type="submit" value="글쓰기">
 					<%}%>
 				</form>
-				<%=freepage.getPageNavi()%>
 			</div>
 		</div>   
 		<div id="footer">

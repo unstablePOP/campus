@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.campus.board.free.model.service.FreeBoardService;
 import com.campus.board.free.model.service.FreeBoardServiceImpl;
-import com.campus.board.free.model.vo.FreeBoard;
+import com.campus.member.model.vo.Member;
 
 /**
- * Servlet implementation class FreeBoardSelectOneServlt
+ * Servlet implementation class FreeBoardDelete
  */
-@WebServlet(name = "FreeBoardSelectOneServlet", urlPatterns = { "/board/free/selectOne.do" })
-public class FreeBoardSelectOneServlet extends HttpServlet {
+@WebServlet("/board/free/delete.do")
+public class FreeBoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FreeBoardSelectOneServlet() {
+    public FreeBoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +33,19 @@ public class FreeBoardSelectOneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-		System.out.println(freeNo);
+		String userId = ((Member)request.getSession().getAttribute("member")).getUserId();
 		
 		FreeBoardService freebService = new FreeBoardServiceImpl();
-		FreeBoard freeBoard = freebService.freeboardSelectOne(freeNo);
+		int result = freebService.delete(freeNo,userId);
 		
-		if (freeBoard != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/community/free/freepost.jsp");
-			request.setAttribute("freeBoard", freeBoard);
-			view.forward(request, response);
-
-		} else {
-			response.sendRedirect("/community/error/boardError.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/community/free/delete.jsp");
+		
+		if(result>0) {
+			request.setAttribute("deleteResult", true);
+		}else {
+			request.setAttribute("deleteResult", false);
 		}
+		view.forward(request, response);
 	}
 
 	/**

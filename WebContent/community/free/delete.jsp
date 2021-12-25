@@ -7,17 +7,17 @@
 <title>CampUs-자유게시판</title>
 </head>
 <body>
-<%
-	boolean result = (boolean)request.getAttribute("writeResult");
-%>
-
-<script>
+	<%
+	boolean result = (boolean)request.getAttribute("deleteResult");
+	%>
+	
+	<script>
 	<%if(result){ %>
-		alert('글 등록이 완료되었습니다.');
+		alert('글을 삭제하였습니다.');
 	<%}else{ %>
-		alert('글 등록에 실패하였습니다 - 지속적인 문제 발생시 관리자에게 문의해주세요 - ');
+		alert('글 삭제에 실패하였습니다 - 지속적인 문제 발생시 관리자에게 문의해주세요 - ');
 	<%} %>
 	location.replace('/board/free/listAll.do');
-</script>
+	</script>
 </body>
 </html>

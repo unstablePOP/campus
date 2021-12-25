@@ -1,3 +1,5 @@
+<%@page import="com.campus.member.model.vo.Member"%>
+<%@page import="com.campus.board.free.model.vo.FreeBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -17,27 +19,31 @@
     </style>
 </head>
 <body>
+<% 
+	FreeBoard freeBoard = (FreeBoard)request.getAttribute("freeBoard");
+	Member m = (Member)session.getAttribute("member");
+%>
 	<div id="wrap">
         
         <div id="header-wrap">
-            <%@ include file="../../common/include/gnb.jsp" %>
+            <%@ include file="/common/include/gnb.jsp" %>
         </div>
         
         <div id="contents-wrap">
-        <%@ include file="../include/sideNavi.jsp" %>
+        <%@ include file="/community/include/sideNavi.jsp" %>
         <div id="contents">
             
-            <%@ include file="../include/upimg.jsp" %>
+            <%@ include file="/community/include/upimg.jsp" %>
             
             <div id="where">&nbsp&nbsp&nbsp&nbsp 자유게시판</div>
             
             <div id="post-wrap">
                 <div id="post">
                     <div id="title" style="text-align:center">
-                        디스 이즈 제목
+                    	<%= freeBoard.getFreeTitle() %>
                     </div>
                     <div id="postinfo">
-                        작성자: 김뫄뫄 &nbsp 댓글수: &nbsp 추천수:
+                        작성자: <%= freeBoard.getUserId() %> &nbsp 댓글수: &nbsp 추천수: <%= freeBoard.getFreeLike() %> 비추천수: <%= freeBoard.getFreeHate() %> 작성일: <%= freeBoard.getFreeDate() %>
                     </div>
                     <div id="postcontent-wrap">
                         <div id="postaction">
@@ -51,12 +57,19 @@
                             <button><i class="xi-share-alt-o xi-x"></i></button>
                         </div>
                         <div id="postcontent">
-                            헤이 모두들 안녕 내가 누군지 아늬?<br>
-                            이하!늬다! 이하!늬다!<br>
-                            어쩌고 저쩌고<br>
-                            힛띵 마 드럼스 라잌<br>
-                            덤디디데이~<br>
-                            아 랔 더 덜띠 릐듬 유 플레이~<br>
+	                        <%if(m!=null && m.getUserId().equals(freeBoard.getUserId())){ %>
+							<form action="/board/free/postUpdate.do" id="updateForm" method="post">
+								<textarea cols="50" disabled="true"><%= freeBoard.getFreeContent() %></textarea><br>
+								<input type="hidden" name="boardNo" value="<%=freeBoard.getFreeNo()%>"/>
+							</form>
+	
+							<button id="deleteBtn">삭제</button>
+							<button id="updateBtn">수정</button>
+							<button id="cancleBtn" style="display: none;">취소</button>
+							
+							<%}else{ %>
+								<textarea cols="50" disabled="true"><%= freeBoard.getFreeContent() %></textarea><br>
+							<%} %>
                         </div>
                     </div>
                     <div id="comment">
@@ -89,9 +102,33 @@
     </div>
 
 <script>
-    $('#msg').click(function(){
-        $(this).children('ul').children('li').slideToggle(300);
-    })
+	var updateBtnFlag = false;
+	var boardData;
+	$('#updateBtn').click(function(){
+		if(updateBtnFlag==false)
+			{
+				$('#content').prop('disabled',false);
+				$('#updateBtn').text('완료');
+				$('#cancleBtn').css('display','inline');	
+				updateBtnFlag=true;
+				boardData = $('#content').html();
+			}
+		else if(updateBtnFlag==true){
+			$('#updateForm').submit();
+		}
+	});
+	
+	$('#cancleBtn').click(function(){
+		location.replace('/board/free/selectOne.do?freeNo=<%=freeBoard.getFreeNo()%>');
+	});
+	
+	$('#deleteBtn').click(function(){
+		var result = window.confirm("삭제하시겠습니까?");
+		if(result==true)
+		{
+			location.replace("/board/free/delete.do?freeNo=<%=freeBoard.getFreeNo()%>");	
+		}
+	});
 </script>
 </body>
 </html>

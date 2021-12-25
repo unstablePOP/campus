@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CampUs-자유게시판</title>
+<title>CampUs-정보공유게시판</title>
 </head>
 <body>
 <%
@@ -17,7 +17,7 @@
 	<%}else{ %>
 		alert('글 등록에 실패하였습니다 - 지속적인 문제 발생시 관리자에게 문의해주세요 - ');
 	<%} %>
-	location.replace('/board/free/listAll.do');
+	location.replace('/board/info/listAll.do');
 </script>
 </body>
 </html>
