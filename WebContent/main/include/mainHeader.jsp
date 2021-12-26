@@ -136,6 +136,10 @@
 	color: black;
 	text-decoration: none;
 }
+#loginWrap3>a {
+	color: black;
+	text-decoration: none;
+}
 
 .userIcon:hover>.xi-user-o {
 	color: gray;
@@ -191,13 +195,13 @@
 	background-image: url(/main/image/mainlogo/stars.png);
 	border-radius: 70px;
 	margin: -65px 0px;
+	padding:50px 0px;
 }
 
 #mainReservationSearch {
 	width: 100%;
 	height: 60px;
 	text-align: center;
-	padding: 6px 0px;
 }
 
 #areaSearch {
@@ -215,19 +219,6 @@
 	position: absolute;
 	margin: 5px -50px;
 }
-
-#mainReservationIcon {
-	width: 100%;
-	height: 90px;
-	text-align: center;
-}
-
-#mainReservationIcon>a {
-	text-decoration: none;
-	color: white;
-	font-size: 30px;
-	padding: 30px;
-}
 </style>
 </head>
 <body>
@@ -242,33 +233,39 @@
 				<ul>
 					<li><a href="/board/notice/listAll.do">Board</a>
 						<ul class="subBar" id="firstSub">
+<<<<<<< HEAD
 							<li><a href="/board/notice/listAll.do">공지사항</a></li>
 							<li><a href="/board/free/listAll.do">자유 게시판</a></li>
 							<li><a href="/board/info/listAll.do">정보공유</a></li>
 							<li><a href="/board/market/listAll.do">중고장터</a></li>
 							<li><a href="">통합 채팅</a></li>
+=======
+						<li><a href="/community/notice/noticeboard.jsp">공지사항</a></li>
+						<li><a href="/community/free/freeboard.jsp">자유 게시판</a></li>
+						<li><a href="/community/info/infoboard.jsp">정보공유</a></li>
+						<li><a href="/community/market/marketboard.jsp">중고장터</a></li>
+						<li><a href="">통합 채팅</a></li>
+>>>>>>> 689cfbe11c272177dd368f7c333aa1c84d1b5498
 						</ul></li>
-					<li><a href="/reservation/views/resservationMain.jsp">Reservation</a>
+					<li><a href="/reservation/SelectCampingList.do">Reservation</a>
 						<ul class="subBar" id="secondSub">
-							<li><a href="">캠핑 예약</a></li>
-							<li><a href="">날씨 정보</a></li>
+							<li><a href="/reservation/SelectCampingList.do">캠핑 예약</a></li>
 						</ul></li>
-					<li><a href="">MyPage</a>
+					<li><a href="/diary/allView.do">MyPage</a>
 						<ul class="subBar" id="thirdSub">
-							<li><a href="">내 정보 보기</a></li>
-							<li><a href="">다이어리</a></li>
+							<li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
+							<li><a href="/diary/allView.do">다이어리</a></li>
 						</ul></li>
-					<li><a href="">Service</a>
+					<li><a href="/main/service/M_service.jsp">Service</a>
 						<ul class="subBar" id="fourthSub">
-							<li><a href="">FAQ</a></li>
-							<li><a href="">신고센터</a></li>
+							<li><a href="/main/service/M_service.jsp">FAQ</a></li>
 						</ul></li>
 				</ul>
 			</div>
 		<c:choose>
 			<c:when test="${member!=null }">
 				<div id="loginWrap2">
-					<a href="" class="userIcon"><i class="xi-user-o xi-2x"></i>
+					<a href="/userPage/u_main.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
 						${member.userName }</a>님<br> <a href="" class="notes"><i
 						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
 				</div>
@@ -299,17 +296,6 @@
 						id="areaSearch" name="areaSearch"> <input type="image"
 						src="/main/image/search/searchLeaf.png" id="searchLeaf">
 				</form>
-			</div>
-			<div id="mainReservationIcon">
-				<a href=""><img
-					src="/main/image/searchIcon/2camp-removebg-preview.png" alt=""
-					align="middle">Camping</a> <a href=""><img
-					src="/main/image/searchIcon/2glamp-removebg-preview.png" alt=""
-					align="middle">Glamping</a> <a href=""><img
-					src="/main/image/searchIcon/2caravan-removebg-preview.png" alt=""
-					align="middle">Caravan</a> <a href=""><img
-					src="/main/image/searchIcon/2psension-removebg-preview.png" alt=""
-					align="middle">Pension</a>
 			</div>
 		</div>
 	</div>

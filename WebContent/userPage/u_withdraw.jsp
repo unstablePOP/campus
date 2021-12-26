@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -120,17 +121,27 @@
         #btn>input:hover{
             background-color: #A6A6A6;
             color: white;
-            
+            cursor: pointer;
         }
 
     </style>
 </head>
 
+
 <body>
+
     <div id="wrap">
         <div id="header-wrap">
-            <%@ include file="include/u_gnb.html" %>
+            <%@ include file="include/u_gnb.jsp" %>
         </div>
+        
+        <c:if test="${member==null }">
+				<script>
+					location.replace('/main/login/M_Login.jsp');
+				</script>
+		</c:if>
+		
+		
 
         <div id="body">
 
@@ -144,13 +155,15 @@
                 <br>
                 <div id="check-wrap">
                     <div id="check-title">profile check</div>
+                    
+                    <form action="/member/memberWithDraw.do" method="post">
                     <table>
                         <tr>
                             <td>
                                 <div class="form-div">아이디</div>
                             </td>
                             <td>
-                                <input type="text" readonly>
+                                <input type="text" readonly value="${member.userId }">
                             </td>
                         </tr>
                         <tr>
@@ -158,7 +171,7 @@
                                 <div class="form-div">이름</div>
                             </td>
                             <td>
-                                <input type="text" readonly>
+                                <input type="text" readonly value="${member.userName }">
                             </td>
                         </tr>
                         <tr>
@@ -167,21 +180,43 @@
 
                             </td>
                             <td>
-                                <input type="password" id="pass">
+                                <input type="password" id="pass" name="pwd">
                             </td>
                         </tr>
                     </table>
+                    
                 </div>
 				<div id="btn">
-					<input type="submit" value="회원 탈퇴">
+					<input type="submit" value="회원 탈퇴"  id="submitBtn">
 				</div>
-
+				</form>
             </div>
-
-
-
         </div>
     </div>
+    
+    <script>
+    
+    	$('#submitBtn').click(function(){
+    		
+    		if($('#pass').val()=="")
+    		{
+    			alert('비밀번호를 입력해주세요');
+    			$('#pass').focus(); 
+    			return false;
+    		}
+    		if(window.confirm("정말로 캠퍼스를 떠나시겠습니까?") && window.confirm("떠나시면 되돌릴 수 없습니다..TAT \n정말로 떠나시겠습니까..?"))
+    		{
+    			return true;
+    		}else
+    		{
+    			return false;
+    			
+    		}
+    		return false;
+    	});
+    
+    </script>
+    
 </body>
 
 </html>

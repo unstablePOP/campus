@@ -1,19 +1,23 @@
+<%@page import="com.campus.reservation.model.vo.CampingArea" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!--Jquery 라이브러리 & JqueryUI라이브러리-->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-
-
+<!--jQuery UI CSS -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<!--부트스트랩 CSS파일 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CampUS reservation</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <style>
 	div{
@@ -68,6 +72,7 @@
 		height: 50px;
 		margin: 0px auto;
         float: left;
+        margin-top: 1px;
     }
 	#campingAreaList{
 		width: 950px;
@@ -75,8 +80,11 @@
 		margin: 0px auto;
         float: left;
         z-index: 0;
-        
-
+    }
+    table.table{
+    	border:1px solid gray;
+		width: 920px;
+		height:220px;
     }
 	#reservationSelect{
 		width: 300px;
@@ -94,8 +102,8 @@
 		height: 45px;
 		margin: 0px auto;
         float: left;
-        text-align: center;
-     	background-color: #1AAB8A;
+        text-align: left;
+     	background-color: white;
     }
     #serachPanel{
     	width: 300px;
@@ -104,8 +112,8 @@
         float: left;
         text-align : center;
     }
-	#reservationClick{
-	background:#1AAB8A;
+	#reSearch{
+	background:#3e4a56;
 	color:#fff;
 	border:1px solid white;
 	position:relative;
@@ -117,27 +125,27 @@
 	transition:800ms ease all;
 	outline:none;
 	}
-	#reservationClick:hover{
+	#reSearch:hover{
 	  background:#fff;
-	  color:#1AAB8A;
+	  color:#3e4a56;
 	}
-	#reservationClick:before,#reservationClick:after{
+	#reSearch:before,#reSearch:after{
 	  content:'';
 	  position:absolute;
 	  top:0;
 	  right:0;
 	  height:2px;
 	  width:0;
-	  background: #1AAB8A;
+	  background: #3e4a56;
 	  transition:400ms ease all;
 	}
-	#reservationClick:after{
+	#reSearch:after{
 	  right:inherit;
 	  top:inherit;
 	  left:0;
 	  bottom:0;
 	}
-	#reservationClick:hover:before,#reservationClick:hover:after{
+	#reSearch:hover:before,#reSearch:hover:after{
 	  width:100%;
 	  transition:800ms ease all;
 	}
@@ -160,8 +168,98 @@
 	height:20px;	
 }
 
+.modal{ 
+  position:absolute; width:100%; height:100%; background: rgba(255,255,255,0.6); top:0; left:0; display:none;
+}
+
+.modal_content{
+  width:500px; height:900px;
+  background:#fff; border-radius:10px;
+  position:relative; top:20%; left:50%;
+  margin-top:-100px; margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box; padding:74px 0;
+  line-height:23px; cursor:pointer;
+}
+
+.mUpside{
+	width : 500px;
+	height : 650px;
+	background-color: #3e4a56;
+	
+}
+.mImageArea{
+	width : 500px;
+	height : 250px;
+	float: left;
+	
+}
+.mimage{
+	width : 500px;
+	height : 250px;
+	float: left;
+	padding-top: 20px;
+	
+}
+.mAreaInfo{
+	width : 500px;
+	height : 500px;
+	float: left;
+	background-color:#3e4a56;
+}
+.mTitle{
+	width : 500px;
+	height : 50px;
+	float: left;
+	
+}
+.summary{
+	width : 500px;
+	height : 500px;
+	background-color: white;
+	text-align: left;
+}
+
+.mDownside{
+	width : 500px;
+	height : 50px;
+}
+.confirm{
+	width : 500px;
+	height : 50px;
+	color: white;
+	font-weight: bold;	
+	background-color: #3e4a56;
+}
+
+.reservBtn{
+	width : 500px;
+	height : 50px;
+	background-color: #3e4a56;
+	color: white;
+	font-weight: bold;
+	font-size: 14pt;
+	
+}
+.modal_content .layerpop_close {
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent url('./image/btn_exit.png') no-repeat;
+}
+.modal_content .layerpop_close:hover {
+    background: transparent url('./image/btn_exit.png') no-repeat;
+    cursor: pointer;
+}
+#cpNm{
+	font-size: 32px;
+}
 </style>
-  <script type="text/javascript">
+
+<script type="text/javascript">
 	 $(function() {
 		  $( "#from" ).datepicker({
 		         changeMonth: true, 
@@ -196,86 +294,103 @@
    
    
    
-   
-   
 <body>
+<%
+String from="";
 
+if(request.getParameter("from")==null)
+{
+	from="";
+}else {
+	from = request.getParameter("from");
+}
+
+String to="";
+
+if(request.getParameter("to")==null)
+{
+	to="";
+}else {
+	to = request.getParameter("to");
+}
+
+
+	//페이징 처리되어 넘어온 데이터를 가져와야 함
+	HashMap<String, Object> pageDataMap = (HashMap<String, Object>)request.getAttribute("pageDataMap");
+	
+	ArrayList<CampingArea> list = (ArrayList<CampingArea>)pageDataMap.get("list");
+	String pageNavi = (String)pageDataMap.get("pageNavi");
+	int currentPage = (int)request.getAttribute("currentPage");
+	String keyword = (String)request.getAttribute("keyword");
+	String cpNm = "";
+	if(!list.isEmpty()) cpNm = list.get(0).getBusinessName();
+%>
 	<div id="wrapper">
         <div id="header">
-		<%@ include file="/common/include/gnb.html" %></div>
+		<%@ include file="/common/include/gnb.jsp" %></div>
 		<div id="body">
-		    <div id="upSideArea" style = "background: url('../../reservation/image/main/2maintop.jpg') no-repeat 50%">;
-		    
-		    </div>
+		    <div id="upSideArea" style="background: url('../../reservation/image/main/2maintop.jpg') no-repeat 50%;"></div>
 		    <div id="downSideArea">
 		        <div id="campingArea">
+		        
 		            <div id="campingTitle">
 		            	<div class="title">
-		            		<h2> <%="사업자명"%> </h2>
+		            	<span id="cpNm"><%=cpNm %></span>
 		            	</div>
-
 		            </div>
+
 		            <div id="campingAreaList">
-		        		<table class="table table-striped" style="border:1px solid gray; width: 920px; height:220px;">
+		        		<table class="table table-striped">
+<%					
+						if(!list.isEmpty()) {
+							for(CampingArea campingArea:list){
+%>
 							
-							<%for(int i=0; i<1; i++) {%>
+						
 							<tr style="border:1px solid gary;">
-								<td rowspan="5" style="border:1px solid gray; width: 300px;">
-									<button class="btn btn-success btn-sm" >
-									<img id ="likeBtnImg" src="../../reservation/image/main/likeIcon.png">
-									찜!!
-									</button>								
-					
-									<img
-									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
-									
+								<td rowspan="5" style="border:1px solid gray; width: 300px;">						
+									<img src="<%=campingArea.getFilename()%>"/>
 								</td>
 								<td style="border:1px solid gray;">
-								<h5><span class="badge rounded-pill bg-warning text-dark">캠핑</span></h5>
-				
+									<input class="reservBtn" type="button" value="예약하기"/>
+									<button class='likebtn' style='border:0; outline: 0; color:black;'><i class="xi-heart xi-2x"></i></button>
 								</td>
 							</tr>
-							<tr style="border:1px solid gray;">
-								<td style="border:1px solid black;">캠핑사이트명 : 글램핑 강전망</td>
+							<tr style="border:1px solid gray; height: 37px;">
+								
+								<td style="display: inline-block; margin: 4px; padding: 5px 7px; line-height: 1; border-radius: 6px; background: #FFC946;  border: 1px solid #FFC946; color: #fff; text-align: center;  font-size: 13px;">
+								<%=campingArea.getCampType() %></td>
+								
 							</tr>
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;">위치번호 : 침대/온돌형 &캠핑시설 &홍천강 전망(17개동)_3동</td>
+								<td style="border:1px solid gray; font-weight: bold;"><%=campingArea.getCampName() %></td>
 							</tr>													
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;">기준인원 : 2인 (최대인원: 4인)</td>
+								<td style="border:1px solid gray;">기준인원 : <%=campingArea.getCampPo() %>인 (최대인원: <%=campingArea.getCampMaxpo() %>인)</td>
 							</tr>
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;">가격(1박) : 100000 원</td>
+								<td style="border:1px solid gray;">가격(1박) : <%=campingArea.getCampPrice() %></td>
 							</tr>
-							<%} %>
+<%							}
+						}
+%>
 						</table>
-										<div class="board_list_paging" style="text-align:center; ">
-					<img src="../../reservation/image/main/preIcon.png" class="prevnextIcon" alt="이전"> 
-					   <span class="num">               
-					     <a href="" class="on">1</a>
-					     <a href="">2</a>
-					     <a href="">3</a> 
-					     <a href="">4</a> 
-					     <a href="">5</a>
-					    </span>                        
-					    <a href="" class="next">
-					    <img src="../../reservation/image/main/nextIcon.png" class="prevnextIcon"" alt="다음"></a>
-			</div>
+						<%=pageNavi%>
 		            </div>
 		        </div>
 		        <div id="campingInfo">
 
                     <div id="reservationSelect">
                    	<form id="serachPanel" mehtod="get">
-                    	<button type="submit" id="reservationClick">일정 재 검색</button>
+                    	<button type="submit" id="reSearch"><i class="xi-search"></i> 일정 재 검색</button>
 						<br><br>
 						<div class="search">
 						     <label for="form">일정이 언제에요?</label><br>
-						     <input type="text" style="text-align:center" size= 30 id="from" name = "from" readonly/>
+						     <input type="text" style="text-align:center" size= 30 id="from" name = "from" value="<%=from%>" readonly/>
 						</div>
 						<div class="search">
 						     <label for="form">언제까지에요?</label><br>
-						     <input type="text" style="text-align:center" size= 30 id="to" name = "to" readonly />
+						     <input type="text" style="text-align:center" size= 30 id="to" name = "to" value="<%=to%>" readonly />
 						</div>
 					</form>
  				 </div>
@@ -293,9 +408,75 @@
 		</div>
 		<div id="footer"></div>
 	</div>
-
-
-
-
 </body>
+
+<div class="modal">
+  <div class="modal_content">
+  		<div class="mUpside">
+  			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
+			<div class="mImageArea">
+				<div class="mimage">
+					<img src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
+					
+				</div>
+			</div>
+			<div class="mAreaInfo">
+				<div class="mTitle">
+					<h2>00캠핑장</h2>
+				</div>
+				<div class="summary">
+					<form style="font-size : 16pt; left:50px;">
+					
+						숙소이름 : <br><br>
+						체크인 : <br><br>
+						체크아웃 : <br><br>
+						결제금액 : <br><br>
+						예약안내 : <br><br><br>
+						
+						<input type="checkbox" style="zoom:1.5;"/> 숙소이용규칙 및 취소/환불규정 동의 (필수)<br>
+						<input type="checkbox" style="zoom:1.5;"/> 개인정보 수집 및 이용 동의 (필수)<br>
+						<input type="checkbox" style="zoom:1.5;"/> 개인정보 제 3자 제공 동의 (필수)<br>
+						<input type="checkbox" style="zoom:1.5;"/> 만 14세 이상 확인 (필수)<br>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="mDownside">
+			<div>
+				<button type="submit" class="confirm">결제하기</button>
+			</div>
+		</div>
+  </div>
+</div>
+
+
+<script>
+$(function(){ 
+
+  $(".reservBtn").click(function(){
+    $(".modal").fadeIn();
+  });
+  
+  $("#layerbox_close").click(function(){
+	$(".modal").fadeOut();
+  });
+
+  
+});
+</script>
+
+<!-- 좋아요 함수 -->
+<script>
+$(function(){
+	$(".likebtn").click(function(){
+		
+	alert("");
+	
+	});
+});
+
+</script>
+
+
 </html>

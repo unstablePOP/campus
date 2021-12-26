@@ -9,4 +9,28 @@ public interface MemberService {
 
 	Business loginBusiness(String businessId, String businessPwd);
 
+	boolean idCheck(String userId);
+
+	boolean emailCheck(String email);
+
+	int memberJoin(Member m);
+
+	boolean emailCheckB(String email);
+
+	boolean idCheckBusiness(String businessId);
+
+	int businessJoin(Business b);
+
+	String businessIdSearchResult(String businessEmail);
+
+	String userIdSearchResult(String userEmail);
+
+	boolean passwordSearch(String userId, String userEmail);
+
+	boolean passwordSearchB(String businessId, String businessEmail);
+
+	int tmpPassword(String userId, String tmpPwd);
+
+	int tmpPasswordB(String businessId, String tmpPwd);
+
 }

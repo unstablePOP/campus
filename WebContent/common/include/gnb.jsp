@@ -138,6 +138,11 @@
 	text-decoration: none;
 }
 
+#loginWra3>a {
+	color: black;
+	text-decoration: none;
+}
+
 .userIcon:hover>.xi-user-o {
 	color: gray;
 }
@@ -184,26 +189,24 @@
 			<ul>
 				<li><a href="/community/community_index.jsp">Board</a>
 					<ul class="subBar" id="firstSub">
-						<li><a href="">공지사항</a></li>
+						<li><a href="/community/notice/noticeboard.jsp">공지사항</a></li>
 						<li><a href="/community/free/freeboard.jsp">자유 게시판</a></li>
-						<li><a href="/community/free/infoboard.jsp">정보공유</a></li>
-						<li><a href="/community/free/marketboard.jsp">중고장터</a></li>
+						<li><a href="/community/info/infoboard.jsp">정보공유</a></li>
+						<li><a href="/community/market/marketboard.jsp">중고장터</a></li>
 						<li><a href="">통합 채팅</a></li>
 					</ul></li>
-				<li><a href="/reservation/views/resservationMain.jsp">Reservation</a>
+				<li><a href="/reservation/SelectCampingList.do">Reservation</a>
 					<ul class="subBar" id="secondSub">
-						<li><a href="">캠핑 예약</a></li>
-						<li><a href="">날씨 정보</a></li>
+						<li><a href="/reservation/SelectCampingList.do">캠핑 예약</a></li>
 					</ul></li>
-				<li><a href="">MyPage</a>
+				<li><a href="/diary/allView.do">MyPage</a>
 					<ul class="subBar" id="thirdSub">
-						<li><a href="">내 정보 보기</a></li>
-						<li><a href="">다이어리</a></li>
+						<li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
+						<li><a href="/diary/allView.do">다이어리</a></li>
 					</ul></li>
-				<li><a href="">Service</a>
+				<li><a href="/main/service/M_service.jsp">Service</a>
 					<ul class="subBar" id="fourthSub">
-						<li><a href="">FAQ</a></li>
-						<li><a href="">신고센터</a></li>
+						<li><a href="/main/service/M_service.jsp">FAQ</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -211,7 +214,7 @@
 		<c:choose>
 			<c:when test="${member!=null }">
 				<div id="loginWrap2">
-					<a href="" class="userIcon"><i class="xi-user-o xi-2x"></i>
+					<a href="/userPage/u_main.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
 						${member.userName }</a>님<br> <a href="" class="notes"><i
 						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
 				</div>

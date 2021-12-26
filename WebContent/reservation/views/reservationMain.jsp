@@ -1,9 +1,14 @@
+<%@page import="com.campus.reservation.model.vo.CampingArea" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--Jquery 라이브러리 & JqueryUI라이브러리-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
@@ -11,6 +16,9 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <!--부트스트랩 CSS파일 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<!--아이콘CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CampUS reservation</title>
@@ -21,7 +29,7 @@ div {
 }
 #wrapper {
 	width: 1250px;
-	height: 1400px;
+	height: 2000px;
 	margin: 0px auto;
 }
 #header {
@@ -31,7 +39,7 @@ div {
 }
 #body {
 	width: 1250px;
-	height: 1200px;
+	height: 1800px;
 	margin: 0px auto;
 }
 #footer {
@@ -47,31 +55,31 @@ div {
 }
 #contentArea {
 	width: 1250px;
-	height: 900px;
+	height: 1500px;
 }
 #leftArea {
 	width: 900px;
-	height: 900px;
+	height: 1500px;
 	float: left;
 }
 #rightArea {
 	width: 350px;
-	height: 900px;
+	height: 1500px;
 	float: left;
 }
 #weatherArea {
 	width: 350px;
-	height: 450px;
+	height: 780px;
 	float: left;
 	background-color:rgba(220,220,220,0.5);
 }
 #mapArea {
 	width: 350px;
-	height: 450px;
+	height: 700px;
 	float: left;
 }
 #serachPanel {
-	width: 720px;
+	width: 760px;
 	height: 100px;
 	color: white;
 	background-color: rgba(220,220,220,0.2);
@@ -93,7 +101,7 @@ div {
 	height: 40px;
 	font-size: 25px;
 }
-#searchlogo{
+.searchlogo{
 	width:40px;
 	height:40px;
 	margin-bottom: 10px;
@@ -102,11 +110,51 @@ div {
 	width:20px;
 	height:20px;	
 }
+.resultArea{
+	width:100%;
+	height:1200px;	
+}
+
+.cicon{
+	width:100%;
+	height:100%;	
+}
+
+.btn btn-outline-secondary{
+	width:55px;
+	height:50px;
+	text-align: center;	
+}
+.btnArea{
+	width:350px;
+	height:60px;
+	text-align: center;	
+}
+.climateResult{
+	width:350px;
+	height:700px;
+	background-color: #3e4a56;
+	color: white;
+}
+.morebtn{
+	width:350px;
+	height:40px;
+	background-color: #d4dadc;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	
+}
+
+
+
 
 </style>
 </head>
+<!--캠핑장 검색  달력 start-->
 <script type="text/javascript">
 	 $(function() {
+		 weather('Seoul');
+		 
 		  $( "#from" ).datepicker({
 		         changeMonth: true, 
 		         changeYear: true,
@@ -133,11 +181,42 @@ div {
 		  });
 		}); 	 
 </script>
-
+<!--캠핑장 검색  달력 end -->
 <body>
+
+<%
+String from="";
+
+if(request.getParameter("from")==null)
+{
+	from="";
+}else {
+	from = request.getParameter("from");
+}
+
+String to="";
+
+if(request.getParameter("to")==null)
+{
+	to="";
+}else {
+	to = request.getParameter("to");
+}
+	
+	//페이징 처리되어 넘어온 데이터를 가져와야 함
+	HashMap<String, Object> pageDataMap = (HashMap<String, Object>)request.getAttribute("pageDataMap");
+	
+	ArrayList<CampingArea> list = (ArrayList<CampingArea>)pageDataMap.get("list");
+	String pageNavi = (String)pageDataMap.get("pageNavi");
+	int currentPage = (int)request.getAttribute("currentPage");
+//	String keyword = (String)request.getAttribute("keyword");
+	//String cpNm = "";
+%>
+
+
 	<div id="wrapper">
 		<div id="header">
-		<%@ include file="/common/include/gnb.html" %>
+		<%@ include file="/common/include/gnb.jsp" %>
 		</div>
 		<div id="body">
 			<div class="searchArea">
@@ -145,16 +224,14 @@ div {
 					<div class="search">
 					     <label for="form">어디로 가나요?</label><br>
 					     <select name="where" class="form" style="width:150px; height:40px; font-size:20px;">
-							<option value="seoul">서울</option>
-							<option value="gyeonggi">경기도</option>
-							<option value="gangwon">강원도</option>
-							<option value="chungcheongbuk">충청북도</option>
-							<option value="chungcheongnam">충청남도</option>							
-							<option value="jeollabuk">전라북도</option>							
-							<option value="jeollanam">전라남도</option>
-							<option value="gyeongsangbuk">경상북도</option>
-							<option value="gyeongsangnam">경상남도</option>
-							<option value="jeju">제주도</option>
+							<option value="total">전체</option>
+							<option value="gp">가평</option>
+							<option value="gi">경기/인천</option>
+							<option value="gw">강원</option>
+							<option value="cc">충청</option>							
+							<option value="gs">경상</option>							
+							<option value="jl">전라</option>
+							<option value="jj">제주</option>
 						</select>
 					</div>
 					<div class="search">
@@ -168,7 +245,7 @@ div {
 					</div>
 					<br>
 					<div id="searchBTN">
-					     <button type="submit" class="btn btn-outline-light" style="width:100px;, height:30px; font-size:20px; ">검색</button>
+					     <button type="submit" class="btn btn-outline-light" style="width:120px;, height:30px; font-size:20px;"><i class="xi-search"></i> 검색</button>
 					</div>
 				</form>
 					
@@ -176,84 +253,124 @@ div {
 			
 			<div id="contentArea">
 				<div id="leftArea">
-					<div id="resultArea">
+					<div class="resultArea">
 					<br>
-						<h2><img id="searchlogo" src='../../reservation/image/main/select2.png'> 캠핑장 정보</h2>
+						<h2><img class="searchlogo" src='../../reservation/image/main/select2.png'> 캠핑장 정보</h2>
 						
-						<table class="table table-striped" style="border:1px solid black; width: 880px; height:100%; ">
+		        		<table class="table table-striped" style="width:880px;">
+<%					
+						if(!list.isEmpty()) {
+							for(CampingArea campingArea:list){
+%>
 							
-						<%for(int i=0; i<5; i++){%>
-							<tr style="border:1px solid black;">
-													
-								<td rowspan="3" style="border:1px solid black; width: 300px; height: 200px;">
-								
-								
-								<a href ="./campingArea.jsp">상세페이지</a>
-								
-								<img
-									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
-									
-								
+						
+							<tr style="border:1px solid gary;">
+								<td rowspan="4" style="border:1px solid gray; width: 300px;">						
+								<a href="/reservation/SelectCampingAreaList.do?bsnNo=<%=campingArea.getBusinessNo()%>&from=<%=from%>&to=<%=to%>">	<img src="<%=campingArea.getFilename() %>"/></a>
 								</td>
-								<td style="border:1px solid black;">태그</td>
 							</tr>
-							<tr style="border:1px solid black;">
-								<td style="border:1px solid black;">캠핑장명</td>
+							<tr style="border:1px solid gray; height: 15px;">
+								<td style="display: inline-block; margin: 4px; padding: 5px 7px; line-height: 1; border-radius: 6px; background: #FFC946;  border: 1px solid #FFC946; color: #fff; text-align: center;  font-size: 20px;">
+								<%=campingArea.getCampType() %></td>
 							</tr>
-							<tr style="border:1px solid black;">
-								<td style="border:1px solid black;">주소</td>
-							</tr>
-							 
-							 <%}%>
-							
+							<tr style="border:1px solid gray; font-size: 20pt; height:40px;">
+								<td style="border:1px solid gray; font-weight: bold;"><%=campingArea.getBusinessName() %></td>
+							</tr>													
+							<tr style="border:1px solid gray; font-size: 18pt; height:40px;">
+								<td style="border:1px solid gray;">주소 : <%=campingArea.getBusinessAddress() %></td>
+<%							}
+						}
+%>
 						</table>
-						<br>
-				<div class="board_list_paging" style="text-align:center; ">
-					<img src="../../reservation/image/main/preIcon.png" class="prevnextIcon" alt="이전"> 
-					   <span class="num">               
-					     <a href="" class="on">1</a>
-					     <a href="">2</a>
-					     <a href="">3</a> 
-					     <a href="">4</a> 
-					     <a href="">5</a>
-					    </span>                        
-					    <a href="" class="next">
-					    <img src="../../reservation/image/main/nextIcon.png" class="prevnextIcon"" alt="다음"></a>
-			</div>
-					</div>
-				</div>
+					<div style='text-align: center; font-size: 18pt;'>	<%=pageNavi%> </div>
+		            </div>
+		    </div>
+				
 				<div id="rightArea">
-					<div id="weatherArea" style="border:1px solid black;">
-					<h2>날씨영역
-						<button id="nameBtn">버튼</button>
+				<br>
+				
+				<!-- 날씨정보 START -->
+					<h2><img class="searchlogo" src='../../reservation/image/main/select5.png'> 날씨정보</h2></a>
+					<div id="weatherArea">
+						<div class="btn-group" role="group" aria-label="Basic outlined example">
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Seoul');">서울</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Gapyeong');">가평</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Busan');">부산</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Jeju');">제주</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Daegu');">대구</button>
+							<button  type="button" class="btn btn-outline-secondary" onclick="weather('Jeonju');">전주</button>
+						</div>
+						
 						<script>
-							$(function(){
-		
-								//서블릿을 호출하여 String 값을 전달 함
+							function weather(region){
+								var param = {
+												"q" : region,
+												"appid" : "37a03c805de2c4b05a7b17fc4e292a7c",
+												"units" : "metric"
+											};
+										
 								$.ajax({
-									url : "http://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=37a03c805de2c4b05a7b17fc4e292a7c",
-									type : "get",					
+									type : "GET", 
+									url : "http://api.openweathermap.org/data/2.5/forecast",
+									data: param,
 									success : function(data){
-											/* console.log(resp);
-										console.log("현재온도 : "+(resp.main.temp- 273.15));
-										console.log("현재습도 : "+resp.main.humity);
-										console.log("날씨 : "+ resp.weather[0].main);
-										console.log("날씨 이미지 : "+resp.weather[0].icon);
-										console.log("도시이름 : "+resp.name);
-*/
 										
+										$("#weatherTable").html("");
+										for(var i=4; i<= 56; i++) {
+											
+											if(i%6 == 0) {
+												var $minTemp = data.list[i].main.temp_min;
+												var $maxTemp = data.list[i].main.temp_max;
+												var $cDate = data.list[i].dt_txt.substring(0,13)+"시";
+												var $wIcon = data.list[i].weather[0].icon;
+								
+												var strHtml ='<tr>'
+														+'		<td rowspan="3" style="width: 80px; height: 80px; padding-left:15px;">'
+														+'			<div class=cicon" id="cicon"><img src="../../reservation/image/weatherIcon/'+ $wIcon +'.png" /></div>'
+														+'		</td>'
+														+'		<td>'
+														+'			<div class="cDate" style="font-size:13pt; color:yellow; padding-left:26px; ">일자 : '+ $cDate +'</div>'
+														+'		</td>'
+														+'	</tr>'
+														+'	<tr>'
+														+'		<td>'
+														+'			<div class="chightemp" style="font-size:13pt; padding-left:26px;">최고온도 : '+ $maxTemp + ' ℃'+'</div>'
+														+'		</td>'
+														+'	</tr>'
+														+'	<tr style="border-bottom: 1px solid white;">'
+														+'		<td>'
+														+'			<div class="clowtemp" style="font-size:13pt; padding-left:26px;">최저온도 : '+ $minTemp + ' ℃'+'</div>'
+														+'		</td>'
+														+'	</tr>';
+													
+														$("#region").html(region);
+														$("#weatherTable").append(strHtml);
+												}
+										} 
+									}, 
+									error : function(e){
+										alert("지속적인 문제발생시 고객센터에 문의바랍니다.");
 										
-									},
-									error : function(){
-										console.log("서버 전송 실패");
-									},
+									}
 								});
-							});
-						</script>
-					</h2>
+							}
+						</script>	
+						<div class="climateResult">									
+							<span style="font-size: 32px;" id="region"></span>
+							<table class="weatherTable" id="weatherTable" style="width: 350px; height: 80px;"></table>
+						</div>
+
+						<button class="morebtn"> <a style="text-decoration-line: none;" href="https://www.weather.go.kr/w/index.do" ;>더보기</a></button>
 					</div>
+					<!-- 날씨정보 END -->
+					
 					<div id="mapArea">
+
+						<br>
+						<div>
 						<%@ include file="/reservation/views/map.jsp" %>
+						</div>
+					</div>
 					</div>
 		<div id="footer"></div>
 	</div>

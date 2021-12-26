@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -121,7 +122,7 @@
 <body>
     <div id="wrap">
         <div id="header-wrap">
-            <%@include file="/common/include/gnb.html" %>
+            <%@include file="/common/include/gnb.jsp" %>
         </div>
         <div id="bodyWrap">
            <br>
@@ -360,14 +361,37 @@
             <br>
 <%-- 다음 단계 button 부분 --%>
             <div id="nextStepBtnWrap">
-                    <input type="button" value="다음단계" id="nextStepBtn" onclick="location.replace('/main/join/joinCertifiedBusiness.jsp')">
+                    <input type="button" value="다음단계" id="nextStepBtn">
             </div>
         </div>
     </div>
-    <script>
-        $('#GNB>ul>li').hover(function(){
-            $(this).children().children().slideToggle(300);
-        })
-    </script>
+<script>
+		$("#nextStepBtn").click(function(){
+			if(!$("#allCheck").is(':checked')){
+				alert("약관에 모두 동의하셔야합니다.");
+			}else{
+				location.replace('/main/join/joinCertifiedBusiness.jsp')
+			}
+		});
+		
+		$("#allCheck").click(function(){
+			if($(this).is(':checked')){
+				$('.termsCheck').prop('checked',true);
+			}else{
+				$('.termsCheck').prop('checked',false);
+			}
+		});
+		
+		$('.termsCheck').click(function(){
+			var inforTerms = $('#inforTerms').is(':checked');
+			var useTerms = $('#useTerms').is(':checked');
+			if(inforTerms==true && useTerms==true){
+				$('#allCheck').prop('checked',true);
+			}else{
+				$('#allCheck').prop('checked',false);
+			}
+
+		});
+	</script>
 </body>
 </html>

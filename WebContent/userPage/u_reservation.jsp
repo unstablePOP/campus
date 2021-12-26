@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -112,35 +113,32 @@
         }
         
         #fixed-bar{
-            width: 55px;
+             width: 55px;
             height: 290px;
-            background-color: grey;
-            position: fixed; 
-            top:100px; 
-            right:0px;
-            /*
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;*/
+            position: fixed;
+            top: 250px;
+            right: 0px;
             border-radius: 10px;
             padding: 25px 2.5px 25px 2.5px;
             opacity: 0.5;
+            border: 5px solid #D5D5D5;
         }
         #fixed-bar>a{
-            width: 50px;
+            width: 40px;
             height: 50px;
-            color: white;
-            float:left;
+            color: gray;
+            float: left;
             margin: 0 auto;
             text-align: center;
         }
         #fixed-bar>a:hover{
-            color: #4C4C4C;
+            color: #D5D5D5;
         }
          #fixed-bar-move{
             width: 55px;
             height: 20px;
             position: fixed; 
-            top:390px; 
+            top:540px; 
             right:0px;
             opacity: 0.5;
             padding-top: 2px;
@@ -148,16 +146,16 @@
         #fixed-bar-move>a{
             width: 25px;
             height: 25px;
-            background-color: grey;
+            background-color: #D5D5D5;
             color: white;
-            float:left;
+            float: left;
             text-align: center;
             border-radius: 5px;
             margin: 1px;
             padding-top: 5px;
         }
         #fixed-bar-move>a:hover{
-            color: #4C4C4C;
+            color: gray;
         }
 
     </style>
@@ -167,8 +165,21 @@
     <div id="wrap">
        <a name="top"></a>
         <div class="header-wrap">
-            <%@ include file="include/u_gnb.html" %>
+            <%@ include file="include/u_gnb.jsp" %>
         </div>
+        
+        
+
+		<c:choose>
+			<c:when test="${member==null }">
+				<script>
+					location.replace('/main/login/M_Login.jsp');
+				</script>
+			</c:when>
+			
+			<c:otherwise>
+
+        
         <div id="body">
             <div class="reservation-area" >
                 <div class="img-area">
@@ -229,7 +240,7 @@
             <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
             <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
             <a href=""><i class="xi-note-o xi-2x"></i></a>
-            <a href="u_information.jsp"><i class="xi-user-o xi-2x"></i></a>
+            <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
         </div>
         <div id="fixed-bar-move">
         	<a href="#top"><i class="xi-angle-up"></i></a>
@@ -240,6 +251,15 @@
 
 
     </div>
+    
+    
+
+
+	</c:otherwise>
+			
+			
+	</c:choose>
+		
 </body>
 
 </html>
