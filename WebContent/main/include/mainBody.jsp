@@ -79,9 +79,8 @@
 }
 /* 컨텐츠 영역2 */
 #ContentsAreaWrap2 {
-	width: 1142px;
+	width: 1142px; /* 1140px */
 	height: 470px;
-	border:1px solid black;
 }
 #slideInforWrap{
 	width:440px;
@@ -92,8 +91,23 @@
 #slideWrap{
 	width:700px;
 	height:100%;
-	border:1px solid black;
 	float:left;
+	overflow:hidden;
+}
+#slide{
+	width:300%;
+	height:100%;
+	transition: .3s ease-out;
+}
+.slideImgWrap{
+	widht:700px;
+	height:100%;
+	float:left;
+}
+#slideTitle{
+	width:100%;
+	height:20%;
+	border:1px solid black;
 }
 
 /* 컨텐츠 영역3 */
@@ -159,6 +173,7 @@
 .fixedbarContentWrap:last-child {
 	border: none;
 }
+
 </style>
 </head>
 <body>
@@ -196,8 +211,26 @@
 <%-- 컨텐츠 영역 2 --%>
 		<div id="ContentsAreaWrap2">
 			<div id="slideInforWrap">
+				<div id="slideTitle">
+					서울 근처 캠핑장 여기 어때?
+				</div>
+				<div class="slideSubject">
+				</div>
+				<div class="slideSubject">
+				</div>
+				<div class="slideSubject">
+				</div>
+				<div id="slideBtnWrap">
+				<button id="slideLeft">left</button>
+				<button id="slideRight">right</button>
+				</div>
 			</div>
 			<div id="slideWrap">
+				<div id="slide">
+					<div class="slideImgWrap"><img alt="강동 그린웨이" src="/main/image/mainlogo/2강동 그린웨이.jpg"></div>
+					<div class="slideImgWrap"><img alt="도봉산 무수골 캠핑장" src="/main/image/mainlogo/2도봉산 무수골 캠핑장.jpg"></div>
+					<div class="slideImgWrap"><img alt="북한산 캠핑장" src="/main/image/mainlogo/2북한산 캠핑장.jpg"></div>
+				</div>
 			</div>
 		</div>
 <%-- 컨텐츠 영역 3 --%>
@@ -310,6 +343,43 @@
 			$('html').animate({scrollTop:0}, 400);
 			return false;
 		});
+	</script>
+<%-- slide 스크립트 --%>
+	<script>
+	var slideIndex=0;
+	var slideStart
+	$('#slideLeft').click(function(){
+		slideIndex-=1;
+		if(slideIndex<0){
+			slideIndex=2;
+		}
+		var slideMargin = $('#slide').css("margin-left");
+		$('#slide').css("margin-left",slideIndex*-700);
+		clearInterval(x);
+		time();
+	});
+	$('#slideRight').click(function(){
+		slideIndex+=1;
+		if(slideIndex>2){
+			slideIndex=0;
+		}
+		var slideMargin = $('#slide').css("margin-left");
+		$('#slide').css("margin-left",slideIndex*-700);
+		clearInterval(x);
+		time();
+	});
+	$(function(){
+		time();
+	});
+	function time(){
+			slideStart = setInterval(function(){
+			slideIndex+=1;
+			if(slideIndex>2){
+				slideIndex=0;
+			}
+			$('#slide').css("margin-left",slideIndex*-700);
+		}, 3000);
+	}
 	</script>
 </body>
 </html>
