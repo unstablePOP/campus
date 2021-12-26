@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CampUs-정보공유게시판 게시글 작성</title>
+<title>CampUs-공지게시판 게시글 작성</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<style>
-    	<link rel="stylesheet" href="/community/include/post.css">
+    	<link rel="stylesheet" href="../include/post.css">
         #postaction{
             padding-left:63%;
         }
@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-<div id="wrap">
+	<div id="wrap">
         
         <div id="header-wrap">
             <%@ include file="/common/include/gnb.jsp" %>
@@ -30,13 +30,13 @@
 	        <div id="contents">
 	            <%@ include file="/community/include/upimg.jsp" %>
 	            
-	            <div id="where">&nbsp&nbsp&nbsp&nbsp 정보공유게시판</div>
+	            <div id="where">&nbsp&nbsp&nbsp&nbsp 공지게시판</div>
 	            
 	            <div id="post-wrap">
 	                <div id="post">
-		                <form action="/board/info/write.do" method="post">
-			                <textarea rows="1" cols="100" placeholder="제목을 작성하세요"  name="infoTitle"></textarea><br><br>
-							<textarea rows="20" cols="100" placeholder="내용을 작성하세요"  name="infoContent"></textarea><br><br>
+		                <form action="/board/notice/write.do" method="post">
+			                <textarea rows="1" cols="100" placeholder="제목을 작성하세요"  name="noticeTitle"></textarea><br><br>
+							<textarea rows="20" cols="100" placeholder="내용을 작성하세요"  name="noticeContent"></textarea><br><br>
 							<input type="submit" value="완료"> <button type="button" id="backBtn">목록</button> <input type="reset" value="취소" > 
 						</form>
                     </div>
@@ -47,7 +47,7 @@
 <script>
 	$(function(){
 		$('#backBtn').click(function(){
-				window.location.href="/board/info/listAll.do";
+				window.location.href="/board/notice/listAll.do";
 		});
 	});
 </script>

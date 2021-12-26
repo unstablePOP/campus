@@ -1,25 +1,25 @@
-package com.campus.board.market.model.vo;
+package com.campus.board.msg.model.vo;
 
 import java.util.ArrayList;
 
-public class MarketPage {
-	private ArrayList<MarketBoard> pageList = null;
+public class MsgPage {
+	private ArrayList<MsgBoard> pageList = null;
 	private String pageNavi = null;
 	
-	public MarketPage() {
+	public MsgPage() {
 		super();
 	}
-	public MarketPage(ArrayList<MarketBoard> pageList, String pageNavi) {
+	public MsgPage(ArrayList<MsgBoard> pageList, String pageNavi) {
 		super();
 		this.pageList = pageList;
 		this.pageNavi = pageNavi;
 	}
 
-	public ArrayList<MarketBoard> getPageList() {
+	public ArrayList<MsgBoard> getPageList() {
 		return pageList;
 	}
 
-	public void setPageList(ArrayList<MarketBoard> pageList) {
+	public void setPageList(ArrayList<MsgBoard> pageList) {
 		this.pageList = pageList;
 	}
 

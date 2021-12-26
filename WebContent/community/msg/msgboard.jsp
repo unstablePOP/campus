@@ -1,6 +1,15 @@
+<%@page import="com.campus.board.msg.model.vo.MsgPage"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.campus.board.msg.model.vo.MsgBoard"%>
+<%@page import="com.campus.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	MsgPage msgpage=(MsgPage)request.getAttribute("msgpage");
+	ArrayList<MsgBoard> list = msgpage.getPageList();
+	Member m = (Member) session.getAttribute("member");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,40 +77,38 @@
 	<div id="wrap">
             <div id="where">&nbsp&nbsp&nbsp&nbsp 쪽지함</div>
             <div id="search">
-            <!--<%
-                String keyword = request.getParameter("keyword");
-            %>-->
-            <!--<%if(keyword!=null){ %>-->
-                <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
-            <!--<%}else{%>-->
-                <input type="text" name="keyword" value="닉네임을 입력하세"> <input type="submit" value="검색">
-            <!--<%} %>-->
+            <form action="/board/msg/search.do" method="get">
+				<select id="select" name="type">
+			    <option value="msgTitle">제목</option>
+			            <option value="userId">작성자</option>
+			            <option value="all">제목+작성자</option>
+			        </select>
+			        <%String keyword = request.getParameter("keyword");%>
+			        <%if(keyword!=null){ %>
+			            <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
+			        <%}else{%>
+			            <input type="text" name="keyword"> <input type="submit" value="검색">
+			        <%} %>
+			        </form>
             </div>
             <div id="board">
                 
 <table id="table1" style="text-align: center;">
 	<tr>
 		<th>번호</th>
-        <th>작성자</th>
+        <th>수신자</th>
+        <th>발신자</th>
+        <th>제목</th>
 	</tr>
-    <!--<%for(FreeBoard board : list){%>-->
+    <%for(MsgBoard msgboard : list){%>
     <tr>	
-        <td class="no"><!--<%=freeboard.getBoardNo()%>-->1</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>--><a href="">이롸롸</a></td>
+        <td class="no"><%=msgboard.getMsgNo()%></td>
+        <td class="writer"><%=msgboard.getSendId()%></td>
+        <td class="writer"><%=msgboard.getSendId()%></td>
+        <td class="title"><a href="/board/msg/selectOne.do?msgNo=<%=msgboard.getMsgNo()%>"><%=msgboard.getMsgTitle()%></a></td>
+        <td class="date"><%=msgboard.getMsgDate()%></td>
 	</tr>
-    <tr>	
-        <td class="no"><!--<%=freeboard.getBoardNo()%>-->2</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>--><a href="">박솨솨</a></td>
-	</tr>
-    <tr>
-        <td class="no"><!--<%=freeboard.getBoardNo()%>-->3</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>--><a href="">강돠돠</a></td>
-	</tr>
-    <tr>
-        <td class="no"><!--<%=freeboard.getBoardNo()%>-->4</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>--><a href="">최놔놔</a></td>
-	</tr>
-<!--<%}%>-->
+	<%}%>
 </table>
             </div>
     </div>

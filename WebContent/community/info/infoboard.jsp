@@ -19,8 +19,8 @@
 <title>CampUs-정보공유게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<style>
-    	<link rel="stylesheet" href="../include/board.css">
-    	<link rel="stylesheet" href="../include/table.css">
+    	<link rel="stylesheet" href="/community/include/board.css">
+    	<link rel="stylesheet" href="/community/include/table.css">
         #arrange {
             padding-left:60%;
         }

@@ -110,6 +110,9 @@ public class FreeBoardDAO {
 			count=rset.getInt("count");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		return count;
 	}

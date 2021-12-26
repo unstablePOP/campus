@@ -10,7 +10,7 @@
 <title>CampUs-중고장터</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<style>
-    	<link rel="stylesheet" href="../include/post.css">
+    	<link rel="stylesheet" href="/community/include/post.css">
     	#post{
             float:left;
         }
@@ -60,14 +60,14 @@
 	<div id="wrap">
         
         <div id="header-wrap">
-            <%@ include file="../../common/include/gnb.jsp" %>
+            <%@ include file="/common/include/gnb.jsp" %>
         </div>
         
         <div id="contents-wrap">
-        <%@ include file="../include/sideNavi.jsp" %>
+        <%@ include file="/community/include/sideNavi.jsp" %>
         <div id="contents">
             
-            <%@ include file="../include/upimg.jsp" %>
+            <%@ include file="/community/include/upimg.jsp" %>
             
             <div id="where">&nbsp&nbsp&nbsp&nbsp 중고장터</div>
             
@@ -157,12 +157,5 @@
             
         </div>
     </div>
-
-<script>
-    $('#msg').click(function(){
-        $(this).children('ul').children('li').slideToggle(300);
-    })
-</script>
-
 </body>
 </html>

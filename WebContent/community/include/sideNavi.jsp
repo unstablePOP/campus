@@ -53,12 +53,12 @@
     	<div id="listground">
 	        <div>커뮤니티</div>
             <ul>
-                <li><a href="\community\notice\noticeboard.jsp">공지사항</a></li>
+                <li><a href="/board/notice/listAll.do">공지사항</a></li>
    	            <li><a href="/board/free/listAll.do">자유게시판</a></li>
-       	        <li><a href="\community\info\infoboard.jsp">정보공유게시판</a></li>
-           	    <li><a href="\community\market\marketboard.jsp">중고장터</a></li>
+       	        <li><a href="/board/info/listAll.do">정보공유게시판</a></li>
+           	    <li><a href="/board/market/listAll.do">중고장터</a></li>
            	    <li><a href="\">통합채팅</a></li>
-               	<li id="msg">쪽지함<i class="xi-note-o xi-x"></i></li>
+               	<li id="msg"><a href="/community/msg/msgboard.jsp">쪽지함<i class="xi-note-o xi-x"></i></a></li>
            	</ul>
     	</div>
 	</div>

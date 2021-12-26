@@ -10,7 +10,7 @@
 <title>CampUs-정보공유게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<style>
-    	<link rel="stylesheet" href="../include/post.css">
+    	<link rel="stylesheet" href="/community/include/post.css">
         #postaction{
             padding-left:63%;
         }

@@ -1,16 +1,25 @@
+<%@page import="com.campus.board.notice.model.vo.NoticePage"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.campus.board.notice.model.vo.NoticeBoard"%>
+<%@page import="com.campus.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	NoticePage noticepage=(NoticePage)request.getAttribute("noticepage");
+	ArrayList<NoticeBoard> list = noticepage.getPageList();
+	Member m = (Member) session.getAttribute("member");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<title>Insert title here</title>
+<title>CampUs-공지게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<style>
-		<link rel="stylesheet" href="../include/board.css">
+		<link rel="stylesheet" href="/community/include/board.css">
 		#arrange {
             padding-left:80%;
         }
@@ -23,7 +32,8 @@
     		border-top:1px solid black;
 		}
 		.title{
-    		width:60%;border-left:1px solid black;
+    		width:60%;
+    		border-left:1px solid black;
     		border-right:1px solid black;
 		}
 		table a{
@@ -42,14 +52,14 @@
     <div id="wrap">
         
         <div id="header-wrap">
-            <%@ include file="../../common/include/gnb.jsp" %>
+            <%@ include file="/common/include/gnb.jsp" %>
         </div>
         
         <div id="contents-wrap">
-        <%@ include file="../include/sideNavi.jsp" %>
+        <%@ include file="/community/include/sideNavi.jsp" %>
         
         <div id="contents">
-            <%@ include file="../include/upimg.jsp" %>
+            <%@ include file="/community/include/upimg.jsp" %>
             
             <div id="where">&nbsp&nbsp&nbsp&nbsp 공지사항</div>
             
@@ -66,33 +76,35 @@
 		<th>추천</th>
 		<th>작성일</th>
 	</tr>
-	<!--<%for(FreeBoard board : list){%>-->
+	<%for(NoticeBoard noticeboard : list){%>
     <tr>	
-        <td class="no"><!--<%=freeboard.getBoardNo()%>-->g</td>
-        <td class="writer"><!--<%=freeboard.getPostWriterName()%>-->g</td>
-		<td class="title"><!--<%=freeboard.getBoardTitle()%>--><a href="">아무튼 제목</a></td>
-        <td class="like"><!--<%=freeboard.getHeartCount()%>-->baby</td>
-		<td class="date"><!--<%=freeboard.getRegDate()%>-->baby</td>
+        <td class="no"><%=noticeboard.getNoticeNo()%></td>
+        <td class="writer"><%=noticeboard.getUserName()%></td>
+		<td class="title"><a href="/board/notice/selectOne.do?noticeNo=<%=noticeboard.getNoticeNo()%>"><%=noticeboard.getNoticeTitle()%></a></td>
+        <td class="like"><%=noticeboard.getNoticeLike()%></td>
+		<td class="date"><%=noticeboard.getNoticeDate()%></td>
 	</tr>
-<!--<%}%>-->
+	<%}%>
 </table>
 
             </div>
-    <div id="search">
-        <select id="select" name="type">
-            <option value="subject">제목</option>
-            <option value="writer">작성자</option>
-            <option value="all">제목+작성자</option>
+            <%=noticepage.getPageNavi()%>
+    <div id="search" action="/board/notice/search.do" method="get">
+        <select id="select" name="noticeTitle">
+            <option value="userId">작성자</option>
         </select>
-        <%
-            String keyword = request.getParameter("keyword");
-        %>
-        <%if(keyword!=null){ %>
-            <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
-        <%}else{%>
-            <input type="text" name="keyword"> <input type="submit" value="검색">
-        <%} %>
+        <%String keyword = request.getParameter("noticeTitle");%>
+		<%if(keyword!=null){ %>
+			<input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
+		<%}else{%>
+			<input type="text" name="keyword"> <input type="submit" value="검색">
+		<%} %>
     </div>
+    <form action="/community/notice/writeForm.jsp" method="post">
+		<%if (m != null) {%>
+			<input type="submit" value="글쓰기">
+		<%}%>
+	</form>
         </div>
         </div>   
         
@@ -101,6 +113,7 @@
         </div>
         
     </div>
-    
+ 
+ <script src="/community/include/click.js"></script>   
 </body>
 </html>
