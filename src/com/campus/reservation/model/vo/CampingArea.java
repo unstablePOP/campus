@@ -5,6 +5,8 @@ import java.sql.Date;
 public class CampingArea {
 	private int campSeq;
 	private int businessNo;
+	private String businessName;
+	private String businessAddress;
 	private String campNo;
 	private String campName;
 	private String campType;
@@ -16,17 +18,20 @@ public class CampingArea {
 	private String reservNotice;
 	private String reservInfo;
 	private Date regDate;
+	private String filename;
 	
 	public CampingArea() {
 		super();
 	}
 	
-	public CampingArea(int campSeq, int businessNo, String campNo, String campName, String campType, 
+	public CampingArea(int campSeq, String businessName, int businessNo, String businessAddress, String campNo, String campName, String campType, 
 			int campPo, int campMaxpo, long campPrice, String checkin, String checkout, 
-			String reservNotice, String reservInfo, Date regDate) {
+			String reservNotice, String reservInfo, Date regDate, String filename) {
 		
 		super();
 		this.campSeq = campSeq;
+		this.businessName = businessName;
+		this.businessAddress = businessAddress;
 		this.businessNo = businessNo;
 		this.campNo = campNo;
 		this.campName = campName;
@@ -39,6 +44,25 @@ public class CampingArea {
 		this.reservNotice = reservNotice;
 		this.reservInfo = reservInfo;
 		this.regDate = regDate;
+		this.filename = filename;
+	}
+
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getBusinessAddress() {
+		return businessAddress;
+	}
+
+	public void setBusinessAddress(String businessAddress) {
+		this.businessAddress = businessAddress;
 	}
 
 	public int getCampSeq() {
@@ -48,7 +72,13 @@ public class CampingArea {
 	public void setCampSeq(int campSeq) {
 		this.campSeq = campSeq;
 	}
+	public String getBusinessName() {
+		return businessName;
+	}
 
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
 	public int getBusinessNo() {
 		return businessNo;
 	}
