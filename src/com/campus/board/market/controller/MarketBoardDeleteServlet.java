@@ -16,7 +16,7 @@ import com.campus.member.model.vo.Member;
 /**
  * Servlet implementation class MarketBoardDeleteServlet
  */
-@WebServlet("/board/community/delete.do")
+@WebServlet("/board/market/delete.do")
 public class MarketBoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

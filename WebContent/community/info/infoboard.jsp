@@ -18,9 +18,9 @@
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>CampUs-정보공유게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/community/include/board.css">
+<link rel="stylesheet" href="/community/include/table.css">
 	<style>
-    	<link rel="stylesheet" href="/community/include/board.css">
-    	<link rel="stylesheet" href="/community/include/table.css">
         #arrange {
             padding-left:60%;
         }
@@ -42,7 +42,7 @@
             <div id="where">&nbsp&nbsp&nbsp&nbsp 정보공유게시판</div>
             
             <form id="arrange">
-                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot"></i></button><button type="button" id="list2" class="btn1"><i id="titlelist" class="xi-apps"></i></button>
+                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot"></i></button><button type="button" id="list2" class="btn1"><i id="piclist" class="xi-apps"></i></button>
                 <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
             </form>
             
@@ -82,7 +82,7 @@
     <%}%>
 </ul>
             </div>
-            <%=infopage.getPageNavi()%>
+            <div id="page" style="text-align: center;"><%=infopage.getPageNavi()%></div>
     <div id="search">
     	<form action="/board/info/search.do" method="get">
         <select id="select" name="type">

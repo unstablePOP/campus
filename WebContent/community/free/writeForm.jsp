@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CampUs-자유게시판 게시글 작성</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../include/post.css">
 	<style>
-    	<link rel="stylesheet" href="../include/post.css">
         #postaction{
             padding-left:63%;
         }

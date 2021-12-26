@@ -42,7 +42,7 @@
             height:50px;
             padding-top:12px;
         }
-        a{
+        #listground a{
             text-decoration: none;
             color:white;
         }

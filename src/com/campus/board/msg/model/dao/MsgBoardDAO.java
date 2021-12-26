@@ -23,9 +23,9 @@ public class MsgBoardDAO {
 		int end=currentPage*perPage;
 		
 		try {
-			String query="select * from (select row_number() over (order by msg_no desc) as num, * from msgboard"
-					+ "where msg_withdrawal='N' and (send_id=? or receive_id=?))"
-					+ "where num between ? and ?";
+			String query="select * from (select row_number() over (order by msg_no desc) as num, msg.* from msg"
+					+ " where msg_withdrawal='N' and (send_id=? or receive_id=?))"
+					+ " where num between ? and ?";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
@@ -100,7 +100,7 @@ public class MsgBoardDAO {
 		int count=0;
 		
 		try {
-			String query = "select count(*) as count from msgboard where msg_withdrawal='N'";
+			String query = "select count(*) as count from msg where msg_withdrawal='N'";
 			
 			pstmt = conn.prepareStatement(query);
 			
@@ -125,7 +125,7 @@ public class MsgBoardDAO {
 		MsgBoard msgBoard=null;
 		
 		try {
-			String query="select * from msgboard where msg_no=? and msg_withdrawal='N'";
+			String query="select * from msg where msg_no=? and msg_withdrawal='N'";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, msgNo);
@@ -157,7 +157,7 @@ public class MsgBoardDAO {
 		int result = 0;
 		
 		try {
-			String query="update board set msg_withdrawal='Y' where msg_no=? and (send_id=? or receive_id=?)";
+			String query="update msg set msg_withdrawal='Y' where msg_no=? and (send_id=? or receive_id=?)";
 			
 			pstmt = conn.prepareStatement(query);
 			
@@ -181,7 +181,7 @@ public class MsgBoardDAO {
 		int result = 0;
 		
 		try {
-			String query = "insert into msgboard values(msg_bbs.nextval,?,default,?,?,?,default)";
+			String query = "insert into msg values(msg_bbs.nextval,?,default,?,?,?,default)";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, msgBoard.getMsgTitle());
@@ -212,19 +212,19 @@ public class MsgBoardDAO {
 			String query="";
 			switch(type) {
 			case "msgTitle":
-				query="select * from (select row_number() over(order by msg_no desc) as num, * from msgboard"
-						+ "where msg_withdrawal='N' and msg_title like ? and (send_id=? or receive_id=?))"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by msg_no desc) as num, msg.* from msg"
+						+ " where msg_withdrawal='N' and msg_title like ? and (send_id=? or receive_id=?))"
+						+ " where num between ? and ?";
 				break;
 			case "sendId":
-				query="select * from (select row_number() over(order by msg_no desc) as num, * from msgboard"
-						+ "where msg_withdrawal='N' and send_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by msg_no desc) as num, msg.* from msg"
+						+ " where msg_withdrawal='N' and send_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by msg_no desc) as num, * from msgboard"
-						+ "where msg_withdrawal='N' and (msg_title like ? or send_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by msg_no desc) as num, msg.* from msg"
+						+ " where msg_withdrawal='N' and (msg_title like ? or send_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			pstmt = conn.prepareStatement(query);
@@ -316,19 +316,19 @@ public class MsgBoardDAO {
 			String query="";
 			switch(type) {
 			case "msgTitle":
-				query="select * from (select row_number() over(order by msg_no desc) as num, * from msgboard"
-						+ "where msg_withdrawal='N' and msg_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by msg_no desc) as num, msg.* from msg"
+						+ " where msg_withdrawal='N' and msg_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "sendId":
-				query="select * from (select row_number() over(order by msg_no desc) as num, * from msgboard"
-						+ "where msg_withdrawal='N' and send_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by msg_no desc) as num, msg.* from msg"
+						+ " where msg_withdrawal='N' and send_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by msg_no desc) as num, * from msgboard"
-						+ "where msg_withdrawal='N' and (msg_title like ? or send_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by msg_no desc) as num, msg.* from msg"
+						+ " where msg_withdrawal='N' and (msg_title like ? or send_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			

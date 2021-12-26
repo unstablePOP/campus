@@ -18,8 +18,9 @@
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>CampUs-공지게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/community/include/board.css">
+<link rel="stylesheet" href="/community/include/table.css">
 	<style>
-		<link rel="stylesheet" href="/community/include/board.css">
 		#arrange {
             padding-left:80%;
         }
@@ -88,7 +89,7 @@
 </table>
 
             </div>
-            <%=noticepage.getPageNavi()%>
+            <div id="page" style="text-align: center;"><%=noticepage.getPageNavi()%></div>
     <div id="search" action="/board/notice/search.do" method="get">
         <select id="select" name="noticeTitle">
             <option value="userId">작성자</option>

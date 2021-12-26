@@ -23,9 +23,9 @@ public class NoticeBoardDAO {
 		int end=currentPage*perPage;
 		
 		try {
-			String query="select * from (select row_number() over (order by notice_no desc) as num, * from noticeboard"
-					+ "where notice_withdrawal='N')"
-					+ "where num between ? and ?";
+			String query="select * from (select row_number() over (order by notice_no desc) as num, noticeboard.* from noticeboard"
+					+ " where notice_withdrawal='N')"
+					+ " where num between ? and ?";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -236,14 +236,14 @@ public class NoticeBoardDAO {
 			String query="";
 			switch(type) {
 			case "noticeTitle":
-				query="select * from (select row_number() over(order by notice_no desc) as num, * from noticeboard"
-						+ "where notice_withdrawal='N' and notice_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by notice_no desc) as num, noticeboard.* from noticeboard"
+						+ " where notice_withdrawal='N' and notice_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by notice_no desc) as num, * from noticeboard"
-						+ "where notice_withdrawal='N' and notice_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by notice_no desc) as num, noticeboard.* from noticeboard"
+						+ " where notice_withdrawal='N' and notice_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			pstmt = conn.prepareStatement(query);
@@ -325,19 +325,19 @@ public class NoticeBoardDAO {
 			String query="";
 			switch(type) {
 			case "noticeTitle":
-				query="select * from (select row_number() over(order by notice_no desc) as num, * from noticeboard"
-						+ "where notice_withdrawal='N' and notice_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by notice_no desc) as num, noticeboard.* from noticeboard"
+						+ " where notice_withdrawal='N' and notice_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by notice_no desc) as num, * from noticeboard"
-						+ "where notice_withdrawal='N' and user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by notice_no desc) as num, noticeboard.* from noticeboard"
+						+ " where notice_withdrawal='N' and user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by notice_no desc) as num, * from noticeboard"
-						+ "where notice_withdrawal='N' and (notice_title like ? or user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by notice_no desc) as num, noticeboard.* from noticeboard"
+						+ " where notice_withdrawal='N' and (notice_title like ? or user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			

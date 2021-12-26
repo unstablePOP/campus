@@ -23,8 +23,8 @@ public class FreeBoardDAO {
 		int end=currentPage*perPage;
 		
 		try {
-			String query="select * from (select row_number() over (order by free_no desc) as num, * from freeboard"
-					+ "where free_withdrawal='N')"
+			String query="select * from (select row_number() over (order by free_no desc) as num, freeboard.* from freeboard "
+					+ "where free_withdrawal='N') "
 					+ "where num between ? and ?";
 			
 			pstmt = conn.prepareStatement(query);
@@ -235,19 +235,19 @@ public class FreeBoardDAO {
 			String query="";
 			switch(type) {
 			case "freeTitle":
-				query="select * from (select row_number() over(order by free_no desc) as num, * from freeboard"
-						+ "where free_withdrawal='N' and free_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by free_no desc) as num, freeboard.* from freeboard"
+						+ " where free_withdrawal='N' and free_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by free_no desc) as num, * from freeboard"
-						+ "where free_withdrawal='N' and user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by free_no desc) as num, freeboard.* from freeboard"
+						+ " where free_withdrawal='N' and user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by free_no desc) as num, * from freeboard"
-						+ "where free_withdrawal='N' and (free_title like ? or user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by free_no desc) as num, freeboard.* from freeboard"
+						+ " where free_withdrawal='N' and (free_title like ? or user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			pstmt = conn.prepareStatement(query);
@@ -335,17 +335,17 @@ public class FreeBoardDAO {
 			String query="";
 			switch(type) {
 			case "freeTitle":
-				query="select * from (select row_number() over(order by free_no desc) as num, * from freeboard"
+				query="select * from (select row_number() over(order by free_no desc) as num, freeboard.* from freeboard"
 						+ "where free_withdrawal='N' and free_title like ?)"
 						+ "where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by free_no desc) as num, * from freeboard"
+				query="select * from (select row_number() over(order by free_no desc) as num, freeboard.* from freeboard"
 						+ "where free_withdrawal='N' and user_id like ?)"
 						+ "where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by free_no desc) as num, * from freeboard"
+				query="select * from (select row_number() over(order by free_no desc) as num, freeboard.* from freeboard"
 						+ "where free_withdrawal='N' and (free_title like ? or user_id like ?)"
 						+ "where num between ? and ?";
 				break;

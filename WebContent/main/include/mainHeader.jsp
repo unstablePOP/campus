@@ -240,12 +240,12 @@
 			</div>
 			<div id="GNB">
 				<ul>
-					<li><a href="/community/community_index.jsp">Board</a>
+					<li><a href="/board/notice/listAll.do">Board</a>
 						<ul class="subBar" id="firstSub">
-							<li><a href="">공지사항</a></li>
-							<li><a href="">자유 게시판</a></li>
-							<li><a href="">정보공유</a></li>
-							<li><a href="">중고장터</a></li>
+							<li><a href="/board/notice/listAll.do">공지사항</a></li>
+							<li><a href="/board/free/listAll.do">자유 게시판</a></li>
+							<li><a href="/board/info/listAll.do">정보공유</a></li>
+							<li><a href="/board/market/listAll.do">중고장터</a></li>
 							<li><a href="">통합 채팅</a></li>
 						</ul></li>
 					<li><a href="/reservation/views/resservationMain.jsp">Reservation</a>

@@ -18,12 +18,13 @@
             height:100%;
             border-radius:50px;
             float:left;
+            //gnb의 어그뭐냐 사이드바? 암튼 안보임 성학씨가 고쳤다는거 알려주삼.
         }
 	</style>
 </head>
 <body>
 	<div id="cushion">
-	    <img src="../image/board/camper-1845590_1920.jpg"/>
+	    <img src="/community/image/board/camper-1845590_1920.jpg"/>
     </div>
 </body>
 </html>

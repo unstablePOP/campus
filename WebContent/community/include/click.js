@@ -6,6 +6,7 @@ $('#list1').click(function(){
     $('#piclist').css("color","rgb(0, 0, 40)");
     $('#table1').css('display','block');
     $('#table2').css('display','none');
+    
 });
 $('#list2').click(function(){
 	$(this).css("background-color","rgb(0, 0, 40)");
@@ -14,4 +15,7 @@ $('#list2').click(function(){
     $('#titlelist').css("color","rgb(0, 0, 40)");
     $('#table1').css('display','none');
     $('#table2').css('display','block');
+    $('#page').css('float','left');
+    $('#page').css('width','100%');
+    $('#search').css('float','left');
 });

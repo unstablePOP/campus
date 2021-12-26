@@ -23,8 +23,8 @@ public class MarketBoardDAO {
 		int end=currentPage*perPage;
 		
 		try {
-			String query="select * from (select row_number() over (order by market_no desc) as num, * from marketboard)"
-					+ "where num between ? and ?";
+			String query="select * from (select row_number() over (order by market_no desc) as num, marketboard.* from marketboard)"
+					+ " where num between ? and ?";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -253,19 +253,19 @@ public class MarketBoardDAO {
 			String query="";
 			switch(type) {
 			case "marketTitle":
-				query="select * from (select row_number() over(order by market_no desc) as num, * from marketboard"
-						+ "where market_withdrawal='N' and market_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by market_no desc) as num, marketboard.* from marketboard"
+						+ " where market_withdrawal='N' and market_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by market_no desc) as num, * from marketboard"
-						+ "where market_withdrawal='N' and user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by market_no desc) as num, marketboard.* from marketboard"
+						+ " where market_withdrawal='N' and user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by market_no desc) as num, * from marketboard"
-						+ "where market_withdrawal='N' and (market_title like ? or user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by market_no desc) as num, marketboard.* from marketboard"
+						+ " where market_withdrawal='N' and (market_title like ? or user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			pstmt = conn.prepareStatement(query);
@@ -357,19 +357,19 @@ public class MarketBoardDAO {
 			String query="";
 			switch(type) {
 			case "marketTitle":
-				query="select * from (select row_number() over(order by market_no desc) as num, * from marketboard"
-						+ "where market_withdrawal='N' and market_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by market_no desc) as num, marketboard.* from marketboard"
+						+ " where market_withdrawal='N' and market_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by market_no desc) as num, * from marketboard"
-						+ "where market_withdrawal='N' and user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by market_no desc) as num, marketboard.* from marketboard"
+						+ " where market_withdrawal='N' and user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by market_no desc) as num, * from marketboard"
-						+ "where market_withdrawal='N' and (market_title like ? or user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by market_no desc) as num, marketboard.* from marketboard"
+						+ " where market_withdrawal='N' and (market_title like ? or user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			

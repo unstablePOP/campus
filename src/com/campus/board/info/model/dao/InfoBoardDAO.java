@@ -23,9 +23,9 @@ public class InfoBoardDAO {
 		int end=currentPage*perPage;
 		
 		try {
-			String query="select * from (select row_number() over (order by info_no desc) as num, * from infoboard"
-					+ "where info_withdrawal='N')"
-					+ "where num between ? and ?";
+			String query="select * from (select row_number() over (order by info_no desc) as num, infoboard.* from infoboard"
+					+ " where info_withdrawal='N')"
+					+ " where num between ? and ?";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -235,19 +235,19 @@ public class InfoBoardDAO {
 			String query="";
 			switch(type) {
 			case "infoTitle":
-				query="select * from (select row_number() over(order by free_no desc) as num, * from infoboard"
-						+ "where info_withdrawal='N' and info_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by free_no desc) as num, infoboard.* from infoboard"
+						+ " where info_withdrawal='N' and info_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by free_no desc) as num, * from infoboard"
-						+ "where info_withdrawal='N' and user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by free_no desc) as num, infoboard.* from infoboard"
+						+ " where info_withdrawal='N' and user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by free_no desc) as num, * from infoboard"
-						+ "where info_withdrawal='N' and (info_title like ? or user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by free_no desc) as num, infoboard.* from infoboard"
+						+ " where info_withdrawal='N' and (info_title like ? or user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			pstmt = conn.prepareStatement(query);
@@ -335,19 +335,19 @@ public class InfoBoardDAO {
 			String query="";
 			switch(type) {
 			case "freeTitle":
-				query="select * from (select row_number() over(order by info_no desc) as num, * from infoboard"
-						+ "where info_withdrawal='N' and info_title like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by info_no desc) as num, infoboard.* from infoboard"
+						+ " where info_withdrawal='N' and info_title like ?)"
+						+ " where num between ? and ?";
 				break;
 			case "userId":
-				query="select * from (select row_number() over(order by info_no desc) as num, * from infoboard"
-						+ "where info_withdrawal='N' and user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by info_no desc) as num, infoboard.* from infoboard"
+						+ " where info_withdrawal='N' and user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			default:
-				query="select * from (select row_number() over(order by info_no desc) as num, * from infoboard"
-						+ "where info_withdrawal='N' and (info_title like ? or user_id like ?)"
-						+ "where num between ? and ?";
+				query="select * from (select row_number() over(order by info_no desc) as num, infoboard.* from infoboard"
+						+ " where info_withdrawal='N' and (info_title like ? or user_id like ?)"
+						+ " where num between ? and ?";
 				break;
 			}
 			
