@@ -12,20 +12,43 @@ public class CampingAreaServiceImpl implements CampingAreaService{
 	private CampingAreaDAO campingAreaDAO = new CampingAreaDAO();
 	
 	@Override
-	public HashMap<String, Object> selectAllList(int currentPage) {
+	public HashMap<String, Object> selectAllList(int bsnNo, int currentPage) {
 
-		Connection conn = JDBCTemplate.getConnection();
-		
 		int recordCountPerPage = 5;
-		ArrayList<CampingArea> list = campingAreaDAO.selectAllList(conn, currentPage, recordCountPerPage);
-
 		int naviCountPerPage = 5;
 		
-		String pageNavi = campingAreaDAO.getPageNavi(conn, naviCountPerPage, recordCountPerPage, currentPage);
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<CampingArea> list = campingAreaDAO.selectAllList(conn, bsnNo, currentPage, recordCountPerPage);
+		
+		String pageNavi = campingAreaDAO.getPageNavi(conn, bsnNo, naviCountPerPage, recordCountPerPage, currentPage);
 		
 		JDBCTemplate.close(conn);
 		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
+
+		hm.put("list", list);
+		hm.put("pageNavi", pageNavi);
+		
+		return hm;		
+
+	}
+
+	@Override
+	public HashMap<String, Object> selectMainList(int currentPage) {
+		int recordCountPerPage = 5;
+		int naviCountPerPage = 5;
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<CampingArea> list = campingAreaDAO.selectMainList(conn,currentPage, recordCountPerPage);
+		
+		String pageNavi = campingAreaDAO.getMainPageNavi(conn, naviCountPerPage, recordCountPerPage, currentPage);
+		
+		JDBCTemplate.close(conn);
+		
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+
 		hm.put("list", list);
 		hm.put("pageNavi", pageNavi);
 		

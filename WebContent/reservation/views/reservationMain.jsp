@@ -1,3 +1,8 @@
+<%@page import="com.campus.reservation.model.vo.CampingArea" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -107,7 +112,7 @@ div {
 }
 .resultArea{
 	width:100%;
-	height:1500px;	
+	height:1200px;	
 }
 
 .cicon{
@@ -137,7 +142,6 @@ div {
 	background-color: #d4dadc;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-
 	
 }
 
@@ -146,7 +150,7 @@ div {
 
 </style>
 </head>
-<!--캠핑장 검색 일정 달력 -->
+<!--캠핑장 검색  달력 start-->
 <script type="text/javascript">
 	 $(function() {
 		 weather('Seoul');
@@ -177,8 +181,39 @@ div {
 		  });
 		}); 	 
 </script>
-
+<!--캠핑장 검색  달력 end -->
 <body>
+
+<%
+String from="";
+
+if(request.getParameter("from")==null)
+{
+	from="";
+}else {
+	from = request.getParameter("from");
+}
+
+String to="";
+
+if(request.getParameter("to")==null)
+{
+	to="";
+}else {
+	to = request.getParameter("to");
+}
+	
+	//페이징 처리되어 넘어온 데이터를 가져와야 함
+	HashMap<String, Object> pageDataMap = (HashMap<String, Object>)request.getAttribute("pageDataMap");
+	
+	ArrayList<CampingArea> list = (ArrayList<CampingArea>)pageDataMap.get("list");
+	String pageNavi = (String)pageDataMap.get("pageNavi");
+	int currentPage = (int)request.getAttribute("currentPage");
+//	String keyword = (String)request.getAttribute("keyword");
+	//String cpNm = "";
+%>
+
+
 	<div id="wrapper">
 		<div id="header">
 		<%@ include file="/common/include/gnb.jsp" %>
@@ -222,48 +257,35 @@ div {
 					<br>
 						<h2><img class="searchlogo" src='../../reservation/image/main/select2.png'> 캠핑장 정보</h2>
 						
-						<table class="table table-striped" style="border:1px solid black; width: 880px; height:100%; ">
+		        		<table class="table table-striped" style="width:880px;">
+<%					
+						if(!list.isEmpty()) {
+							for(CampingArea campingArea:list){
+%>
 							
-						<%for(int i=0; i<8; i++){%>
-							<tr style="border:1px solid black;">
-													
-								<td rowspan="3" style="border:1px solid black; width: 300px; height: 200px;">
-								
-								
-								<a href ="./campingArea.jsp">상세페이지</a>
-								<img
-									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
-
-								
+						
+							<tr style="border:1px solid gary;">
+								<td rowspan="4" style="border:1px solid gray; width: 300px;">						
+								<a href="/reservation/SelectCampingAreaList.do?bsnNo=<%=campingArea.getBusinessNo()%>&from=<%=from%>&to=<%=to%>">	<img src="<%=campingArea.getFilename() %>"/></a>
 								</td>
-								<td style="border:1px solid black;">태그</td>
 							</tr>
-							<tr style="border:1px solid black;">
-								<td style="border:1px solid black;">캠핑장명</td>
+							<tr style="border:1px solid gray; height: 15px;">
+								<td style="display: inline-block; margin: 4px; padding: 5px 7px; line-height: 1; border-radius: 6px; background: #FFC946;  border: 1px solid #FFC946; color: #fff; text-align: center;  font-size: 20px;">
+								<%=campingArea.getCampType() %></td>
 							</tr>
-							<tr style="border:1px solid black;">
-								<td style="border:1px solid black;">주소</td>
-							</tr>
-							 
-							 <%}%>
-							
+							<tr style="border:1px solid gray; font-size: 20pt; height:40px;">
+								<td style="border:1px solid gray; font-weight: bold;"><%=campingArea.getBusinessName() %></td>
+							</tr>													
+							<tr style="border:1px solid gray; font-size: 18pt; height:40px;">
+								<td style="border:1px solid gray;">주소 : <%=campingArea.getBusinessAddress() %></td>
+<%							}
+						}
+%>
 						</table>
-						<br>
-				<div class="board_list_paging" style="text-align:center; ">
-					<img src="../../reservation/image/main/preIcon.png" class="prevnextIcon" alt="이전"> 
-					   <span class="num">               
-					     <a href="" class="on">1</a>
-					     <a href="">2</a>
-					     <a href="">3</a> 
-					     <a href="">4</a> 
-					     <a href="">5</a>
-					    </span>                        
-					    <a href="" class="next">
-					    <img src="../../reservation/image/main/nextIcon.png" class="prevnextIcon"" alt="다음"></a>
-				</div>
-
-					</div>
-				</div>
+					<div style='text-align: center; font-size: 18pt;'>	<%=pageNavi%> </div>
+		            </div>
+		    </div>
+				
 				<div id="rightArea">
 				<br>
 				
@@ -292,8 +314,10 @@ div {
 									url : "http://api.openweathermap.org/data/2.5/forecast",
 									data: param,
 									success : function(data){
+										
 										$("#weatherTable").html("");
 										for(var i=4; i<= 56; i++) {
+											
 											if(i%6 == 0) {
 												var $minTemp = data.list[i].main.temp_min;
 												var $maxTemp = data.list[i].main.temp_max;
@@ -346,6 +370,7 @@ div {
 						<div>
 						<%@ include file="/reservation/views/map.jsp" %>
 						</div>
+					</div>
 					</div>
 		<div id="footer"></div>
 	</div>

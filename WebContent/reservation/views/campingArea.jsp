@@ -2,8 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,8 +80,11 @@
 		margin: 0px auto;
         float: left;
         z-index: 0;
-        
-
+    }
+    table.table{
+    	border:1px solid gray;
+		width: 920px;
+		height:220px;
     }
 	#reservationSelect{
 		width: 300px;
@@ -214,7 +215,7 @@
 }
 .summary{
 	width : 500px;
-	height : 450px;
+	height : 500px;
 	background-color: white;
 	text-align: left;
 }
@@ -224,25 +225,41 @@
 	height : 50px;
 }
 .confirm{
-	width : 350px;
+	width : 500px;
 	height : 50px;
+	color: white;
+	font-weight: bold;	
+	background-color: #3e4a56;
 }
-.reservCancle{
-	width : 150px;
-	height : 50px;
-}
+
 .reservBtn{
 	width : 500px;
 	height : 50px;
 	background-color: #3e4a56;
 	color: white;
 	font-weight: bold;
-	font-size: 16pt;
+	font-size: 14pt;
+	
 }
-
-
+.modal_content .layerpop_close {
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent url('./image/btn_exit.png') no-repeat;
+}
+.modal_content .layerpop_close:hover {
+    background: transparent url('./image/btn_exit.png') no-repeat;
+    cursor: pointer;
+}
+#cpNm{
+	font-size: 32px;
+}
 </style>
-  <script type="text/javascript">
+
+<script type="text/javascript">
 	 $(function() {
 		  $( "#from" ).datepicker({
 		         changeMonth: true, 
@@ -278,65 +295,87 @@
    
    
 <body>
+<%
+String from="";
+
+if(request.getParameter("from")==null)
+{
+	from="";
+}else {
+	from = request.getParameter("from");
+}
+
+String to="";
+
+if(request.getParameter("to")==null)
+{
+	to="";
+}else {
+	to = request.getParameter("to");
+}
 
 
-
+	//페이징 처리되어 넘어온 데이터를 가져와야 함
+	HashMap<String, Object> pageDataMap = (HashMap<String, Object>)request.getAttribute("pageDataMap");
+	
+	ArrayList<CampingArea> list = (ArrayList<CampingArea>)pageDataMap.get("list");
+	String pageNavi = (String)pageDataMap.get("pageNavi");
+	int currentPage = (int)request.getAttribute("currentPage");
+	String keyword = (String)request.getAttribute("keyword");
+	String cpNm = "";
+	if(!list.isEmpty()) cpNm = list.get(0).getBusinessName();
+%>
 	<div id="wrapper">
         <div id="header">
 		<%@ include file="/common/include/gnb.jsp" %></div>
 		<div id="body">
-		    <div id="upSideArea" style = "background: url('../../reservation/image/main/2maintop.jpg') no-repeat 50%">;
-		    
-		    </div>
+		    <div id="upSideArea" style="background: url('../../reservation/image/main/2maintop.jpg') no-repeat 50%;"></div>
 		    <div id="downSideArea">
 		        <div id="campingArea">
+		        
 		            <div id="campingTitle">
 		            	<div class="title">
-		            		<h2> <%="사업자명"%> </h2>
+		            	<span id="cpNm"><%=cpNm %></span>
 		            	</div>
-
 		            </div>
+
 		            <div id="campingAreaList">
-		        		<table class="table table-striped" style="border:1px solid gray; width: 920px; height:220px;">
+		        		<table class="table table-striped">
+<%					
+						if(!list.isEmpty()) {
+							for(CampingArea campingArea:list){
+%>
 							
-							<%for(int i=0; i<1; i++) {%>
+						
 							<tr style="border:1px solid gary;">
 								<td rowspan="5" style="border:1px solid gray; width: 300px;">						
-					
-									<img
-									src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
-									
+									<img src="<%=campingArea.getFilename()%>"/>
 								</td>
 								<td style="border:1px solid gray;">
-								<input class="reservBtn" type="button" value="예약하기"/>
-								<button class='likebtn' style='border:0; outline: 0; color:black;'><i class="xi-heart xi-2x"></i></button>
+									<input class="reservBtn" type="button" value="예약하기"/>
+									<button class='likebtn' style='border:0; outline: 0; color:black;'><i class="xi-heart xi-2x"></i></button>
+								</td>
+							</tr>
+							<tr style="border:1px solid gray; height: 37px;">
+								
+								<td style="display: inline-block; margin: 4px; padding: 5px 7px; line-height: 1; border-radius: 6px; background: #FFC946;  border: 1px solid #FFC946; color: #fff; text-align: center;  font-size: 13px;">
+								<%=campingArea.getCampType() %></td>
+								
 							</tr>
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid black;"></td>
-							</tr>
-							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;"></td>
+								<td style="border:1px solid gray; font-weight: bold;"><%=campingArea.getCampName() %></td>
 							</tr>													
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;">기준인원 : 2인 (최대인원: 4인)</td>
+								<td style="border:1px solid gray;">기준인원 : <%=campingArea.getCampPo() %>인 (최대인원: <%=campingArea.getCampMaxpo() %>인)</td>
 							</tr>
 							<tr style="border:1px solid gray;">
-								<td style="border:1px solid gray;">가격(1박) : 100000 원</td>
+								<td style="border:1px solid gray;">가격(1박) : <%=campingArea.getCampPrice() %></td>
 							</tr>
-							<%} %>
+<%							}
+						}
+%>
 						</table>
-										<div class="board_list_paging" style="text-align:center; ">
-					<img src="../../reservation/image/main/preIcon.png" class="prevnextIcon" alt="이전"> 
-					   <span class="num">               
-					     <a href="" class="on">1</a>
-					     <a href="">2</a>
-					     <a href="">3</a> 
-					     <a href="">4</a> 
-					     <a href="">5</a>
-					    </span>                        
-					    <a href="" class="next">
-					    <img src="../../reservation/image/main/nextIcon.png" class="prevnextIcon"" alt="다음"></a>
-			</div>
+						<%=pageNavi%>
 		            </div>
 		        </div>
 		        <div id="campingInfo">
@@ -347,11 +386,11 @@
 						<br><br>
 						<div class="search">
 						     <label for="form">일정이 언제에요?</label><br>
-						     <input type="text" style="text-align:center" size= 30 id="from" name = "from" readonly/>
+						     <input type="text" style="text-align:center" size= 30 id="from" name = "from" value="<%=from%>" readonly/>
 						</div>
 						<div class="search">
 						     <label for="form">언제까지에요?</label><br>
-						     <input type="text" style="text-align:center" size= 30 id="to" name = "to" readonly />
+						     <input type="text" style="text-align:center" size= 30 id="to" name = "to" value="<%=to%>" readonly />
 						</div>
 					</form>
  				 </div>
@@ -374,9 +413,11 @@
 <div class="modal">
   <div class="modal_content">
   		<div class="mUpside">
+  			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
 			<div class="mImageArea">
 				<div class="mimage">
 					<img src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
+					
 				</div>
 			</div>
 			<div class="mAreaInfo">
@@ -403,7 +444,7 @@
 		</div>
 		<div class="mDownside">
 			<div>
-				<button type="submit" class="confirm">결제하기</button><button class="reservCancle">취소</button>
+				<button type="submit" class="confirm">결제하기</button>
 			</div>
 		</div>
   </div>
@@ -417,9 +458,10 @@ $(function(){
     $(".modal").fadeIn();
   });
   
-  $(".reservCancle").click(function(){
-    $(".modal").fadeOut();
+  $("#layerbox_close").click(function(){
+	$(".modal").fadeOut();
   });
+
   
 });
 </script>

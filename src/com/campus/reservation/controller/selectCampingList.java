@@ -14,16 +14,16 @@ import com.campus.reservation.model.service.CampingAreaService;
 import com.campus.reservation.model.service.CampingAreaServiceImpl;
 
 /**
- * Servlet implementation class selectCampingAreaList
+ * Servlet implementation class selectCampingList
  */
-@WebServlet("/reservation/SelectCampingAreaList.do")
-public class selectCampingAreaList extends HttpServlet {
+@WebServlet("/reservation/SelectCampingList.do")
+public class selectCampingList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectCampingAreaList() {
+    public selectCampingList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +35,6 @@ public class selectCampingAreaList extends HttpServlet {
 		System.out.println(1);
 		
 		int currentPage;
-		int bsnNo= Integer.parseInt(request.getParameter("bsnNo"));;
-		System.out.println("bsnNo::"+bsnNo);
 		
 		if(request.getParameter("currentPage")==null)
 		{
@@ -47,9 +45,9 @@ public class selectCampingAreaList extends HttpServlet {
 		System.out.println("currentPage::"+currentPage);
 		
 		CampingAreaService campingAreaService = new CampingAreaServiceImpl();
-		HashMap<String, Object> pageDataMap = campingAreaService.selectAllList(bsnNo, currentPage);
+		HashMap<String, Object> pageDataMap = campingAreaService.selectMainList(currentPage);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/reservation/views/campingArea.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/reservation/views/reservationMain.jsp");
 		
 		request.setAttribute("pageDataMap", pageDataMap);
 		request.setAttribute("currentPage", currentPage);
@@ -63,4 +61,5 @@ public class selectCampingAreaList extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
