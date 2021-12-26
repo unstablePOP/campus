@@ -11,14 +11,14 @@
 	<c:if test="${requestScope.frameDeleteResult}">
 		<script>
 		alert('삭제되었습니다.');
-		location.replace('/diary/frameView.do');
+		location.replace('/diary/allView.do');
 			
 		</script>
 	</c:if>
 	<c:if test="${!requestScope.frameDeleteResult}">
 		<script>
 		alert('삭제에 실패하였습니다. -지속적인 문제 발생시 관리자에게 문의해주세요.-');
-		location.replace('/diary/frameView.do');
+		location.replace('/diary/allView.do');
 			
 		</script>
 	</c:if>

@@ -3,15 +3,15 @@ package com.campus.diary.controller;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campus.diary.model.service.FrameService;
-import com.campus.diary.model.service.FrameServiceImpl;
+import com.campus.diary.model.service.DiaryService;
+import com.campus.diary.model.service.DiaryServiceImpl;
 
 /**
  * Servlet implementation class FrameDeleteServlet
@@ -35,13 +35,13 @@ public class FrameDeleteServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		int frameNo = Integer.parseInt(request.getParameter("frameNo"));
-		String imagePath = request.getParameter("imagePath");
+		String imageName = request.getParameter("imageName");
 		
 		//System.out.println(frameNo);
 		//System.out.println(imagePath);
 		
 		
-		FrameService frService = new FrameServiceImpl();
+		DiaryService frService = new DiaryServiceImpl();
 		int result = frService.deleteFrame(frameNo);
 		
 		
@@ -49,12 +49,17 @@ public class FrameDeleteServlet extends HttpServlet {
 		{
 			// 서버에 있는 사진도 삭제해야함
 			
-			File file = new File(imagePath);
-			if(file.exists()) // 파일이 서버에 존재하면 삭제
-			{
-				file.delete();
-			}
+			// 업로드 경로 
+			String uploadImagePath = request.getServletContext().getRealPath("/diary/uploadFrameImage");
 
+			File file = new File(uploadImagePath+ "/" +imageName);
+			//System.out.println(file);
+			if(file.exists()) // 파일이 서버에 존재하면 삭제
+			{						
+				file.delete();
+				//System.out.println("서버 파일 삭제");
+			}
+			//System.out.println("서버 파일 삭제 실패");
 			request.setAttribute("frameDeleteResult", true);
 			response.sendRedirect("/diary/frameDeleteResult.jsp");
 		}

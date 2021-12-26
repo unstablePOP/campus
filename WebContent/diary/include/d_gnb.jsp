@@ -163,10 +163,10 @@
                                 <li><a href="">날씨 정보</a></li>
                             </ul>
                         </li>
-                        <li><a href="/diary/frameView.do">MyPage</a>
+                        <li><a href="/diary/allView.do">MyPage</a>
                             <ul class="subBar" id="thirdSub">
                                 <li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
-                                <li><a href="/diary/frameView.do">다이어리</a></li>
+                                <li><a href="/diary/allView.do">다이어리</a></li>
                             </ul>
                         </li>
                         <li><a href="">Service</a>
