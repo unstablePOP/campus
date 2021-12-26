@@ -79,23 +79,9 @@
 }
 /* 컨텐츠 영역2 */
 #ContentsAreaWrap2 {
-	width: 1142px;
+	width: 100%;
 	height: 470px;
-	border:1px solid black;
 }
-#slideInforWrap{
-	width:440px;
-	height:100%;
-	border:1px solid black;
-	float:left;
-}
-#slideWrap{
-	width:700px;
-	height:100%;
-	border:1px solid black;
-	float:left;
-}
-
 /* 컨텐츠 영역3 */
 #ContentsAreaWrap3 {
 	width: 100%;
@@ -193,14 +179,17 @@
 				</ul>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 2 --%>
+		<%-- 컨텐츠 영역 2 --%>
 		<div id="ContentsAreaWrap2">
-			<div id="slideInforWrap">
+			<div>
+				<img alt="" src="/main/image/mainlogo/Marry.png">
 			</div>
-			<div id="slideWrap">
+			<div>
+			</div>
+			<div>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 3 --%>
+		<%-- 컨텐츠 영역 3 --%>
 		<div id="ContentsAreaWrap3">
 			<div id="infoWrap">
 				<h3
@@ -222,7 +211,7 @@
 				</ul>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 4 --%>
+		<%-- 컨텐츠 영역 4 --%>
 		<div id="ContentsAreaWrap4">
 			<div id="maketWrap">
 				<h3
@@ -244,7 +233,7 @@
 				</ul>
 			</div>
 		</div>
-<%-- fixedBar 영역 --%>
+		<%-- fixedBar 영역 --%>
 			<div id="fixedBar">
 				<div class="fixedbarContentWrap">
 					<a href=""><img alt="" src="/main/image/logo/2user.jpg" id="fixedUserIcon"></a>

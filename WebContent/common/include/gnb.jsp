@@ -32,6 +32,8 @@
 	width: 70%;
 	height: 100%;
 	float: left;
+	position:relative;
+	z-index:1;
 }
 
 #GNB>ul {
