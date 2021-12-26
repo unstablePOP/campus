@@ -1,17 +1,7 @@
-<!--
-날짜 : 21/12/12 
-작성자 : 김재오
-
-1. 대쉬보드 하나를 만들고 그것을 기본으로 다른페이지를 만들어서 한번 수정할때 하나하나 다 수정해야됨..... 시간되면 바꾸고 안되면.....
-
-2/ 색은 원래 기존색에서 우리의 색으로 바꾸다가 실패해서 우선 보류
-
-
-
--->
-<!DOCTYPE html>
-<html lang="en">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -642,5 +632,4 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="./assets/js/material-dashboard.min.js?v=3.0.0"></script>
 </body>
-
 </html>
