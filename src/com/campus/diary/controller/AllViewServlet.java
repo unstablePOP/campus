@@ -10,22 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campus.diary.model.service.FrameService;
-import com.campus.diary.model.service.FrameServiceImpl;
+import com.campus.diary.model.service.DiaryService;
+import com.campus.diary.model.service.DiaryServiceImpl;
+import com.campus.diary.model.vo.Background;
 import com.campus.diary.model.vo.Frame;
+import com.campus.diary.model.vo.Title;
 import com.campus.member.model.vo.Member;
 
 /**
- * Servlet implementation class FrameViewServlet
+ * Servlet implementation class AllViewServlet
  */
-@WebServlet("/diary/frameView.do")
-public class FrameViewServlet extends HttpServlet {
+@WebServlet("/diary/allView.do")
+public class AllViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrameViewServlet() {
+    public AllViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,18 +41,31 @@ public class FrameViewServlet extends HttpServlet {
 			response.sendRedirect("/main/login/M_Login.jsp"); 
 		}else {
 		
-		// 유저 id를 가지고, db에서 본인이 업로드 한 프레임 정보 리스트 가져오기
+		// 유저 id를 가지고, 
+		//db에서 본인이 업로드 한 프레임 정보 리스트, 타이틀, 배경 가져오기
 		
 		String userId = ((Member)request.getSession().getAttribute("member")).getUserId();
-		FrameService frService = new FrameServiceImpl();
-		ArrayList<Frame> list = frService.selectFrameList(userId);
+		DiaryService dService = new DiaryServiceImpl();
+		
+		//프레임 리스트 가져오기
+		ArrayList<Frame> list = dService.selectFrameList(userId);
+		//타이틀 가져오기
+		Title title = dService.selectTitle(userId);
+		//배경 가져오기
+		Background back = dService.selectBackground(userId);
+		
 		
 		//System.out.println(list);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/diary/d_main.jsp");
 		request.setAttribute("list", list);
+		request.setAttribute("title", title);
+		request.setAttribute("background", back);
+		//System.out.println(back);
 		view.forward(request, response);
 		}
+	
+	
 	
 	}
 

@@ -190,14 +190,14 @@
 						<li><a href="/community/market/marketboard.jsp">중고장터</a></li>
 						<li><a href="">통합 채팅</a></li>
 					</ul></li>
-				<li><a href="/reservation/views/reservationMain.jsp">Reservation</a>
+				<li><a href="/reservation/SelectCampingList.do">Reservation</a>
 					<ul class="subBar" id="secondSub">
-						<li><a href="/reservation/views/reservationMain.jsp">캠핑 예약</a></li>
+						<li><a href="/reservation/SelectCampingList.do">캠핑 예약</a></li>
 					</ul></li>
-				<li><a href="/diary/frameView.do">MyPage</a>
+				<li><a href="/diary/allView.do">MyPage</a>
 					<ul class="subBar" id="thirdSub">
 						<li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
-						<li><a href="/diary/frameView.do">다이어리</a></li>
+						<li><a href="/diary/allView.do">다이어리</a></li>
 					</ul></li>
 				<li><a href="/main/service/M_service.jsp">Service</a>
 					<ul class="subBar" id="fourthSub">
