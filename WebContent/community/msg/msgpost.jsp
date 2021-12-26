@@ -47,7 +47,7 @@
                     </div>
                     <div id="postcontent-wrap">
                         <div id="postcontent">
-	                        <%if(m!=null && m.getUserId().equals(msgBoard.getUserId())){ %>
+	                        <%if(m!=null && m.getUserId().equals(msgBoard.getSendId())){ %>
 								<button id="deleteBtn">삭제</button>
 								<button id="cancleBtn" style="display: none;">취소</button>
 							<%}else{ %>

@@ -79,10 +79,10 @@
             <div id="search">
             <form action="/board/msg/search.do" method="get">
 				<select id="select" name="type">
-			    <option value="msgTitle">제목</option>
-			            <option value="userId">작성자</option>
-			            <option value="all">제목+작성자</option>
-			        </select>
+			    	<option value="msgTitle">제목</option>
+			        <option value="userId">작성자</option>
+			        <option value="all">제목+작성자</option>
+			    </select>
 			        <%String keyword = request.getParameter("keyword");%>
 			        <%if(keyword!=null){ %>
 			            <input type="text" name="keyword" value="<%=keyword%>"> <input type="submit" value="검색">
@@ -104,12 +104,18 @@
     <tr>	
         <td class="no"><%=msgboard.getMsgNo()%></td>
         <td class="writer"><%=msgboard.getSendId()%></td>
-        <td class="writer"><%=msgboard.getSendId()%></td>
+        <td class="writer"><%=msgboard.getReceiveId()%></td>
         <td class="title"><a href="/board/msg/selectOne.do?msgNo=<%=msgboard.getMsgNo()%>"><%=msgboard.getMsgTitle()%></a></td>
         <td class="date"><%=msgboard.getMsgDate()%></td>
 	</tr>
 	<%}%>
 </table>
+            <%=msgpage.getPageNavi()%>
+            	<form action="/community/msg/writeForm.jsp" method="post">
+					<%if (m != null) {%>
+						<input type="submit" value="글쓰기">
+					<%}%>
+				</form>
             </div>
     </div>
 </body>

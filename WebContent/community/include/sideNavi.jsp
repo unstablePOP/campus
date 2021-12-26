@@ -58,7 +58,9 @@
        	        <li><a href="/board/info/listAll.do">정보공유게시판</a></li>
            	    <li><a href="/board/market/listAll.do">중고장터</a></li>
            	    <li><a href="\">통합채팅</a></li>
-               	<li id="msg"><a href="/community/msg/msgboard.jsp">쪽지함<i class="xi-note-o xi-x"></i></a></li>
+           	    <% %>
+           	    <!-- 로그인일 때만 작동 -->
+               	<li id="msg"><a href="/board/msg/listAll.do">쪽지함<i class="xi-note-o xi-x"></i></a></li>
            	</ul>
     	</div>
 	</div>
