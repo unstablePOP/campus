@@ -36,7 +36,7 @@
 	}
 	#body{
 		width: 1250px;
-		height: 1000px;
+		height: 1300px;
 		margin: 0px auto;
 		
 	}
@@ -52,18 +52,18 @@
     }
 	#downSideArea{
 		width: 1250px;
-		height: 900px;
+		height: 1200px;
 		margin: 0px auto;
     }
 	#campingArea{
 		width: 950px;
-		height: 900px;
+		height: 1200px;
 		margin: 0px auto;
         float: left;
     }
 	#campingInfo{
 		width: 300px;
-		height: 900px;
+		height: 1200px;
 		margin: 0px auto;
         float: left;
     }
@@ -76,7 +76,7 @@
     }
 	#campingAreaList{
 		width: 950px;
-		height: 700px;
+		height: 1000px;
 		margin: 0px auto;
         float: left;
         z-index: 0;
@@ -196,7 +196,7 @@
 }
 .mimage{
 	width : 500px;
-	height : 250px;
+	height : 220px;
 	float: left;
 	padding-top: 20px;
 	
@@ -256,6 +256,12 @@
 }
 #cpNm{
 	font-size: 32px;
+}
+
+.searchlogo{
+	width:40px;
+	height:40px;
+	margin-bottom: 10px;
 }
 </style>
 
@@ -321,7 +327,6 @@ if(request.getParameter("to")==null)
 	ArrayList<CampingArea> list = (ArrayList<CampingArea>)pageDataMap.get("list");
 	String pageNavi = (String)pageDataMap.get("pageNavi");
 	int currentPage = (int)request.getAttribute("currentPage");
-	String keyword = (String)request.getAttribute("keyword");
 	String cpNm = "";
 	if(!list.isEmpty()) cpNm = list.get(0).getBusinessName();
 %>
@@ -334,12 +339,13 @@ if(request.getParameter("to")==null)
 		        <div id="campingArea">
 		        
 		            <div id="campingTitle">
-		            	<div class="title">
-		            	<span id="cpNm"><%=cpNm %></span>
+		            	<div class="title" style="padding-top: 10px;">
+		            	<img class="searchlogo" src='../../reservation/image/main/select3.png'><span id="cpNm"> <%=cpNm %></span>
 		            	</div>
 		            </div>
-
+					<br>
 		            <div id="campingAreaList">
+		        	<br>
 		        		<table class="table table-striped">
 <%					
 						if(!list.isEmpty()) {
@@ -349,7 +355,7 @@ if(request.getParameter("to")==null)
 						
 							<tr style="border:1px solid gary;">
 								<td rowspan="5" style="border:1px solid gray; width: 300px;">						
-									<img src="<%=campingArea.getFilename()%>"/>
+									<img src="<%=campingArea.getFilename()%>"onerror="this.src='../../reservation/image/main/sample_camping/default_300_200.jpg'"/>
 								</td>
 								<td style="border:1px solid gray;">
 									<input class="reservBtn" type="button" value="예약하기"/>
@@ -375,14 +381,15 @@ if(request.getParameter("to")==null)
 						}
 %>
 						</table>
-						<%=pageNavi%>
-		            </div>
+						<div style='text-align: center; font-size: 18pt;'>	<%=pageNavi%> </div>
+		            	</div>
+		            
 		        </div>
 		        <div id="campingInfo">
 
                     <div id="reservationSelect">
                    	<form id="serachPanel" mehtod="get">
-                    	<button type="submit" id="reSearch"><i class="xi-search"></i> 일정 재 검색</button>
+                    <a href=""><button type="submit" id="reSearch"><i class="xi-search"></i> 일정 재 검색</button></a>
 						<br><br>
 						<div class="search">
 						     <label for="form">일정이 언제에요?</label><br>
@@ -416,18 +423,17 @@ if(request.getParameter("to")==null)
   			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
 			<div class="mImageArea">
 				<div class="mimage">
-					<img src="../../reservation/image/main/sample_camping/default_300_200.jpg"/>
+
 					
 				</div>
 			</div>
 			<div class="mAreaInfo">
 				<div class="mTitle">
-					<h2>00캠핑장</h2>
+		            <span id="cpNm" style="background-color: white; color:#3e4a56;"><%=cpNm %></span>
 				</div>
 				<div class="summary">
-					<form style="font-size : 16pt; left:50px;">
-					
-						숙소이름 : <br><br>
+					<form style="font-size : 16pt; fon">
+						숙소이름 :<br><br>
 						체크인 : <br><br>
 						체크아웃 : <br><br>
 						결제금액 : <br><br>
@@ -437,7 +443,6 @@ if(request.getParameter("to")==null)
 						<input type="checkbox" style="zoom:1.5;"/> 개인정보 수집 및 이용 동의 (필수)<br>
 						<input type="checkbox" style="zoom:1.5;"/> 개인정보 제 3자 제공 동의 (필수)<br>
 						<input type="checkbox" style="zoom:1.5;"/> 만 14세 이상 확인 (필수)<br>
-						
 					</form>
 				</div>
 			</div>
@@ -468,13 +473,14 @@ $(function(){
 
 <!-- 좋아요 함수 -->
 <script>
-$(function(){
 	$(".likebtn").click(function(){
 		
-	alert("");
+	var $likebtn = $(".likebtn");
+	$likebtn.on("click", function(){
+		$likebtn.css("color","red");
+	});
 	
 	});
-});
 
 </script>
 

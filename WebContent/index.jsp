@@ -18,7 +18,7 @@
 
 #wrap {
 	width: 1250px;
-	height: 1920px;
+	height: 2770px;
 	box-sizing: border-box;
 	margin: 0px auto;
 }
@@ -32,6 +32,9 @@
 	width: 100%;
 	height: 1800px;
 }
+#footerWrap{
+	width:1250px;
+}
 </style>
 </head>
 <body>
@@ -41,6 +44,9 @@
 		</div>
 		<div id="bodyWrap">
 			<%@include file="/main/include/mainBody.jsp"%>
+		</div>
+		<div id="footerWrap">
+			<%@include file="/main/include/footer.jsp" %>
 		</div>
 	</div>
 </body>

@@ -223,15 +223,16 @@ if(request.getParameter("to")==null)
 				<form id="serachPanel" mehtod="get">
 					<div class="search">
 					     <label for="form">어디로 가나요?</label><br>
-					     <select name="where" class="form" style="width:150px; height:40px; font-size:20px;">
+					     <select name="location" class="form" style="width:150px; height:40px; font-size:20px;">
 							<option value="total">전체</option>
-							<option value="gp">가평</option>
-							<option value="gi">경기/인천</option>
-							<option value="gw">강원</option>
-							<option value="cc">충청</option>							
-							<option value="gs">경상</option>							
-							<option value="jl">전라</option>
-							<option value="jj">제주</option>
+							<option value="가평">가평</option>
+							<option value="경기">경기</option>
+							<option value="인천">인천</option>
+							<option value="강원">강원</option>
+							<option value="충청">충청</option>							
+							<option value="경상">경상</option>							
+							<option value="전라">전라</option>
+							<option value="제주">제주</option>
 						</select>
 					</div>
 					<div class="search">
@@ -245,7 +246,7 @@ if(request.getParameter("to")==null)
 					</div>
 					<br>
 					<div id="searchBTN">
-					     <button type="submit" class="btn btn-outline-light" style="width:120px;, height:30px; font-size:20px;"><i class="xi-search"></i> 검색</button>
+					  <a href="/reservation/SelectCampingList.do">   <button type="submit" class="btn btn-outline-light" style="width:120px;, height:30px; font-size:20px;"><i class="xi-search"></i> 검색</button></a>
 					</div>
 				</form>
 					
@@ -266,7 +267,7 @@ if(request.getParameter("to")==null)
 						
 							<tr style="border:1px solid gary;">
 								<td rowspan="4" style="border:1px solid gray; width: 300px;">						
-								<a href="/reservation/SelectCampingAreaList.do?bsnNo=<%=campingArea.getBusinessNo()%>&from=<%=from%>&to=<%=to%>">	<img src="<%=campingArea.getFilename() %>"/></a>
+								<a href="/reservation/SelectCampingAreaList.do?bsnNo=<%=campingArea.getBusinessNo()%>&from=<%=from%>&to=<%=to%>">	<img src="<%=campingArea.getFilename() %>"onerror="this.src='../../reservation/image/main/sample_camping/default_300_200.jpg'"/></a>
 								</td>
 							</tr>
 							<tr style="border:1px solid gray; height: 15px;">

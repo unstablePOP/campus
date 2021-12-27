@@ -35,6 +35,7 @@ public class selectCampingList extends HttpServlet {
 		System.out.println(1);
 		
 		int currentPage;
+		String location;
 		
 		if(request.getParameter("currentPage")==null)
 		{
@@ -42,10 +43,21 @@ public class selectCampingList extends HttpServlet {
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		
+
+		if(request.getParameter("location")==null)
+		{
+			location="";
+		}else {
+			location = request.getParameter("location");
+		}
+		
+		
+		System.out.println("location:" +location);
 		System.out.println("currentPage::"+currentPage);
 		
 		CampingAreaService campingAreaService = new CampingAreaServiceImpl();
-		HashMap<String, Object> pageDataMap = campingAreaService.selectMainList(currentPage);
+		HashMap<String, Object> pageDataMap = campingAreaService.selectMainList(currentPage, location);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/reservation/views/reservationMain.jsp");
 		

@@ -86,7 +86,6 @@
 	width:440px;
 	height:100%;
 	float:left;
-	background-color: #fdf7f7;
 }
 #slideWrap{
 	width:700px;
@@ -114,6 +113,9 @@
 	font-size:40px;
 	text-align: center;
 	line-height: 93px;
+	background-color:black;
+	color:white;
+	cursor: pointer;
 }
 #slideBtnWrap{
 	width:100%;
@@ -145,6 +147,7 @@
 	height:30px;
 	border:1px solid black;
 	line-height: 30px;
+	cursor: pointer;
 }
 
 /* 컨텐츠 영역3 */
@@ -398,17 +401,35 @@
 		if(slideIndex<0){
 			slideIndex=2;
 		}
+		clearInterval(slideStart);
 		slideCommon();
+		time();
 	});
 	$('#slideRight').click(function(){
 		slideIndex+=1;
 		if(slideIndex>2){
 			slideIndex=0;
 		}
+		clearInterval(slideStart);
 		slideCommon();
+		time();
+	});
+	$('.slideNo').click(function(){
+		var no = $(this).html();
+		slideIndex=no-1;
+		clearInterval(slideStart);
+		slideCommon();
+		time();
+	});
+	$('.slideSubject').click(function(){
+		var no = $(this).index();
+		slideIndex=no-1;
+		clearInterval(slideStart);
+		slideCommon();
+		time();
 	});
 	$(function(){
-		$('.slsub').eq(0).css('font-weight','bolder');
+		slideCommon();
 		time();
 	});
 	function time(){
@@ -417,16 +438,23 @@
 			if(slideIndex>2){
 				slideIndex=0;
 			}
-			$('#slide').css("margin-left",slideIndex*-700);
-			$('.slsub').css('font-weight',"");
-			$('.slsub').eq(slideIndex).css('font-weight','bolder');
+			slideCommon();
 		}, 3000);
 	}
 	function slideCommon(){
-		clearInterval(slideStart);
 		$('#slide').css("margin-left",slideIndex*-700);
 		$('.slsub').css('font-weight',"");
 		$('.slsub').eq(slideIndex).css('font-weight','bolder');
+		$('.slsub').css('color','white');
+		$('.slsub').eq(slideIndex).css('color','black');
+		$('.slideSubject').css('background-color','black');
+		$('.slideSubject').eq(slideIndex).css('background-color','rgba(220,220,220,0.7)');
+		$('.slideNo').css('border-color','');
+		$('.slideNo').css('color','');
+		$('.slideNo').css('font-weight','');
+		$('.slideNo').eq(slideIndex).css('border-color','#ff5000');
+		$('.slideNo').eq(slideIndex).css('color','#ff5000');
+		$('.slideNo').eq(slideIndex).css('font-weight','bolder');
 	}
 	</script>
 </body>
