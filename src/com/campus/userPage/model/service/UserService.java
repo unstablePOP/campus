@@ -1,6 +1,9 @@
 package com.campus.userPage.model.service;
 
+import java.util.ArrayList;
+
 import com.campus.member.model.vo.Member;
+import com.campus.userPage.model.vo.UserReservation;
 
 public interface UserService {
 
@@ -35,5 +38,34 @@ public interface UserService {
 	 * Descriptrion : userNo 받아서 회원 탈퇴 처리
 	 */
 	int deleteOneMember(int userNo);
+
+	/**
+	 * 작성자 : yeonhee
+	 * @return UserReservation
+	 * 작성일 : 2021. 12. 27.
+	 * 
+	 * Descriptrion : userId 예약 정보 가져오기
+	 */
+	UserReservation selectReservation(String userId);
+
+	/**
+	 * 작성자 : yeonhee
+	 * @param userId
+	 * @return ArrayList<UserReservation>
+	 * 작성일 : 2021. 12. 27.
+	 * 
+	 * Descriptrion : userId의 모든 유효한 예약 정보 가져오기
+	 */
+	ArrayList<UserReservation> selectAllReservationN(String userId);
+
+	/**
+	 * 작성자 : yeonhee
+	 * @param userId
+	 * @return ArrayList<UserReservation>
+	 * 작성일 : 2021. 12. 27.
+	 * 
+	 * Descriptrion : userId의 모든 종료된 예약 정보 가져오기
+	 */
+	ArrayList<UserReservation> selectAllReservationY(String userId);
 
 }

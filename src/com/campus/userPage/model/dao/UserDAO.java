@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.campus.common.JDBCTemplate;
 import com.campus.member.model.vo.Member;
+import com.campus.userPage.model.vo.UserReservation;
 
 public class UserDAO {
 
@@ -106,6 +108,184 @@ public class UserDAO {
 		}
 		
 		return result;
+	}
+
+	public UserReservation selectReservation(String userId, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		UserReservation uReser = null;
+		
+		String query="SELECT business_name, camp.camp_no, camp_type, reserv_sta, reserv_end,  " + 
+					"		checkin, checkout, user_id, reserv_no, business_address, file_name, path  " + 
+					"FROM CAMP " + 
+					"	LEFT JOIN RESERVATION ON (RESERVATION.CAMP_NO = CAMP.CAMP_NO) " + 
+					"	LEFT JOIN BUSINESS ON (BUSINESS.BUSINESS_NO = CAMP.BUSINESS_NO)  " + 
+					"	LEFT JOIN CAMPIMG ON (CAMPIMG.CAMP_SEQ = CAMP.CAMP_SEQ) " + 
+					"WHERE USER_ID = ? AND RESERVATION.DEL_YN='N' AND END_YN='N' " + 
+					"        AND business_no IN (SELECT BUSINESS_NO FROM RESERVATION WHERE USER_ID= ? AND END_YN='N' ) "+
+					"ORDER BY RESERV_STA";
+				
+				
+				
+				
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			//System.out.println(rset.next());
+			
+			
+			if(rset.next())
+			{
+				uReser = new UserReservation();
+				uReser.setBusinessName(rset.getString("business_name"));
+				uReser.setCampNo(rset.getString("camp_no"));
+				uReser.setCampType(rset.getString("camp_type"));
+				uReser.setReservSta(rset.getInt("reserv_sta"));
+				uReser.setReservEnd(rset.getInt("reserv_end"));
+				uReser.setCheckin(rset.getString("checkin"));
+				uReser.setCheckout(rset.getString("checkout"));
+				uReser.setUserId(rset.getString("user_id"));
+				uReser.setReservNo(rset.getString("reserv_no"));
+				uReser.setBusinessAddress(rset.getString("business_address"));
+				uReser.setFileName(rset.getString("file_name"));
+				uReser.setPath(rset.getString("path"));
+				
+			}
+			//System.out.println(uReser);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return uReser;
+	}
+
+	public ArrayList<UserReservation> selectAllReservationN(String userId, Connection conn) {
+			
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<UserReservation> list = new ArrayList<UserReservation>();
+		
+		String query="SELECT business_name, camp.camp_no, camp_type, reserv_sta, reserv_end,  " + 
+				"		checkin, checkout, user_id, reserv_no, business_address, file_name, path  " + 
+				"FROM CAMP " + 
+				"	LEFT JOIN RESERVATION ON (RESERVATION.CAMP_NO = CAMP.CAMP_NO) " + 
+				"	LEFT JOIN BUSINESS ON (BUSINESS.BUSINESS_NO = CAMP.BUSINESS_NO)  " + 
+				"	LEFT JOIN CAMPIMG ON (CAMPIMG.CAMP_SEQ = CAMP.CAMP_SEQ) " + 
+				"WHERE USER_ID = ? AND RESERVATION.DEL_YN='N' AND END_YN='N' " + 
+				"        AND business_no IN (SELECT BUSINESS_NO FROM RESERVATION WHERE USER_ID= ? AND END_YN='N' ) "+
+				"ORDER BY RESERV_STA";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				UserReservation uReser = new UserReservation();
+				uReser.setBusinessName(rset.getString("business_name"));
+				uReser.setCampNo(rset.getString("camp_no"));
+				uReser.setCampType(rset.getString("camp_type"));
+				uReser.setReservSta(rset.getInt("reserv_sta"));
+				uReser.setReservEnd(rset.getInt("reserv_end"));
+				uReser.setCheckin(rset.getString("checkin"));
+				uReser.setCheckout(rset.getString("checkout"));
+				uReser.setUserId(rset.getString("user_id"));
+				uReser.setReservNo(rset.getString("reserv_no"));
+				uReser.setBusinessAddress(rset.getString("business_address"));
+				uReser.setFileName(rset.getString("file_name"));
+				uReser.setPath(rset.getString("path"));
+				
+				list.add(uReser);
+				
+			}
+			//System.out.println(uReser);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return list;
+		
+	}
+
+	public ArrayList<UserReservation> selectAllReservationY(String userId, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<UserReservation> list = new ArrayList<UserReservation>();
+		
+		String query="SELECT business_name, camp.camp_no, camp_type, reserv_sta, reserv_end,  " + 
+				"		checkin, checkout, user_id, reserv_no, business_address, file_name, path  " + 
+				"FROM CAMP " + 
+				"	LEFT JOIN RESERVATION ON (RESERVATION.CAMP_NO = CAMP.CAMP_NO) " + 
+				"	LEFT JOIN BUSINESS ON (BUSINESS.BUSINESS_NO = CAMP.BUSINESS_NO)  " + 
+				"	LEFT JOIN CAMPIMG ON (CAMPIMG.CAMP_SEQ = CAMP.CAMP_SEQ) " + 
+				"WHERE USER_ID = ? AND RESERVATION.DEL_YN='N' AND END_YN='Y' " + 
+				"        AND business_no IN (SELECT BUSINESS_NO FROM RESERVATION WHERE USER_ID= ? AND END_YN='Y' ) "+
+				"ORDER BY RESERV_STA desc";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				UserReservation uReser = new UserReservation();
+				uReser.setBusinessName(rset.getString("business_name"));
+				uReser.setCampNo(rset.getString("camp_no"));
+				uReser.setCampType(rset.getString("camp_type"));
+				uReser.setReservSta(rset.getInt("reserv_sta"));
+				uReser.setReservEnd(rset.getInt("reserv_end"));
+				uReser.setCheckin(rset.getString("checkin"));
+				uReser.setCheckout(rset.getString("checkout"));
+				uReser.setUserId(rset.getString("user_id"));
+				uReser.setReservNo(rset.getString("reserv_no"));
+				uReser.setBusinessAddress(rset.getString("business_address"));
+				uReser.setFileName(rset.getString("file_name"));
+				uReser.setPath(rset.getString("path"));
+				
+				list.add(uReser);
+				
+			}
+			//System.out.println(uReser);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return list;
 	}
 
 }
