@@ -76,7 +76,7 @@
     <li>
         <a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><img src="../image/merch/griddle.png"/></a>
         <dl>
-            <dt><a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%></a>[댓글]</dt>
+            <dt><a href="/board/free/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%></a>[댓글]</dt>
             <dd><div><%=freeboard.getUserId()%></div></dd>
             <dd><span><%=freeboard.getFreeDate()%></span><br>
             <span>조회수 <%=freeboard.getFreeHit()%></span>&nbsp&nbsp&nbsp<span>추천수 <%=freeboard.getFreeLike()%></span></dd>
@@ -101,7 +101,7 @@
 			        <%} %>
 			        </form>
 			    </div>
-			    <form action="/community/free/writeForm.jsp" method="post">
+			    <form action="/community/free/writeForm.jsp?currentPage=<%=request.getAttribute("currentPage") %>" method="post">
 					<%if (m != null) {%>
 						<input type="submit" value="글쓰기">
 					<%}%>

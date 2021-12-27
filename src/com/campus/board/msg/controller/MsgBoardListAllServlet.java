@@ -46,6 +46,7 @@ public class MsgBoardListAllServlet extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher("/community/msg/msgboard.jsp");
 		request.setAttribute("msgpage", page);
+		request.setAttribute("currentPage", currentPage);
 		view.forward(request,response);
 	}
 

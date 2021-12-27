@@ -59,7 +59,7 @@
                         <div id="postcontent">
 	                        <%if(m!=null && m.getUserId().equals(freeBoard.getUserId())){ %>
 							<form action="/board/free/postUpdate.do" id="updateForm" method="post">
-								<textarea cols="50" disabled="true"><%= freeBoard.getFreeContent() %></textarea><br>
+								<textarea width="612px" cols="50" disabled="true"><%= freeBoard.getFreeContent() %></textarea><br>
 								<input type="hidden" name="boardNo" value="<%=freeBoard.getFreeNo()%>"/>
 							</form>
 	
@@ -88,8 +88,8 @@
 </table>
                     </div>
                     <div id="back">
-                        <a href=""><img src="../image/common/back.png"/>이전 글</a>&nbsp&nbsp&nbsp<a src="">다음 글<img  src="../image/common/front.png"/></a><br>
-                        <a href="">목록으로</a>
+                        <a href=""><img src="/community/image/common/back.png"/>이전 글</a>&nbsp&nbsp&nbsp<a src="">다음 글<img  src="../image/common/front.png"/></a><br>
+                        <a href="/board/free/listAll.do?currentPage=<%=request.getAttribute("currentPage")%>">목록으로</a>
                     </div>
                 </div>
             </div>

@@ -44,6 +44,7 @@ public class NoticeBoardListAllServlet extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher("/community/notice/noticeboard.jsp");
 		request.setAttribute("noticepage", page);
+		request.setAttribute("currentPage", currentPage);
 		view.forward(request,response);
 	}
 

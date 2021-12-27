@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div id="back">
-                        <a href="">목록으로</a>
+                        <a href="/board/msg/listAll.do?currentPage=<%=request.getAttribute("currentPage")%>">목록으로</a>
                     </div>
                 </div>
             </div>
