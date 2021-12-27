@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.omg.CORBA.IMP_LIMIT;
 
-import com.campus.diary.model.service.FrameService;
-import com.campus.diary.model.service.FrameServiceImpl;
+import com.campus.diary.model.service.DiaryService;
+import com.campus.diary.model.service.DiaryServiceImpl;
 import com.campus.diary.model.vo.Frame;
 import com.campus.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -98,7 +98,7 @@ public class FrameUploadServlet extends HttpServlet {
 		System.out.println(imagePath.length());
 		System.out.println(frameTitle.length());
 		*/
-		System.out.println(imagePath);
+		//System.out.println(imagePath);
 
 		Frame fr = new Frame();
 		fr.setUserId(userId);
@@ -107,7 +107,7 @@ public class FrameUploadServlet extends HttpServlet {
 		fr.setFrameTitle(frameTitle);
 		fr.setFrameDate(frameDate);
 		
-		FrameService fService = new FrameServiceImpl();
+		DiaryService fService = new DiaryServiceImpl();
 		int result = fService.insertFrameUpload(fr);
 		
 		

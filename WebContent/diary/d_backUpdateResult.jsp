@@ -9,14 +9,14 @@
 <body>
 
 <%
-	boolean result = (boolean)request.getAttribute("result");
+	boolean result = (boolean)request.getAttribute("backUpdateResult");
 %>
 
 	<script>
 		<%if(result){%>
-			alert('업로드 되었습니다.');
+			alert('배경화면이 변경 되었습니다.');
 		<%}else{%>
-			alert('업로드 실패!! -지속저인 문제 발생 시 관리자에게 문의해주세요 -');
+			alert('변경 실패!! -지속저인 문제 발생 시 관리자에게 문의해주세요 -');
 		<%}%>
 		location.replace('/diary/allView.do');
 	</script>
