@@ -204,7 +204,6 @@ h3>a{
 	height: 200px;
 	display: none;
 	border-radius: 10px;
-	opacity: 0.5;
 	padding:2.5px;
 	padding-top:25px;
    	border: 5px solid #D5D5D5;
@@ -227,11 +226,6 @@ h3>a{
 .fixedbarContentWrap>a:hover{
  	color: #D5D5D5;
  }
-
-.fixedbarContentWrap img {
-	cursor: pointer;
-}
-
 </style>
 </head>
 <body>
