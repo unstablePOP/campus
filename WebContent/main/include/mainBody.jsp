@@ -87,6 +87,7 @@
 	height:100%;
 	border:1px solid black;
 	float:left;
+	background-color: #fdf7f7;
 }
 #slideWrap{
 	width:700px;
@@ -107,8 +108,29 @@
 #slideTitle{
 	width:100%;
 	height:20%;
-	border:1px solid black;
 }
+.slideSubject{
+	width:100%;
+	height:20%;
+	font-size:40px;
+	text-align: center;
+	line-height: 93px;
+}
+#slideBtnWrap{
+	width:100%;
+	height:20%;
+	border:1px solid black;
+	text-align:center;
+	font-size:25px;
+	background-color: white;
+}
+.slBtn{
+	border:none;
+	background-color: white;
+	cursor: pointer;
+}
+
+
 
 /* 컨텐츠 영역3 */
 #ContentsAreaWrap3 {
@@ -212,17 +234,25 @@
 		<div id="ContentsAreaWrap2">
 			<div id="slideInforWrap">
 				<div id="slideTitle">
-					서울 근처 캠핑장 여기 어때?
+					<img alt="" src="/main/image/mainlogo/slideTitle.png">
 				</div>
 				<div class="slideSubject">
+					<span class="slsub">글램 인스타</span>
 				</div>
 				<div class="slideSubject">
+					<span class="slsub">솔잎향 캠핑 파크</span>
 				</div>
 				<div class="slideSubject">
+					<span class="slsub">밀양 189</span>
 				</div>
 				<div id="slideBtnWrap">
-				<button id="slideLeft">left</button>
-				<button id="slideRight">right</button>
+					<div class="slideBtnWrapIn"><button id="slideLeft" class="slBtn"><img src="/main/image/logo/2back.jpg"></button></div>
+					<div id="slideNoWrap" class="slideBtnWrapIn">
+					<span class="slideNo">1</span>
+					<span class="slideNo">2</span>
+					<span class="slideNo">3</span>
+					</div>
+					<div class="slideBtnWrapIn"><button id="slideRight" class="slBtn"><img src="/main/image/logo/2next.jpg"></button></div>
 				</div>
 			</div>
 			<div id="slideWrap">
@@ -353,22 +383,17 @@
 		if(slideIndex<0){
 			slideIndex=2;
 		}
-		var slideMargin = $('#slide').css("margin-left");
-		$('#slide').css("margin-left",slideIndex*-700);
-		clearInterval(x);
-		time();
+		slideCommon();
 	});
 	$('#slideRight').click(function(){
 		slideIndex+=1;
 		if(slideIndex>2){
 			slideIndex=0;
 		}
-		var slideMargin = $('#slide').css("margin-left");
-		$('#slide').css("margin-left",slideIndex*-700);
-		clearInterval(x);
-		time();
+		slideCommon();
 	});
 	$(function(){
+		$('.slsub').eq(0).css('font-weight','bolder');
 		time();
 	});
 	function time(){
@@ -378,7 +403,16 @@
 				slideIndex=0;
 			}
 			$('#slide').css("margin-left",slideIndex*-700);
+			$('.slsub').css('font-weight',"");
+			$('.slsub').eq(slideIndex).css('font-weight','bolder');
 		}, 3000);
+	}
+	function slideCommon(){
+		$('#slide').css("margin-left",slideIndex*-700);
+		clearInterval(slideStart);
+		$('.slsub').css('font-weight',"");
+		$('.slsub').eq(slideIndex).css('font-weight','bolder');
+		setTimeout(time, 3000);
 	}
 	</script>
 </body>
