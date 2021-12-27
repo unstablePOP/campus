@@ -261,17 +261,17 @@
 				</ul>
 			</div>
 		<c:choose>
+			<c:when test="${business!=null }">
+				<div id="loginWrap3">
+					<a href="/admin/dashboard/index.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
+						${business.businessName }</a>님<br> <a href="/admin/dashboard/index.jsp" class="notes"><i
+						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
+				</div>
+			</c:when>
 			<c:when test="${member!=null }">
 				<div id="loginWrap2">
 					<a href="/userPage/userPage.do" class="userIcon"><i class="xi-user-o xi-2x"></i>
 						${member.userName }</a>님<br> <a href="" class="notes"><i
-						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
-				</div>
-			</c:when>
-			<c:when test="${business!=null }">
-				<div id="loginWrap3">
-					<a href="" class="userIcon"><i class="xi-user-o xi-2x"></i>
-						${business.businessName }</a>님<br> <a href="" class="notes"><i
 						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
 				</div>
 			</c:when>
