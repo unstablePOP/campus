@@ -50,7 +50,7 @@ public class InfoBoardUpdateServlet extends HttpServlet {
 			response.sendRedirect("/board/info/selectOne.do?infoNo="+infoNo);
 		}else
 		{
-			response.sendRedirect("/community/info/error.jsp");
+			response.sendRedirect("/main/error/error.jsp");
 		}
 	}
 

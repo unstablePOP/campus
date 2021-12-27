@@ -21,8 +21,7 @@
 	<style>
         *{box-sizing: border-box;}
         #wrap{
-            width: 300px;
-            width: 300px;
+            width:100%;
             margin: 0px auto;
         }
         #where{
@@ -59,12 +58,24 @@
         td:first-of-type{
             border-right: solid 1px rgb(0, 0, 40);
         }
+        .no{
+        	width:8%;
+        }
+        .writer{
+        	width:10%;
+        }
+        .title{
+        	width:60%;
+        }
         a{
             text-decoration:none;
             color:black;
         }
         .writer:hover>a{
             text-decoration:underline;
+        }
+        #page{
+        	margin-top:30px;
         }
         #search{
             width:100%;
@@ -95,13 +106,13 @@
                 
 <table id="table1" style="text-align: center;">
 	<tr>
-		<th>번호</th>
-        <th>수신자</th>
-        <th>발신자</th>
-        <th>제목</th>
+		<th class="no">번호</th>
+        <th class="writer">보낸 이</th>
+        <th class="writer">받는 이</th>
+        <th class="date">제목</th>
 	</tr>
     <%for(MsgBoard msgboard : list){%>
-    <tr>	
+    <tr style="text-align: center;">	
         <td class="no"><%=msgboard.getMsgNo()%></td>
         <td class="writer"><%=msgboard.getSendId()%></td>
         <td class="writer"><%=msgboard.getReceiveId()%></td>
@@ -110,7 +121,7 @@
 	</tr>
 	<%}%>
 </table>
-            <%=msgpage.getPageNavi()%>
+            <div id="page" style="text-align: center;"><%=msgpage.getPageNavi()%></div>
             	<form action="/community/msg/writeForm.jsp" method="post">
 					<%if (m != null) {%>
 						<input type="submit" value="글쓰기">

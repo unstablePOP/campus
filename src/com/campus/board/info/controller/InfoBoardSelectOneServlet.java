@@ -47,7 +47,7 @@ public class InfoBoardSelectOneServlet extends HttpServlet {
 			view.forward(request, response);
 
 		} else {
-			response.sendRedirect("/community/error/boardError.jsp");
+			response.sendRedirect("/main/error/error.jsp");
 		}
 	}
 

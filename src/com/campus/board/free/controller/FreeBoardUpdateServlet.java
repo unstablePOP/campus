@@ -50,7 +50,7 @@ public class FreeBoardUpdateServlet extends HttpServlet {
 			response.sendRedirect("/board/free/selectOne.do?freeNo="+freeNo);
 		}else
 		{
-			response.sendRedirect("/community/free/error.jsp");
+			response.sendRedirect("/main/error/error.jsp");
 		}
 	}
 

@@ -50,7 +50,7 @@ public class MarketBoardUpdateServlet extends HttpServlet {
 			response.sendRedirect("/board/market/selectOne.do?marketNo="+marketNo);
 		}else
 		{
-			response.sendRedirect("/community/market/error.jsp");
+			response.sendRedirect("/main/error/error.jsp");
 		}
 	}
 

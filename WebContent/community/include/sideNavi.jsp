@@ -46,6 +46,9 @@
             text-decoration: none;
             color:white;
         }
+        #msg{
+        	color:white;
+        }
 	</style>
 </head>
 <body>
@@ -60,14 +63,14 @@
            	    <li><a href="\">통합채팅</a></li>
            	    <% %>
            	    <!-- 로그인일 때만 작동 -->
-               	<li id="msg"><a href="/board/msg/listAll.do">쪽지함<i class="xi-note-o xi-x"></i></a></li>
+               	<li id="msg">쪽지함<i class="xi-note-o xi-x"></i></li>
            	</ul>
     	</div>
 	</div>
 	
 	<script>
 		document.getElementById('msg').onclick=function popup(){
-			var newWin = window.open("/msg/msgboard.jsp","_blank","width=700px, height=400px");
+			var newWin = window.open("/board/msg/listAll.do","_blank","width=700px, height=400px");
 		}
 	</script>
 </body>

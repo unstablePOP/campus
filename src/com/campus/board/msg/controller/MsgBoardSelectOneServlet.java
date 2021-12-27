@@ -44,7 +44,7 @@ public class MsgBoardSelectOneServlet extends HttpServlet {
 			view.forward(request, response);
 
 		} else {
-			response.sendRedirect("/community/error.jsp");
+			response.sendRedirect("/main/error/error.jsp");
 		}
 	}
 

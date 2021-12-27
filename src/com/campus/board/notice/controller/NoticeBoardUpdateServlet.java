@@ -50,7 +50,7 @@ public class NoticeBoardUpdateServlet extends HttpServlet {
 			response.sendRedirect("/board/notice/selectOne.do?noticeNo="+noticeNo);
 		}else
 		{
-			response.sendRedirect("/community/notice/error.jsp");
+			response.sendRedirect("/main/error/error.jsp");
 		}
 	}
 
