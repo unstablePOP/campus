@@ -46,8 +46,15 @@
 			<%@include file="/main/include/mainBody.jsp"%>
 		</div>
 		<div id="footerWrap">
-			<%@include file="/main/include/footer.jsp" %>
+			<%@include file="/common/include/footer.jsp" %>
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$.ajax({
+				url:"/main/count.do"
+			});
+		});
+	</script>
 </body>
 </html>

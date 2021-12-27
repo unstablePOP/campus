@@ -1,3 +1,5 @@
+<%@page import="com.campus.userPage.model.vo.UserReservation"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -39,6 +41,13 @@
             width: 1000px;
             height: 400px;
             background-color: #F6F6F6;
+            margin: 50px auto 20px;
+            z-index: -100;
+        }
+        .reservation-areaY {
+            width: 1000px;
+            height: 400px;
+            background-color: #D5D5D5;
             margin: 50px auto 20px;
             z-index: -100;
         }
@@ -103,6 +112,14 @@
 
         .res-infor>p {
             text-align: center;
+        }
+        #no-reser{
+        	margin: 0 auto;
+        	text-align: center;
+        	width: 500px;
+        	height: 400px;
+        	line-height: 400px;
+        	color: grey;
         }
 
         #footer {
@@ -178,9 +195,112 @@
 			</c:when>
 			
 			<c:otherwise>
+			
+		
+        <div id="body">	
+			
+		<%
+			ArrayList<UserReservation> listN =  (ArrayList<UserReservation>)request.getAttribute("UserReservationListN");
+         %>
 
+        <%if(!listN.isEmpty()){ %>
+        	<%for(UserReservation ur : listN) {%>
+        	
+            <div class="reservation-area">
+                <div class="img-area">
+                    <div class="img-circle">
+                        <img src="<%=ur.getPath() %><%=ur.getFileName() %>" class="img">
+                    </div>
+                </div>
+                <div class="reser-area">
+                    <div class="reservation">
+                        <div class="name">
+                            <h3> <%=ur.getBusinessName() %> | <%=ur.getCampNo() %> (<%=ur.getCampType() %>)</h3>
+                            <hr>
+                        </div>
+                        <div class="res-infor">
+                            <p><%=ur.getReservSta() %> - <%=ur.getReservEnd() %></p>
+                            <p>체크인 <%=ur.getCheckin() %> | 체크아웃 <%=ur.getCheckout() %> </p>
+                            <p>예약자 id : <%=ur.getUserId() %></p>
+                            <p>예약 번호 : <%=ur.getReservNo() %></p>
+                            <p><%=ur.getBusinessAddress() %></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        	
+        	<%} %>
         
-        <div id="body">
+        <%} %>
+        
+        
+        
+        
+        <%
+			ArrayList<UserReservation> listY =  (ArrayList<UserReservation>)request.getAttribute("UserReservationListY");
+         %>
+
+        <%if(!listY.isEmpty()){ %>
+        	<%for(UserReservation ur : listY) {%>
+        	
+            <div class="reservation-areaY">
+                <div class="img-area">
+                    <div class="img-circle">
+                        <img src="<%=ur.getPath() %><%=ur.getFileName() %>" class="img">
+                    </div>
+                </div>
+                <div class="reser-area">
+                    <div class="reservation">
+                        <div class="name">
+                            <h3> <%=ur.getBusinessName() %> | <%=ur.getCampNo() %> (<%=ur.getCampType() %>)</h3>
+                            <hr>
+                        </div>
+                        <div class="res-infor">
+                            <p><%=ur.getReservSta() %> - <%=ur.getReservEnd() %></p>
+                            <p>체크인 <%=ur.getCheckin() %> | 체크아웃 <%=ur.getCheckout() %> </p>
+                            <p>예약자 id : <%=ur.getUserId() %></p>
+                            <p>예약 번호 : <%=ur.getReservNo() %></p>
+                            <p><%=ur.getBusinessAddress() %></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        	
+        	<%} %>
+        
+        <%} %>
+        
+        
+        
+        <%if(listN.isEmpty() && listY.isEmpty()){  %>
+        
+        	
+        	
+            <div class="reservation-area">
+               
+                <div id="no-reser">
+                    아직 예약내역이 없습니다.
+                    우리 사이트를 이용해주세요 : )
+                </div>
+                
+
+            </div>
+             
+        	
+        
+        
+        <%} %>
+        
+        
+        
+        
+        
+        
+        	<%--
             <div class="reservation-area" >
                 <div class="img-area">
                     <div class="img-circle">
@@ -205,39 +325,19 @@
                 </div>
 
             </div>
-            <div class="reservation-area">
-                <div class="img-area">
-                    <div class="img-circle">
-                        <img src="image/test/캠핑카.jpg" class="img">
-                    </div>
-                </div>
-                <div class="reser-area">
-                    <div class="reservation">
-                        <div class="name">
-                            <h3> 내손자바 캠핑장 | A 구역 </h3>
-                            <hr>
-                        </div>
-                        <div class="res-infor">
-                            <p>2021.12.25(토) ~ 2021.12.26(일)</p>
-                            <p>체크인 15:00 | 체크아웃 13:00 </p>
-                            <p>예약자 명 : 홍길동</p>
-                            <p>예약 번호 : 123454657</p>
-                            <p>강원도 어쩌구 저쩌구 abc</p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+            --%>
+            
+            
+            
+            
 
 
         </div>
         <div id="footer">
 
-        </div>
         <div id="fixed-bar">
-            <a href="u_main.jsp"><i class="xi-bars xi-2x"></i></a>
-            <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
+            <a href="/userPage/userPage.do"><i class="xi-bars xi-2x"></i></a>
+            <a href="/userPage/ReservationList.do"><i class="xi-calendar-check xi-2x"></i></a>
             <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
             <a href=""><i class="xi-note-o xi-2x"></i></a>
             <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>

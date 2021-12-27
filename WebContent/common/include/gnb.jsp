@@ -140,7 +140,7 @@
 	text-decoration: none;
 }
 
-#loginWra3>a {
+#loginWrap3>a {
 	color: black;
 	text-decoration: none;
 }
@@ -203,7 +203,7 @@
 					</ul></li>
 				<li><a href="/diary/allView.do">MyPage</a>
 					<ul class="subBar" id="thirdSub">
-						<li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
+						<li><a href="/userPage/userPage.do">내 정보 보기</a></li>
 						<li><a href="/diary/allView.do">다이어리</a></li>
 					</ul></li>
 				<li><a href="/main/service/M_service.jsp">Service</a>
@@ -212,20 +212,21 @@
 					</ul></li>
 			</ul>
 		</div>
-<%-- 회원 로그인 --%>
+
 		<c:choose>
-			<c:when test="${member!=null }">
-				<div id="loginWrap2">
-					<a href="/userPage/u_main.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
-						${member.userName }</a>님<br> <a href="" class="notes"><i
-						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
-				</div>
-			</c:when>
 <%-- 관리자 로그인 --%>
 			<c:when test="${business!=null }">
 				<div id="loginWrap3">
-					<a href="" class="userIcon"><i class="xi-user-o xi-2x"></i>
-						${business.businessName }</a>님<br> <a href="" class="notes"><i
+					<a href="/admin/dashboard/index.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
+						${business.businessName }</a>님<br> <a href="/admin/dashboard/index.jsp" class="notes"><i
+						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
+				</div>
+			</c:when>
+<%-- 회원 로그인 --%>
+			<c:when test="${member!=null }">
+				<div id="loginWrap2">
+					<a href="/userPage/userPage.do" class="userIcon"><i class="xi-user-o xi-2x"></i>
+						${member.userName }</a>님<br> <a href="" class="notes"><i
 						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
 				</div>
 			</c:when>
@@ -240,7 +241,7 @@
 	<script>
 		$('#GNB>ul>li').hover(function() {
 			$(this).children().children().slideToggle(300);
-		})
+		});
 	</script>
 </body>
 </html>

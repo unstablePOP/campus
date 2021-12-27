@@ -77,6 +77,16 @@
 .list:last-child {
 	border-bottom: 1px solid black;
 }
+
+h3>a{
+	color:black;
+	text-decoration: none;
+}
+
+#freeLink{
+	color:dodgerblue;
+}
+
 /* 컨텐츠 영역2 */
 #ContentsAreaWrap2 {
 	width: 1142px; /* 1140px */
@@ -172,7 +182,6 @@
 .infoImgWrap {
 	width: 100%;
 	height: 80%;
-	border: 1px solid black;
 }
 
 .infoSubWrap {
@@ -190,28 +199,45 @@
 	position: relative;
 	left: 1150px;
 	top:-1700px;
-	border: 1px solid black;
 	width: 55px;
 	height: 200px;
 	display: none;
 	border-radius: 10px;
-	padding-top: 6px;
+	padding:2.5px;
+	padding-top:25px;
+   	border: 5px solid #D5D5D5;
 }
 
 .fixedbarContentWrap {
-	margin-left: 3px;
 	widhth: 100%;
-	height: 24%;
-	padding: 1px;
-	border-bottom: 1px solid black;
-}
-
-.fixedbarContentWrap img {
+	height: 25%;
 	cursor: pointer;
+	text-align: center;
 }
 
-.fixedbarContentWrap:last-child {
-	border: none;
+.fixedbarContentWrap>a{
+	width: 100%;
+	height: 100%;
+}
+.market{
+	text-align: center;
+	overflow: hidden;
+	padding:16px 0px;
+}
+.info{
+	text-align: center;
+	overflow: hidden;
+	padding:16px 0px;
+}
+.market>a{
+	text-decoration: none;
+	color:black;
+}
+
+.info>a{
+	text-decoration: none;
+	color:black;
+
 }
 
 </style>
@@ -222,7 +248,7 @@
 		<%-- 컨텐츠 영역1 (공지, 자유) --%>
 		<div id="ContentsAreaWrap">
 			<div id="noticeWrap">
-				<h3>소식 게시판</h3>
+				<h3><a href="/board/notice/listAll.do" id="noticeLink">소식 게시판</a></h3>
 				<ul class="listBoard" id="noticeBoard">
 					<li class="list notice">1</li>
 					<li class="list notice">2</li>
@@ -235,7 +261,7 @@
 				</ul>
 			</div>
 			<div id="freeWrap">
-				<h3 style="color: dodgerblue;">자유 게시판</h3>
+				<h3><a href="/board/free/listAll.do" id="freeLink">자유 게시판</a></h3>
 				<ul class="listBoard" id="freeBoard">
 					<li class="list free" id="free1">1</li>
 					<li class="list free" id="free2">2</li>
@@ -275,9 +301,9 @@
 			</div>
 			<div id="slideWrap">
 				<div id="slide">
-					<div class="slideImgWrap"><img alt="강동 그린웨이" src="/main/image/mainlogo/2강동 그린웨이.jpg"></div>
-					<div class="slideImgWrap"><img alt="도봉산 무수골 캠핑장" src="/main/image/mainlogo/2도봉산 무수골 캠핑장.jpg"></div>
-					<div class="slideImgWrap"><img alt="북한산 캠핑장" src="/main/image/mainlogo/2북한산 캠핑장.jpg"></div>
+					<div class="slideImgWrap"><a href=""><img alt="강동 그린웨이" src="/main/image/mainlogo/2강동 그린웨이.jpg"></a></div>
+					<div class="slideImgWrap"><a href=""><img alt="도봉산 무수골 캠핑장" src="/main/image/mainlogo/2도봉산 무수골 캠핑장.jpg"></a></div>
+					<div class="slideImgWrap"><a href=""><img alt="북한산 캠핑장" src="/main/image/mainlogo/2북한산 캠핑장.jpg"></a></div>
 				</div>
 			</div>
 		</div>
@@ -289,16 +315,16 @@
 					게시판</h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap info"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap info"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap info"></div>
 					</li>
 				</ul>
 			</div>
@@ -306,21 +332,19 @@
 <%-- 컨텐츠 영역 4 --%>
 		<div id="ContentsAreaWrap4">
 			<div id="maketWrap">
-				<h3
-					style="color: dodgerblue; border-bottom: 1px solid black; width: 1128px;">중고
-					장터</h3>
+				<h3 style="border-bottom: 1px solid black; width: 1128px;"><a href="/board/market/listAll.do">중고 장터</a></h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap market"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap market"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap market"></div>
 					</li>
 				</ul>
 			</div>
@@ -328,16 +352,16 @@
 <%-- fixedBar 영역 --%>
 			<div id="fixedBar">
 				<div class="fixedbarContentWrap">
-					<a href=""><img alt="" src="/main/image/logo/2user.jpg" id="fixedUserIcon"></a>
+					<a href=""><i class="xi-user-o xi-2x fixedIcon"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><img alt="" src="/main/image/logo/calendar.jpg" id="fixedResevationIcon"></a>
+					<a href=""><i class="xi-calendar-check xi-2x fixedIcon"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><img alt="" src="/main/image/logo/2postbox.jpg" id="fixedMessageIcon"></a>
+					<a href=""><i class="xi-note-o xi-2x fixedIcon"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<img alt="" src="/main/image/logo/2top.jpg" id="fixedTopIcon">
+					<a href="" id="fixedTopIcon"><i class="xi-angle-up fixedIcon"></i></a>
 				</div>
 			</div>
 	</div>
@@ -350,8 +374,8 @@
 				success : function(freeList) {
 					$.each(freeList, function(index, f) {
 						$('.free').eq(index).html(
-								"<a href='/community/free/freeboard.jsp?currentPage=1&freeNo='"
-										+ f.freeNo + ">" + f.FreeTitle
+								"<a href='/community/free/freeboard.jsp?currentPage=1&freeNo="
+										+ f.FreeNo + "'>" + f.FreeTitle
 										+ "<span style='color:#f94b4b;'> ["
 										+ f.commentCount + "]</span></a>");
 					})
@@ -379,6 +403,46 @@
 				}
 			});
 		});
+		// 정보게시판 불러오기
+		$(function() {
+			$.ajax({
+				url : "/main/infoDataPull.do",
+				dataType : "json",
+				success : function(infoList) {
+					$.each(infoList, function(index, i) {
+						$('.info').eq(index).html(
+								"<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo="
+										+ i.infoNo + "'>" + i.infoTitle
+										+ "<span style='color:#f94b4b;'> ["
+										+ i.infoCount + "]</span></a>");
+					})
+				},
+				error : function() {
+
+				}
+			});
+		});
+		
+		// 중고 장터 게시판 불러오기
+		$(function() {
+			$.ajax({
+				url : "/main/marketDataPull.do",
+				dataType : "json",
+				success : function(marketList) {
+					$.each(marketList, function(index, m) {
+						$('.market').eq(index).html(
+								"<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo="
+										+ m.marketNo + "'>" + m.marketTitle
+										+ "<span style='color:#f94b4b;'> ["
+										+ m.marketCount + "]</span></a>");
+					})
+				},
+				error : function() {
+
+				}
+			});
+		});
+<%-- fixedBar 스크립트 --%>
 		$(window).scroll(function() {
 			if ($(this).scrollTop() > 380) {
 				$('#fixedBar').css("display", "block");
@@ -390,6 +454,12 @@
 		$('#fixedTopIcon').click(function(){
 			$('html').animate({scrollTop:0}, 400);
 			return false;
+		});
+		$('.fixedIcon').css('color','gray');
+		$('.fixedIcon').hover(function(){
+			$(this).css('color','black');
+		},function(){
+			$(this).css('color','gray');
 		});
 	</script>
 <%-- slide 스크립트 --%>
