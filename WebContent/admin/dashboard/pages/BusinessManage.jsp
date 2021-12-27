@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.campus.board.free.model.vo.FreeBoard"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,6 +24,88 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+  <style>
+  	#tableWrap{
+  		width:100%;
+  		height:450px;
+  		border:1px solid black;
+  	}
+  	/* table css */
+        #serviceTbl{
+        	margin:0 auto;
+        	width:100%;
+        	overflow: hidden;
+        	text-align:center;
+        	table-layout: fixed;
+        	border-spacing: 0px;
+        }
+        #serviceNo{
+        	width:10%;
+        }
+		#serviceSubject{
+			width:50%;
+		}
+		#serviceDate{
+			width:20%;
+		}
+		#serviceCondition{
+			width:20%;
+		}
+/* head css */
+		#theadTr{
+			height:40px;
+		}
+		.headTh{
+			border-top:1px solid black;
+			border-bottom:1px solid black;
+		}
+/* content css */
+		.tbodyTr{
+			height:60px;
+		}
+		.tbodyTr:hover{
+			background-color: rgba(220,220,220,0.3);
+		}
+		.contentTd{
+			border-bottom:1px solid rgba(220,220,220,0.7);
+		}
+		.contentTd>a{
+			text-decoration: none;
+			color:black;
+		}
+		#tfootTr{
+			height:60px;
+		}
+		.answerCondition{
+			padding:0px 70px;
+		}
+		#serviceRegister{
+			border:1px solid #ff5000;
+			height:40px;
+			line-height: 40px;
+			color:#ff5000;
+		}
+		#serviceEnd{
+			border:1px solid #999;
+			height:40px;
+			line-height: 40px;
+			color:#999
+		}
+		.navi{
+			text-decoration: none;
+			color:black;
+			border:1px solid black;
+			display:inline-block;
+			width:25px;
+			margin:0px -1px;;
+		}
+		#focusNavi{
+			border-color:#ff5000;
+		}
+		.navi:hover{
+			background-color: rgba(220,220,220,0.5);
+		}
+  </style>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
 <!-- 
@@ -111,19 +196,44 @@
       </div>
     </nav>
     <!-- End Navbar -->
-
-
- <!-- iframe   -->
- <div class="container-fluid">
-      <div class="row">
-       
-
-        <iframe src="/board/notice/listAll.do" ></iframe>
-  
-    
-        </div>
-      </div>
-      
+    <%
+    HashMap<String, Object> map = (HashMap<String, Object>)request.getAttribute("map");
+    ArrayList<FreeBoard> list = (ArrayList<FreeBoard>)map.get("list");
+    int currentPage = (int)request.getAttribute("currentPage");
+    %>
+			<div id="tableWrap">
+				<table id="freeTbl">
+					<thead id="tblHead">
+						<tr id="theadTr">
+							<th id="serviceNo" class="headTh">글 번호</th>
+							<th id="serviceSubject" class="headTh">글 제목</th>
+							<th id="serviceDate" class="headTh">글 날자</th>
+							<th id="serviceCondtion" class="headTh">삭제 여부</th>
+						</tr>
+					</thead>
+					<tbody id="contentBody">
+						<%for(FreeBoard f : list){ %>
+							<tr class="tbodyTr">
+								<td class="contentTd"><%=f.getFreeNo() %></td>
+								<td class="contentTd"><a href="/board/free/selectOne.do?freeNo=<%=f.getFreeNo() %>&currentPage=<%=currentPage%>"><%=f.getFreeTitle() %></a></td>
+								<td class="contentTd"><%=f.getFreeDate() %></td>
+								<td class="contentTd answerCondition">
+									<%if(f.getFreeWithdrawal()=='N'){ %>
+										<div id="serviceRegister">삭제</div>
+									<%}else{ %>	
+										<div id="serviceEnd">복구</div>
+									<%} %>
+								</td>
+							</tr>
+						<%} %>
+					</tbody>
+					<tbody id="naviBody">
+					<tr id="tfootTr">
+						<td colspan="4" align="center">${map.pageNavi }</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>      
       <!-- footer   -->
       <footer class="footer py-4  ">
         <div class="container-fluid">
@@ -157,7 +267,6 @@
           </div>
         </div>
       </footer>
-    </div>
   </main>
 
 </html>
