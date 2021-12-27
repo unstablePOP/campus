@@ -52,7 +52,7 @@
 	            
 	            <div id="board">
 	            
-<table id="table1" style="text-align: center; width:100%;">
+<table id="table1" style="text-align: center;">
 <thead >
 	<tr>
 		<th style="width:7%;">번호</th>

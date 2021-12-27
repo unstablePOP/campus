@@ -6,7 +6,14 @@ $('#list1').click(function(){
     $('#piclist').css("color","rgb(0, 0, 40)");
     $('#table1').css('display','table');
     $('#table2').css('display','none');
-   
+    $('#page').css('float','none');
+    $('#page').css('width','100%');
+    $('#search').css('float','none');
+    $('#board').css('float','none');
+    $('#board').css('border-top','solid 20px rgba(220, 220, 220, 0.3)');
+    $('#board').css('border-left','solid 60px rgba(220, 220, 220, 0.4)');
+    $('#board').css('border-right','solid 60px rgba(220, 220, 220, 0.4)');
+    $('#board').css('border-bottom','solid 20px rgba(220, 220, 220, 0.3)');
 });
 $('#list2').click(function(){
 	$(this).css("background-color","rgb(0, 0, 40)");
@@ -18,4 +25,6 @@ $('#list2').click(function(){
     $('#page').css('float','left');
     $('#page').css('width','100%');
     $('#search').css('float','left');
+    $('#board').css('float','left');
+    $('#board').css('border','none');
 });

@@ -34,8 +34,6 @@
 		}
 		.title{
     		width:60%;
-    		border-left:1px solid black;
-    		border-right:1px solid black;
 		}
 		table a{
     	text-decoration:none;
