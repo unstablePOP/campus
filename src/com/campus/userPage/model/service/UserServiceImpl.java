@@ -7,6 +7,7 @@ import com.campus.common.JDBCTemplate;
 import com.campus.member.model.vo.Member;
 import com.campus.userPage.model.dao.UserDAO;
 import com.campus.userPage.model.vo.UserReservation;
+import com.campus.userPage.model.vo.UserWish;
 
 public class UserServiceImpl implements UserService{
 	
@@ -76,6 +77,17 @@ public class UserServiceImpl implements UserService{
 		
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<UserReservation> list = uDAO.selectAllReservationY(userId, conn);
+		JDBCTemplate.close(conn);
+		
+		
+		return list;
+	}
+
+	@Override
+	public ArrayList<UserWish> selectWishList(String userId) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<UserWish> list = uDAO.selectWishList(userId, conn);
 		JDBCTemplate.close(conn);
 		
 		
