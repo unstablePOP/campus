@@ -282,7 +282,7 @@
 		</c:choose>
 		</div>
 		<div id="mainLogoWrap">
-			<a href="/"><img src="/main/image/mainlogo/camper-1845590_1920.jpg" alt=""
+			<a href="/"><img src="/main/image/mainlogo/campUs.png" alt=""
 				id="mainLogoImg"></a>
 		</div>
 		<div id="mainReservation">
