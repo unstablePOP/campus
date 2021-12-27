@@ -423,11 +423,10 @@
 		}, 3000);
 	}
 	function slideCommon(){
-		$('#slide').css("margin-left",slideIndex*-700);
 		clearInterval(slideStart);
+		$('#slide').css("margin-left",slideIndex*-700);
 		$('.slsub').css('font-weight',"");
 		$('.slsub').eq(slideIndex).css('font-weight','bolder');
-		setTimeout(time, 3000);
 	}
 	</script>
 </body>
