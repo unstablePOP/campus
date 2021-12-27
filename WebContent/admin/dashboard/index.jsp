@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,9 +10,11 @@
   <link rel="icon" type="image/png" href="./assets/img/favicon.png">
   
     <title>
-    태스트 용 플짹
+ test dashboard
   </title>
+  
   <!--     Fonts and icons     -->
+  
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -38,7 +41,7 @@
 -->
  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
    <body>
-     <div data-include-path="navi.html"></div>
+     <div data-include-path="navi.jsp"></div>
  
     <script>
  
@@ -60,8 +63,9 @@
         });
  
     </script>
+    </aside> 
 </body>
-</aside> 
+
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">   
     
     <!-- Navbar -->
@@ -81,13 +85,17 @@
               <input type="text" class="form-control">
             </div>
           </div>
+        
+        
           <ul class="navbar-nav  justify-content-end">
+            
             <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+              <a href="/userPage/u_main.jsp" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                ${member.userName }</a>님<br> <a href="" class="notes">
               </a>
             </li>
+  
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -172,6 +180,7 @@
                         </p>
                       </div>
                     </div>
+
                   </a>
                 </li>
               </ul>
@@ -181,6 +190,8 @@
       </div>
     </nav>
     <!-- End Navbar -->
+    
+    <!--  ST Section 1 -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -252,13 +263,14 @@
           </div>
         </div>
       </div>
+      
       <!-- 중간에 빈공간 -->
        <div class="row mt-4">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-         
+        <div class="col-lg-4 col-md-6 mt-4 mb-4">   
         </div>
       </div>
-     
+      
+     <!--  ST Section 2 -->
       <div class="row mb-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
           <div class="card">
@@ -499,11 +511,12 @@
             </div>
           </div>
         </div>
+        
+        <!-- ST Section 3-->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100">
             <div class="card-header pb-0">
               <h6>QnA 알람?</h6> <!-- 사업자일경우는 캠핑장 문의 -->
-              
             </div>
             <div class="card-body p-3">
               <div class="timeline timeline-one-side">
@@ -579,57 +592,23 @@
     </div>
   </main>
   
+  
+  <!-- photo space -->
   <div class="fixed-plugin">
     <div class="row mt-4">
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
-         
         </div>
-    
-    <li class="nav-item">
-         <div class="row mt-4">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-         
         </div>
           <a class="nav-link text-white active bg-gradient-primary" href="./pages/pic.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons py-2">pic</i>
-            </div>
             <span class="nav-link-text ms-1"></span>
           </a>
-        </li>
-        
-        <!-- End Toggle Button -->
       </div>
-      <hr class="horizontal dark my-1">
-      
-      
-        
-       
-        
-      
-    </div>
-  </div>
- 
-
-  <!--   Core JS Files   -->
-  <script src="./assets/js/core/popper.min.js"></script>
-  <script src="./assets/js/core/bootstrap.min.js"></script>
-  <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="./assets/js/plugins/chartjs.min.js"></script>
-  
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/material-dashboard.min.js?v=3.0.0"></script>
 </body>
+
+
+
 </html>
+
+
+
+
