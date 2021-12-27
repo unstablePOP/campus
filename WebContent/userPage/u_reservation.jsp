@@ -204,7 +204,7 @@
          %>
 
         <%if(!listN.isEmpty()){ %>
-        	<%for(UserReservation ur : listN) {%>
+        	<%for(UserReservation ur : listN) { %>
         	
             <div class="reservation-area">
                 <div class="img-area">
@@ -338,7 +338,7 @@
         <div id="fixed-bar">
             <a href="/userPage/userPage.do"><i class="xi-bars xi-2x"></i></a>
             <a href="/userPage/ReservationList.do"><i class="xi-calendar-check xi-2x"></i></a>
-            <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
+            <a href="/userPage/userWishList.do"><i class="xi-heart-o xi-2x"></i></a>
             <a href=""><i class="xi-note-o xi-2x"></i></a>
             <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
         </div>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.campus.common.JDBCTemplate;
 import com.campus.member.model.vo.Member;
 import com.campus.userPage.model.vo.UserReservation;
+import com.campus.userPage.model.vo.UserWish;
 
 public class UserDAO {
 
@@ -273,6 +274,58 @@ public class UserDAO {
 				
 			}
 			//System.out.println(uReser);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return list;
+	}
+
+	public ArrayList<UserWish> selectWishList(String userId, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<UserWish> list = new ArrayList<UserWish>();
+		
+		String query = "SELECT business_name, substr(business_address, 0, instr(business_address, ' ', 1, 2)) as business_addr, " + 
+						"	camp.camp_no, file_name, path, business_address, camp_price " + 
+						"FROM WISH " + 
+						"	LEFT JOIN CAMP ON (WISH.CAMP_NO = CAMP.CAMP_NO) " + 
+						"	LEFT JOIN BUSINESS ON (BUSINESS.BUSINESS_NO = CAMP.BUSINESS_NO)  " + 
+						"	LEFT JOIN CAMPIMG ON (CAMPIMG.CAMP_SEQ = CAMP.CAMP_SEQ) " + 
+						"WHERE USER_ID = ? " + 
+						"        AND business_no IN (SELECT BUSINESS_NO FROM WISH WHERE USER_ID= ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				UserWish uWish = new UserWish();
+				uWish.setBusinessName(rset.getString("business_name"));
+				uWish.setBusinessAddr(rset.getString("business_addr"));
+				uWish.setCmapNo(rset.getString("camp_no"));
+				uWish.setFileName(rset.getString("file_name"));
+				uWish.setPath(rset.getString("path"));
+				uWish.setBusinessAddress(rset.getString("business_address"));
+				uWish.setCampPrice(rset.getInt("camp_price"));
+				
+				list.add(uWish);
+				
+			}
+			//System.out.println(list);
 			
 			
 		} catch (SQLException e) {
