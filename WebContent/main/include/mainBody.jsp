@@ -77,6 +77,16 @@
 .list:last-child {
 	border-bottom: 1px solid black;
 }
+
+h3>a{
+	color:black;
+	text-decoration: none;
+}
+
+#freeLink{
+	color:dodgerblue;
+}
+
 /* 컨텐츠 영역2 */
 #ContentsAreaWrap2 {
 	width: 1142px; /* 1140px */
@@ -190,28 +200,36 @@
 	position: relative;
 	left: 1150px;
 	top:-1700px;
-	border: 1px solid black;
 	width: 55px;
 	height: 200px;
 	display: none;
 	border-radius: 10px;
-	padding-top: 6px;
+	opacity: 0.5;
+	padding:2.5px;
+	padding-top:25px;
+   	border: 5px solid #D5D5D5;
 }
 
 .fixedbarContentWrap {
-	margin-left: 3px;
 	widhth: 100%;
-	height: 24%;
-	padding: 1px;
-	border-bottom: 1px solid black;
+	height: 25%;
+	opacity: 0.5;
+	color: gray;
+	cursor: pointer;
+	text-align: center;
 }
+
+.fixedbarContentWrap>a{
+	width: 100%;
+	height: 100%;
+}
+
+.fixedbarContentWrap>a:hover{
+ 	color: #D5D5D5;
+ }
 
 .fixedbarContentWrap img {
 	cursor: pointer;
-}
-
-.fixedbarContentWrap:last-child {
-	border: none;
 }
 
 </style>
@@ -222,7 +240,7 @@
 		<%-- 컨텐츠 영역1 (공지, 자유) --%>
 		<div id="ContentsAreaWrap">
 			<div id="noticeWrap">
-				<h3>소식 게시판</h3>
+				<h3><a href="/board/notice/listAll.do" id="noticeLink">소식 게시판</a></h3>
 				<ul class="listBoard" id="noticeBoard">
 					<li class="list notice">1</li>
 					<li class="list notice">2</li>
@@ -235,7 +253,7 @@
 				</ul>
 			</div>
 			<div id="freeWrap">
-				<h3 style="color: dodgerblue;">자유 게시판</h3>
+				<h3><a href="/board/free/listAll.do" id="freeLink">자유 게시판</a></h3>
 				<ul class="listBoard" id="freeBoard">
 					<li class="list free" id="free1">1</li>
 					<li class="list free" id="free2">2</li>
@@ -275,9 +293,9 @@
 			</div>
 			<div id="slideWrap">
 				<div id="slide">
-					<div class="slideImgWrap"><img alt="강동 그린웨이" src="/main/image/mainlogo/2강동 그린웨이.jpg"></div>
-					<div class="slideImgWrap"><img alt="도봉산 무수골 캠핑장" src="/main/image/mainlogo/2도봉산 무수골 캠핑장.jpg"></div>
-					<div class="slideImgWrap"><img alt="북한산 캠핑장" src="/main/image/mainlogo/2북한산 캠핑장.jpg"></div>
+					<div class="slideImgWrap"><a href=""><img alt="강동 그린웨이" src="/main/image/mainlogo/2강동 그린웨이.jpg"></a></div>
+					<div class="slideImgWrap"><a href=""><img alt="도봉산 무수골 캠핑장" src="/main/image/mainlogo/2도봉산 무수골 캠핑장.jpg"></a></div>
+					<div class="slideImgWrap"><a href=""><img alt="북한산 캠핑장" src="/main/image/mainlogo/2북한산 캠핑장.jpg"></a></div>
 				</div>
 			</div>
 		</div>
@@ -306,9 +324,7 @@
 <%-- 컨텐츠 영역 4 --%>
 		<div id="ContentsAreaWrap4">
 			<div id="maketWrap">
-				<h3
-					style="color: dodgerblue; border-bottom: 1px solid black; width: 1128px;">중고
-					장터</h3>
+				<h3 style="border-bottom: 1px solid black; width: 1128px;"><a href="/board/market/listAll.do">중고 장터</a></h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
 						<div class="infoImgWrap"></div>
@@ -328,16 +344,16 @@
 <%-- fixedBar 영역 --%>
 			<div id="fixedBar">
 				<div class="fixedbarContentWrap">
-					<a href=""><img alt="" src="/main/image/logo/2user.jpg" id="fixedUserIcon"></a>
+					<a href=""><i class="xi-user-o xi-2x"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><img alt="" src="/main/image/logo/calendar.jpg" id="fixedResevationIcon"></a>
+					<a href=""><i class="xi-calendar-check xi-2x"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><img alt="" src="/main/image/logo/2postbox.jpg" id="fixedMessageIcon"></a>
+					<a href=""><i class="xi-note-o xi-2x"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<img alt="" src="/main/image/logo/2top.jpg" id="fixedTopIcon">
+					<a href=""><i class="xi-angle-up"></i></a>
 				</div>
 			</div>
 	</div>
