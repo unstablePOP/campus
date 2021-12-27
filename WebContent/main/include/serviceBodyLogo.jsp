@@ -78,7 +78,7 @@
 	<div id="serviceLogoWrap">
 		<img src="/main/image/mainlogo/creux-du-van-2839124_1920.jpg" alt="">
 		<div id="myService">
-			<a href="/main/serviceList.do">내 문의 내역 ></a>
+			<a href="/main/serviceList.do">내 문의 내역 </a>
 		</div>
 		<div id="helpSearchWrap">
 			<span>도움말 검색</span> <input type="text" id="helpSeachBar"

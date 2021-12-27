@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import com.campus.common.JDBCTemplate;
 import com.campus.main.model.dao.MainDAO;
 import com.campus.main.model.vo.Free;
+import com.campus.main.model.vo.Info;
+import com.campus.main.model.vo.Market;
 import com.campus.main.model.vo.Notice;
 
 public class MainServiceImpl implements MainService{
@@ -43,6 +45,28 @@ public class MainServiceImpl implements MainService{
 			mDAO.countCreate(conn);
 		}
 		JDBCTemplate.close(conn);
+	}
+
+	@Override
+	public ArrayList<Info> infoData() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Info> infoList = mDAO.infoData(conn);
+		for(Info i : infoList) {
+			i.setInfoCount(mDAO.infoCount(i.getInfoNo(),conn));
+		}
+		JDBCTemplate.close(conn);
+		return infoList;
+	}
+
+	@Override
+	public ArrayList<Market> marketData() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Market> marketList = mDAO.marketData(conn);
+		for(Market m : marketList) {
+			m.setMarketCount(mDAO.marketCount(m.getMarketNo(),conn));
+		}
+		JDBCTemplate.close(conn);
+		return marketList;
 	}
 
 }

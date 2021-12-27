@@ -166,7 +166,6 @@
 
 /* SubWrap CSS */
 #loginSubWrap {
-	border: 1px solid red;
 	width: 100%;
 	height: 55px;
 	text-align: center;
@@ -216,7 +215,6 @@
 }
 /* api 로그인 영역 CSS */
 #apiLoginWrap {
-	border: 1px solid blue;
 	width: 100%;
 	height: 100px;
 }
@@ -291,7 +289,7 @@
 			<a href="/main/join/joinTermsBusiness.jsp">│ 사업자 회원 가입 │</a>
 		</div>
 		<%-- api 로그인 부분 --%>
-		<div id=apiLoginWrap>api login 임시공간</div>
+		<div id=apiLoginWrap></div>
 	</div>
 
 	<%-- script 부분 --%>

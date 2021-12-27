@@ -182,7 +182,6 @@ h3>a{
 .infoImgWrap {
 	width: 100%;
 	height: 80%;
-	border: 1px solid black;
 }
 
 .infoSubWrap {
@@ -220,7 +219,26 @@ h3>a{
 	width: 100%;
 	height: 100%;
 }
+.market{
+	text-align: center;
+	overflow: hidden;
+	padding:16px 0px;
+}
+.info{
+	text-align: center;
+	overflow: hidden;
+	padding:16px 0px;
+}
+.market>a{
+	text-decoration: none;
+	color:black;
+}
 
+.info>a{
+	text-decoration: none;
+	color:black;
+
+}
 
 </style>
 </head>
@@ -297,16 +315,16 @@ h3>a{
 					게시판</h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap info"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap info"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap info"></div>
 					</li>
 				</ul>
 			</div>
@@ -317,16 +335,16 @@ h3>a{
 				<h3 style="border-bottom: 1px solid black; width: 1128px;"><a href="/board/market/listAll.do">중고 장터</a></h3>
 				<ul class="listBoard" id="infoBoard">
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap market"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap market"></div>
 					</li>
 					<li class="list2">
-						<div class="infoImgWrap"></div>
-						<div class="infoSubWrap"></div>
+						<div class="infoImgWrap"><img src="/main/image/2noImage.jpg"></div>
+						<div class="infoSubWrap market"></div>
 					</li>
 				</ul>
 			</div>
@@ -356,8 +374,8 @@ h3>a{
 				success : function(freeList) {
 					$.each(freeList, function(index, f) {
 						$('.free').eq(index).html(
-								"<a href='/community/free/freeboard.jsp?currentPage=1&freeNo='"
-										+ f.freeNo + ">" + f.FreeTitle
+								"<a href='/community/free/freeboard.jsp?currentPage=1&freeNo="
+										+ f.FreeNo + "'>" + f.FreeTitle
 										+ "<span style='color:#f94b4b;'> ["
 										+ f.commentCount + "]</span></a>");
 					})
@@ -385,7 +403,46 @@ h3>a{
 				}
 			});
 		});
-<%-- 픽스드바 스크립트 --%>
+		// 정보게시판 불러오기
+		$(function() {
+			$.ajax({
+				url : "/main/infoDataPull.do",
+				dataType : "json",
+				success : function(infoList) {
+					$.each(infoList, function(index, i) {
+						$('.info').eq(index).html(
+								"<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo="
+										+ i.infoNo + "'>" + i.infoTitle
+										+ "<span style='color:#f94b4b;'> ["
+										+ i.infoCount + "]</span></a>");
+					})
+				},
+				error : function() {
+
+				}
+			});
+		});
+		
+		// 중고 장터 게시판 불러오기
+		$(function() {
+			$.ajax({
+				url : "/main/marketDataPull.do",
+				dataType : "json",
+				success : function(marketList) {
+					$.each(marketList, function(index, m) {
+						$('.market').eq(index).html(
+								"<a href='/community/notice/noticeboard.html?currentPage=1&noticeNo="
+										+ m.marketNo + "'>" + m.marketTitle
+										+ "<span style='color:#f94b4b;'> ["
+										+ m.marketCount + "]</span></a>");
+					})
+				},
+				error : function() {
+
+				}
+			});
+		});
+<%-- fixedBar 스크립트 --%>
 		$(window).scroll(function() {
 			if ($(this).scrollTop() > 380) {
 				$('#fixedBar').css("display", "block");
