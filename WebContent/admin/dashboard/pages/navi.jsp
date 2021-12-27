@@ -28,7 +28,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/admin/dashboard/pages/BusinessManage.html">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/BusinessManage.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -36,7 +36,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/admin/dashboard/noticeBoard.jsp">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/noticeBoard.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -44,7 +44,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/admin/dashboard/virtual-reality.jsp">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/virtual-reality.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
@@ -52,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/admin/dashboard/notifications.jsp">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/notifications.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">notifications</i>
             </div>
@@ -63,7 +63,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/admin/dashboard/profile.jsp">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/profile.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
