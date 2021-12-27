@@ -246,7 +246,7 @@
             </div>
 
             <div id="fixed-bar">
-                <a href="u_main.jsp"><i class="xi-bars xi-2x"></i></a>
+                <a href="/userPage/userPage.do"><i class="xi-bars xi-2x"></i></a>
                 <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
                 <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
                 <a href=""><i class="xi-note-o xi-2x"></i></a>

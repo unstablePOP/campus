@@ -482,7 +482,7 @@
     	
     
         $('#reset').click(function() {
-            location.replace('u_main.jsp');
+            location.replace('/userPage/userPage.do');
         });
         
        

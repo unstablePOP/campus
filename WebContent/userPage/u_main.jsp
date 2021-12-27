@@ -1,3 +1,4 @@
+<%@page import="com.campus.userPage.model.vo.UserReservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -275,7 +276,14 @@
             text-align: center;
             margin: 20px auto 0;
         }
-
+		#no-reser{
+        	margin: 0 auto;
+        	text-align: center;
+        	width: 500px;
+        	height: 400px;
+        	line-height: 400px;
+        	color: grey;
+        }
 
 
         #footer {
@@ -353,6 +361,62 @@
 			
 		
         <div id="body">
+        
+        	<%
+        		UserReservation uReser = (UserReservation)request.getAttribute("UserReservation");
+       	 		//System.out.println(uReser.getPath()+uReser.getFileName());
+       	 		//System.out.println(uReser.getFileName());
+       	 	%>
+        	<%if(uReser!=null){ %>
+        	
+        	
+            <div id="reservation-area">
+                <div id="img-area">
+                    <div id="img-circle">
+                        <img src="<%=uReser.getPath() %><%=uReser.getFileName() %>" id="img">
+                    </div>
+                </div>
+                <div id="reser-area">
+                    <div id="reservation">
+                        <div id="name">
+                            <h3> <%=uReser.getBusinessName() %> | <%=uReser.getCampNo() %> (<%=uReser.getCampType() %>)</h3>
+                            <hr>
+                        </div>
+                        <div id="res-infor">
+                            <p><%=uReser.getReservSta() %> - <%=uReser.getReservEnd() %></p>
+                            <p>체크인 <%=uReser.getCheckin() %> | 체크아웃 <%=uReser.getCheckout() %> </p>
+                            <p>예약자 id : <%=uReser.getUserId() %></p>
+                            <p>예약 번호 : <%=uReser.getReservNo() %></p>
+                            <p><%=uReser.getBusinessAddress() %></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        	
+        	
+        	
+        	<%}else{ %>
+        	
+        	
+            <div id="reservation-area">
+                <div id="no-reser">
+                    아직 예약내역이 없습니다.
+                    우리 사이트를 이용해주세요 : )
+                </div>
+
+            </div>
+             
+        	
+        	
+        	
+        	
+        	
+        	
+        	<%} %>
+        
+        	<%--
             <div id="reservation-area">
                 <div id="img-area">
                     <div id="img-circle">
@@ -362,7 +426,7 @@
                 <div id="reser-area">
                     <div id="reservation">
                         <div id="name">
-                            <h3> 내손자바 캠핑장 | A 구역 </h3>
+                            <h3> 내손자바 캠핑장 | A 구역 (캠핑)</h3>
                             <hr>
                         </div>
                         <div id="res-infor">
@@ -377,6 +441,11 @@
                 </div>
 
             </div>
+             --%>
+            
+            
+            
+            
 
             <div id="like-area">
                 <div class="likebox" id="likebox1">
@@ -431,8 +500,8 @@
 
 
         <div id="fixed-bar">
-            <a href="u_main.jsp"><i class="xi-bars xi-2x"></i></a>
-            <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
+            <a href="/userPage/userPage.do"><i class="xi-bars xi-2x"></i></a>
+            <a href="/userPage/ReservationList.do"><i class="xi-calendar-check xi-2x"></i></a>
             <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
             <a href=""><i class="xi-note-o xi-2x"></i></a>
             <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
