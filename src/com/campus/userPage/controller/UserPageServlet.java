@@ -1,6 +1,7 @@
 package com.campus.userPage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import com.campus.member.model.vo.Member;
 import com.campus.userPage.model.service.UserService;
 import com.campus.userPage.model.service.UserServiceImpl;
 import com.campus.userPage.model.vo.UserReservation;
+import com.campus.userPage.model.vo.UserWish;
 
 /**
  * Servlet implementation class UserPageServlet
@@ -47,9 +49,16 @@ public class UserPageServlet extends HttpServlet {
 			UserService uService = new UserServiceImpl();
 			// 예약 정보 가져오기
 			UserReservation uReser = uService.selectReservation(userId);
+			ArrayList<UserWish> ulist = uService.selectWishList(userId);
+			//System.out.println(ulist);
+			
+			
 			
 			RequestDispatcher view = request.getRequestDispatcher("/userPage/u_main.jsp");
 			request.setAttribute("UserReservation", uReser);
+			request.setAttribute("UserWishList", ulist);
+			//System.out.println(ulist.size());
+			//System.out.println(ulist.get(0).getPath()+ulist.get(0).getFileName());
 			//System.out.println(uReser);
 			view.forward(request, response);
 			

@@ -14,18 +14,19 @@ import com.campus.member.model.vo.Member;
 import com.campus.userPage.model.service.UserService;
 import com.campus.userPage.model.service.UserServiceImpl;
 import com.campus.userPage.model.vo.UserReservation;
+import com.campus.userPage.model.vo.UserWish;
 
 /**
- * Servlet implementation class ReservationListServlet
+ * Servlet implementation class UserWishListServlset
  */
-@WebServlet("/userPage/ReservationList.do")
-public class ReservationListServlet extends HttpServlet {
+@WebServlet("/userPage/userWishList.do")
+public class UserWishListServlset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationListServlet() {
+    public UserWishListServlset() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +35,22 @@ public class ReservationListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String userId = ((Member)request.getSession().getAttribute("member")).getUserId();
+
+		// 1. 유효한 예약 정보  가져오기 (일단 한개니까 가져오는 거 해보기)
+		String userId = ((Member) request.getSession().getAttribute("member")).getUserId();
 		
 		UserService uService = new UserServiceImpl();
-		ArrayList<UserReservation> listN = uService.selectAllReservationN(userId);
-		ArrayList<UserReservation> listY = uService.selectAllReservationY(userId);		
+		
+		ArrayList<UserWish> ulist = uService.selectWishList(userId);
 		
 		
-		RequestDispatcher view = request.getRequestDispatcher("/userPage/u_reservation.jsp");
-		request.setAttribute("UserReservationListN", listN);
-		request.setAttribute("UserReservationListY", listY);
-		//System.out.println(listN);
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("/userPage/u_like.jsp");
+		
+		request.setAttribute("UserWishList", ulist);
+		
 		view.forward(request, response);
-	
 	}
 
 	/**

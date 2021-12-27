@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.campus.member.model.vo.Member;
 import com.campus.userPage.model.vo.UserReservation;
+import com.campus.userPage.model.vo.UserWish;
 
 public interface UserService {
 
@@ -67,5 +68,15 @@ public interface UserService {
 	 * Descriptrion : userId의 모든 종료된 예약 정보 가져오기
 	 */
 	ArrayList<UserReservation> selectAllReservationY(String userId);
+
+	/**
+	 * 작성자 : yeonhee
+	 * @param userId
+	 * @return UserWish
+	 * 작성일 : 2021. 12. 27.
+	 * 
+	 * Descriptrion : userId의 관심상품 정보 리스트 가져오기
+	 */
+	ArrayList<UserWish> selectWishList(String userId);
 
 }
