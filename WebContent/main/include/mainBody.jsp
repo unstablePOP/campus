@@ -85,7 +85,6 @@
 #slideInforWrap{
 	width:440px;
 	height:100%;
-	border:1px solid black;
 	float:left;
 	background-color: #fdf7f7;
 }
@@ -119,7 +118,6 @@
 #slideBtnWrap{
 	width:100%;
 	height:20%;
-	border:1px solid black;
 	text-align:center;
 	font-size:25px;
 	background-color: white;
@@ -129,8 +127,25 @@
 	background-color: white;
 	cursor: pointer;
 }
-
-
+.slideBtnWrapIn{
+	width:146px;
+	height:100%;
+	float:left;
+}
+#slideLeft{
+	margin-top: 25px;
+}
+#slideRight{
+	margin-top: 25px;
+}
+#slideNoWrap>span{
+	margin-top:37px;
+	display:inline-block;
+	width:30px;
+	height:30px;
+	border:1px solid black;
+	line-height: 30px;
+}
 
 /* 컨텐츠 영역3 */
 #ContentsAreaWrap3 {
@@ -248,9 +263,9 @@
 				<div id="slideBtnWrap">
 					<div class="slideBtnWrapIn"><button id="slideLeft" class="slBtn"><img src="/main/image/logo/2back.jpg"></button></div>
 					<div id="slideNoWrap" class="slideBtnWrapIn">
-					<span class="slideNo">1</span>
-					<span class="slideNo">2</span>
-					<span class="slideNo">3</span>
+						<span class="slideNo">1</span>
+						<span class="slideNo">2</span>
+						<span class="slideNo">3</span>
 					</div>
 					<div class="slideBtnWrapIn"><button id="slideRight" class="slBtn"><img src="/main/image/logo/2next.jpg"></button></div>
 				</div>
@@ -408,11 +423,10 @@
 		}, 3000);
 	}
 	function slideCommon(){
-		$('#slide').css("margin-left",slideIndex*-700);
 		clearInterval(slideStart);
+		$('#slide').css("margin-left",slideIndex*-700);
 		$('.slsub').css('font-weight',"");
 		$('.slsub').eq(slideIndex).css('font-weight','bolder');
-		setTimeout(time, 3000);
 	}
 	</script>
 </body>
