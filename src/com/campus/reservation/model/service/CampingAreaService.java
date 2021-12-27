@@ -18,7 +18,7 @@ public interface CampingAreaService {
 	 * History :<br>
 	 * - 작성자 : lee, 날짜 : 2021. 12. 25., 설명 : 최초작성<br>
 	 */
-	HashMap<String, Object> selectMainList(int currentPage);
+	HashMap<String, Object> selectMainList(int currentPage, String location);
 
 
 }
