@@ -31,4 +31,18 @@ public class MainServiceImpl implements MainService{
 		return noticeList;
 	}
 
+	@Override
+	public void count() {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = mDAO.countCheck(conn);
+		if(result) {
+			int result2 = mDAO.count(conn);
+			if(result2>0) JDBCTemplate.commit(conn);
+			else JDBCTemplate.rollback(conn);
+		}else {
+			mDAO.countCreate(conn);
+		}
+		JDBCTemplate.close(conn);
+	}
+
 }

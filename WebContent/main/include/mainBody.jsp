@@ -212,8 +212,6 @@ h3>a{
 .fixedbarContentWrap {
 	widhth: 100%;
 	height: 25%;
-	opacity: 0.5;
-	color: gray;
 	cursor: pointer;
 	text-align: center;
 }
@@ -223,9 +221,7 @@ h3>a{
 	height: 100%;
 }
 
-.fixedbarContentWrap>a:hover{
- 	color: #D5D5D5;
- }
+
 </style>
 </head>
 <body>
@@ -338,16 +334,16 @@ h3>a{
 <%-- fixedBar 영역 --%>
 			<div id="fixedBar">
 				<div class="fixedbarContentWrap">
-					<a href=""><i class="xi-user-o xi-2x"></i></a>
+					<a href=""><i class="xi-user-o xi-2x fixedIcon"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><i class="xi-calendar-check xi-2x"></i></a>
+					<a href=""><i class="xi-calendar-check xi-2x fixedIcon"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><i class="xi-note-o xi-2x"></i></a>
+					<a href=""><i class="xi-note-o xi-2x fixedIcon"></i></a>
 				</div>
 				<div class="fixedbarContentWrap">
-					<a href=""><i class="xi-angle-up"></i></a>
+					<a href="" id="fixedTopIcon"><i class="xi-angle-up fixedIcon"></i></a>
 				</div>
 			</div>
 	</div>
@@ -389,6 +385,7 @@ h3>a{
 				}
 			});
 		});
+<%-- 픽스드바 스크립트 --%>
 		$(window).scroll(function() {
 			if ($(this).scrollTop() > 380) {
 				$('#fixedBar').css("display", "block");
@@ -400,6 +397,12 @@ h3>a{
 		$('#fixedTopIcon').click(function(){
 			$('html').animate({scrollTop:0}, 400);
 			return false;
+		});
+		$('.fixedIcon').css('color','gray');
+		$('.fixedIcon').hover(function(){
+			$(this).css('color','black');
+		},function(){
+			$(this).css('color','gray');
 		});
 	</script>
 <%-- slide 스크립트 --%>

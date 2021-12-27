@@ -88,4 +88,54 @@ public class MainDAO {
 		return noticeList;
 	}
 
+	public boolean countCheck(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from countpp where TO_DATE(COUNT_DATE)=TO_DATE(SYSDATE)";
+		boolean result = false;
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) result=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public void countCreate(Connection conn) {
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO COUNTPP VALUES(COUNTPP_SEQ.NEXTVAL,1,SYSDATE)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+	}
+
+	public int count(Connection conn) {
+		PreparedStatement pstmt = null;
+		int result= 0;
+		String query = "UPDATE COUNTPP SET COUNT_PP=COUNT_PP+1 WHERE TO_DATE(COUNT_DATE)=TO_DATE(SYSDATE)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

@@ -11,4 +11,6 @@ public interface MainService {
 
 	ArrayList<Notice> noticeData();
 
+	void count();
+
 }
