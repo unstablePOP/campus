@@ -35,15 +35,15 @@ public class CampingAreaServiceImpl implements CampingAreaService{
 	}
 
 	@Override
-	public HashMap<String, Object> selectMainList(int currentPage) {
+	public HashMap<String, Object> selectMainList(int currentPage, String location) {
 		int recordCountPerPage = 5;
 		int naviCountPerPage = 5;
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<CampingArea> list = campingAreaDAO.selectMainList(conn,currentPage, recordCountPerPage);
+		ArrayList<CampingArea> list = campingAreaDAO.selectMainList(conn,currentPage, recordCountPerPage, location);
 		
-		String pageNavi = campingAreaDAO.getMainPageNavi(conn, naviCountPerPage, recordCountPerPage, currentPage);
+		String pageNavi = campingAreaDAO.getMainPageNavi(conn, naviCountPerPage, recordCountPerPage, currentPage, location);
 		
 		JDBCTemplate.close(conn);
 		
