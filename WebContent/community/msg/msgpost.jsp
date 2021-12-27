@@ -70,7 +70,7 @@
 
 <script>
 	$('#cancleBtn').click(function(){
-		location.replace('/board/msg/selectOne.do?msgNo=<%=msgBoard.getMsgNo()%>');
+		location.replace('/board/msg/selectOne.do?currentPage=<%=request.getAttribute("currentPage")%>&msgNo=<%=msgBoard.getMsgNo()%>');
 	});
 	
 	$('#deleteBtn').click(function(){

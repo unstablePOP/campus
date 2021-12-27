@@ -40,7 +40,6 @@
     border-top:1px solid black;
 }
 #table1 .title{
-    width:60%;
     border-left:1px solid black;
     border-right:1px solid black;
 }
@@ -51,8 +50,6 @@
 #table1 .title:hover{
     background-color:rgba(0, 0, 40, 0.2);
 }
-#table1 .hit{width:60px;}
-#table1 .like{width:60px;}
 
 #table2{
     width:100%;

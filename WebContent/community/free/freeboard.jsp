@@ -31,6 +31,9 @@
         
         <div id="header-wrap">
             <%@ include file="/common/include/gnb.jsp" %>
+            <style>
+	            .subBar>li>a {color: white;}
+			</style>
         </div>
         
         <div id="contents-wrap">
@@ -49,20 +52,22 @@
 	            <div id="board">
 	            
 <table id="table1" style="text-align: center;">
-<tbody>
+<thead style="width:100%;">
 	<tr>
-		<th>번호</th>
-        <th>작성자</th>
-		<th>제목</th>
-        <th>댓글</th>
-		<th>추천</th>
-		<th>작성일</th>
+		<th style="width:7%;">번호</th>
+        <th style="width:10%;">작성자</th>
+		<th style="width:60%;">제목</th>
+        <th style="width:5%;">댓글</th>
+		<th style="width:5%;">추천</th>
+		<th style="width:13%;">작성일</th>
 	</tr>
+</thead>
+<tbody>
     <%for(FreeBoard freeboard : list){%>
     <tr>	
         <td class="no"><%=freeboard.getFreeNo()%></td>
         <td class="writer"><%=freeboard.getUserId()%></td>
-		<td class="title"><a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%>[댓글]</a></td>
+		<td class="title"><a href="/board/free/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%>[댓글]</a></td>
         <td class="hit"><%=freeboard.getFreeHit()%></td>
         <td class="like"><%=freeboard.getFreeLike()%></td>
 		<td class="date"><%=freeboard.getFreeDate()%></td>

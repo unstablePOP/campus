@@ -65,7 +65,7 @@
         <td class="no"><%=marketboard.getMarketNo()%></td>
         <td class="writer"><%=marketboard.getUserId()%></td>
         <td class="del_yn"><%=marketboard.getMarketWithdrawal()%></td>
-		<td class="title"><a href="/board/market/selectOne.do?marketNo=<%=marketboard.getMarketNo()%>"><%=marketboard.getMarketTitle()%></a></td>
+		<td class="title"><a href="/board/market/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&marketNo=<%=marketboard.getMarketNo()%>"><%=marketboard.getMarketTitle()%></a></td>
         <td class="comment"></td>
         <td class="price"><%=marketboard.getMarketPrice()%></td>
         <td class="hit"><%=marketboard.getMarketHit()%></td>

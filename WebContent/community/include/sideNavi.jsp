@@ -61,7 +61,6 @@
            	    <li><a href="/board/market/listAll.do">중고장터</a></li>
            	    <li><a href="\">통합채팅</a></li>
            	    <% %>
-           	    <!-- 로그인일 때만 작동 -->
                	<li id="msg">쪽지함<i class="xi-note-o xi-x"></i></li>
            	</ul>
     	</div>
@@ -69,7 +68,7 @@
 	
 	<script>
 		document.getElementById('msg').onclick=function popup(){
-			var newWin = window.open("/board/msg/listAll.do","_blank","width=700px, height=400px");
+			var newWin = window.open("/board/msg/listAll.do?userID=<%=request.getAttribute("userId") %>","_blank","width=700px, height=400px");
 		}
 	</script>
 </body>

@@ -13,6 +13,7 @@
             padding-left:63%;
         }
         textarea{
+        width: 80%;
 		resize: none;
 		font-size: 20px;
 		}
@@ -43,14 +44,14 @@
                     </div>
             	</div>
         	</div>
-        	<%System.out.println(request.getAttribute("currentPage")); %>
+        	<%System.out.println(request.getParameter("currentPage")); %>
     	</div>
 	</div>
 <script>
 	$(function(){
 		$('#backBtn').click(function(){
 				
-				window.location.href="/board/free/listAll.do?currentPage=<%=request.getAttribute("currentPage")%>";
+			window.location.href="/board/free/listAll.do?currentPage=<%=request.getParameter("currentPage")%> ";
 		});
 	});
 </script>

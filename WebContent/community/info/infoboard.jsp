@@ -61,7 +61,7 @@
     <tr>	
         <td class="no"><%=infoboard.getInfoNo()%></td>
         <td class="writer"><%=infoboard.getUserId()%></td>
-		<td class="title"><a href="/board/info/selectOne.do?infoNo=<%=infoboard.getInfoNo()%>"><%=infoboard.getInfoTitle()%>[댓글]</a></td>
+		<td class="title"><a href="/board/info/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&infoNo=<%=infoboard.getInfoNo()%>"><%=infoboard.getInfoTitle()%>[댓글]</a></td>
         <td class="hit"><%=infoboard.getInfoHit()%></td>
         <td class="like"><%=infoboard.getInfoLike()%></td>
 		<td class="date"><%=infoboard.getInfoDate()%></td>
