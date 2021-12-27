@@ -69,10 +69,9 @@ public class CampingAreaDAO {
 		
 		int count = 0;
 		
-		String query = "SELECT COUNT(*) CNT " 
-				 + " FROM BUSINESS A, CAMP B "
-				 + " WHERE  A.BUSINESS_NO = B.BUSINESS_NO" 
-				 + " AND A.BUSINESS_NO = ?"; 
+		String query = " SELECT count(*) CNT "  
+				+ "	 FROM BUSINESS A, CAMP B, CAMPIMG C"
+				+ " WHERE  A.BUSINESS_NO = B.BUSINESS_NO AND B.CAMP_SEQ = C.CAMP_SEQ AND A.BUSINESS_NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -132,7 +131,7 @@ public class CampingAreaDAO {
 		{
 			if(i==currentPage)
 			{
-				sb.append("<a href='/reservation/SelectCampingAreaList.do?currentPage="+i+"'><B style='font-size:1.2em'>"+i+"</B></a> ");
+				sb.append("<B style='font-size:1.2em'>"+i+"</B>");
 			}else
 			{
 				sb.append("<a href='/reservation/SelectCampingAreaList.do?currentPage="+i+"'> "+i+" </a> ");
@@ -154,7 +153,7 @@ public class CampingAreaDAO {
 	
 	
 	
-	public ArrayList<CampingArea> selectMainList(Connection conn, int currentPage, int recordCountPerPage) {
+	public ArrayList<CampingArea> selectMainList(Connection conn, int currentPage, int recordCountPerPage, String location) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -163,17 +162,22 @@ public class CampingAreaDAO {
 		int start = currentPage * recordCountPerPage - (recordCountPerPage-1);
 		int end = currentPage * recordCountPerPage;
 		
-		String query = " SELECT * FROM (SELECT ROW_NUMBER() OVER(order BY a.BUSINESS_NO ASC) AS NUM,  a.BUSINESS_NO, b.business_name, a.camp_type, b.business_address , c.PATH||c.FILE_NAME FILENAME" + 
-				"		 FROM CAMP a, BUSINESS b, CAMPIMG c" + 
-				" where a.business_no = b.business_no and a.CAMP_SEQ = c.CAMP_SEQ" + 
-				" and a.CAMP_SEQ not in (select CAMP_SEQ" + 
-				"        From RESERVATION " + 
-				"        where del_yn = 'N'" + 
-				"        and to_number('20211225') between RESERV_STA  and RESERV_END)" + 
-				" and b.business_withdrawal = 'N'" + 
-				" group by a.BUSINESS_NO, b.business_name, a.camp_type, b.business_address, c.PATH, c.FILE_NAME" + 
-				" order by a.BUSINESS_NO" +
-				" )  WHERE NUM BETWEEN ? AND ? ";
+		String query = " SELECT main.*, c.path||c.file_name filename "
+						+ " FROM (SELECT ROW_NUMBER() OVER(order BY a.BUSINESS_NO ASC) AS NUM, a.BUSINESS_NO,  b.business_name, a.camp_type, b.business_address,min(a.camp_seq) camp_seq"  
+						+ "		 FROM  BUSINESS b left join CAMP a on b.business_no = a.business_no"  
+						+ " WHERE a.CAMP_SEQ not in (SELECT CAMP_SEQ  "
+						+ "							FROM RESERVATION"  
+						+ "							WHERE del_yn = 'N'"  
+						+ "       					AND to_number('20211225') between RESERV_STA  and RESERV_END)" 
+						+ " AND b.business_withdrawal = 'N'	";
+				//지역검색
+				if(location != "") {
+					query += " AND substr(b.business_address, 0,2) = '" + location + "'";
+				}
+		
+				query += " GROUP BY a.BUSINESS_NO, b.business_name, a.camp_type, b.business_address"  
+					  +" ) main left join CAMPIMG c on main.camp_seq = c.camp_seq" 
+					  +"   WHERE NUM BETWEEN ? AND ? ";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -203,8 +207,8 @@ public class CampingAreaDAO {
 		return list;
 	}
 
-	public String getMainPageNavi(Connection conn, int naviCountPerPage, int recordCountPerPage, int currentPage) {
-		int recordTotalCount = mainTotalCount(conn); //전체 글 개수
+	public String getMainPageNavi(Connection conn, int naviCountPerPage, int recordCountPerPage, int currentPage, String location) {
+		int recordTotalCount = mainTotalCount(conn, location); //전체 글 개수
 		System.out.println("recordTotalCount::"+recordTotalCount);
 		int pageTotalCount = 0; //전체 페이지 개수
 		
@@ -234,21 +238,21 @@ public class CampingAreaDAO {
 		
 		if(startNavi!=1)
 		{
-			sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+(startNavi-1)+"'>< Prev</a>  ");
+			sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+(startNavi-1)+"&location="+location+"'>< Prev</a>  ");
 		}
 		for(int i = startNavi; i<=endNavi; i++)
 		{
 			if(i==currentPage)
 			{
-				sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+i+"'><B style='font-size:1.2em'>"+i+"</B></a> ");
+				sb.append("<B style='font-size:1.2em'>"+i+"</B>");
 			}else
 			{
-				sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+i+"'> "+i+" </a> ");
+				sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+i+"&location="+location+"'> "+i+" </a> ");
 			}
 		}
 		if(endNavi!=pageTotalCount)
 		{
-			sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+(endNavi+1)+"'> Next></a>  ");
+			sb.append("<a href='/reservation/SelectCampingList.do?currentPage="+(endNavi+1)+"&location="+location+"'> Next></a>  ");
 		}
 		
 		//System.out.println(sb.toString());
@@ -256,23 +260,28 @@ public class CampingAreaDAO {
 		return sb.toString();
 	}
 
-	private int mainTotalCount(Connection conn) {
+	private int mainTotalCount(Connection conn, String location) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		int count = 0;
 		
-		String query = "SELECT count(*) CNT from ( "+ 
-				"    SELECT a.BUSINESS_NO, b.business_name, a.camp_type, b.business_address" + 
-				"        from camp a, BUSINESS b" + 
-				"        where a.business_no = b.business_no" + 
-				"        and a.CAMP_SEQ not in (select CAMP_SEQ" + 
-				"                From RESERVATION " + 
-				"                where del_yn = 'N'" + 
-				"                and to_number('20211225') between RESERV_STA  and RESERV_END)" + 
-				"        and b.business_withdrawal = 'N'" + 
-				"        group by a.BUSINESS_NO, b.business_name, a.camp_type, b.business_address" + 
-				"    ) "; 
+		String query = "SELECT count(*) CNT from ( " 
+				+ " SELECT ROW_NUMBER() OVER(order BY a.BUSINESS_NO ASC) AS NUM, a.BUSINESS_NO,  b.business_name, a.camp_type, b.business_address,min(a.camp_seq) camp_seq"  
+				+ "		 FROM  BUSINESS b left join CAMP a on b.business_no = a.business_no"  
+				+ " WHERE a.CAMP_SEQ not in (SELECT CAMP_SEQ  "
+				+ "							FROM RESERVATION"  
+				+ "							WHERE del_yn = 'N'"  
+				+ "       					AND to_number('20211225') between RESERV_STA  and RESERV_END)" 
+				+ " AND b.business_withdrawal = 'N'	";
+			//지역검색
+			if(location != "") {
+				query += " AND substr(b.business_address, 0,2) = '" + location + "'";
+			}
+	
+			query += " GROUP BY a.BUSINESS_NO, b.business_name, a.camp_type, b.business_address"  
+				  +" ) main left join CAMPIMG c on main.camp_seq = c.camp_seq"; 
+
 		
 		try {
 			pstmt = conn.prepareStatement(query);
