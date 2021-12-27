@@ -48,7 +48,7 @@
 <script>
 	$(function(){
 		$('#backBtn').click(function(){
-				window.location.href="/board/notice/listAll.do";
+				window.location.href="/board/notice/listAll.do?currentPage=<%=request.getParameter("currentPage") %>";
 		});
 	});
 </script>

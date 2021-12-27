@@ -33,6 +33,9 @@
         
         <div id="header-wrap">
             <%@ include file="/common/include/gnb.jsp" %>
+            <style>
+	            .subBar>li>a {color: white;}
+			</style>
         </div>
         
         <div id="contents-wrap">
@@ -79,7 +82,7 @@
     <li>
         <a href="/board/market/selectOne.do?marketNo=<%=marketboard.getMarketNo()%>"><img src="../image/merch/griddle.png"/></a>
         <dl>
-            <dt><a href="/board/market/selectOne.do?marketNo=<%=marketboard.getMarketNo()%>"><%=marketboard.getMarketTitle()%></a>[댓글]</dt>
+            <dt><a href="/board/market/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&marketNo=<%=marketboard.getMarketNo()%>"><%=marketboard.getMarketTitle()%></a>[댓글]</dt>
             <dd><div><%=marketboard.getUserId()%><%=marketboard.getMarketPrice()%></div></dd>
             <dd><span><%=marketboard.getMarketDate()%></span>&nbsp&nbsp&nbsp<span><%=marketboard.getMarketHit()%></span></dd>
         </dl>
@@ -103,7 +106,7 @@
 		<%} %>
     </form>
     </div>
-    	<form action="/community/market/writeForm.jsp" method="post">
+    	<form action="/community/market/writeForm.jsp?currentPage=<%=request.getAttribute("currentPage") %>" method="post">
 			<%if (m != null) {%>
 				<input type="submit" value="글쓰기">
 			<%}%>

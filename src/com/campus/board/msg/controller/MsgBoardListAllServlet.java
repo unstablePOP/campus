@@ -33,6 +33,7 @@ public class MsgBoardListAllServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("userId");
+		
 		int currentPage;
 		if (request.getParameter("currentPage") == null) {
 			currentPage = 1;
@@ -43,11 +44,18 @@ public class MsgBoardListAllServlet extends HttpServlet {
 		MsgBoardService msgbService = new MsgBoardServiceImpl();
 		MsgPage page = msgbService.msgboardListAll(currentPage,userId);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/community/msg/msgboard.jsp");
-		request.setAttribute("msgpage", page);
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("userId", userId);
-		view.forward(request,response);
+		if (userId==null) {
+			RequestDispatcher view = request.getRequestDispatcher("/main/error/error.jsp");
+			request.setAttribute("currentPage", currentPage);
+			view.forward(request,response);
+		}
+		else {
+			RequestDispatcher view = request.getRequestDispatcher("/community/msg/msgboard.jsp");
+			request.setAttribute("msgpage", page);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("userId", userId);
+			view.forward(request,response);
+		}
 	}
 
 	/**

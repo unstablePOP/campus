@@ -4,9 +4,9 @@ $('#list1').click(function(){
     $('#titlelist').css("color","white");
     $('#list2').css("background-color","white");
     $('#piclist').css("color","rgb(0, 0, 40)");
-    $('#table1').css('display','block');
+    $('#table1').css('display','table');
     $('#table2').css('display','none');
-    
+   
 });
 $('#list2').click(function(){
 	$(this).css("background-color","rgb(0, 0, 40)");

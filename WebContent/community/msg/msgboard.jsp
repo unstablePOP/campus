@@ -116,7 +116,7 @@
         <td class="no"><%=msgboard.getMsgNo()%></td>
         <td class="writer"><%=msgboard.getSendId()%></td>
         <td class="writer"><%=msgboard.getReceiveId()%></td>
-        <td class="title"><a href="/board/msg/selectOne.do?userId=<%=request.getAttribute("userId") %>&msgNo=<%=msgboard.getMsgNo()%>"><%=msgboard.getMsgTitle()%></a></td>
+        <td class="title"><a href="/board/msg/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&msgNo=<%=msgboard.getMsgNo()%>"><%=msgboard.getMsgTitle()%></a></td>
         <td class="date"><%=msgboard.getMsgDate()%></td>
 	</tr>
 	<%}%>

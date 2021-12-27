@@ -103,7 +103,7 @@
 <script>
 	$(function(){
 		$('#backBtn').click(function(){
-				window.location.href="/board/market/listAll.do";
+				window.location.href="/board/market/listAll.do?currentPage=<%=request.getParameter("currentPage") %>";
 		});
 	});
 </script>

@@ -45,14 +45,15 @@
 	            <div id="where">&nbsp&nbsp&nbsp&nbsp 자유게시판</div>
 	            
 	            <form id="arrange">
-	                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot xi-x"></i></button><button type="button" id="list2" class="btn1"><i id="piclist" class="xi-apps xi-x"></i></button>
+	                <button type="button" id="list1" class="btn1"><i id="titlelist" class="xi-list-dot xi-x"></i></button>
+	                <button type="button" id="list2" class="btn1"><i id="piclist" class="xi-apps xi-x"></i></button>
 	                <button type="button" id="mypost" class="btn2">내 글</button><button type="button" id="mycmt" class="btn2">내 댓글</button><button type="button" id="myfind" class="btn2"><img src=""/>즐겨찾기</button>
 	            </form>
 	            
 	            <div id="board">
 	            
-<table id="table1" style="text-align: center;">
-<thead style="width:100%;">
+<table id="table1" style="text-align: center; width:100%;">
+<thead >
 	<tr>
 		<th style="width:7%;">번호</th>
         <th style="width:10%;">작성자</th>
@@ -62,7 +63,7 @@
 		<th style="width:13%;">작성일</th>
 	</tr>
 </thead>
-<tbody>
+<tbody >
     <%for(FreeBoard freeboard : list){%>
     <tr>	
         <td class="no"><%=freeboard.getFreeNo()%></td>
@@ -79,7 +80,7 @@
 <ul id="table2" style="text-align: center;">
 	<%for(FreeBoard freeboard : list){%>
     <li>
-        <a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><img src="../image/merch/griddle.png"/></a>
+        <a href="/board/free/selectOne.do?freeNo=<%=freeboard.getFreeNo()%>"><img src="/community/image/merch/griddle.png"/></a>
         <dl>
             <dt><a href="/board/free/selectOne.do?currentPage=<%=request.getAttribute("currentPage") %>&freeNo=<%=freeboard.getFreeNo()%>"><%=freeboard.getFreeTitle()%></a>[댓글]</dt>
             <dd><div><%=freeboard.getUserId()%></div></dd>

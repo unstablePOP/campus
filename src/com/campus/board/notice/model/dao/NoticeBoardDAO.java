@@ -37,6 +37,7 @@ public class NoticeBoardDAO {
 				NoticeBoard noticeBoard=new NoticeBoard();
 				noticeBoard.setNoticeNo(rset.getInt("notice_no"));
 				noticeBoard.setBusinessId(rset.getString("business_id"));
+				noticeBoard.setBusinessName(rset.getString("business_name"));
 				noticeBoard.setNoticeTitle(rset.getString("notice_title"));
 				noticeBoard.setNoticeHit(rset.getInt("notice_hit"));
 				noticeBoard.setNoticeLike(rset.getInt("notice_like"));
@@ -61,11 +62,9 @@ public class NoticeBoardDAO {
 		int totalPage=BoardCommon.totalPage(perPage, totalPost);
 		int startNavi=BoardCommon.startNavi(currentPage, perPage, naviPage, totalPost);
 		int endNavi=startNavi+naviPage-1;
-		
 		if (endNavi > totalPage) {
 			endNavi = totalPage;
 		}
-		
 		boolean prev = true;
 		boolean next = true;
 		if (startNavi == 1) {
