@@ -27,9 +27,11 @@
 }
 
 #GNB {
+	position:relative;
 	width: 70%;
 	height: 100%;
 	float: left;
+	z-index:1;
 }
 
 #GNB>ul {
@@ -176,6 +178,7 @@
 	margin-left: 60px;
 }
 
+/* 로고 영역 */
 #mainLogoWrap {
 	width: 100%;
 	height: 563px;
@@ -186,16 +189,17 @@
 	left: 0;
 	width: 100%;
 	height: 563px;
-	z-index: -1;
 }
 
 #mainReservation {
+	position:relative;
 	width: 100%;
 	height: 150px;
 	background-image: url(/main/image/mainlogo/stars.png);
 	border-radius: 70px;
 	margin: -65px 0px;
 	padding:50px 0px;
+	z-index:1;
 }
 
 #mainReservationSearch {
@@ -292,7 +296,7 @@
 		</c:choose>
 		</div>
 		<div id="mainLogoWrap">
-			<a><img src="/main/image/mainlogo/camper-1845590_1920.jpg" alt=""
+			<a href="/"><img src="/main/image/mainlogo/camper-1845590_1920.jpg" alt=""
 				id="mainLogoImg"></a>
 		</div>
 		<div id="mainReservation">

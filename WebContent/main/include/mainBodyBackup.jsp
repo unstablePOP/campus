@@ -79,59 +79,9 @@
 }
 /* 컨텐츠 영역2 */
 #ContentsAreaWrap2 {
-	width: 1142px; /* 1140px */
+	width: 100%;
 	height: 470px;
 }
-#slideInforWrap{
-	width:440px;
-	height:100%;
-	border:1px solid black;
-	float:left;
-	background-color: #fdf7f7;
-}
-#slideWrap{
-	width:700px;
-	height:100%;
-	float:left;
-	overflow:hidden;
-}
-#slide{
-	width:300%;
-	height:100%;
-	transition: .3s ease-out;
-}
-.slideImgWrap{
-	widht:700px;
-	height:100%;
-	float:left;
-}
-#slideTitle{
-	width:100%;
-	height:20%;
-}
-.slideSubject{
-	width:100%;
-	height:20%;
-	font-size:40px;
-	text-align: center;
-	line-height: 93px;
-}
-#slideBtnWrap{
-	width:100%;
-	height:20%;
-	border:1px solid black;
-	text-align:center;
-	font-size:25px;
-	background-color: white;
-}
-.slBtn{
-	border:none;
-	background-color: white;
-	cursor: pointer;
-}
-
-
-
 /* 컨텐츠 영역3 */
 #ContentsAreaWrap3 {
 	width: 100%;
@@ -195,7 +145,6 @@
 .fixedbarContentWrap:last-child {
 	border: none;
 }
-
 </style>
 </head>
 <body>
@@ -230,40 +179,17 @@
 				</ul>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 2 --%>
+		<%-- 컨텐츠 영역 2 --%>
 		<div id="ContentsAreaWrap2">
-			<div id="slideInforWrap">
-				<div id="slideTitle">
-					<img alt="" src="/main/image/mainlogo/slideTitle.png">
-				</div>
-				<div class="slideSubject">
-					<span class="slsub">글램 인스타</span>
-				</div>
-				<div class="slideSubject">
-					<span class="slsub">솔잎향 캠핑 파크</span>
-				</div>
-				<div class="slideSubject">
-					<span class="slsub">밀양 189</span>
-				</div>
-				<div id="slideBtnWrap">
-					<div class="slideBtnWrapIn"><button id="slideLeft" class="slBtn"><img src="/main/image/logo/2back.jpg"></button></div>
-					<div id="slideNoWrap" class="slideBtnWrapIn">
-					<span class="slideNo">1</span>
-					<span class="slideNo">2</span>
-					<span class="slideNo">3</span>
-					</div>
-					<div class="slideBtnWrapIn"><button id="slideRight" class="slBtn"><img src="/main/image/logo/2next.jpg"></button></div>
-				</div>
+			<div>
+				<img alt="" src="/main/image/mainlogo/Marry.png">
 			</div>
-			<div id="slideWrap">
-				<div id="slide">
-					<div class="slideImgWrap"><img alt="강동 그린웨이" src="/main/image/mainlogo/2강동 그린웨이.jpg"></div>
-					<div class="slideImgWrap"><img alt="도봉산 무수골 캠핑장" src="/main/image/mainlogo/2도봉산 무수골 캠핑장.jpg"></div>
-					<div class="slideImgWrap"><img alt="북한산 캠핑장" src="/main/image/mainlogo/2북한산 캠핑장.jpg"></div>
-				</div>
+			<div>
+			</div>
+			<div>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 3 --%>
+		<%-- 컨텐츠 영역 3 --%>
 		<div id="ContentsAreaWrap3">
 			<div id="infoWrap">
 				<h3
@@ -285,7 +211,7 @@
 				</ul>
 			</div>
 		</div>
-<%-- 컨텐츠 영역 4 --%>
+		<%-- 컨텐츠 영역 4 --%>
 		<div id="ContentsAreaWrap4">
 			<div id="maketWrap">
 				<h3
@@ -307,7 +233,7 @@
 				</ul>
 			</div>
 		</div>
-<%-- fixedBar 영역 --%>
+		<%-- fixedBar 영역 --%>
 			<div id="fixedBar">
 				<div class="fixedbarContentWrap">
 					<a href=""><img alt="" src="/main/image/logo/2user.jpg" id="fixedUserIcon"></a>
@@ -373,47 +299,6 @@
 			$('html').animate({scrollTop:0}, 400);
 			return false;
 		});
-	</script>
-<%-- slide 스크립트 --%>
-	<script>
-	var slideIndex=0;
-	var slideStart
-	$('#slideLeft').click(function(){
-		slideIndex-=1;
-		if(slideIndex<0){
-			slideIndex=2;
-		}
-		slideCommon();
-	});
-	$('#slideRight').click(function(){
-		slideIndex+=1;
-		if(slideIndex>2){
-			slideIndex=0;
-		}
-		slideCommon();
-	});
-	$(function(){
-		$('.slsub').eq(0).css('font-weight','bolder');
-		time();
-	});
-	function time(){
-			slideStart = setInterval(function(){
-			slideIndex+=1;
-			if(slideIndex>2){
-				slideIndex=0;
-			}
-			$('#slide').css("margin-left",slideIndex*-700);
-			$('.slsub').css('font-weight',"");
-			$('.slsub').eq(slideIndex).css('font-weight','bolder');
-		}, 3000);
-	}
-	function slideCommon(){
-		$('#slide').css("margin-left",slideIndex*-700);
-		clearInterval(slideStart);
-		$('.slsub').css('font-weight',"");
-		$('.slsub').eq(slideIndex).css('font-weight','bolder');
-		setTimeout(time, 3000);
-	}
 	</script>
 </body>
 </html>
