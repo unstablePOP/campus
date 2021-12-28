@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.campus.userPage.model.vo.UserWish"%>
+<%@page import="com.campus.userPage.model.vo.UserReservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -132,11 +135,11 @@
             line-height: 400px;
         }
 
-        .like-top {
+        .like-top:not(.opac) {
             width: 292px;
             height: 50px;
             background-color: black;
-            opacity: 0.4;
+            opacity: 0.5!important;
 
 
         }
@@ -192,17 +195,10 @@
             color: white;
             opacity: 1;
             padding-right: 20px;
-            padding-top: 20px;
-
+            padding-bottom: 20px;
         }
 
-        #likebox1 {
-            background: url("./image/test/캠핑카.jpg");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-position: center;
-
-        }
+        
 
         /* 쪽지, 회원정보 */
         #information-area {
@@ -275,12 +271,19 @@
             text-align: center;
             margin: 20px auto 0;
         }
-
+		#no-reser{
+        	margin: 0 auto;
+        	text-align: center;
+        	width: 500px;
+        	height: 400px;
+        	line-height: 400px;
+        	color: grey;
+        }
 
 
         #footer {
             width: 1250px;
-            height: 400px;
+            margin-top: 20px;
             /*background-color: #F6F6F6;
             margin: 20px auto 0;*/
         }
@@ -330,6 +333,14 @@
         #fixed-bar-move>a:hover{
             color: gray;
         }
+        
+        #plus{
+        	float:right;
+        	padding: 0 20px 20px 0;
+        	font-size:13px;
+        	text-decoration: none;
+        	color: grey;
+        }
 
     </style>
 </head>
@@ -353,6 +364,57 @@
 			
 		
         <div id="body">
+        
+        	<%
+        		UserReservation uReser = (UserReservation)request.getAttribute("UserReservation");
+       	 		//System.out.println(uReser.getPath()+uReser.getFileName());
+       	 		//System.out.println(uReser.getFileName());
+       	 	%>
+        	<%if(uReser!=null){ %>
+        	
+        	
+            <div id="reservation-area">
+                <div id="img-area">
+                    <div id="img-circle">
+                        <img src="<%=uReser.getPath() %><%=uReser.getFileName() %>" id="img">
+                    </div>
+                </div>
+                <div id="reser-area">
+                    <div id="reservation">
+                        <div id="name">
+                            <h3> <%=uReser.getBusinessName() %> | <%=uReser.getCampNo() %> (<%=uReser.getCampType() %>)</h3>
+                            <hr>
+                        </div>
+                        <div id="res-infor">
+                            <p><%=uReser.getReservSta() %> - <%=uReser.getReservEnd() %></p>
+                            <p>체크인 <%=uReser.getCheckin() %> | 체크아웃 <%=uReser.getCheckout() %> </p>
+                            <p>예약자 id : <%=uReser.getUserId() %></p>
+                            <p>예약 번호 : <%=uReser.getReservNo() %></p>
+                            <p><%=uReser.getBusinessAddress() %></p>
+                        </div>
+
+                    </div>
+                    <a href="/userPage/ReservationList.do" id="plus"> 예약 내역 확인 > </a>
+                </div>
+
+            </div>
+        	
+        	
+        	
+        	<%}else{ %>
+        	
+        	
+            <div id="reservation-area">
+                <div id="no-reser">
+                    아직 예약내역이 없습니다.
+                    우리 사이트를 이용해주세요 : )
+                </div>
+            </div>
+             
+        	
+        	<%} %>
+        
+        	<%-- ㅇㅖ약 샘플
             <div id="reservation-area">
                 <div id="img-area">
                     <div id="img-circle">
@@ -362,7 +424,7 @@
                 <div id="reser-area">
                     <div id="reservation">
                         <div id="name">
-                            <h3> 내손자바 캠핑장 | A 구역 </h3>
+                            <h3> 내손자바 캠핑장 | A 구역 (캠핑)</h3>
                             <hr>
                         </div>
                         <div id="res-infor">
@@ -377,8 +439,96 @@
                 </div>
 
             </div>
+             --%>
+            
+            
+            
+            
 
             <div id="like-area">
+            
+            	<%
+            	ArrayList<UserWish> ulist = (ArrayList<UserWish>)request.getAttribute("UserWishList");
+       	 		%>
+       	 		<%if(!ulist.isEmpty()) {%>
+       	 		
+       	 			<%if(ulist.size()<4){ %>
+       	 				<%for(int i=0; i <ulist.size(); i++) { %>
+       	 					<style>
+        						#likebox<%=i%> {							
+        							background: url("<%=ulist.get(i).getPath()%><%=ulist.get(i).getFileName()%>");
+            						background-repeat: no-repeat;
+           							background-size: cover;
+            						background-position: center;
+        						}
+        					</style>
+       	 					<div class="likebox" id="likebox<%=i%>">
+       	 						
+                    			<div class="like-top">
+                        			<div class="like-name opac"><%=ulist.get(i).getBusinessName() %></div>
+                       			 	
+                       			 	<div class="like-areaname opac">| <%=ulist.get(i).getCmapNo() %> 구역</div>
+                    			</div>
+                    			<div class="like-body"></div>
+                    			<div class="like-bottom">
+                        			<div class="like-address"><%=ulist.get(i).getBusinessAddress() %> </div>
+                        			<div class="like-price"><%=ulist.get(i).getCampPrice() %>원</div>
+                    			</div>
+                			</div>
+       	 				<%} %>
+       	 				<%for(int j = 0; j< 4-ulist.size(); j++) {%>	
+       	 					<div class="likebox">
+                    			<div class="like-add">
+                       			관심상품을 추가해주세요:-)
+                    			</div>
+
+                			</div>
+       	 				<%} %>
+       	 			
+       	 			<%}else {%>  
+       	 			    <%for(int i=0; i < 4; i++) {%>
+       	 					<div class="likebox" id="likebox<%=i%>">
+                    			<div class="like-top">
+                        			<div class="like-name"><%=ulist.get(i).getBusinessName() %></div>
+                       			 	<div class="like-areaname">| <%=ulist.get(i).getCmapNo() %> 구역</div>
+                    			</div>
+                    			<div class="like-body"></div>
+                    			<div class="like-bottom">
+                        			<div class="like-address"><%=ulist.get(i).getBusinessAddress() %> </div>
+                        			<div class="like-price"><%=ulist.get(i).getCampPrice() %>원</div>
+                    			</div>
+                			</div>
+       	 				<%} %>	 		
+       	 			<%} %>
+       	 		<%-- 
+       	 		<%for(UserWish uWish : ulist) {%>
+                <div class="likebox likebox1">
+                    <div class="like-top">
+                        <div class="like-name"><%=uWish.getBusinessName() %></div>
+                        <div class="like-localname">[<%=uWish.getBusinessAddr() %>]</div>
+                        <div class="like-areaname">| <%=uWish.getCmapNo() %> 구역</div>
+                    </div>
+                    <div class="like-body"></div>
+                    <div class="like-bottom">
+                        <div class="like-address"><%=uWish.getBusinessAddress() %> </div>
+                        <div class="like-price"><%=uWish.getCampPrice() %>원</div>
+                    </div>
+                </div>
+       	 		<%} %>--%>
+       	 		<%}else{ %>
+       	 		
+       	 			<%for(int j = 0; j < 4; j++) {%>	
+       	 					<div class="likebox">
+                    			<div class="like-add">
+                       			관심상품을 추가해주세요:-)
+                    			</div>
+                			</div>
+       	 				<%} %>
+       	 		<%} %>
+            
+            
+           
+            <%-- 관심상품 샘플
                 <div class="likebox" id="likebox1">
                     <div class="like-top">
                         <div class="like-name">abc캠핑장</div>
@@ -391,23 +541,18 @@
                         <div class="like-price">40,000원</div>
                     </div>
                 </div>
-                <div class="likebox">
-                    <div class="like-add">
-                        관심상품을 추가해주세요:-)
-                    </div>
+                 
 
-                </div>
+                
                 <div class="likebox">
                     <div class="like-add">
                         관심상품을 추가해주세요:-)
                     </div>
                 </div>
-                <div class="likebox">
-                    <div class="like-add">
-                        관심상품을 추가해주세요:-)
-                    </div>
-                </div>
-
+			--%>
+			
+			
+			
             </div>
             <div id="information-area">
                 <div id="note-area">
@@ -426,14 +571,14 @@
 
         </div>
         <div id="footer">
-
+			<%@include file="/common/include/footer.jsp" %>
         </div>
 
 
         <div id="fixed-bar">
-            <a href="u_main.jsp"><i class="xi-bars xi-2x"></i></a>
-            <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
-            <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
+            <a href="/userPage/userPage.do"><i class="xi-bars xi-2x"></i></a>
+            <a href="/userPage/ReservationList.do"><i class="xi-calendar-check xi-2x"></i></a>
+            <a href="/userPage/userWishList.do"><i class="xi-heart-o xi-2x"></i></a>
             <a href=""><i class="xi-note-o xi-2x"></i></a>
             <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
         </div>

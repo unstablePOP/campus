@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- xeicon -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>Insert title here</title>
 <style>
 #header-wrap {
@@ -249,7 +251,7 @@
 						</ul></li>
 					<li><a href="/diary/allView.do">MyPage</a>
 						<ul class="subBar" id="thirdSub">
-							<li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
+							<li><a href="/userPage/userPage.do">내 정보 보기</a></li>
 							<li><a href="/diary/allView.do">다이어리</a></li>
 						</ul></li>
 					<li><a href="/main/service/M_service.jsp">Service</a>
@@ -259,17 +261,17 @@
 				</ul>
 			</div>
 		<c:choose>
-			<c:when test="${member!=null }">
-				<div id="loginWrap2">
-					<a href="/userPage/u_main.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
-						${member.userName }</a>님<br> <a href="" class="notes"><i
+			<c:when test="${business!=null }">
+				<div id="loginWrap3">
+					<a href="/admin/dashboard/index.jsp" class="userIcon"><i class="xi-user-o xi-2x"></i>
+						${business.businessName }</a>님<br> <a href="/admin/dashboard/index.jsp" class="notes"><i
 						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
 				</div>
 			</c:when>
-			<c:when test="${business!=null }">
-				<div id="loginWrap3">
-					<a href="" class="userIcon"><i class="xi-user-o xi-2x"></i>
-						${business.businessName }</a>님<br> <a href="" class="notes"><i
+			<c:when test="${member!=null }">
+				<div id="loginWrap2">
+					<a href="/userPage/userPage.do" class="userIcon"><i class="xi-user-o xi-2x"></i>
+						${member.userName }</a>님<br> <a href="" class="notes"><i
 						class="xi-note-o xi-2x"></i></a> <a href="/main/logout.do" class="logout">logout</a>
 				</div>
 			</c:when>

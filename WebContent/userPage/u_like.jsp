@@ -1,3 +1,5 @@
+<%@page import="com.campus.userPage.model.vo.UserWish"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -116,27 +118,20 @@
             color: white;
             opacity: 1;
             padding-right: 20px;
-            padding-top: 20px;
+            padding-bottom: 20px;
 
         }
 
-        #likebox1 {
-            background: url("./image/test/캠핑카.jpg");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-position: center;
-
-        }
         
         #footer {
             width: 1250px;
-            height: 400px;
+            margin-top: 500px;
             /*background-color: #F6F6F6;
             margin: 20px auto 0;*/
         }
 
         #fixed-bar {
-             width: 55px;
+            width: 55px;
             height: 290px;
             position: fixed;
             top: 250px;
@@ -209,54 +204,102 @@
 
         
         <div id="body">
+        
+        
             <div id="like-area">
-                <div class="likebox" id="likebox1">
-                    <div class="like-top">
-                        <div class="like-name">abc캠핑장</div>
-                        <div class="like-localname">[춘천]</div>
-                        <div class="like-areaname">| A 구역</div>
-                    </div>
-                    <div class="like-body"></div>
-                    <div class="like-bottom">
-                        <div class="like-address">강원도 춘천시 어쩌구 저쩌구 </div>
-                        <div class="like-price">40,000원</div>
-                    </div>
-                </div>
-                <div class="likebox">
-                    <div class="like-add">
-                        관심상품을 추가해주세요:-)
-                    </div>
+               
+			
+            	<%
+            	ArrayList<UserWish> ulist = (ArrayList<UserWish>)request.getAttribute("UserWishList");
+       	 		%>
+       	 		<%if(!ulist.isEmpty()) {%>
+       	 		
+       	 			<%if(ulist.size()<4){ %>
+       	 				<%for(int i=0; i <ulist.size(); i++) { %>
+       	 					<style>
+        						#likebox<%=i%> {							
+        							background: url("<%=ulist.get(i).getPath()%><%=ulist.get(i).getFileName()%>");
+            						background-repeat: no-repeat;
+           							background-size: cover;
+            						background-position: center;
+        						}
+        					</style>
+       	 					<div class="likebox" id="likebox<%=i%>">
+       	 						
+                    			<div class="like-top">
+                        			<div class="like-name opac"><%=ulist.get(i).getBusinessName() %></div>
+                       			 	
+                       			 	<div class="like-areaname opac">| <%=ulist.get(i).getCmapNo() %> 구역</div>
+                    			</div>
+                    			<div class="like-body"></div>
+                    			<div class="like-bottom">
+                        			<div class="like-address"><%=ulist.get(i).getBusinessAddress() %> </div>
+                        			<div class="like-price"><%=ulist.get(i).getCampPrice() %>원</div>
+                    			</div>
+                			</div>
+       	 				<%} %>
+       	 				<%for(int j = 0; j< 4-ulist.size(); j++) {%>	
+       	 					<div class="likebox">
+                    			<div class="like-add">
+                       			관심상품을 추가해주세요:-)
+                    			</div>
 
-                </div>
-                <div class="likebox">
-                    <div class="like-add">
-                        관심상품을 추가해주세요:-)
-                    </div>
-                </div>
-                <div class="likebox">
-                    <div class="like-add">
-                        관심상품을 추가해주세요:-)
-                    </div>
-                </div>
+                			</div>
+       	 				<%} %>
+       	 			
+       	 			<%}else {%>  
+       	 			    <%for(int i=0; i < ulist.size(); i++) {%>
+       	 					<div class="likebox" id="likebox<%=i%>">
+                    			<div class="like-top">
+                        			<div class="like-name"><%=ulist.get(i).getBusinessName() %></div>
+                       			 	<div class="like-areaname">| <%=ulist.get(i).getCmapNo() %> 구역</div>
+                    			</div>
+                    			<div class="like-body"></div>
+                    			<div class="like-bottom">
+                        			<div class="like-address"><%=ulist.get(i).getBusinessAddress() %> </div>
+                        			<div class="like-price"><%=ulist.get(i).getCampPrice() %>원</div>
+                    			</div>
+                			</div>
+       	 				<%} %>	 		
+       	 			<%} %>
+       	 		
+       	 		<%}else{ %>
+       	 		
+       	 			<%for(int j = 0; j < 4; j++) {%>	
+       	 					<div class="likebox">
+                    			<div class="like-add">
+                       			관심상품을 추가해주세요:-)
+                    			</div>
+                			</div>
+       	 				<%} %>
+       	 		<%} %>
+
+
+
+
+
+
+
+
 
             </div>
 
             <div id="footer">
-
+				<%@include file="/common/include/footer.jsp" %>
             </div>
 
-            <div id="fixed-bar">
-                <a href="u_main.jsp"><i class="xi-bars xi-2x"></i></a>
-                <a href="u_reservation.jsp"><i class="xi-calendar-check xi-2x"></i></a>
-                <a href="u_like.jsp"><i class="xi-heart-o xi-2x"></i></a>
-                <a href=""><i class="xi-note-o xi-2x"></i></a>
-                <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
-            </div>
-            <div id="fixed-bar-move">
-                <a href="#top"><i class="xi-angle-up"></i></a>
-                <a href="#bottom"><i class="xi-angle-down"></i></a>
-            </div>
-            <a name="bottom"></a>
+        <div id="fixed-bar">
+            <a href="/userPage/userPage.do"><i class="xi-bars xi-2x"></i></a>
+            <a href="/userPage/ReservationList.do"><i class="xi-calendar-check xi-2x"></i></a>
+            <a href="/userPage/userWishList.do"><i class="xi-heart-o xi-2x"></i></a>
+            <a href=""><i class="xi-note-o xi-2x"></i></a>
+            <a href="u_pwdCheck.jsp"><i class="xi-user-o xi-2x"></i></a>
+        </div>
+        <div id="fixed-bar-move">
+        	<a href="#top"><i class="xi-angle-up"></i></a>
+        	<a href="#bottom"><i class="xi-angle-down"></i></a>
+        </div>
+        <a name="bottom"></a>
 
 
         </div>

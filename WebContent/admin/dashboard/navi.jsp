@@ -1,17 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
 <body>
    
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" ./index.html " target="_blank">
-       <!-- <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo"> -->
-        <span class="ms-1 font-weight-bold text-white">CampUS 성학이 PG 이동</span> <!-- 디자인 바꿀것 -->
+      <a class="navbar-brand m-0" href="/community/community_index.jsp" target="_blank">
+       <a href="/">      
+            <span class="ms-1 font-weight-bold text-white">CampUS</span> <!-- 디자인 바꿀것 -->
+        </a>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="./index.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dashboard/index.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -19,7 +28,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/BusinessManage.html">
+          <a class="nav-link text-white " href="/admin/freeList.do">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -27,7 +36,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/noticeBoard.html">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/noticeBoard.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -35,7 +44,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/virtual-reality.html">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/virtual-reality.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
@@ -43,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/notifications.html">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/notifications.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">notifications</i>
             </div>
@@ -54,7 +63,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/profile.html">
+          <a class="nav-link text-white " href="/admin/dashboard/pages/profile.jsp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -65,13 +74,11 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="김성학의 메인 주소로" type="button">Log out</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="/main/logout.do" type="button">Log out</a>
       </div>
     </div>
-  
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-  
- 
 </body>
 
 
+
+</html>

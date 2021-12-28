@@ -164,7 +164,7 @@
                         </li>
                         <li><a href="/diary/allView.do">MyPage</a>
                             <ul class="subBar" id="thirdSub">
-                                <li><a href="/userPage/u_main.jsp">내 정보 보기</a></li>
+                                <li><a href="/userPage/userPage.do">내 정보 보기</a></li>
                                 <li><a href="/diary/allView.do">다이어리</a></li>
                             </ul>
                         </li>
@@ -181,7 +181,7 @@
                 
                 	<c:choose>
                 		<c:when test="${member!=null }">
-                			<a href="/userPage/u_main.jsp" class="userIcon">${member.userName } 님 </a>
+                			<a href="/userPage/userPage.do" class="userIcon">${member.userName } 님 </a>
                     	</c:when>
                     	<c:otherwise>
                     		<a href="/main/login/M_Login.jsp">login</a>
