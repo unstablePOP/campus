@@ -47,14 +47,14 @@
                     </div>
                     <div id="postcontent-wrap">
                         <div id="postaction">
-                            <button><i class="xi-thumbs-up xi-x"></i></button>
-                            <button><i class="xi-thumbs-down xi-x"></i></button>
-                            <button><i class="xi-bookmark-o xi-x"></i></button>
+                            <div><i class="xi-thumbs-up xi-x"></i></div>
+                            <div><i class="xi-thumbs-down xi-x"></i></div>
+                            <div><i class="xi-bookmark-o xi-x"></i></div>
                             <a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();"></a>
                             <a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();"></a>
 							<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();"></a>
 							<a id="btnMail" class="link-icon email" href=""><i class="xi-mail-o xi-x"></i></a>
-                            <button><i class="xi-share-alt-o xi-x"></i></button>
+                            <div><i class="xi-share-alt-o xi-x"></i></div>
                         </div>
                         <div id="postcontent">
 	                        <%if(m!=null && m.getUserId().equals(freeBoard.getUserId())){ %>
