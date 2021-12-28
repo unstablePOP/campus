@@ -46,7 +46,7 @@
 			<%@include file="/main/include/mainBody.jsp"%>
 		</div>
 		<div id="footerWrap">
-       			<%@include file="/common/include/footer.jsp" %>
+       		<%@include file="/common/include/footer.jsp" %>
 		</div>
 	</div>
 </body>
