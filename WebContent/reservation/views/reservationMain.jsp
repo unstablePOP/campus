@@ -247,7 +247,7 @@
 					</div>
 				</div>
 				<div id="footer">
-					<%@include file="/main/include/footer.jsp"%>
+					<%@include file="/common/include/footer.jsp" %>
 				</div>
 			</div>
 </body>
