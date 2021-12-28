@@ -47,8 +47,6 @@
 		</div>
 		<div id="footerWrap">
        		<%@include file="/common/include/footer.jsp" %>
-			<%@include file="/common/include/footer.jsp" %>
-
 		</div>
 	</div>
 	<script>
