@@ -14,7 +14,7 @@
 
         #wrap {
             width: 1250px;
-            height: 1920px;
+            height: 1720px;
 
             box-sizing: border-box;
             margin: 0px auto;
@@ -28,7 +28,7 @@
 
         #bodyWrap {
             width: 100%;
-            height: 1000px;
+            height: 1400px;
         }
 
         #ContentWrap {
