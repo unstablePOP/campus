@@ -14,7 +14,7 @@
 
         #wrap {
             width: 1250px;
-            height: 1920px;
+            height: 1420px;
 
             box-sizing: border-box;
             margin: 0px auto;
@@ -195,6 +195,10 @@
                 </div>
             </div>
         </div>
+        <br><br><br><br><br>
+        <div>
+    		<%@include file="/common/include/footer.jsp" %>
+    	</div>
     </div>
     <script>
     	$('.qna').click(function(){
