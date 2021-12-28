@@ -109,7 +109,7 @@
 			    </div>
 			    <form action="/community/free/writeForm.jsp?currentPage=<%=request.getAttribute("currentPage") %>" method="post">
 					<%if (m != null) {%>
-						<input type="submit" value="글쓰기">
+						<button id="postWrite" style="font-size:13px;"><i class="xi-pen-o"></i>글 작성</button>
 					<%}%>
 				</form>
 			</div>
