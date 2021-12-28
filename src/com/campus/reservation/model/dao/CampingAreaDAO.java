@@ -302,10 +302,53 @@ public class CampingAreaDAO {
 
 	}
 
-	
-	
+	public ArrayList<CampingArea> selectArea(Connection conn, int rsvSeq) {
 
-	
-	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<CampingArea> list = new ArrayList<CampingArea>();
+		
+		String query = " SELECT A.CAMP_SEQ,  A.BUSINESS_NO, B.BUSINESS_NAME, A.CAMP_NO, A.CAMP_NAME, A.CAMP_TYPE"
+					+ ", A.CAMP_PO, A.CAMP_MAXPO, A.CAMP_PRICE, A.CHECKIN, A.CHECKOUT, A.RESERV_NOTICE, A.RESERV_INFO, C.PATH||C.FILE_NAME FILENAME"
+					+ " FROM CAMP A,BUSINESS B, CAMPIMG C "  
+					+ " WHERE A.BUSINESS_NO = B.BUSINESS_NO"
+					+ " AND A.CAMP_SEQ = C.CAMP_SEQ"
+					+ " AND A.CAMP_SEQ = ?	";
+					 
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rsvSeq);
+			System.out.println("query::"+query);
+			rset = pstmt.executeQuery();
+			
+		while(rset.next())
+		{
+			CampingArea campingArea = new CampingArea();
+			
+			campingArea.setCampSeq(rset.getInt("CAMP_SEQ"));
+			campingArea.setBusinessNo(rset.getInt("BUSINESS_NO"));
+			campingArea.setBusinessName(rset.getString("BUSINESS_NAME"));
+			campingArea.setCampNo(rset.getString("CAMP_NO"));
+			campingArea.setCampName(rset.getString("CAMP_NAME"));
+			campingArea.setCampType(rset.getString("CAMP_TYPE"));
+			campingArea.setCampPo(rset.getInt("CAMP_PO"));
+			campingArea.setCampMaxpo(rset.getInt("CAMP_MAXPO"));
+			campingArea.setCampPrice(rset.getInt("CAMP_PRICE"));
+			campingArea.setCheckin(rset.getString("CHECKIN"));
+			campingArea.setCheckout(rset.getString("CHECKOUT"));
+			campingArea.setReservNotice(rset.getString("RESERV_NOTICE"));
+			campingArea.setReservInfo(rset.getString("RESERV_INFO"));
+			campingArea.setFilename(rset.getString("FILENAME"));
+			
+			list.add(campingArea);
+		}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 }

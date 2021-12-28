@@ -56,4 +56,15 @@ public class CampingAreaServiceImpl implements CampingAreaService{
 
 	}
 
+	@Override
+	public ArrayList<CampingArea> selectArea(int rsvSeq){
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		ArrayList<CampingArea> list = campingAreaDAO.selectArea(conn, rsvSeq);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 }
