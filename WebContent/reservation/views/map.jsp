@@ -6,29 +6,28 @@
 <input type="text" id="keyword" placeholder="키워드를 입력하세요 " style='width:250px; height:40px;' /><button id ="btn" style='width:100px; height:40px;' class="btn btn-outline-secondary">검색</button>
 </form>
 
-<div id="map" style="width:350px;height:640px;"></div>
+<div id="map" style="width:350px;height:500px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c456a11190a7975ad58deff213fae949"></script>
 
 
 <script>
 	$('#btn').click(function(){
 		map = new kakao.maps.Map(mapContainer, mapOption); 
 		var keyword = $('#keyword').val();
-		ps.keywordSearch(keyword, placesSearchCB); 
+		ps.keywordSearch(keyword, placesSearchCB); 	
 	});
-
 </script>
 
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c456a11190a7975ad58deff213fae949&libraries=services"></script>
 <script>
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 4 // 지도의 확대 레벨
+        level: 3 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -37,8 +36,12 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(); 
 
-//키워드로 장소를 검색합니다
-ps.keywordSearch(keyword, placesSearchCB);
+// 키워드로 장소를 검색합니다
+ps.keywordSearch(keyword, placesSearchCB); 
+
+
+
+
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {

@@ -36,7 +36,7 @@
 	}
 	#body{
 		width: 1250px;
-		height: 1300px;
+		height: 1600px;
 		margin: 0px auto;
 		
 	}
@@ -167,7 +167,6 @@
 	width:20px;
 	height:20px;	
 }
-
 .modal{ 
   position:absolute; width:100%; height:100%; background: rgba(255,255,255,0.6); top:0; left:0; display:none;
 }
@@ -219,11 +218,6 @@
 	background-color: white;
 	text-align: left;
 }
-
-.mDownside{
-	width : 500px;
-	height : 50px;
-}
 .confirm{
 	width : 500px;
 	height : 50px;
@@ -254,10 +248,13 @@
     background: transparent url('./image/btn_exit.png') no-repeat;
     cursor: pointer;
 }
+
+#modalCpNm{
+	font-size: 32px;
+}
 #cpNm{
 	font-size: 32px;
 }
-
 .searchlogo{
 	width:40px;
 	height:40px;
@@ -295,6 +292,67 @@
 
 		  });		  	  
 		}); 
+
+	 function rsvInfo(rsvSeq){
+			
+			if($("#from").val()==null ||$("#from").val() == ""){
+				$("#from").focus();
+				return;
+			}
+			if($("#to").val()==null ||$("#to").val() == ""){
+				$("#to").focus();
+				return;
+			}
+			if($("#from").val() > $("#to").val()){
+				alert("날짜를 확인하세요");
+				$("#from").focus();
+
+				return;
+			} 
+		 
+			$.ajax({
+				type : "GET", 
+				url : "/reservation/ajax.do",
+				data: {"rsvSeq":rsvSeq},
+				dataType : "json",
+				success : function(data){
+					var keys = Object.keys(data);	
+						
+					$.each(keys, function(index, item){
+						
+						var html='	<div class="summary" id="summary">'
+								+'  	<form style="font-size : 16pt; fon">'
+								+'		숙소이름 : '+ data[item].campName +'<br><br>'
+								+'		체크인 : '+ data[item].checkin +'<br><br>'
+								+'		체크아웃 : '+ data[item].checkout +'<br><br>'
+								+'		결제금액 : '+ data[item].campPrice +'<br><br>'
+								+'		예약안내 : '+ data[item].reservInfo +'<br><br><br>'
+								+'		<input type="checkbox" style="zoom:1.5;"/> 숙소이용규칙 및 취소/환불규정 동의 (필수)<br>'
+								+'		<input type="checkbox" style="zoom:1.5;"/> 개인정보 수집 및 이용 동의 (필수)<br>'
+								+'		<input type="checkbox" style="zoom:1.5;"/> 개인정보 제 3자 제공 동의 (필수)<br>'
+								+'		<input type="checkbox" style="zoom:1.5;"/> 만 14세 이상 확인 (필수)<br>'
+								+'	</form>'
+								+'</div>';
+								
+						$("#mimage").attr("src",data[item].filename);
+						$("#modalCpNm").text(data[item].businessName);
+						$("#summary").html(html);
+						
+						//일정
+						var startdate = $("#from").val().replaceAll("-", ""); 
+						var enddate = $("#to").val().replaceAll("-", ""); 
+						$("#reservSta").val(startdate);
+						$("#reservEnd").val(enddate);
+						
+						$(".modal").fadeIn();
+						return; 
+					});
+				
+				}, error : function(e){
+					alert("지속적인 문제발생시 고객센터에 문의바랍니다.");
+				}
+			});
+	 }
 
 </script> 
    
@@ -358,7 +416,7 @@ if(request.getParameter("to")==null)
 									<img src="<%=campingArea.getFilename()%>"onerror="this.src='../../reservation/image/main/sample_camping/default_300_200.jpg'"/>
 								</td>
 								<td style="border:1px solid gray;">
-									<input class="reservBtn" type="button" value="예약하기"/>
+									<input type="button" class="reservBtn" value="예약하기" onclick="javascript:rsvInfo('<%=campingArea.getCampSeq()%>'); return false"/>
 									<button class='likebtn' style='border:0; outline: 0; color:black;'><i class="xi-heart xi-2x"></i></button>
 								</td>
 							</tr>
@@ -389,7 +447,6 @@ if(request.getParameter("to")==null)
 
                     <div id="reservationSelect">
                    	<form id="serachPanel" mehtod="get">
-                    <a href=""><button type="submit" id="reSearch"><i class="xi-search"></i> 일정 재 검색</button></a>
 						<br><br>
 						<div class="search">
 						     <label for="form">일정이 언제에요?</label><br>
@@ -413,63 +470,47 @@ if(request.getParameter("to")==null)
 		        
 		    </div>
 		</div>
-		<div id="footer"></div>
+		<div id="footer">
+				<%@include file="/main/include/footer.jsp" %>
+		</div>
 	</div>
 </body>
 
 <div class="modal">
-  <div class="modal_content">
+	  <div class="modal_content">
   		<div class="mUpside">
   			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
 			<div class="mImageArea">
 				<div class="mimage">
-
-					
+					<img src="" id="mimage"/>
 				</div>
 			</div>
 			<div class="mAreaInfo">
 				<div class="mTitle">
-		            <span id="cpNm" style="background-color: white; color:#3e4a56;"><%=cpNm %></span>
+		            <span id="modalCpNm" style="background-color: white; color:#3e4a56;"></span>
 				</div>
-				<div class="summary">
-					<form style="font-size : 16pt; fon">
-						숙소이름 :<br><br>
-						체크인 : <br><br>
-						체크아웃 : <br><br>
-						결제금액 : <br><br>
-						예약안내 : <br><br><br>
+				<form action="/reservation/reservationJoin.do" method="post" style="font-size : 16pt;">
+					<!-- 모달창 입력내용 ajax -->
+					<div class="summary" id="summary"></div>
+					<input type="hidden" id="reservSta" name="reservSta" />
+					<input type="hidden" id="reservEnd" name="reservEnd" />
+					<input type="submit" class="confirm" value="예약"></input>
 						
-						<input type="checkbox" style="zoom:1.5;"/> 숙소이용규칙 및 취소/환불규정 동의 (필수)<br>
-						<input type="checkbox" style="zoom:1.5;"/> 개인정보 수집 및 이용 동의 (필수)<br>
-						<input type="checkbox" style="zoom:1.5;"/> 개인정보 제 3자 제공 동의 (필수)<br>
-						<input type="checkbox" style="zoom:1.5;"/> 만 14세 이상 확인 (필수)<br>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="mDownside">
-			<div>
-				<button type="submit" class="confirm">결제하기</button>
+				</form>
 			</div>
 		</div>
   </div>
-</div>
-
-
 <script>
 $(function(){ 
-
-  $(".reservBtn").click(function(){
-    $(".modal").fadeIn();
-  });
-  
   $("#layerbox_close").click(function(){
 	$(".modal").fadeOut();
   });
 
-  
 });
+
 </script>
+</div>
+
 
 <!-- 좋아요 함수 -->
 <script>
