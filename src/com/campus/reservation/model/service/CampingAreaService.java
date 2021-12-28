@@ -1,6 +1,9 @@
 package com.campus.reservation.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.campus.reservation.model.vo.CampingArea;
 
 public interface CampingAreaService {
 
@@ -20,5 +23,5 @@ public interface CampingAreaService {
 	 */
 	HashMap<String, Object> selectMainList(int currentPage, String location);
 
-
+	ArrayList<CampingArea> selectArea(int rsvSeq);
 }
